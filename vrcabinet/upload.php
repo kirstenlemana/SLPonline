@@ -950,7 +950,6 @@ $("#sendfeedback").click(function(event) {
       format: 'M/D/YYYY'
     });
 
-    
 
 </script>
 </body>

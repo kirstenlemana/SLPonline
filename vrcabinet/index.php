@@ -145,6 +145,7 @@ table tr {
                       <button class="btn btn-danger" id="categoryback" style="display:none;margin-top:0.8em;padding:6px 10px 6px 10px;"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp; Show All Categories</button>
                       <button id="advancedbtn" class="btn btn-info" style="padding:6px 10px 6px 10px;margin-top:0.8em"><span class="glyphicon glyphicon-search"></span> Advanced Search</button> 
                       <a href="upload.php"><button class="btn btn-success" style="padding:6px 10px 6px 10px;margin-top:0.8em"><span class="glyphicon glyphicon-cloud-upload"></span> Upload</button></a>
+                      <button id="printme" class="btn btn-warning" style="padding:6px 10px 6px 10px;margin-top:0.8em"><span class="glyphicon glyphicon-print"></span> Print Selected</button>
                   </div>
                 </div>
           </div>
@@ -438,6 +439,7 @@ function gotofiles(filetype) {
       $("#categoryback").css( "display", "inline-block" );
       oTable.fnFilter("^"+filetype+"$", 2, true, false, true);
       if (filetype=="Admin Doc") {
+        $("#printme").css( "display", "inline-block" );
         oTable.fnSetColumnVis( 2, false,false );
         oTable.fnSetColumnVis( 3, true,true );
         oTable.fnSetColumnVis( 4, true,true );
@@ -467,6 +469,20 @@ $("#resetfilters").click(function(event) {
 function toTitleCase(str) {
     return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
 }
+printArray = [];
+clickedArray = [];
+function printID(idnum,cb) {
+    if (cb.checked == true) {
+      printArray.push(idnum);
+      clickedArray.push(idnum);
+    } else {
+      var pa = printArray.indexOf(parseInt(idnum));
+      if (pa > -1) {
+        printArray.splice(pa, 1);
+      }
+    }
+
+}
 $.fn.DataTable.ext.pager.numbers_length = 5;
   oTable = $('#docdata').dataTable({
     "aProcessing": true,
@@ -488,32 +504,55 @@ $.fn.DataTable.ext.pager.numbers_length = 5;
                 {
                     $(nTd).css('text-align', 'center');
                     $(nTd).css('width', '20px');
+                    $(nTd).css('vertical-align', 'middle');
                 },
                 "mData": null,
                 "mRender": function( data, type, full) {
-                  if (data[8]!=null) {
-                    file_ext = data[8].substr(data[8].lastIndexOf('.')+1);
-                    if (file_ext == "docx") {
-                      return '<td><div class="file-icon file-icon-sm" data-type="doc"></div></td>';
-                    } else if (file_ext == "pdf") {
-                      return '<td><div class="file-icon file-icon-sm" data-type="pdf"></div></td>';
-                    } else if (file_ext == "xls") {
-                      return '<td><div class="file-icon file-icon-sm" data-type="xls"></div></td>';
-                    } else if (file_ext == "xlsx") {
-                      return '<td><div class="file-icon file-icon-sm" data-type="xlsx"></div></td>';
-                    } else if (file_ext == "png") {
-                      return '<td><div class="file-icon file-icon-sm" data-type="png"></div></td>';
-                    } else if (file_ext == "jpg") {
-                      return '<td><div class="file-icon file-icon-sm" data-type="jpg"></div></td>';
-                    } else if (file_ext == "zip") {
-                      return '<td><div class="file-icon file-icon-sm" data-type="zip"></div></td>';
-                    } else if (file_ext == "pptx") {
-                      return '<td><div class="file-icon file-icon-sm" data-type="pptx"></div></td>';
-                    } else if (file_ext == "ppt") {
-                      return '<td><div class="file-icon file-icon-sm" data-type="ppt"></div></td>';
-                    } else {
-                      return false;
-                    }
+                  file_ext = data[8].substr(data[8].lastIndexOf('.')+1);
+                  if (data[8]!==null && data[2]=="Admin Doc") {
+                        if (file_ext == "docx") {
+                          return '<td><div class="file-icon file-icon-sm" data-type="doc"></div></td><td><input type="checkbox" onclick="printID('+data[0]+',this)"></td>';
+                        } else if (file_ext == "pdf") {
+                          return '<td><div class="file-icon file-icon-sm" data-type="pdf"></div></td><td><input type="checkbox" onclick="printID('+data[0]+',this)"></td>';
+                        } else if (file_ext == "xls") {
+                          return '<td><div class="file-icon file-icon-sm" data-type="xls"></div></td><td><input type="checkbox" onclick="printID('+data[0]+',this);"></td>';
+                        } else if (file_ext == "xlsx") {
+                          return '<td><div class="file-icon file-icon-sm" data-type="xlsx"></div></td><td><input type="checkbox" onclick="printID('+data[0]+',this);"></td>';
+                        } else if (file_ext == "png") {
+                          return '<td><div class="file-icon file-icon-sm" data-type="png"></div></td><td><input type="checkbox" onclick="printID('+data[0]+',this)"></td>';
+                        } else if (file_ext == "jpg") {
+                          return '<td><div class="file-icon file-icon-sm" data-type="jpg"></div></td><td><input type="checkbox" onclick="printID('+data[0]+',this)"></td>';
+                        } else if (file_ext == "zip") {
+                          return '</td><td><div class="file-icon file-icon-sm" data-type="zip"></div></td><td><input type="checkbox" onclick="printID('+data[0]+',this)"></td>';
+                        } else if (file_ext == "pptx") {
+                          return '</td><td><div class="file-icon file-icon-sm" data-type="pptx"></div></td><td><input type="checkbox" onclick="printID('+data[0]+',this)"></td>';
+                        } else if (file_ext == "ppt") {
+                          return '<td><div class="file-icon file-icon-sm" data-type="ppt"></div></td><td><input type="checkbox" onclick="printID('+data[0]+',this)"></td>';
+                        } else {
+                          return false;
+                        }
+                } else if (data[8]!=null) {
+                        if (file_ext == "docx") {
+                          return '<td><div class="file-icon file-icon-sm" data-type="doc"></div></td>';
+                        } else if (file_ext == "pdf") {
+                          return '<td><div class="file-icon file-icon-sm" data-type="pdf"></div></td>';
+                        } else if (file_ext == "xls") {
+                          return '<td><div class="file-icon file-icon-sm" data-type="xls"></div></td>';
+                        } else if (file_ext == "xlsx") {
+                          return '<td><div class="file-icon file-icon-sm" data-type="xlsx"></div></td>';
+                        } else if (file_ext == "png") {
+                          return '<td><div class="file-icon file-icon-sm" data-type="png"></div></td>';
+                        } else if (file_ext == "jpg") {
+                          return '<td><div class="file-icon file-icon-sm" data-type="jpg"></div></td>';
+                        } else if (file_ext == "zip") {
+                          return '</td><td><div class="file-icon file-icon-sm" data-type="zip"></div></td>';
+                        } else if (file_ext == "pptx") {
+                          return '</td><td><div class="file-icon file-icon-sm" data-type="pptx"></div></td>';
+                        } else if (file_ext == "ppt") {
+                          return '<td><div class="file-icon file-icon-sm" data-type="ppt"></div></td>';
+                        } else {
+                          return false;
+                        }
                 }
               }
             },
@@ -602,18 +641,30 @@ $.fn.DataTable.ext.pager.numbers_length = 5;
   });
       //oTable.fnFilter('<?php echo $filter;?>',6);
         $('#docdata').on( 'click', 'tbody tr', function () {
-          var redirection = $(this).attr('id');
-          var type = $(this).attr('type');
-          if (type == "Admin Doc") {
-              window.location.href = "docview2.php?id="+redirection;
-          } else {
-              window.location.href = "docview3.php?id="+redirection;
-          }
+            var redirection = $(this).attr('id');
+            var type = $(this).attr('type');
+            var indexz = printArray.indexOf(parseInt(redirection));
+            var indexy = clickedArray.indexOf(parseInt(redirection));
+
+            if (type == "Admin Doc" && indexy == -1) {
+                window.location.href = "docview2.php?id="+redirection;
+            } else if (indexy == -1) {
+                window.location.href = "docview3.php?id="+redirection;
+            }
+
+            if (indexz == -1 && indexy > -1) {
+                var pa = clickedArray.indexOf(parseInt(redirection));
+                if (pa > -1) {
+                  clickedArray.splice(pa, 1);
+                }
+            }
         });
 
 $(document).ready(function() {
   tableshown=false;
   $("#categoryback").css( "display", "none" );
+  $("#printme").css( "display", "none" );
+
 $("#searchme").keyup(function() {
    if (tableshown==false) {
       tableshown=true;
@@ -634,7 +685,6 @@ $("#searchme").keyup(function() {
         //$("#searchblock").hide().delay( 1000 ).slideDown( 400 );
 advance = 0;
 $("#advancedbtn").click(function(event) {
-  
   if (advance==0) {
     $("#advancedsearch").fadeIn();
     $("#advancedbtn").html('<span class="glyphicon glyphicon-search"></span> Hide Advanced Search');
@@ -651,7 +701,25 @@ $("#categoryback").click(function(event) {
     $("#categoryback").css( "display", "none" );
     $("#dttablerow").css( "display", "block" );
     $("#dttablerow2").css( "display", "none" );
-    $("#searchme").val() = "";
+    $("#searchme").val("");
+    $("#printme").css( "display", "none" );
+});
+
+$("#printme").click(function(event) {
+      var formData = {
+        'action'        : "printview",
+        'printArray'    : printArray
+      };
+      console.log(printArray);      
+          $.ajax({
+             url: "printview.php",
+             type: "POST",
+             data: formData,
+             success: function(data)
+             {
+                  location.href = "printview.php";
+             }
+          });//endAjax
 });
 
 

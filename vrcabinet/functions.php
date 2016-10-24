@@ -304,7 +304,7 @@ if(!empty($_POST))
 
     if($_POST['action'] == "reupload") {
             $ext=date("mdY");
-            $maxsize=9000000;
+            $maxsize=15000000;
             $FILE_EXTS = array('pdf','jpg','jpeg','png','xls','xlsx','doc','docx','zip');
 
             $file_name = $_FILES['file']['name'];
@@ -379,7 +379,7 @@ if(!empty($_POST))
                 {//if admin not required to insert a file
                             
                             $ext=date("mdY");
-                            $maxsize=9000000;
+                            $maxsize=15000000;
                             $FILE_EXTS = array('pdf','jpg','jpeg','png','xls','xlsx','doc','docx','zip');
                             $file_name = $_FILES['file']['name'];
                             $file_ext = pathinfo($file_name, PATHINFO_EXTENSION);
@@ -473,7 +473,7 @@ if(!empty($_POST))
                else //if not admin they required to insert a file 
               {
                             $ext=date("mdY");
-                            $maxsize=9000000;
+                            $maxsize=15000000;
                             $FILE_EXTS = array('pdf','jpg','jpeg','png','xls','xlsx','doc','docx','zip');
 
                             $file_name = $_FILES['file']['name'];
@@ -563,7 +563,7 @@ if($_POST['action'] == "reuploadadmin"){
             $dateondoc3  = "$parts[2]-$parts[0]-$parts[1]";
    
             $ext=date("mdY");
-            $maxsize=9000000;
+            $maxsize=15000000;
             $FILE_EXTS = array('pdf','jpg','jpeg','png','xls','xlsx','doc','docx','zip');
 
             $file_name = $_FILES['file']['name'];
@@ -623,7 +623,7 @@ if($_POST['action'] == "reuploadadmin"){
             $dateondoc2  = "$parts[2]-$parts[0]-$parts[1]";
    
             $ext=date("mdY");
-            $maxsize=9000000;
+            $maxsize=15000000;
             $FILE_EXTS = array('pdf','jpg','jpeg','png','xls','xlsx','doc','docx','zip');
 
             $file_name = $_FILES['file']['name'];

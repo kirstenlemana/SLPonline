@@ -218,7 +218,7 @@ h3 {
                 <td>REGION III</td>
                 <td>Gemma B. Gabuya</td>
                 <td>Venus F. Rebuldela</td>
-                <td>Lilia Ediza</td>
+                <td>Fe Manarang (OIC)</td>
                 <td>fo3@dswd.gov.ph, slpunit.fo3@e-dswd.net</td>
               </tr>
               <tr>
@@ -239,7 +239,7 @@ h3 {
                 <td>REGION V</td>
                 <td>Arnel B. Garcia</td>
                 <td>Corazon B. Miña</td>
-                <td>Generosa Millete</td>
+                <td>Generosa Millete, Earl Maximillian A. Cecilio</td>
                 <td>livelihood.fo5@dswd.gov.ph</td>
               </tr>
               <tr>
@@ -260,7 +260,7 @@ h3 {
                 <td>REGION VIII</td>
                 <td>Restituto B. Macuto (OIC)</td>
                 <td></td>
-                <td>Hermanito Madsfasdfsasdfangalao</td>
+                <td>Hermanito Mangalao</td>
                 <td>livelihood08@dswd.gov.ph</td>
               </tr>
               <tr>
@@ -313,9 +313,7 @@ h3 {
                 <td>livelihood.fonir@dswd.gov.ph, fonir@dswd.gov.ph</td>
               </tr>
             </table>
-            <br>
-            <a href="hr/viewdata.php"><button class="btn btn-info pull-left btn-md" style="margin-bottom:2em">Go to SLP staff directory</button></a>
-            <div class="clearfix"></div>
+
       </div>
   </div>
 
