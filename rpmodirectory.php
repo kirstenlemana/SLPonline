@@ -313,7 +313,9 @@ h3 {
                 <td>livelihood.fonir@dswd.gov.ph, fonir@dswd.gov.ph</td>
               </tr>
             </table>
-
+            <br>     
+             <a href="hr/viewdata.php"><button class="btn btn-info pull-left btn-md" style="margin-bottom:2em">Go to SLP staff directory</button></a>    
+             <div class="clearfix"></div>
       </div>
   </div>
 

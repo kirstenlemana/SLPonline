@@ -278,6 +278,7 @@ table tr {
               <th>filename</th>
               <th>id</th>
               <th>hrdbid</th>
+              <th></th>
               </tr>
             </thead>
             </table>
@@ -465,6 +466,7 @@ $("#resetfilters").click(function(event) {
   oTable.fnFilter("",0,false);
   oTable.fnFilter("",4,false);
   oTable.fnFilter("",10,false);
+  oTable.fnFilter("",13,false);
 });
 function toTitleCase(str) {
     return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
@@ -489,7 +491,7 @@ $.fn.DataTable.ext.pager.numbers_length = 5;
     "aServerSide": true,
     "orderCellsTop": true,
     "ajax": "dt_docdb222.php",
-    "dom": '<"top">rt<"bottom"p><"clear">',
+    "dom": '<"top">rt<"bottom"ip><"clear">',
     "aaSorting": [9,'desc'],
     "fnRowCallback":
       function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
@@ -529,7 +531,7 @@ $.fn.DataTable.ext.pager.numbers_length = 5;
                         } else if (file_ext == "ppt") {
                           return '<td><div class="file-icon file-icon-sm" data-type="ppt"></div></td><td><input type="checkbox" onclick="printID('+data[0]+',this)"></td>';
                         } else {
-                          return false;
+                          return '<td><input type="checkbox" onclick="printID('+data[0]+',this)"></td>';
                         }
                 } else if (data[8]!=null) {
                         if (file_ext == "docx") {
@@ -551,7 +553,7 @@ $.fn.DataTable.ext.pager.numbers_length = 5;
                         } else if (file_ext == "ppt") {
                           return '<td><div class="file-icon file-icon-sm" data-type="ppt"></div></td>';
                         } else {
-                          return false;
+                          return '<td><input type="checkbox" onclick="printID('+data[0]+',this)"></td>';
                         }
                 }
               }
@@ -636,7 +638,19 @@ $.fn.DataTable.ext.pager.numbers_length = 5;
                     return '<td><span class="dtsubhead">By:</span> <a href="../hr/user.php?id='+data[10]+'" class="linkhover" style="text-decoration:none;line-height:0.7;font-size:12px">'+toTitleCase(data[3])+'</a> <span class="dtsubhead" style="line-height:0.7">('+data[6]+')</span><br><span class="dtsubhead">on <font color="black">'+data[4]+'</font></span></td>';
                 }
             },
-            { "bVisible": false, "aTargets":[7,8,9,10,11,12] }
+            { 
+               "aTargets":[13],
+               "fnCreatedCell": function(nTd, sData, oData, iRow, iCol)
+                {
+                    $(nTd).css('text-align', 'center');
+                    $(nTd).css('width', '16%');
+                },
+                "mData": null,
+                "mRender": function( data, type, full) {
+                    return '<td>'+data[4]+'</td>';
+                }
+            },
+            { "bVisible": false, "aTargets":[7,8,9,10,11,12,13] }
                     ]
   });
       //oTable.fnFilter('<?php echo $filter;?>',6);
@@ -813,8 +827,7 @@ $(function () {
       field: $('#ddate')[0], 
       format: 'M/D/YYYY', 
       onSelect: function() {
-        console.log(this.getMoment().format('YYYY-MM-DD'));
-            oTable.fnFilter(this.getMoment().format('YYYY-MM-DD'), 4, true, false, true);
+            oTable.fnFilter(this.getMoment().format('YYYY-MM-DD'), 13, true, false, true);
       }
     });
 </script>
