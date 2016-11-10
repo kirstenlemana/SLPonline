@@ -168,11 +168,14 @@ table tr {
                         <option>Blast</option>
                 </select>
               </div>
-              <div class="form-group">
-                <input type="text" name="autocompleteajax" id="autocompleteajax" class="form-control" placeholder="Search by Uploader"/>
-                <input type="hidden" id="autocomplete-ajax-x" disabled="disabled"/>
+               <div class="form-group">
+                <div class="form-group" style="margin-top:1em;" id="docdate">
+                      <input class="form-control" placeholder="Filter by Date" style="" id="ddate" name="ddate"/><center>
+                  </div>
               </div>
+        
         </div>
+   
         <div class="col-sm-6">
               <div class="form-group">
                 <select class="form-control" onchange="filterType()" id="fType">
@@ -187,18 +190,30 @@ table tr {
                   <option>docx</option>
                 </select>
               </div>
-              <div class="form-group">
-                <div class="form-group" style="margin-top:1em;" id="docdate">
-                      <input class="form-control" placeholder="Filter by Date" style="" id="ddate" name="ddate"/><center>
-                  </div>
+                 <div class="form-group">
+                <input type="text" name="autocompleteajax" id="autocompleteajax" class="form-control" placeholder="Search by Uploader"/>
+                <input type="hidden" id="autocomplete-ajax-x" disabled="disabled"/>
               </div>
+          
+        </div>
+        <div class="col-sm-6">
+                      <input class="form-control" placeholder="Filter by Date Received" style="" id="dr" name="dr"/><center>
         </div>
         <div class="col-sm-2">
           <button id="resetfilters" class="btn btn-warning col-md-12" style="padding:6px 10px 6px 10px;">Reset Filters</button>
         </div>
-      </div>
 
+         <div class="col-sm-4">
+                      <input type="hidden"/><center>
+        </div>
+    
+    
+   
+       
 
+     </div>
+
+  
       <div class="row" id="dttablerow">
         <div class="col-md-12" style="padding: 2em 3em 2em 3em">
             <table cellpadding="0" cellspacing="0" border="0" class="table table-bordered table-hover hover" id="folders" style="background-color:#fff;width:100%;line-height:0.5;">
@@ -271,7 +286,7 @@ table tr {
               <th><center>Doc. Type</th>
               <th><center>Reference No.</th>
               <th><center>Office</th>
-              <th><center>Uploader</th>
+              <th><center>Date Received </th>
               <th>filetype</th>
               <th>region</th>
               <th>fileext</th>
@@ -279,6 +294,7 @@ table tr {
               <th>id</th>
               <th>hrdbid</th>
               <th></th>
+              <th><center>Uploader</th>
               </tr>
             </thead>
             </table>
@@ -457,6 +473,7 @@ function filterCategory() {
   var category = document.getElementById("fCategory").value;
     oTable.fnFilter("^"+category+"$", 2, true, false, true);
 }
+
 function filterType() {
   var category = document.getElementById("fType").value;
     oTable.fnFilter(category, 8, true, false, true);
@@ -467,6 +484,7 @@ $("#resetfilters").click(function(event) {
   oTable.fnFilter("",4,false);
   oTable.fnFilter("",10,false);
   oTable.fnFilter("",13,false);
+  oTable.fnFilter("",6,false);
 });
 function toTitleCase(str) {
     return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
@@ -626,7 +644,7 @@ $.fn.DataTable.ext.pager.numbers_length = 5;
                 }
             },
             { 
-               "aTargets":[6],
+               "aTargets":[14],
                "fnCreatedCell": function(nTd, sData, oData, iRow, iCol)
                 {
                     $(nTd).css('text-align', 'center');
@@ -648,6 +666,18 @@ $.fn.DataTable.ext.pager.numbers_length = 5;
                 "mData": null,
                 "mRender": function( data, type, full) {
                     return '<td>'+data[4]+'</td>';
+                }
+            },
+            { 
+               "aTargets":[6],
+               "fnCreatedCell": function(nTd, sData, oData, iRow, iCol)
+                {
+                    $(nTd).css('text-align', 'center');
+                    $(nTd).css('width', '16%');
+                },
+                "mData": null,
+                "mRender": function( data, type, full) {
+                    return '<td>'+data[18]+'</td>';
                 }
             },
             { "bVisible": false, "aTargets":[7,8,9,10,11,12,13] }
@@ -830,6 +860,15 @@ $(function () {
             oTable.fnFilter(this.getMoment().format('YYYY-MM-DD'), 13, true, false, true);
       }
     });
+        var picker = new Pikaday({ 
+      field: $('#dr')[0], 
+      format: 'M/D/YYYY', 
+      onSelect: function() {
+            oTable.fnFilter(this.getMoment().format('YYYY-MM-DD'), 6, true, false, true);
+      }
+    });
+
+
 </script>
 </body>
 </html>
