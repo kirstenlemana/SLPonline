@@ -401,7 +401,7 @@ function typeChange2(){
 var selection = $('#doctypeselector option:selected').val();
 console.log(selection);
       if (selection == "Admin Doc") {
-             $("#admintypeholder").fadeIn(); $("#logtypeholder").fadeIn(); $("#refnumberholder").fadeIn(); $("#officeholder").fadeIn(); 
+             $("#admintypeholder").fadeIn(); $("#logtypeholder").fadeIn(); $("#refnumberholder").fadeOut(); $("#officeholder").fadeIn(); 
              $("#nameholder").fadeIn();$("#resdateholder").fadeIn(); 
              $("#posholder").fadeIn();
                       
@@ -414,9 +414,13 @@ console.log(selection);
 }
 
 function typeChange3(){
-$('#refnumber').val($('#admintype option:selected').val()+'<?php echo '-'.date('dYm').'-'.($rowz['id'] + 1) ?>');
-}
+$('#refnumber').val($('#logtype option:selected').val()+'-'+$('#admintype option:selected').val()+'<?php 
+  date_default_timezone_set('Asia/Brunei');
+ // $date = date('Ymj',time()+ 50400);
+  $date = date('mjY');
+  echo '-'.$date.'-'.($rowz['id'] + 1) ?>');
 
+}
 
 </script>
                   <div class="form-group" style="margin-top:1em">
@@ -451,7 +455,7 @@ $('#refnumber').val($('#admintype option:selected').val()+'<?php echo '-'.date('
                   </div>
 
                   <div class="form-group" style="display: none; margin-top:1em" id="admintypeholder">
-                      <select class="form-control" id="admintype" name="admintype" onchange="typeChange3()">
+                      <select class="form-control" id="admintype" name="admintype" >
                         <option value="">Select Admin Document Type</option>
 
                         <!-- get this --> 
@@ -478,10 +482,10 @@ $('#refnumber').val($('#admintype option:selected').val()+'<?php echo '-'.date('
                   <div class="row">
                     <div class="col-sm-6">
                       <div class="form-group" style="display: none" id="logtypeholder">
-                       <select class="form-control" id="logtype" name="logtype">
+                       <select class="form-control" id="logtype" name="logtype" required>
                         <option value="">Select Log Type</option>
-                        <option value="Incoming" id="in">Incoming</option>
-                        <option value="Outgoing" id="out">Outgoing</option>
+                        <option value="I" id="in">Incoming</option>
+                        <option value="O" id="out">Outgoing</option>
                       
                         </select>
                       
@@ -569,7 +573,7 @@ $('#refnumber').val($('#admintype option:selected').val()+'<?php echo '-'.date('
                   </div>
 
                   <div class="form-group" style="">
-                      <textarea rows="3" class="form-control" placeholder="Description" style="padding-top:0.6em;resize:none" id="remarks" name="remarks" required></textarea><center>
+                      <textarea rows="3" class="form-control" placeholder="Remarks" style="padding-top:0.6em;resize:none" id="remarks" name="remarks" required></textarea><center>
                   </div>
                   <div style="display:block;font-weight:bold">Send a notification for this upload: &nbsp; <div id="theswitch" class="bootstrap-switch bootstrap-switch-wrapper bootstrap-switch-animate bootstrap-switch-id-custom-switch-01 bootstrap-switch-off"><div class="bootstrap-switch-container"><span class="bootstrap-switch-handle-on bootstrap-switch-primary">YES</span><label class="bootstrap-switch-label">&nbsp;</label><span class="bootstrap-switch-handle-off bootstrap-switch-default">NO</span><input type="checkbox" checked="" data-toggle="switch" id="custom-switch-01"></div></div></div>
                   <div id="notificationpanel" style="margin-top:1em;display:none">
@@ -765,7 +769,7 @@ $(function () {
               </form>
           </div>
           <div class="col-md-12" style="padding-right:0">
-                  <button id="uploadBtn" class="btn btn-success pull-right" style="padding:6px 10px 6px 10px;margin-top:0.8em"><span class="glyphicon glyphicon-cloud-upload"></span> Upload</button>
+                  <button id="uploadBtn" class="btn btn-success pull-right" style="padding:6px 10px 6px 10px;margin-top:0.8em" onclick="typeChange3()"><span class="glyphicon glyphicon-cloud-upload"></span> Upload</button>
           </div>
       </div>
   </div>
@@ -776,6 +780,7 @@ $(function () {
 
           <div class="modal-content" style="padding:1em;padding-top:0.5em">
                   <h3 style="color:#5cb85c;margin-bottom:6px">Success!</h3>
+                   <span style="font-size:13px" id="sucsubtext">Your document was successfully upload and your Reference Number is: </span><br>
                   <span style="font-size:13px">Note: If you sent email notifications, emails may take 30mins to arrive in inbox</span><br><br>
                   <button type="button" class="btn btn-primary pull-right" style="background:#5cb85c;border:0;margin-top:0;padding:5px 10px 5px 10px" id="okaybtn" data-dismiss="modal">Okay</button>
                   <div class="clearfix"></div>
@@ -853,17 +858,19 @@ $("#uploadBtn").click(function(event) {
       emailfinal.push(emailmaster[i][1]);
     }
      $("#loadoverlay").show();
+   
      var fd = new FormData;                  
        file1 = $('#theupload').prop('files')[0];
        fd.append('action', 'upload');
        fd.append('file', file1);
+
        fd.append('doctype', $('#doctypeselector option:selected').val());
        fd.append('docsubject', $('input[name=dsubject]').val());
        fd.append('author', $('#autocompleteajax2').val());
        fd.append('ddate', $('input[name=ddate]').val());
        fd.append('remarks', $('textarea[name=remarks]').val());
        fd.append('admintype', $('#admintype option:selected').text());
-       fd.append('logtype', $('#logtype option:selected').val());
+       fd.append('logtype', $('#logtype option:selected').text());
        fd.append('refnumber', $('input[name=refnumber]').val());
        fd.append('sourceoffice', $('input[name=sourceoffice]').val());
        fd.append('sourcename', $('input[name=sourcename]').val());
@@ -872,7 +879,7 @@ $("#uploadBtn").click(function(event) {
        fd.append('resdate', $('input[name=resdate]').val());
        fd.append('destpos', $('input[name=destpos]').val());
        fd.append('sourcepos', $('input[name=sourcepos]').val());
-       
+       fd.append('switch', switchClass);
        fd.append('emailarray', emailfinal.toString());
       $.ajax({
                 url: 'functions.php',
@@ -885,6 +892,7 @@ $("#uploadBtn").click(function(event) {
                 success: function(data){
                     $("#loadoverlay").hide();
                     if (data=="Success") {
+                      $("#sucsubtext").html("Your document was successfully upload and your Reference Number is: <br><b>"+$('input[name=refnumber]').val()+"</b>");
                       $('#myModal').modal();
                       $('#myModal').on('hidden.bs.modal', function () {
                           location.href = "index.php";
@@ -950,6 +958,7 @@ $("#sendfeedback").click(function(event) {
       format: 'M/D/YYYY'
     });
 
+    
 
 </script>
 </body>
