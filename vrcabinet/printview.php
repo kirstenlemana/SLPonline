@@ -36,7 +36,7 @@ if(!empty($_POST)) {
 	foreach($printArray as $printid) {
                       try {
                               $sql = $db->prepare("SELECT d.referenceno as ref,d.datereceived as dt,d.title as t,d.sourceoffice as src,
-                              d.destoffice as dest,d.remarks as rem, group_concat(e.  doc_comment,' [',e.added,']<br>') as gc,hr.firstname as fn FROM DOCDB as d LEFT JOIN docdb_comments as e ON e.docdbid=d.id 
+                              d.destoffice as dest,d.remarks as rem, group_concat(e.doc_comment,' [',e.added,']<br>') as gc,hr.firstname as fn FROM DOCDB as d LEFT JOIN docdb_comments as e ON e.docdbid=d.id 
                                LEFT JOIN HRDB as hr ON hr.id=d.hrdbid
                               WHERE e.docdbid=:id order by ref");
                               $sql->bindParam(':id', $printid);
@@ -47,7 +47,7 @@ if(!empty($_POST)) {
                         	echo "<tr><td style='text-align:center'>".$printview['ref']."</td>
                       		<td style='text-align:center'>".$printview['dt']."</td>
                       		<td>".$printview['t']."</td>
-                      		<td>".$printview['src']." -> ".$printview['dest']."</td>
+                      		<td>[".$printview['src']." >>> ".$printview['dest']."]</td>
                       		<td><b>".goprint($printview['rem'])."</b><br>".$printview['gc']."<br></td><td></td>
                       		</tr>";                      		
                      		}
