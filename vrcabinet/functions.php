@@ -377,13 +377,7 @@ if(!empty($_POST))
 
  
     if($_POST['action'] == "upload") {
-    //$string = "Beijing, Chongqing, Hong Kong, Urumqi";
-    //putenv("TZ=$string");
-    //echo date('Y-m-d H:i:s');
-       date_default_timezone_set('Asia/Brunei');
-    //   $date = date('Y-m-d H:i:s');
-     //   date_default_timezone_set('Asia/Brunei');
-      //  echo date('F j,y,g:i a');
+    date_default_timezone_set('Asia/Brunei');
     $parts = explode('/', $_POST['resdate']);
     $resdate  = "$parts[2]-$parts[0]-$parts[1]";
 
@@ -411,7 +405,7 @@ if(!empty($_POST))
                                     $stmt->bindParam(':title', $_POST['docsubject']);
                                     $stmt->bindParam(':author', $_POST['author']);
                                     $stmt->bindParam(':remarks', $_POST['remarks']);
-                                    $stmt->bindParam(':added', date('Y-m-j'));
+                                    $stmt->bindParam(':added', date('Y-m-d'));
                                     $stmt->bindParam(':hrdbid', $_SESSION['id']);
                                     $stmt->bindParam(':admintype', $_POST['admintype']);
                                     $stmt->bindParam(':logtype', $_POST['logtype']);
@@ -456,7 +450,7 @@ if(!empty($_POST))
                                     $stmt->bindParam(':filename', $uploadname);
                                     $stmt->bindParam(':filesize', $file_size);
                                     $stmt->bindParam(':remarks', $_POST['remarks']);
-                                    $stmt->bindParam(':added', date('Y-m-j'));
+                                    $stmt->bindParam(':added', date('Y-m-d'));
                                     $stmt->bindParam(':hrdbid', $_SESSION['id']);
                                     $stmt->bindParam(':admintype', $_POST['admintype']);
                                     $stmt->bindParam(':logtype', $_POST['logtype']);
@@ -532,7 +526,7 @@ if(!empty($_POST))
                                         $stmt->bindParam(':filename', $uploadname);
                                         $stmt->bindParam(':filesize', $file_size);
                                         $stmt->bindParam(':remarks', $_POST['remarks']);
-                                        $stmt->bindParam(':added', date('Y-m-j'));
+                                        $stmt->bindParam(':added', date('Y-m-d'));
                                         $stmt->bindParam(':hrdbid', $_SESSION['id']);
                                         $stmt->bindParam(':admintype', $_POST['admintype']);
                                         $stmt->bindParam(':logtype', $_POST['logtype']);
@@ -606,7 +600,7 @@ if($_POST['action'] == "reuploadadmin"){
                     $stmt->bindParam(':title', $_POST['docsubject']);
                     $stmt->bindParam(':author', $_POST['author']);
                     $stmt->bindParam(':remarks', $_POST['remarks']);
-                    $stmt->bindParam(':added', date('Y-m-j'));
+                    $stmt->bindParam(':added', date('Y-m-d'));
                     $stmt->bindParam(':hrdbid', $_SESSION['id']);
                  //   $stmt->bindParam(':admintype', $_POST['admintype']);
                   //  $stmt->bindParam(':logtype', $_POST['logtype']);
@@ -633,7 +627,7 @@ if($_POST['action'] == "reuploadadmin"){
                     $stmt->bindParam(':title', $_POST['docsubject']);
                     $stmt->bindParam(':author', $_POST['author']);
                     $stmt->bindParam(':remarks', $_POST['remarks']);
-                    $stmt->bindParam(':added',date('Y-m-j'));
+                    $stmt->bindParam(':added',date('Y-m-d'));
                     $stmt->bindParam(':hrdbid', $_SESSION['id']);
                     $stmt->bindParam(':admintype', $_POST['admintype']);
                     $stmt->bindParam(':logtype', $_POST['logtype']);
@@ -723,7 +717,7 @@ if($_POST['action'] == "reuploadadmin"){
                                 $stmt->bindParam(':filename', $uploadname);
                                 $stmt->bindParam(':filesize', $file_size);
                                 $stmt->bindParam(':remarks', $_POST['remarks']);
-                                $stmt->bindParam(':added', date('Y-m-j'));
+                                $stmt->bindParam(':added', date('Y-m-d'));
                                 $stmt->bindParam(':hrdbid', $_SESSION['id']);
                                 $stmt->bindParam(':admintype', $_POST['admintype']);
                                 $stmt->bindParam(':logtype', $_POST['logtype']);
