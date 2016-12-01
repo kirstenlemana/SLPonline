@@ -417,7 +417,7 @@ function typeChange3(){
 $('#refnumber').val($('#logtype option:selected').val()+'-'+$('#admintype option:selected').val()+'<?php 
   date_default_timezone_set('Asia/Brunei');
  // $date = date('Ymj',time()+ 50400);
-  $date = date('mjY');
+  $date = date('mdY');
   echo '-'.$date.'-'.($rowz['id'] + 1) ?>');
 
 }
