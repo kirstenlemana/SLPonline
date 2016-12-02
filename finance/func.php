@@ -14,7 +14,7 @@ function besIsLove($idbes)
 
 
 
-$dates = date("mdY h:i:sa");
+$dates = date("Y-m-d h:i:sa",time() + 86400);
 $dt = date("Y-m-d",time() + 86400);
 if(!empty($_POST)) 
 { 
@@ -30,7 +30,7 @@ if(!empty($_POST))
                      )
                       VALUES
                       ( 
-                          :uacs,
+                         :uacs,
                          :subaro,
                          :amount,
                          :dt,
@@ -71,7 +71,7 @@ if($_POST['action'] == "deletenta") {
 }
 
 if($_POST['action']=="updateallot") {
-    $stmt=$db->prepare("UPDATE fin_allotments SET region=:region,type=:type,subtype=:subtype,saa=:saa,uacs=:uacs,fundsource=:fundsource,fundsourceyear=:fundsourceyear,amount=:amt,d8=:d8 WHERE allotid=:eid");
+    $stmt=$db->prepare("UPDATE fin_allotments SET region=:region,type=:type,subtype=:subtype,saa=:saa,uacs=:uacs,fundsource=:fundsource,fundsourceyear=:fundsourceyear,amount=:amt,d8=:d8,purpose=:purpose WHERE allotid=:eid");
     $stmt->bindparam(':eid',$_SESSION['editid1']);
     $stmt->bindParam(':region',$_POST['region']);
     $stmt->bindParam(':type',$_POST['fundtype']);
@@ -82,6 +82,8 @@ if($_POST['action']=="updateallot") {
     $stmt->bindParam(':fundsourceyear', $_POST['fundsourceyear']);
     $stmt->bindParam(':amt', $_POST['amt']);
     $stmt->bindParam(':d8', $_POST['d8']);
+    $stmt->bindParam(':purpose', $_POST['purpose']);
+
     $stmt->execute();
     echo "success";
 }
@@ -113,10 +115,14 @@ if($_POST['action'] == "comment") {
         echo "commented";
     }
 if($_POST['action'] == "addfundallo") {
+ 
+
+                    
               try   
                   { 
                   
-                   
+                 
+
                      $stmt1 = $db->prepare("INSERT INTO fin_allotments
                       (region,
                         type,
@@ -128,7 +134,9 @@ if($_POST['action'] == "addfundallo") {
                         amount,
                         d8,
                         hrdbid,
-                        dateadded)
+                        dateadded,
+                        purpose
+                        )
                       VALUES
                       ( 
                          :region,
@@ -141,7 +149,8 @@ if($_POST['action'] == "addfundallo") {
                          :amt,
                          :d8,
                          :hrid,
-                         :dateadd                                         
+                         :dateadd,
+                         :purpose                                       
                          )
 
                        ");
@@ -156,6 +165,8 @@ if($_POST['action'] == "addfundallo") {
                       $stmt1->bindParam(':d8', $_POST['d8']);
                       $stmt1->bindParam(':hrid', $_SESSION['id']);
                       $stmt1->bindParam(':dateadd', $dates);
+                      $stmt1->bindParam(':purpose', $_POST['purpose']);
+
                       $stmt1->execute();
                     }        
                 catch(PDOException $e) 
@@ -163,6 +174,10 @@ if($_POST['action'] == "addfundallo") {
                       echo "Error: " . $e->getMessage();
                   }
                   echo "success";
+                
+
+
+
     }
 
 
