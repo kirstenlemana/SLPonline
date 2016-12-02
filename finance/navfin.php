@@ -1,4 +1,3 @@
-
 <script>
   function triggerClicked(str,str2) {
     console.log(str2);
@@ -33,6 +32,7 @@
       
     </div>
    <!-- Collect the nav links, forms, and other content for toggling -->
+
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <!--<li class="dropdown">
@@ -63,9 +63,10 @@
             <li><a href="http://slp.ph/hanapbuhay/jobs.php">MD</a></li>
           </ul>
         </li>-->
-        
+          
         <li class="dropdown">
-          <a href="dashboard.php">Finance v3</a>
+          <a href="dashboard.php">
+          <img src="../images/SLP LOGO.png" width="65" height="25" alt="SLPIT">&nbsp;Finance v3</a>
         </li>
         <!--<li class="dropdown">
           <a href="wfp.php" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -129,7 +130,7 @@ if ($notifs == 0) {
           </ul>
         </li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> Migs <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> <?php echo $_SESSION['firstname'] ?> <span class="caret"></span></a>
           <ul class="dropdown-menu slpdropsub">
             <li><a href="http://slp.ph/changepassword.php">Change Password</a></li>
             <li><a href="http://slp.ph/hr/feedback.php">My Feedback</a></li>
