@@ -256,7 +256,7 @@ tr {
                    <div class="form-group">
                     <div class="row">
                       <div class="col-md-12">
-                        <select class="form-control" id="subtype" name="subtype" onchange="displaySubType();">
+                        <select class="form-control" id="subtype" name="subtype" onchange="SubGA()">
                             <option><?php echo $rowa['subtype'];?></option> 
                             <option value="'">Select Sub-Type</option>
                             <option>Grant</option>
@@ -264,6 +264,38 @@ tr {
                         </select>
                       </div>
                       </div><br>
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <select class="form-control" id="fundsource" name="fundsource" onchange="fs()">
+                             <!--get this region -->
+                             <option><?php echo $rowa['fundsource'];?></option> 
+                             <option value="">Select Fund Source</option>
+                              <?php
+                              $query1 = "SELECT * FROM libhr_fundsource "; 
+                              try 
+                              { $stmt1 = $db->prepare($query1); $result = $stmt1->execute(); } 
+                              catch(PDOException $ex) 
+                              { die("Failed to run query: " . $ex->getMessage()); } 
+                              while ($row1 = $stmt1->fetch(PDO::FETCH_ASSOC)) {
+                                 echo "<option value='".$row1['hrfundsourcename']."'>".$row1['hrfundsourcename']."</option>";
+                              }
+                              ?>
+                          <!-- upto this -->  
+                        </select>
+                      </div>
+                      <div class="col-md-6">
+                        <select class="form-control" id="fundsourceyear" name="fundsourceyear">
+                        <option><?php echo $rowa['fundsourceyear'];?></option> 
+                            <option>Select Fund Year</option>
+                            <option>2015</option>
+                            <option>2016</option>
+                            <option>2017</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+
                        <div class="row">
                      
                       <div class="col-md-6" id="saaholder">
@@ -308,36 +340,13 @@ tr {
                       </div>
                     </div>
                   </div>
-                  <div class="form-group">
-                    <div class="row">
-                      <div class="col-md-6">
-                        <select class="form-control" id="fundsource" name="fundsource">
-                             <!--get this region -->
-                             <option><?php echo $rowa['fundsource'];?></option> 
-                             <option value="">Select Fund Source</option>
-                              <?php
-                              $query1 = "SELECT * FROM libhr_fundsource "; 
-                              try 
-                              { $stmt1 = $db->prepare($query1); $result = $stmt1->execute(); } 
-                              catch(PDOException $ex) 
-                              { die("Failed to run query: " . $ex->getMessage()); } 
-                              while ($row1 = $stmt1->fetch(PDO::FETCH_ASSOC)) {
-                                 echo "<option value='".$row1['hrfundsourcename']."'>".$row1['hrfundsourcename']."</option>";
-                              }
-                              ?>
-                          <!-- upto this -->  
-                        </select>
+                  
+                    <div class="form-group">
+                     <div class="row">
+                       <div class="col-md-12" style="">
+                           <textarea rows="3" class="form-control" placeholder="Purpose" style="padding-top:0.6em;resize:none" id="purpose" name="purpose" required><?php echo $rowa['purpose'];?></textarea><center>
+                       </div>
                       </div>
-                      <div class="col-md-6">
-                        <select class="form-control" id="fundsourceyear" name="fundsourceyear">
-                        <option><?php echo $rowa['fundsourceyear'];?></option> 
-                            <option>Select Fund Year</option>
-                            <option>2015</option>
-                            <option>2016</option>
-                            <option>2017</option>
-                        </select>
-                      </div>
-                    </div>
                   </div>
                  <button class="btn-info btn pull-left"  id="back">Back</button>
                  <button class="btn-info btn pull-right" id="updateallot" >Update</button>
@@ -367,8 +376,34 @@ tr {
 
 
 <script>
+function SubGA() {
+ var subga=$("#subtype").val();
+ if(subga=="Grant") {
+   document.getElementById("uacs1").disabled = true;
+   $("#uacs1").val("");
+ }else {
+    document.getElementById("uacs1").disabled = false;
+ }
+}
 
+function fs() {
+var fs = $("#fundsource").val();
 
+  if(fs=="SLP GAA") {
+  $("#saa").val('302100000');
+  document.getElementById("saa").focus();
+  } else if(fs=="JSDF") {
+  $("#saa").val('292000514100000');
+  document.getElementById("saa").focus();
+  } else if(fs=="PAMANA Regular") {
+  $("#saa").val('414110002(PAMANA-LGU Led)');
+  document.getElementById("saa").focus();
+  }else {
+ $("#saa").val('');
+  document.getElementById("saa").focus();
+  }
+
+}
 
 $("#updateallot").click(function(event) {
 
@@ -387,7 +422,8 @@ $("#updateallot").click(function(event) {
        'fundsource'       :$('#fundsource option:selected').val(),
        'fundsourceyear'   :$('#fundsourceyear option:selected').val(),
        'amt'              :$('input[name=amt]').val(), 
-       'd8'               :$('input[name=d8]').val()
+       'd8'               :$('input[name=d8]').val(),
+       'purpose'          :$('textarea[name=purpose]').val()
 
      };
   $.ajax({
