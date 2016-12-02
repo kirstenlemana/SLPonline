@@ -1,5 +1,36 @@
 <?php
 require "../zxcd9.php";
+ //$stmt = $db->prepare("SELECT * from fin_allotments where hrdbid=:id");
+ //$stmt->bindParam(':id', $_SESSION['id']);
+ //$stmt->execute();
+ //$rowfa = $stmt->fetch(PDO::FETCH_ASSOC);
+  //echo $rowfa['hrdbid'];
+//  echo $_SESSION['id'];
+ // while ($rowfa = $stmt->fetch(PDO::FETCH_ASSOC)) {
+  //      echo $rowfa['hrdbid'].'<br>';
+   // }
+  
+$regionz = array("NCR", "CAR", "REGION I", "REGION II", "REGION III", "REGION IV-A", "REGION IV-B", "REGION V", "REGION VI", "REGION VII", "REGION VIII", "REGION IX", "REGION X", "REGION XI", "REGION XII", "CARAGA", "ARMM", "NIR");
+
+//SELECT COUNT(region)as region,re FROM `fin_allotments` WHERE type="CMF" and region="NCR"
+$cmf = [];
+foreach ($regionz as $regvalue) {
+      $stmt = $db->prepare("SELECT COUNT(region) as regioncount FROM fin_allotments WHERE region = '".$regvalue."' and type='CMF' ");           
+      $stmt->execute();
+      $row = $stmt->fetch();
+      $cmf[] = intval($row['regioncount']);
+}
+$dr = [];
+foreach ($regionz as $regvalue) {
+      $stmt = $db->prepare("SELECT COUNT(region) as regioncount FROM fin_allotments WHERE region = '".$regvalue."' and type='DR'");           
+      $stmt->execute();
+      $row = $stmt->fetch();
+      $dr[] = intval($row['regioncount']);
+}
+
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -140,8 +171,10 @@ thead th {
   cursor: pointer;
 }
 .dataTables_paginate {
-  float:none;
+line-height:22px;
+text-align:left;
 }
+
 h3 {
   font-weight: 400
 }
@@ -260,17 +293,65 @@ $(function () {
                 stacking: 'normal'
             }
         },
+  //      series: [{
+   //         name: 'CMF',
+    //        color: colors[3],
+     //       data: [23,23,55,23,15,09,18,20,50,33,38,21,12,10,40,20]
+      //  },{
+       //     name: 'DR',
+        //    color: colors[8],
+         //   data: [43,12,44,22,10,08,25,67,32,10,29,56,19,10,40,20]
+        //}]
+
         series: [{
             name: 'CMF',
-            color: colors[3],
-            data: [23,23,55,23,15,09,18,20,50,33,38,21,12,10,40,20]
+            color:  colors[3],
+            data: [<?php echo $cmf[0].",".$cmf[1].",".$cmf[2].",".$cmf[3].",".$cmf[4].",".$cmf[5].",".$cmf[6].",".$cmf[7].",".$cmf[8].",".$cmf[9].",".$cmf[10].",".$cmf[11].",".$cmf[12].",".$cmf[13].",".$cmf[14].",".$cmf[15].",".$cmf[16].",".$cmf[17]; ?>]
         },{
             name: 'DR',
             color: colors[8],
-            data: [43,12,44,22,10,08,25,67,32,10,29,56,19,10,40,20]
+            data: [<?php echo $dr[0].",".$dr[1].",".$dr[2].",".$dr[3].",".$dr[4].",".$dr[5].",".$dr[6].",".$dr[7].",".$dr[8].",".$dr[9].",".$dr[10].",".$dr[11].",".$dr[12].",".$dr[13].",".$dr[14].",".$dr[15].",".$dr[16].",".$dr[17]; ?>]
         }]
+
+
+
+
     });
 });
+function delcom(xx) {
+      var r = confirm("This will permanently delete this record. Are you sure?");
+      if (r == true) {
+          var formData = { 
+          'action' : 'delallo',
+          'delid'  : xx
+        };
+        $.ajax({
+        type: "POST",
+        url: "func.php",
+        data: formData,
+        success: function(data) {
+                  $("#sucsubtext").html("Record deleted");
+                  $('#myModal').modal();
+                  $('#myModal').on('hidden.bs.modal', function () {location.href = "../finance/allotments_add.php"; });
+                  location.reload();
+              }
+
+        });
+      }
+}
+function allotview(ee) {
+        var formData = { 'editid' : ee };
+        $.ajax({
+          type: "POST",
+          url: "allotments_view.php?id="+ee,
+          data: formData,
+          success: function(data) {
+                  if (data == "visitpage") {
+                    location.href="allotments_view.php?id="+ee;
+                  }
+                }
+          });
+}
 </script>
 <script type="text/javascript" language="javascript" class="init">
 var oTable = "";
@@ -289,6 +370,11 @@ function parselimit(strz)
     }
     return m;
 }
+
+function com(x) {
+                   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+               }
+
 function parseStatus(str) {
   if (str == "0") {
     status = "<span class='label label-primary'>Open</span>";
@@ -301,47 +387,53 @@ function parseStatus(str) {
   }
   return status;
 }
+
+
   $.fn.DataTable.ext.pager.numbers_length = 5;
-  oTable = $('#viewdata').dataTable({
+  oTable = $('#viewdata').dataTable({ 
+    
     "aProcessing": true,
     "aServerSide": true,
     "orderCellsTop": true,
     "ajax": "dt_allotments.php",
-    "dom": '<"top">rt<"bottom"f>',
+    "dom": '<"top">rt<"bottom"ip><"clear">',
+    "aaSorting": [9,'desc'],
     "fnRowCallback":
       function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
         $(nRow).attr('id', aData[0]);
-        $(nRow).attr('subfeed', aData[1]);
+      //  $(nRow).attr('subfeed', aData[1]);
         
         return nRow;
       },
     "aoColumnDefs": [
+           { 
+               "aTargets":[7],
+                "mData": null,
+                "mRender": function( data, type, full) {
+                 return '<td>&#8369;'+com(data[7])+'</td>';
+                }
+            },
             { 
                "aTargets":[9],
                 "mData": null,
                 "mRender": function( data, type, full) {
-                    return '<td><span class="glyphicon glyphicon-edit"></span> &nbsp;<span class="glyphicon glyphicon-remove"></span></td>';
-                }
+               var id='<?php echo $_SESSION['id']; ?>';
+               var lvl='<?php echo $_SESSION['permlvl']; ?>';
+               var d9=data[9];
+               if(lvl>0 || d9==id) {              
+                    return '<td><span class=" glyphicon glyphicon-search" onclick="allotview('+data[0]+')"></span>&nbsp;<span class="glyphicon glyphicon-remove" onclick="delcom('+data[0]+')"></span></td>';
+               }
+               else
+               {
+                  return '<td><span class=" glyphicon glyphicon-search" onclick="allotview('+data[0]+')"></span></td>';
+               }
+              }
             },
+        
             { "bVisible": false, "aTargets":[0] }
                     ]
   });
-  $('#viewdata').on( 'click', 'tbody tr', function () {
-          var redirection = $(this).attr('id');
-          var redirection2 = $(this).attr('subfeed');
-          var formData = { 'subfeed' : redirection2 };
-                  $.ajax({
-                    type: "POST",
-                    url: "feedback_portaldetails.php",
-                    data: formData,
-                    success: function(data) {
-                            if (data == "visitpage") {
-                              location.href="feedback_portaldetails.php?id="+redirection;
-                            }
-                          }
 
-                    });
-  });
 
 $(document).ready(function() {
   tableshown=false;
@@ -352,11 +444,8 @@ $("#searchme").keyup(function() {
    oTable.fnFilter(this.value);
 }); 
 });
-
-
-
-
 });
+
 </script>
 <div class="row" style="margin:0;padding:0">
   <div class="col-md-2">
@@ -378,7 +467,7 @@ $("#searchme").keyup(function() {
         <br>
       </div>
       <div class="col-md-8" id="cont1" style="">
-        a
+        
       </div>
     </div>
         <div class="row" style="margin-top:1em;margin-bottom:1em;display:none;" id="searchfields">
@@ -416,12 +505,14 @@ $("#searchme").keyup(function() {
             <th>Region</th>
             <th>Type</th>
             <th>Sub-Type</th>
-            <th>SAA</th>
+            <th>Sub-Aro</th>
             <th>UACS</th>
             <th>Fund Source</th>
             <th>Amount</th>
             <th>Date</th>
             <th></th>
+       
+
           </thead>
         <!--    <tr>
               <td>Region IV-B</td>
@@ -497,6 +588,20 @@ $("#searchme").keyup(function() {
         </div>
   </div>
 </div>
+<!-- Modal -->
+      <div class="modal fade" id="myModal" role="dialog" style="margin-top:3em">
+        <div class="modal-dialog modal-sm">
+
+          <div class="modal-content" style="padding:1em;padding-top:0.5em;">
+                  <h3 style="color:#5cb85c;margin-bottom:6px">Success!</h3>
+                  <span style="font-size:13px" id="sucsubtext">Fund Allotments saved!</span><br><br>
+                  <button type="button" class="btn btn-primary pull-right" style="background:#5cb85c;border:0;margin-top:0;padding:5px 10px 5px 10px" id="okaybtn" data-dismiss="modal">Okay</button>
+                  <div class="clearfix"></div>
+          </div>
+          
+        </div>
+      </div>
+<!-- Modal -->
 <script>
 $('[data-toggle="tooltip"]').tooltip();
 shown = false;
@@ -526,5 +631,6 @@ function getProv() {
   });
 }
 </script>
+
 </body>
 </html>
