@@ -116,6 +116,26 @@ $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
         }
 
+
+        if($_POST['action']=="editwp") {
+             date_default_timezone_set('Asia/Brunei');
+            $stmt=$db->prepare("UPDATE wallposts SET wall_msg=:ewp,wallposted=:wallposted,wallposter=:wallposter WHERE wallpostid=:wpid");
+            $stmt->bindparam(':wpid',$_SESSION['editid']);
+            $stmt->bindParam(':ewp',$_POST['ewp']);   
+            $stmt->bindParam(':wallposted', date('Y-m-d'));
+            $stmt->bindParam(':wallposter', $_SESSION['id']);
+            $stmt->execute();
+            echo "edited";
+        }
+        if($_POST['action'] == "delwp") {
+                      $stmt = $db->prepare("DELETE FROM wallposts WHERE wallpostid = :wpid");
+                      $stmt->bindParam(':wpid',$_POST['wpid']);
+                      $stmt->execute();
+                      echo "deleted";
+        }
+
+
+
 }//end post
      
 ?>
