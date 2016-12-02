@@ -194,7 +194,7 @@ tr {
         <div class="row">
               <div class="col-md-6">
                   <h2 style="font-size:40px;margin-bottom:0em;margin-top:0em">Work and Financial Plan</h2>
-                  <a href="wfp2016final.xlsx" download><button class="btn btn-primary btn-xs" style="margin-top:0.5em;margin-left:3px">Export to Excel</button></a>
+                  <a href="wfp2016final.xlsx" download><button class="btn btn-primary btn-xs" style="margin-top:0.5em;margin-left:3px">Download Full Excel Version</button></a>
               </div>
               <div class="col-md-2 pull-right">
                   <div class="form-group">
@@ -1054,6 +1054,8 @@ chart3.renderer.label('Admin Cost: CMF', 30, 0, 'callout')
             })
     .add();
 });
+
+
 
             </script>
             <table class="table table-bordered" style="margin-top:2em;line-height:0.9;vertical-align:middle;border-top:2;padding-bottom:0;margin-bottom:0" >
