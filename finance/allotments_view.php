@@ -8,7 +8,7 @@ $_SESSION['pageid'] = $_GET['id'];
 
 if (isset($_GET['id'])) {
  // $_GET  = filter_input_array(INPUT_GET, FILTER_SANITIZE_NUMBER_INT);
-  $stmt = $db->prepare("SELECT fa.region as region,fa.type as type,fa.subtype as subtype,fa.saa as saa,fa.uacs as uacs,fa.fundsource as fundsource,fa.fundsourceyear as fundsourceyear,fa.amount as amount,fa.dateadded as dateadded,fa.d8 as d8, hrd.firstname as fn, hrd.id as id from fin_allotments as fa LEFT JOIN HRDB as hrd ON fa.hrdbid=hrd.id  WHERE allotid = :id");
+  $stmt = $db->prepare("SELECT fa.region as region,fa.type as type,fa.subtype as subtype,fa.saa as saa,fa.uacs as uacs,fa.fundsource as fundsource,fa.fundsourceyear as fundsourceyear,fa.amount as amount,fa.dateadded as dateadded,fa.d8 as d8, hrd.firstname as fn, hrd.id as id,fa.allotid as allotid, fa.purpose from fin_allotments as fa LEFT JOIN HRDB as hrd ON fa.hrdbid=hrd.id  WHERE allotid = :id");
   $stmt->bindParam(':id', $_GET['id']);
   $stmt->execute();
   $rowdv = $stmt->fetch();
@@ -268,96 +268,95 @@ h3 {
 <body>
 <?php require "../nav.php"; ?>
 <div class="row" style="margin-right:0">
-
   <div class="col-md-offset-1 col-md-10 padfix padfix2" style="">
     <div style="border:solid 1px #c5d6de;margin-left:1em;background:#fff;text-align:center;padding:1em">
       <div class="row" style="border-bottom:1px solid #c5d6de;padding-left:2em">
         <div class="col-sm-6">
-            <h3 style="text-align:left;margin-top:0;font-size:20px"><?php echo $rowdv['logtype']." "; ?><img src="../imgs/money.png" alt="fund" width="40" height="40">&nbsp;Fund Allotment Details</h3>
+            <h3 style="text-align:left;margin-top:0;font-size:20px"><img src="../imgs/money.png" alt="fund" width="40" height="40">&nbsp;Fund Allotment Details</h3>
         </div>
         <div class="col-sm-6 pull-right">
             <?php if ($_SESSION['permlvl']>0||$_SESSION['id']==$rowdv['id']) { ?> 
             
-            <span class="link-hover delbtn pull-right" id="delfile"><span class="glyphicon glyphicon-trash"></span> Delete</span>
             <span class="link-hover editbtn pull-right" id="editfile"><span class="glyphicon glyphicon-pencil"></span> Edit &nbsp; </span>
             <span class="link-hover pull-right" id="back" style="color:#00ADDe"><span class="glyphicon glyphicon-backward"></span> Back &nbsp;</span>
 
-            <?php } ?>
+            <?php } else {?>
+
+            <span class="link-hover pull-right" id="back" style="color:#00ADDe"><span class="glyphicon glyphicon-backward"></span> Back &nbsp;</span>
+
+            <?php }?>
+
+
         </div>
       </div>
-      <div class="row" style="padding-top:1em;text-align:left;padding-left:3em">
-        <div class="col-sm-12">
-          <b>Region: </b><br><?php echo $rowdv['region']; ?><br>
-        </div>
-      </div>
-      <div class="row" style="padding-top:1em;text-align:left;padding-left:3em">
-        <div class="col-sm-3">
-          <b>Type:</b><br><?php echo $rowdv['type']; ?><br>
-        </div>
-        <div class="col-sm-3">
-          <b>Sub-Type:</b><br><?php echo $rowdv['subtype']; ?><br>
-        </div>
-        <div class="col-sm-3">
-          <b>Sub-Aro:</b><br><?php echo $rowdv['saa']; ?><br>
-        </div>
-        <div class="col-sm-3">
-          <b>UACS:</b><br><?php echo $rowdv['uacs']; ?><br>
-        </div>
-      </div>
-      <div class="row" style="padding-top:1em;text-align:left;padding-left:3em;margin-top:1em">
-            <div class="col-sm-3">
-              <b>Fund Source:</b><br><?php echo $rowdv['fundsource']; ?>
-            </div>
-            <div class="col-sm-3">
-                <b>Fund Source Year:</b> <?php echo $rowdv['fundsourceyear']; ?>
-            </div>
-            <div class="col-sm-3">
-              <b>Amount:</b><br><?php echo $rowdv['amount']; ?>
-            </div>
-            <div class="col-sm-3">
-              <b>Date:</b><br><?php echo $rowdv['d8']; ?>
-            </div>
+     <div class="row">
+          <table class="table table-bordered" style="line-height:0.9;vertical-align:middle;border:0;margin-bottom:1em">
+              <thead style="background:#f6f8fa">
+                <th style="width:10%">Region</th>
+                <th >Type</th>
+                <th >Sub-type</th>
+                <th style="width:15%">Sub-Aro</th>
+                <th >Uacs</th>
+                <th >Fund Source</th>
+                <th >Fund Source Year</th>
+                <th >Amount</th>
+                <th >Date of allotments</th>
+                <th style="width:15%">Purpose</th>
+                <th >Uploaded By</th>
             
-      </div>
-      <div class="row" style="padding-top:1em;text-align:left;padding-left:3em;margin-top:1em;margin-bottom:1em">
-        <div class="col-sm-6">
-          <b>Uploaded by:</b> <a href="../hr/user.php?id=<?php echo $rowdv['id']; ?>" style="color:#00ADDe"><?php echo $rowdv['fn']; ?></a> on <?php echo $rowdv['dateadded']; ?>
+                </thead>
+              <!--comments-->
+              <tr>
+                <td><?php echo $rowdv['region'];?></td>
+                <td><?php echo $rowdv['type'];?></td>
+                <td><?php echo $rowdv['subtype'];?></td>
+                <td><?php echo $rowdv['saa'];?></td>
+                <td><?php echo $rowdv['uacs'];?></td>
+                <td><?php echo $rowdv['fundsource'];?></td>
+                <td><?php echo $rowdv['fundsourceyear'];?></td>
+                <td>&#8369;<?php echo number_format($rowdv['amount'],2);?></td>
+                <td><?php echo $rowdv['d8'];?></td>
+                 <td><?php echo $rowdv['purpose'];?></td>
+                <td><a href="../hr/user.php?id=<?php echo $rowdv['id']; ?>" style="color:#00ADDe"><?php echo $rowdv['fn']; ?></a><span style='color:#999;font-size:13px'><?php echo " On ".date("m/d/Y", strtotime($rowdv['dateadded'])); ?></span></td>
+
+              </tr>
+              <!--comments-->     
+              </table>
+
         </div>
-        <div class="col-sm-offset-3 col-sm-3">
-          <button class="btn btn-info btn-xs" id="goDL">Download</button> &nbsp;<button class="btn btn-success btn-xs" id="resendfile">Share via email</button>
-        </div>
-      </div>
     </div>
   </div>
 </div>
 
 <div class="row" style="margin-right:0;margin-top:1em;margin-bottom:3em">
-  <div class="col-md-offset-3 col-md-6" style="">
-    <div style="border:solid 1px #c5d6de;background:#fff;text-align:left;padding:1em;padding-top:0">
+  <div class="col-md-offset-1 col-md-10 padfix padfix2" style="">
+    <div style="border:solid 1px #c5d6de;background:#fff;text-align:left;padding:1em;padding-top:0;margin-left:1em;">
         <div class="row">
           <table class="table table-bordered" style="line-height:0.9;vertical-align:middle;border:0;margin-bottom:1em">
               <thead style="background:#f6f8fa">
-                <th style="width:35%">NTA</th>
+                <th style="width:33%">NTA</th>
                 <th style="width:33%">Amount</th>
-                <th style="width:23%">Date</th>
+                <th style="width:18%">Date of NTA</th>
+                <th >Date Added</th>
+
                 <th></th>
               </thead>
         
 
                          <!--comments-->
             <?php
-              $stmtnta = $db->prepare("SELECT f.ntaid,f.nta,f.nta_amount,f.nta_date,h.firstname,h.id,f.id FROM fin_nta f LEFT JOIN HRDB h ON f.hrdbid=h.id WHERE
+              $stmtnta = $db->prepare("SELECT f.ntaid,f.nta,f.nta_amount,f.nta_date,h.firstname,h.id,f.id,f.nta_dateadded FROM fin_nta f LEFT JOIN HRDB h ON f.hrdbid=h.id WHERE
                 f.ntaid = :id");
               $stmtnta->bindParam(':id', $_GET['id']);
               $stmtnta->execute();
                 while ($rowN = $stmtnta->fetch(PDO::FETCH_NUM, PDO::FETCH_ORI_NEXT)) {
      
-                  if ($_SESSION['id']==$rowN[5]) {
-                    echo "<tr><td>".$rowN[1]." </td><td>".$rowN[2]."</td><td><span style='color:#999;font-size:13px'>by: ".$rowN[4]." on ".date("m/d", strtotime($rowN[3]))."</span></td><td style='text-align:center'><span class='glyphicon glyphicon-edit' id='editcomment' onclick='editnta(".$rowN[6].");'></span> &nbsp;<span class='glyphicon glyphicon-remove' id='deletecomment' onclick='delnta(".$rowN[6].");'></span></td></tr>";
+                  if ($_SESSION['permlvl']>0 || $_SESSION['id']==$rowN[5]) {
+                    echo "<tr><td>".$rowN[1]." </td><td>&#8369;".number_format($rowN[2],2)."</td><td>".$rowN[3]."</td><td><span style='color:#999;font-size:13px'>by: ".$rowN[4]." on ".date("m/d", strtotime($rowN[7]))."</span></td><td style='text-align:center'><span class='glyphicon glyphicon-edit' id='editcomment' onclick='editnta(".$rowN[6].");'></span> &nbsp;<span class='glyphicon glyphicon-remove' id='deletecomment' onclick='delnta(".$rowN[6].");'></span></td></tr>";
                       }
                       else
                       {
-                     echo "<tr><td>".$rowN[1]." </td><td>".$rowN[2]."</td><td><span style='color:#999;font-size:13px'>by: ".$rowN[4]." on ".date("m/d", strtotime($rowN[3]))."</span></td><td style='text-align:center' hidden><span class='glyphicon glyphicon-edit' id='editcomment' onclick='editnta(".$rowN[6].");'></span> &nbsp;<span class='glyphicon glyphicon-remove' id='deletecomment' onclick='delnta(".$rowN[6].");'></span></td></tr>";
+                     echo "<tr><td>".$rowN[1]." </td><td>&#8369;".number_format($rowN[2],2)."</td><td>".$rowN[3]."</td><td><span style='color:#999;font-size:13px'>by: ".$rowN[4]." on ".date("m/d", strtotime($rowN[7]))."</span></td><td style='text-align:center' hidden><span class='glyphicon glyphicon-edit' id='editcomment' onclick='editnta(".$rowN[6].");'></span> &nbsp;<span class='glyphicon glyphicon-remove' id='deletecomment' onclick='delnta(".$rowN[6].");'></span></td></tr>";
 
                       }
               }
@@ -369,7 +368,7 @@ h3 {
               </table>
 
         </div>
-        <div class="row" style="padding-left:1em">
+        <div class="row" style="padding-left:0em">
           <div class="col-sm-4">
             <div class="form-group">
               <input class="form-control" placeholder="Type nta here.." id="nta" name="nta">
@@ -377,7 +376,7 @@ h3 {
           </div>
            <div class="col-sm-4">
             <div class="form-group">
-              <input class="form-control" placeholder="Type amount here.." id="amt" name="amt">
+              <input class="form-control" placeholder="Type amount here.." id="amt" name="amt" >
             </div>
           </div>
            <div class="col-sm-3">
@@ -385,7 +384,7 @@ h3 {
               <input class="form-control" placeholder="Type date here.." style="" id="dte" name="dte">
             </div>
           </div>
-          <div class="col-sm-1" style="margin-left:0;padding-left:0">
+          <div class="col-sm-1" style="margin-left:0;padding-left:0em">
             <div class="form-group">
               <button class="btn btn-primary" id="postcomment">Post</button>
             </div>
@@ -454,47 +453,6 @@ function editnta(row1) {
                 }
           });
 }
-$('#goDL').click(function(){
-  var formData = {
-      'action'        : "countDL",
-      'docdbid'       : "<?php echo $_GET['id']; ?>",
-    };
-        $.ajax({
-          type: "POST",
-          url: "functions.php",
-          data: formData,
-          success: function(data) {
-                  if (data == "counted") {
-                    location.href="http://slp.ph/docs/<?php echo $rowdv['filename']; ?>"
-                  } else {
-                    alert(data);
-                  }
-          }
-
-      });
-});
-$("#resendfile").click(function(event) {
-event.preventDefault();
-event.stopImmediatePropagation();
-  var formData = { 'resendid' : '<?php echo $_GET["id"]; ?>' };
-        $.ajax({
-          type: "POST",
-          url: "resend.php",
-          data: formData,
-          success: function(data) {
-                  if (data == "visitpage") {
-                    location.href="resend.php"
-                  }
-                }
-
-          });
-});
-
-$("#sharelink").click(function(event) {
-event.preventDefault();
-event.stopImmediatePropagation();
-  $('#myModal').modal();
-});
 $("#editfile").click(function(event) {
         var formData = { 'editid1' : '<?php echo $rowdv['allotid']; ?>' };
         $.ajax({
@@ -509,6 +467,10 @@ $("#editfile").click(function(event) {
 
           });
 });
+
+
+
+
 
 $("#back").click(function(event) {
   
@@ -547,32 +509,7 @@ $("#postcomment").click(function(event) {
                 });
                 //endAjax
 }); //endpost
-$("#delfile").click(function(event) {
-  var r = confirm("You are about to delete a record. This will be recorded. Are you sure?");
-  if (r == true) {
-    var formData = {
-      'action'        : "delete",
-      'docdbid'       : "<?php echo $_GET['id']; ?>",
-      'docfilename'   : "<?php echo $rowdv['filename'] ?>"
-    };
-                $.ajax({
-                   url: "functions.php",
-                   type: "POST",
-                   data: formData,
-                   success: function(data)
-                   {
-                      if (data == "deleted") {
-                        alert("Success!");
-                        
-                        location.href = "index.php";
-                      } else {
-                        alert(data);
-                      }
-                   }
-                });
-                //endAjax
-  }
-}); //endpost
+
 </script>
 <script type="text/javascript" src="http://momentjs.com/downloads/moment.min.js"></script>
 <script src="../js/pikaday.min.js"></script>
