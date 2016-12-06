@@ -311,6 +311,31 @@ if ($_SESSION['permlvl']>0 || ($_SESSION['permlvl']<1 && $_SESSION['id']==$_SESS
           $byte = $db->prepare("SELECT SUM(amt) as total FROM bytez m WHERE m.hrdbid='".$_GET['id']."' ");
           $byte->execute();
           $bytez = $byte->fetch();
+
+
+    try {
+        $admin = $db->prepare("SELECT count(id) as encoded FROM DOCDB WHERE hrdbid=:hrdbida");
+        $admin->bindParam(':hrdbida', $_SESSION['pageid']);
+        $admin->execute();
+        $admun=$admin->fetch();
+          
+        } catch(PDOException $e) {
+              echo "Error: " . $e->getMessage();
+        }
+
+  try {
+        $adminU = $db->prepare("SELECT groupname FROM hr_groups WHERE HRDBid=:hrdbida");
+        $adminU->bindParam(':hrdbida', $_SESSION['pageid']);
+        $adminU->execute();
+        $admunit=$adminU->fetch();
+          
+        } catch(PDOException $e) {
+              echo "Error: " . $e->getMessage();
+        }
+
+
+
+          
           ?> 
 
           <br>
@@ -345,10 +370,11 @@ if ($_SESSION['permlvl']>0 || ($_SESSION['permlvl']<1 && $_SESSION['id']==$_SESS
           <?php
             }
             if ($_SESSION['id']==$_GET['id'] || $_SESSION['permlvl']>0) {
-          ?>
+
+         echo ' <a href="edit.php?id='.$_GET['id'].'" style="color:#000">'; ?>
             <button type="button" class="btn btn-info btn-sm" id='editprofile'>
               Edit Profile &nbsp;<span class="glyphicon glyphicon-cog"></span>
-            </button>
+            </button></a>
           <?php
             }
           ?>
@@ -358,6 +384,14 @@ if ($_SESSION['permlvl']>0 || ($_SESSION['permlvl']<1 && $_SESSION['id']==$_SESS
           <hr style="height:1px;border:none;color:#c5d6de;background-color:#c5d6de; margin-right:-30px; margin-left:-30px;margin-bottom:0.75em"/>
           <span class="glyphicon glyphicon-question-sign" id="tooltip3" data-toggle="popover" data-original-title="Bytez <span class='glyphicon glyphicon-flash'>" data-content="Bytez are automatically earned by using the system. What are they for? Nothing for now." rel="popover" data-placement="top" data-trigger="hover"></span>
           Bytez: <b><?php echo number_format($bytez['total']); ?></b><span class="glyphicon glyphicon-flash"></span><br>
+
+
+          <?php  if($admunit['groupname']=="Administrative Support Unit") {  ?>
+           <span class="glyphicon glyphicon glyphicon-th"  rel="popover" data-placement="top" data-trigger="hover" ></span>
+          Encoded:
+          <?php echo "<b>".$admun['encoded']."</b><br>"; } ?> 
+
+
           <hr style="height:1px;border:none;color:#c5d6de;background-color:#c5d6de; margin-right:-30px; margin-left:-30px; margin-top:0.75em"/>
 
 
@@ -435,13 +469,22 @@ if ($_SESSION['permlvl']>0 || ($_SESSION['permlvl']<1 && $_SESSION['id']==$_SESS
 
           <table style="margin:1em;width:90%">            
 <?php
-      $stmtcom = $db->prepare("SELECT t.firstname, m.wall_msg, m.wallposted, t.region, t.id FROM hr_wallposts m LEFT JOIN hr_db t ON m.wallposter=t.id WHERE m.wallowner = :wallowner ORDER BY m.wallpostid DESC LIMIT 10");
+      $stmtcom = $db->prepare("SELECT t.firstname, m.wall_msg, m.wallposted, t.region, t.id, m.wallpostid FROM hr_wallposts m LEFT JOIN hr_db t ON m.wallposter=t.id WHERE m.wallowner = :wallowner ORDER BY m.wallpostid DESC LIMIT 10");
       $stmtcom->bindParam(':wallowner', $_GET['id']);
       $stmtcom->execute();
       while ($row8 = $stmtcom->fetch(PDO::FETCH_NUM, PDO::FETCH_ORI_NEXT)) {
-            echo '<tr style="cursor:default;"><td style="font-size:15px;vertical-align:middle"><div class="col-sm-12" style="text-align:left;line-height:1.1;padding-left:0.7em">'.$row8[1].'<br><span style="font-size:12px"><a href="user.php?id='.$row8[4].'" style="color:#00ADDe;text-decoration:none">'.ucwords(strtolower($row8[0])).'</a></span> <span style="color:#888;font-size:12px">'.timeago(strtotime($row8[2])).'<br><br></span></span></div><div class="clearfix"></div></div></td></tr>';
+
+
+        if($_SESSION['permlvl']>0 || $_SESSION['id']==$row8[4]) {
+            echo '<tr style="cursor:default;"><td style="font-size:15px;vertical-align:middle"><div class="col-sm-12" style="text-align:left;line-height:1.1;padding-left:0.7em">'.$row8[1].'<br><span style="font-size:12px"><a href="http://slp.ph/hr/user.php?id='.$row8[4].'" style="color:#00ADDe;text-decoration:none">'.ucwords(strtolower($row8[0])).'</a></span><span style="color:#444;font-size:12px"> ('.$row8[3].') <span style="color:#888;font-size:12px">'.timeago(strtotime($row8[2])).'</span></span></span>&nbsp;&nbsp;<span class="glyphicon glyphicon-edit" onclick="editwp('.$row8[5].');" style="color:#34495e;font-size:12px"></span>&nbsp;<span class="glyphicon glyphicon-remove" onclick="delwp('.$row8[5].');" style="color:#e74c3c;font-size:12px"></span><br><br></div><div class="clearfix"></div></div></td></tr>';
+          }else{
+             echo '<tr style="cursor:default;"><td style="font-size:15px;vertical-align:middle"><div class="col-sm-12" style="text-align:left;line-height:1.1;padding-left:0.7em">'.$row8[1].'<br><span style="font-size:12px"><a href="http://slp.ph/hr/user.php?id='.$row8[4].'" style="color:#00ADDe;text-decoration:none">'.ucwords(strtolower($row8[0])).'</a></span><span style="color:#444;font-size:12px"> ('.$row8[3].') <span style="color:#888;font-size:12px">'.timeago(strtotime($row8[2])).'</span></span></span><br><br></div><div class="clearfix"></div></div></td></tr>';
+
+          }
+
       }
 ?>
+
           </table>
         </div>
       </div>  
@@ -634,7 +677,7 @@ $('#viewdata').on( 'click', 'tbody tr', function () {
                               <textarea name="remarks" maxlength="255" class="form-control" id="remarks" placeholder="Purpose" style="resize:none;padding-top:8px;padding-bottom:8px;" rows="3"></textarea>
                           </div>
 <?PhP
-$sql = "SELECT id, CONCAT(lastname, ', ', firstname) as name FROM HRDB";
+$sql = "SELECT id, CONCAT(lastname, ', ', firstname) as name FROM hr_db";
 //$partnerIDArray = [];
 //$partnerArray = [];
 
@@ -1368,6 +1411,50 @@ $(function () {
         });
     });
 });
+
+
+function editwp(row1) {
+        var formData = { 'editid' : row1 };
+        $.ajax({
+          type: "POST",
+          url: "editwallpost.php",
+          data: formData,
+          success: function(data) {
+                  if (data == "visitpage") {
+                    location.href="editwallpost.php";
+                  }
+                }
+          });
+}
+function delwp(row){
+  var r = confirm("Do you want to delete this comment?");
+ if (r == true) {
+    var formData = {
+      'action'        : "delwp",
+      'wpid'       : row
+     
+    };
+                $.ajax({
+                   url: "fileFunctions.php",
+                   type: "POST",
+                   data: formData,
+                   success: function(data)
+                   {
+                      if (data == "deleted") {
+                        alert("Success!");
+                        location.href = "user.php?id=<?php echo $_GET['id']; ?>";
+                      } else {
+                        alert(data);
+                          
+                      }
+                   }
+                });
+                //endAjax
+  }
+ //endpost
+}
+
+
 </script>
 
 
