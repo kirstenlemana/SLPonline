@@ -8,7 +8,7 @@ $_SESSION['pageid'] = $_GET['id'];
 
 if (isset($_GET['id'])) {
  // $_GET  = filter_input_array(INPUT_GET, FILTER_SANITIZE_NUMBER_INT);
-  $stmt = $db->prepare("SELECT fa.region as region,fa.type as type,fa.subtype as subtype,fa.saa as saa,fa.uacs as uacs,fa.fundsource as fundsource,fa.fundsourceyear as fundsourceyear,fa.amount as amount,fa.dateadded as dateadded,fa.d8 as d8, hrd.firstname as fn, hrd.id as id,fa.allotid as allotid, fa.purpose from fin_allotments as fa LEFT JOIN HRDB as hrd ON fa.hrdbid=hrd.id  WHERE allotid = :id");
+  $stmt = $db->prepare("SELECT fa.region as region,fa.type as type,fa.subtype as subtype,fa.saa as saa,fa.uacs as uacs,fa.fundsource as fundsource,fa.fundsourceyear as fundsourceyear,fa.amount as amount,fa.dateadded as dateadded,fa.d8 as d8, hrd.firstname as fn, hrd.id as id,fa.allotid as allotid, fa.purpose from fin_allotments as fa LEFT JOIN hr_db as hrd ON fa.hrdbid=hrd.id  WHERE allotid = :id");
   $stmt->bindParam(':id', $_GET['id']);
   $stmt->execute();
   $rowdv = $stmt->fetch();
@@ -345,7 +345,7 @@ h3 {
 
                          <!--comments-->
             <?php
-              $stmtnta = $db->prepare("SELECT f.ntaid,f.nta,f.nta_amount,f.nta_date,h.firstname,h.id,f.id,f.nta_dateadded FROM fin_nta f LEFT JOIN HRDB h ON f.hrdbid=h.id WHERE
+              $stmtnta = $db->prepare("SELECT f.ntaid,f.nta,f.nta_amount,f.nta_date,h.firstname,h.id,f.id,f.nta_dateadded FROM fin_nta f LEFT JOIN hr_db h ON f.hrdbid=h.id WHERE
                 f.ntaid = :id");
               $stmtnta->bindParam(':id', $_GET['id']);
               $stmtnta->execute();
