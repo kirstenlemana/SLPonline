@@ -126,7 +126,7 @@ body {
 <?php
 echo "<center>";
 echo "<h2>Out of Office Today:</h2>";
-$query = "SELECT DISTINCT z.addedby, CONCAT(m.firstname, ' ', m.lastname) as name FROM HRrover z LEFT JOIN HRDB m ON m.id=z.addedby WHERE startdate = DATE(NOW()) OR enddate = DATE(NOW())"; 
+$query = "SELECT DISTINCT z.addedby, CONCAT(m.firstname, ' ', m.lastname) as name FROM hr_rover z LEFT JOIN hr_db m ON m.id=z.addedby WHERE startdate = DATE(NOW()) OR enddate = DATE(NOW())"; 
 try { 
   $stmt = $db->prepare($query); 
   $result = $stmt->execute(); 
@@ -147,7 +147,7 @@ echo ucwords(strtolower($row["name"]))."<BR>";
 <center>
 <?php
 echo "<h2>Out of Office Tomorrow:</h2>";
-$query = "SELECT DISTINCT z.addedby, CONCAT(m.firstname, ' ', m.lastname) as name FROM HRrover z LEFT JOIN HRDB m ON m.id=z.addedby WHERE enddate = DATE(NOW() + INTERVAL 1 DAY) OR CURDATE() BETWEEN z.startdate AND z.enddate"; 
+$query = "SELECT DISTINCT z.addedby, CONCAT(m.firstname, ' ', m.lastname) as name FROM hr_rover z LEFT JOIN hr_db m ON m.id=z.addedby WHERE enddate = DATE(NOW() + INTERVAL 1 DAY) OR CURDATE() BETWEEN z.startdate AND z.enddate"; 
 try { 
   $stmt = $db->prepare($query); 
   $result = $stmt->execute(); 

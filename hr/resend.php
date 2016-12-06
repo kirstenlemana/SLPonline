@@ -12,7 +12,7 @@ $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
         $id = test_input($_POST['id']);
 
-        $query = "SELECT firstname, emailaddress, password FROM HRDB WHERE id=:id"; 
+        $query = "SELECT firstname, emailaddress, password FROM hr_db WHERE id=:id"; 
          
         $query_params = array( 
             ':id' => $id 

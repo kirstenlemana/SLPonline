@@ -3,7 +3,7 @@ require("../mailer/PHPMailerAutoload.php");
 require("../mailer/class.phpmailer.php");
 require("../mailer/class.smtp.php");
 require "../zxcd9.php";
-//$stmt = $db->prepare("SELECT firstname, emailaddress, password FROM HRDB WHERE region = 'REGION VIII' AND confirmed = '0' OR emailaddress = 'jmodelacruz@e-dswd.net' LIMIT 40 OFFSET 80");
+//$stmt = $db->prepare("SELECT firstname, emailaddress, password FROM hr_db WHERE region = 'REGION VIII' AND confirmed = '0' OR emailaddress = 'jmodelacruz@e-dswd.net' LIMIT 40 OFFSET 80");
 $stmt->execute();
 $namearray = [];
 $emailarray = [];

@@ -1,7 +1,9 @@
 <?php
 require "../zxcd9.php";
   byteMe($_SESSION['id'],'hr_profile',0.10);
+
   $_GET   = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
+  $_SESSION['uid'] = $_GET['id'];
     $_SESSION['pageid'] = $_GET['id'];
   $query = "SELECT firstname, middlename, lastname, nickname, sex, birthdate, emailaddress, contactnumber, designation, position, employstatus, employdate, fundsource, region, province, municipality, comptype, compyear, compstatus, compnotes, inactive, feeling FROM hr_db WHERE id = :id";
   $query_params = array(':id' => $_GET['id']);
@@ -27,7 +29,7 @@ function timeago($ptime)
 
     if ($etime < 1)
     {
-        return 'just now';
+        return '0 seconds';
     }
 
     $a = array( 365 * 24 * 60 * 60  =>  'year',
@@ -271,16 +273,11 @@ tbody tr {
 </style>
 </head>
 <body>
+<?php require "nav.php"; ?>
+<div class="row" style="margin:0;padding:0;margin-left:1em;margin-right:1em;border:solid 1px #c5d6de;background:#fff;text-align:center;padding:0">
+        <div class="col-md-3 wellz" style="padding:1em">
 
           <div id="box" style="margin-bottom:1em">
-
-<?php require "../nav.php"; ?>
-
-
-
-  <div class="col-md-3 padfix padfix2" style="border:solid 1px #c5d6de;margin-left:4em;background:#fff;text-align:center;padding:2em">
-      <div style="margin-left:1em;background:#fff;text-align:center;padding:1em;padding-top:0">
-
 <?php
 if ($_SESSION['permlvl']>0 || ($_SESSION['permlvl']<1 && $_SESSION['id']==$_SESSION['pageid'])  ) { 
 ?>
@@ -291,6 +288,7 @@ if ($_SESSION['permlvl']>0 || ($_SESSION['permlvl']<1 && $_SESSION['id']==$_SESS
     </div>
 <?php
 }
+
       try {
         $prof = $db->prepare("SELECT * FROM hr_profilepics WHERE hrdbid=:hrdbida");
         $prof->bindParam(':hrdbida', $_SESSION['pageid']);
@@ -312,9 +310,9 @@ if ($_SESSION['permlvl']>0 || ($_SESSION['permlvl']<1 && $_SESSION['id']==$_SESS
           $byte->execute();
           $bytez = $byte->fetch();
           ?> 
-
-          <br>
-          <span style="font-size:15px;font-weight:200;margin-top:1em">
+</div>
+          
+          <span style="font-size:18px;font-weight:200;margin-top:1em">
           <?php
           $fullnamez = $row['firstname'].' '.$row['middlename'].' '.$row['lastname'];
           if ($row['nickname'] != "") {
@@ -324,68 +322,66 @@ if ($_SESSION['permlvl']>0 || ($_SESSION['permlvl']<1 && $_SESSION['id']==$_SESS
           } ?>
           </span>
           <br>
-          <span style="font-size:13px;color:#888"><?php echo $row['designation'];?><br>
+          <span style="font-size:14px;color:#888"><?php echo $row['designation'];?><br>
           <?php if ($row['region'] == "NPMO") { echo $row['region']; } else { echo $row['region'].' - '.$row['province'].' - '.$row['municipality']; }?>
-          </span><br>
-          </div>
+          </span><br><br>
 
-          <div class="dropdown" style="padding-top:0">
-          <?php
-            if ($_SESSION['permlvl']>0) {
-          ?>
+          <span class="glyphicon glyphicon-question-sign" id="tooltip3" data-toggle="popover" data-original-title="Bytez <span class='glyphicon glyphicon-flash'>" data-content="Bytez are automatically earned by using the system. What are they for? Nothing for now." rel="popover" data-placement="top" data-trigger="hover" ></span>
+          Bytez: <b><?php echo number_format($bytez['total']); ?></b><span class="glyphicon glyphicon-flash"></span><br>
+          <!-- Single button -->
+          <div class="dropdown" style="padding-top:0.5em">
             <button type="button" class="btn btn-info dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Actions <span class="caret"></span>
             </button>
                 <ul class="dropdown-menu" role="menu">
-                      <li id="deleteacct"><a href="#" style="color:#000"><span class="glyphicon glyphicon-warning-sign"></span> &nbsp;Delete Account</a></li>
-                      <li id="levelup"><a href="#" style="color:#000"><span class="glyphicon glyphicon-arrow-up"></span> &nbsp;Level up</a></li>
-                      <li id="resetpass"><a href="#" style="color:#000"><span class="glyphicon glyphicon-eye-open"></span> &nbsp;Reset Password</a></li>
-                      <li id="resendconfirm"><a href="#" style="color:#000"><span class="glyphicon glyphicon-eye-open"></span> &nbsp;Resend Confirm</a></li>
+                    <?php
+                    if ($_SESSION['id']==$_GET['id'] || $_SESSION['permlvl']>0) {
+                      echo '<li id="editprofile"><a href="edit.php?id='.$_GET['id'].'" style="color:#000"><span class="glyphicon glyphicon-cog"></span> &nbsp;Edit Profile</a></li>';
+                    }
+
+                    if ($_SESSION['permlvl']>0) {
+                      echo '<li id="deleteacct"><a href="#" style="color:#000"><span class="glyphicon glyphicon-warning-sign"></span> &nbsp;Delete Account</a></li>';  
+                      echo '<li id="levelup"><a href="#" style="color:#000"><span class="glyphicon glyphicon-arrow-up"></span> &nbsp;Level up</a></li>';
+                      echo '<li id="resetpass"><a href="#" style="color:#000"><span class="glyphicon glyphicon-eye-open"></span> &nbsp;Reset Password</a></li>';
+                      echo '<li id="resendconfirm"><a href="#" style="color:#000"><span class="glyphicon glyphicon-eye-open"></span> &nbsp;Resend Confirm</a></li>';
+                    }
+                    ?>
+                    
                 </ul>
-          <?php
-            }
-            if ($_SESSION['id']==$_GET['id'] || $_SESSION['permlvl']>0) {
-          ?>
-            <button type="button" class="btn btn-info btn-sm" id='editprofile'>
-              Edit Profile &nbsp;<span class="glyphicon glyphicon-cog"></span>
-            </button>
-          <?php
-            }
-          ?>
-            <br>
-            </div>
+          </div>
+        </div>
 
-          <hr style="height:1px;border:none;color:#c5d6de;background-color:#c5d6de; margin-right:-30px; margin-left:-30px;margin-bottom:0.75em"/>
-          <span class="glyphicon glyphicon-question-sign" id="tooltip3" data-toggle="popover" data-original-title="Bytez <span class='glyphicon glyphicon-flash'>" data-content="Bytez are automatically earned by using the system. What are they for? Nothing for now." rel="popover" data-placement="top" data-trigger="hover"></span>
-          Bytez: <b><?php echo number_format($bytez['total']); ?></b><span class="glyphicon glyphicon-flash"></span><br>
-          <hr style="height:1px;border:none;color:#c5d6de;background-color:#c5d6de; margin-right:-30px; margin-left:-30px; margin-top:0.75em"/>
-
-
-              <table style="width:100%" id="userdetails" style="border:2px solid red;text-align:left">
-                <tr><td style="font-size:14px"><b><span class="glyphicon glyphicon-envelope"></span> </b></td><td style="font-size:14px;text-align:left"><?php echo $row['emailaddress'];?></td></tr>
-                <tr><td style="font-size:14px"><b><span class="glyphicon glyphicon-earphone"></span> </b></td><td style="font-size:14px;text-align:left"><?php echo $row['contactnumber'];?></td></tr>
-                <tr><td style="font-size:14px"><b><span class="glyphicon glyphicon-calendar"></span> </b></td><td style="font-size:14px;text-align:left"><?php echo $row['employdate'];?></td></tr>
+<div class="col-md-6" style="padding:1em;text-align:left;border-right:2px solid #ccc">
+            
+            <div class="row"> 
+            <div class="col-md-7">
+       
+            <table style="width:100%" id="userdetails" style="border:2px solid red">
+               <br/>
+              <tr style=""><td style="font-size:14px"><b>Email Address:</b></td><td><?php echo $row['emailaddress'];?></td></tr>
+              <tr><td style="font-size:14px"><b>Contact Number:</b></td><td><?php echo $row['contactnumber'];?></td></tr>
+              <tr><td style="font-size:14px"><b>Employment Date:</b></td><td><?php echo $row['employdate'];?></td></tr>
                
-                <?php if ($_SESSION['permlvl']>0) { ?>
-                <tr style="color:#d9534f;font-size:14px"><td><b>Employment: </b></td><td style="font-size:14px"><?php echo $row['employstatus'];?></td></tr>
-                <tr style="color:#d9534f;font-size:14px"><td><b>Fund Source: </b></td><td style="font-size:14px"><?php echo $row['fundsource'];?></td></tr>
-                <tr style="color:#d9534f;font-size:14px"><td><b>Birthdate: </b></td><td style="font-size:14px"><?php echo $row['birthdate'];?></td></tr>
-                <?php } ?>
-              </table>
+              <?php if ($_SESSION['permlvl']>0) { ?>
+              <tr style="color:#d9534f;font-size:14px"><td><b>Employment Status:</b></td><td> <?php echo $row['employstatus'];?> (Hidden)</td></tr>
+              <tr style="color:#d9534f;font-size:14px"><td><b>Fund Source:</b></td><td> <?php echo $row['fundsource'];?> (Hidden)</td></tr>
+              <tr style="color:#d9534f;font-size:14px"><td><b>Birthdate:</b></td><td> <?php echo $row['birthdate'];?> (Hidden)</td></tr>
+              <?php } ?>
+             </table>
 
-            <hr style="height:1px;border:none;color:#c5d6de;background-color:#c5d6de; margin-right:-30px; margin-left:-30px;margin-bottom:0.75em"/>
-                <h6 style="text-align:center width:100%">LOGIN ATTEMPTS</h6>
-            <hr style="height:1px;border:none;color:#c5d6de;background-color:#c5d6de; margin-right:-30px; margin-left:-30px; margin-top:0.75em"/>
-                
-
-      <div id="container" style="min-width: 200px; height: 180px; max-width: 200px; margin: 0 auto"></div>
-
-      <hr style="height:1px;border:none;color:#c5d6de;background-color:#c5d6de; margin-right:-30px; margin-left:-30px;margin-bottom:0.75em"/>
-      <h6 style="text-align:center width:100%">WORKING GROUPS &nbsp;<span class="glyphicon glyphicon-question-sign" id="tooltip1" data-toggle="popover" data-original-title="Technical Working Groups" data-content="<span class='glyphicon glyphicon-star' style='color:#ffcc09'></span> - Indicates head / focal person<br><b>NITWG</b> - National Inter-agency TWG<br><b>DSWD</b> - TWG within DSWD<br><b>SLP</b> - TWG within SLP" rel="popover" data-placement="top" data-trigger="hover" ></span></h6>
-      <hr style="height:1px;border:none;color:#c5d6de;background-color:#c5d6de; margin-right:-30px; margin-left:-30px; margin-top:0.75em"/>
-
-         <table style="width:100%" style="padding:1em;text-align:left" id="userdetails">
-              <tr><td colspan="2" style="font-size:14px; text-align:center"><b> &nbsp;<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#requestTWG" style="margin-top:2px;padding:0;padding-left:3px;padding-right:3px;font-size:11px;font-weight:bold">Request Change</button> &nbsp;<?php if ($_SESSION['id']==9) { echo '<button type="button" class="btn btn-info" data-toggle="modal" data-target="#twgmodal" style="margin-top:2px;padding:0;padding-left:3px;padding-right:3px;font-weight:bold;font-size:11px">Add</button>'; } ?></b></td></tr>
+              </div>
+                  <div class="col-md-5" style="padding:1em;";>
+                      <h6 style="text-align:center">LOGIN ATTEMPTS</h6>
+                      <div id="container" style="min-width: 200px; height: 200px; max-width: 200px; margin: 0 auto"></div>
+                </div>
+          </div>
+                     
+          <div class="row">   
+           <div class="col-md-11">
+              
+         <table style="width:100%" id="userdetails">
+               <tr><td style="visibility:none;color:#fff">.</td></tr>
+              <tr><td colspan="2" style="font-size:14px"><b>Working Groups &nbsp;<span class="glyphicon glyphicon-question-sign" id="tooltip1" data-toggle="popover" data-original-title="Technical Working Groups" data-content="<span class='glyphicon glyphicon-star' style='color:#ffcc09'></span> - Indicates head / focal person<br><b>NITWG</b> - National Inter-agency TWG<br><b>DSWD</b> - TWG within DSWD<br><b>SLP</b> - TWG within SLP" rel="popover" data-placement="top" data-trigger="hover" ></span> &nbsp;<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#requestTWG" style="margin-top:2px;padding:0;padding-left:3px;padding-right:3px;font-size:11px;font-weight:bold">Request Change</button> &nbsp;<?php if ($_SESSION['id']==9) { echo '<button type="button" class="btn btn-info" data-toggle="modal" data-target="#twgmodal" style="margin-top:2px;padding:0;padding-left:3px;padding-right:3px;font-weight:bold;font-size:11px">Add</button>'; } ?></b></td></tr>
                                   <?php
                                   try {
                                     $stmt3 = $db->prepare("SELECT groupname, groupdesc, isactive, groupleader FROM hr_groups WHERE HRDBid = :HRDBid");
@@ -395,68 +391,76 @@ if ($_SESSION['permlvl']>0 || ($_SESSION['permlvl']<1 && $_SESSION['id']==$_SESS
                                       echo "Error: " . $e->getMessage();
                                   }//endtry
                                       while ($row4 = $stmt3->fetch(PDO::FETCH_NUM, PDO::FETCH_ORI_NEXT)) {
-                                        
+                                        if ($row4[2]=="1") {
+                                          $row4[2]="Active";
+                                        } else {
+                                          $row4[2]="Inactive";
+                                        }
                                         if ($row4[3]==1) {
                                           $row4[3]=" &nbsp;<span class='glyphicon glyphicon-star' style='color:#ffcc09'></span>";
                                         } else {
                                           $row4[3]="";
                                         }
                                         if ($row4[1]==null) {
-                                          echo '<tr><td style="font-size:12px">'.$row4[0].$row4[3].'</td><td style="font-size:13px;"></td></tr>'; 
+                                          echo '<tr><td style="font-size:12px">'.$row4[0].$row4[3].'</td><td style="font-size:13px;"><center>'.$row4[2].'</center></td></tr>'; 
                                         } else {
-                                          echo '<tr><td style="font-size:12px">'.$row4[0].$row4[3].'</td><td style="font-size:13px;"><center>'.$row4[1].'</center></td></tr>'; 
+                                          echo '<tr><td style="font-size:12px">'.$row4[0].$row4[3].'</td><td style="font-size:13px;"><center>'.$row4[1].'-'.$row4[2].'</center></td></tr>'; 
                                         }
                                       }
                                   ?>
-            </table><br>
+            </table>
             </div>
           </div>
-        </div>
+</div> 
 
-  <div class="col-md-8 padfix padfix2" style="border:solid 1px #c5d6de;margin-left:1em;background:#fff;text-align:center;margin-bottom:1em">
 
-      <div style="margin-left:1em;background:#fff;text-align:center;padding:1em;">
 
+
+        <div class="col-md-3 wellz" style="padding:1em;">
           <b style="font-size:20px">
 <?php if ($row['nickname'] != "") {
             echo $row['nickname'];
           } else {
             echo $row['firstname'];
 } ?>'s Wall</b>
-              </div>
-                <div class="col-md-10 padfix padfix2" style="border:0;background:#fff;text-align:left;padding-left:5em;margin-bottom:1em;">
-                    <div class="input-group" style="margin:1em;padding:0;margin-left:1em;margin-right:1em;background:#fff;text-align:center;padding:0">
-                      <input id="comment" name="comment" class="form-control" placeholder="" style="margin-left:6em;height:31.4px">
-                      <div class="input-group-btn">
-                        <button id="postcomment" class="btn btn-primary" style="padding:2px 8px 4px 8px; margin-left:6em">Post</button>
-                      </div>
-                    </div>
-                </div>
-
           <table style="margin:1em;width:90%">            
 <?php
       $stmtcom = $db->prepare("SELECT t.firstname, m.wall_msg, m.wallposted, t.region, t.id FROM hr_wallposts m LEFT JOIN hr_db t ON m.wallposter=t.id WHERE m.wallowner = :wallowner ORDER BY m.wallpostid DESC LIMIT 10");
       $stmtcom->bindParam(':wallowner', $_GET['id']);
       $stmtcom->execute();
       while ($row8 = $stmtcom->fetch(PDO::FETCH_NUM, PDO::FETCH_ORI_NEXT)) {
-            echo '<tr style="cursor:default;"><td style="font-size:15px;vertical-align:middle"><div class="col-sm-12" style="text-align:left;line-height:1.1;padding-left:0.7em">'.$row8[1].'<br><span style="font-size:12px"><a href="user.php?id='.$row8[4].'" style="color:#00ADDe;text-decoration:none">'.ucwords(strtolower($row8[0])).'</a></span> <span style="color:#888;font-size:12px">'.timeago(strtotime($row8[2])).'<br><br></span></span></div><div class="clearfix"></div></div></td></tr>';
+            echo '<tr style="cursor:default;"><td style="font-size:15px;vertical-align:middle"><div class="col-sm-12" style="text-align:left;line-height:1.1;padding-left:0.7em">'.$row8[1].'<br><span style="font-size:12px"><a href="http://slp.ph/hr/user.php?id='.$row8[4].'" style="color:#00ADDe;text-decoration:none">'.ucwords(strtolower($row8[0])).'</a></span><span style="color:#444;font-size:12px"> ('.$row8[3].') <span style="color:#888;font-size:12px">'.timeago(strtotime($row8[2])).'<br><br></span></span></span></div><div class="clearfix"></div></div></td></tr>';
       }
 ?>
           </table>
-        </div>
-      </div>  
 
-  <div class="col-md-8 padfix padfix2" style="border:solid 1px #c5d6de;margin-left:1em;background:#fff;text-align:center;margin-bottom:1em">
-      <div style="margin-left:1em;background:#fff;text-align:left;padding:1em">
+          <div class="form-group" style="padding:0 1em 0 1em;margin-bottom:1em">
+                    <div class="input-group" style="margin-bottom:0;margin-top:1em">
+                      <input id="comment" name="comment" class="form-control" placeholder="" style="height:31.4px">
+                      <div class="input-group-btn">
+                        <button id="postcomment" class="btn btn-primary" style="padding:2px 8px 4px 8px">Post</button>
+                      </div>
+                    </div><!-- /input-group -->
+          </div>
+        </div>
+
+</div><!--ROW-->
+
+<div class="row" style="margin:1em;padding:0;margin-left:1em;margin-right:1em;border:solid 1px #c5d6de;background:#fff;text-align:center;padding:0">
+    <div class="row">
+          <div class="col-md-12" style="margin-top:0;text-align:left;padding-left:2.5em">
             <h3 style="margin-bottom:0"><b>ROVER</b></h3>
             Click on rows to view more<br><br>
-      <div class="col-md-12 padfix padfix2" style="border:0;background:#fff;text-align:left;padding:0;margin-bottom:2em">
-            <table cellpadding="0" cellspacing="0" border="0" class="table table-bordered table-hover hover" id="viewdata" style="background-color:#fff;width:100%;text-align:left;">
+          </div>
+    </div>
+    <div class="row" style="padding-bottom:1em">
+          <div class="col-md-8" style="padding-left:2.5em;">
+            <table cellpadding="0" cellspacing="0" border="0" class="table table-bordered table-hover hover" id="viewdata" style="background-color:#fff;width:100%;text-align:left">
                     <thead style="text-align:left;">
                       <tr>
-                        <th colspan="4" style="text-align:left;cursor:default">When</th>
-                        <th colspan="4" style="text-align:left;cursor:default">Where</th>
-                        <th colspan="4" style="text-align:left;cursor:default">What</th>
+                        <th colspan="3" style="text-align:left;cursor:default">When</th>
+                        <th colspan="2" style="text-align:left;cursor:default">Where</th>
+                        <th colspan="5" style="text-align:left;cursor:default">What</th>
                       </tr>
                       <tr style="display:none">
                         <th>id</th>
@@ -571,13 +575,13 @@ $('#viewdata').on( 'click', 'tbody tr', function () {
         });
 
             </script>
-
-          <div class="col-md-10 padfix padfix2" style="border:0;background:#fff;text-align:left;padding-left:8em;margin-bottom:1em;">
-            <div style="padding-top:3em; <?php if ($_SESSION['permlvl'] > 0 || ($_SESSION['id'] == $_GET['id'])) { echo ''; } else { echo 'display:none;'; } ;?>">
-              <form id="postRover" action="" method="post">
-                        <div class="form-group">
+          </div>
+          <div class="col-md-4" style="padding-right:2.5em">
+            <div style="<?php if ($_SESSION['permlvl'] > 0 || ($_SESSION['id'] == $_GET['id'])) { echo ''; } else { echo 'display:none;'; } ;?>">
+              <form id="postRover" action="" method="post" >
+                        <div class="form-group" >
                             <div class="input-group">
-                              <input class="form-control" aria-label="..." placeholder="Start Date" style="" id="startdate" name="startdate" required/>
+                              <input type="text" class="form-control" aria-label="..." placeholder="Start Date" id="startdate" name="startdate" value="<?php echo $row["startdate"]; ?>">
                               <div class="input-group-btn">
                                 <button id="ampm1" type="button" class="btn dropdown-toggle" data-toggle="dropdown" style="border: 2px solid #dce4ec;background:#dce4ec">AM / PM <span class="caret"></span></button>
                                 <ul class="dropdown-menu dropdown-menu-right" id="selectampm1">
@@ -586,7 +590,6 @@ $('#viewdata').on( 'click', 'tbody tr', function () {
                                 </ul>
                               </div><!-- /btn-group -->
                             </div><!-- /input-group -->
-                          </div>
                         </div>
 
                         <div class="form-group">
@@ -634,9 +637,9 @@ $('#viewdata').on( 'click', 'tbody tr', function () {
                               <textarea name="remarks" maxlength="255" class="form-control" id="remarks" placeholder="Purpose" style="resize:none;padding-top:8px;padding-bottom:8px;" rows="3"></textarea>
                           </div>
 <?PhP
-$sql = "SELECT id, CONCAT(lastname, ', ', firstname) as name FROM HRDB";
-//$partnerIDArray = [];
-//$partnerArray = [];
+$sql = "SELECT id, CONCAT(lastname, ', ', firstname) as name FROM hr_db";
+$partnerIDArray = [];
+$partnerArray = [];
 
 foreach ($db->query($sql) as $results)
 {
@@ -701,11 +704,8 @@ $(function () {
           
       </div>
     </div>
-  </div></div>
-
-
-
-</div><!-- Modal -->
+  </div>
+<!-- Modal -->
       <div class="modal fade" id="myModal" role="dialog" style="margin-top:3em">
         <div class="modal-dialog modal-sm">
 
@@ -718,8 +718,7 @@ $(function () {
           
         </div>
       </div>
-
-
+      <!-- Modal -->
 <!-- Modal -->
   <div class="modal fade" id="requestTWG" role="dialog">
     <div class="modal-dialog">
@@ -1114,12 +1113,12 @@ $("#saveTWG").click(function(event) {
   // UPLOAD BUTTON
 $("#profileBtn").click(function(event) {
      $("#loadoverlay").show();
-     document.getElementById("profileBtn").disabled = true;
      var fd = new FormData;                  
      file1 = $('#userfile').prop('files')[0];
      fd.append('action', 'uploadpics');
      fd.append('file', file1);
-
+      //fd.append('dt', $('input[name=dt]').val());
+         console.log("hello world");
      $.ajax({
                 url: 'uploadprofilepic.php',
                 dataType: 'text',
@@ -1147,8 +1146,6 @@ $("#profileBtn").click(function(event) {
 // REUPLOAD BUTTON 
 $("#profileBtnRe").click(function(event) {
      $("#loadoverlay").show();
-     document.getElementById("profileBtnRe").disabled = true;
-     $("#profileBtnRe").disabled = true;
      var fd1 = new FormData;                  
      file2 = $('#userfile').prop('files')[0];
      fd1.append('action', 'reuploadpics');
@@ -1164,8 +1161,6 @@ $("#profileBtnRe").click(function(event) {
                 success: function(data){
                     $("#loadoverlay").hide();
                     if (data=="Success") {
-                      $("#profileBtnRe").disabled = false;
-                      document.getElementById("profileBtnRe").disabled = false;
                       $('#myModal').modal();
                        $("#uploadprofile").hide()
                       $('#myModal').on('hidden.bs.modal', function () {
@@ -1173,8 +1168,6 @@ $("#profileBtnRe").click(function(event) {
                       })
                     } else {
                       alert(data);
-                      document.getElementById("profileBtnRe").disabled = false;
-                      $("#profileBtnRe").disabled = false;
                     }
                 }
           });
@@ -1303,7 +1296,7 @@ $(function () {
             title: {
                    text: total,
                    verticalAlign: 'middle',
-                   y: -12,
+                   y: -20,
                    style: {
                         fontFamily: 'Lato', 
                         fontSize: '30px',
@@ -1313,7 +1306,7 @@ $(function () {
             subtitle: {
                 text: 'Total',
                 verticalAlign: 'middle',
-                y: 2,
+                y: -5,
                 style: {
                         fontFamily: 'Lato', 
                         fontSize: '14px',
@@ -1360,7 +1353,7 @@ $(function () {
                     color: '#2c3e50'
                     
                 }, {
-                    name: 'FAIL',
+                    name: 'FAILED',
                     y: parseInt(loginfail),
                     color: '#d8d8d8'
                 }]

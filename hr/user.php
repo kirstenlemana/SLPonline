@@ -5,7 +5,7 @@ require "../zxcd9.php";
   $_GET   = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
   $_SESSION['uid'] = $_GET['id'];
     $_SESSION['pageid'] = $_GET['id'];
-  $query = "SELECT firstname, middlename, lastname, nickname, sex, birthdate, emailaddress, contactnumber, designation, position, employstatus, employdate, fundsource, region, province, municipality, comptype, compyear, compstatus, compnotes, inactive, feeling FROM HRDB WHERE id = :id";
+  $query = "SELECT firstname, middlename, lastname, nickname, sex, birthdate, emailaddress, contactnumber, designation, position, employstatus, employdate, fundsource, region, province, municipality, comptype, compyear, compstatus, compnotes, inactive, feeling FROM hr_db WHERE id = :id";
   $query_params = array(':id' => $_GET['id']);
         try 
         { 
@@ -321,7 +321,7 @@ if ($_SESSION['permlvl']>0 || ($_SESSION['permlvl']<1 && $_SESSION['id']==$_SESS
         }
 
   try {
-        $adminU = $db->prepare("SELECT groupname FROM HRgroups WHERE HRDBid=:hrdbida");
+        $adminU = $db->prepare("SELECT groupname FROM hr_groups WHERE HRDBid=:hrdbida");
         $adminU->bindParam(':hrdbida', $_SESSION['pageid']);
         $adminU->execute();
         $admunit=$adminU->fetch();
@@ -413,7 +413,7 @@ if ($_SESSION['permlvl']>0 || ($_SESSION['permlvl']<1 && $_SESSION['id']==$_SESS
               <tr><td colspan="2" style="font-size:14px"><b>Working Groups &nbsp;<span class="glyphicon glyphicon-question-sign" id="tooltip1" data-toggle="popover" data-original-title="Technical Working Groups" data-content="<span class='glyphicon glyphicon-star' style='color:#ffcc09'></span> - Indicates head / focal person<br><b>NITWG</b> - National Inter-agency TWG<br><b>DSWD</b> - TWG within DSWD<br><b>SLP</b> - TWG within SLP" rel="popover" data-placement="top" data-trigger="hover" ></span> &nbsp;<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#requestTWG" style="margin-top:2px;padding:0;padding-left:3px;padding-right:3px;font-size:11px;font-weight:bold">Request Change</button> &nbsp;<?php if ($_SESSION['id']==9) { echo '<button type="button" class="btn btn-info" data-toggle="modal" data-target="#twgmodal" style="margin-top:2px;padding:0;padding-left:3px;padding-right:3px;font-weight:bold;font-size:11px">Add</button>'; } ?></b></td></tr>
                                   <?php
                                   try {
-                                    $stmt3 = $db->prepare("SELECT groupname, groupdesc, isactive, groupleader FROM HRgroups WHERE HRDBid = :HRDBid");
+                                    $stmt3 = $db->prepare("SELECT groupname, groupdesc, isactive, groupleader FROM hr_groups WHERE HRDBid = :HRDBid");
                                     $stmt3->bindParam(':HRDBid', $_GET['id']);
                                     $stmt3->execute();
                                   } catch(PDOException $e) {
@@ -454,7 +454,7 @@ if ($_SESSION['permlvl']>0 || ($_SESSION['permlvl']<1 && $_SESSION['id']==$_SESS
 } ?>'s Wall</b>
           <table style="margin:1em;width:90%">            
 <?php
-      $stmtcom = $db->prepare("SELECT t.firstname, m.wall_msg, m.wallposted, t.region, t.id, m.wallpostid FROM wallposts m LEFT JOIN HRDB t ON m.wallposter=t.id WHERE m.wallowner = :wallowner ORDER BY m.wallpostid DESC LIMIT 10");
+      $stmtcom = $db->prepare("SELECT t.firstname, m.wall_msg, m.wallposted, t.region, t.id, m.wallpostid FROM hr_wallposts m LEFT JOIN hr_db t ON m.wallposter=t.id WHERE m.wallowner = :wallowner ORDER BY m.wallpostid DESC LIMIT 10");
       $stmtcom->bindParam(':wallowner', $_GET['id']);
       $stmtcom->execute();
       while ($row8 = $stmtcom->fetch(PDO::FETCH_NUM, PDO::FETCH_ORI_NEXT)) {
@@ -679,7 +679,7 @@ $('#viewdata').on( 'click', 'tbody tr', function () {
                               <textarea name="remarks" maxlength="255" class="form-control" id="remarks" placeholder="Purpose" style="resize:none;padding-top:8px;padding-bottom:8px;" rows="3"></textarea>
                           </div>
 <?PhP
-$sql = "SELECT id, CONCAT(lastname, ', ', firstname) as name FROM HRDB";
+$sql = "SELECT id, CONCAT(lastname, ', ', firstname) as name FROM hr_db";
 $partnerIDArray = [];
 $partnerArray = [];
 
@@ -1316,10 +1316,10 @@ $(document).ready(function() {
 //$filter = $_SESSION['filter'];
         /*if ($filter == "NPMO") {*/
 //$stmt = $db->prepare("SELECT count(id) as total, count(case when confirmed = '1' then 1 else null end) as confirmed FROM HRDB"); 
-$stmt = $db ->prepare("SELECT logincount + loginfail as total,logincount as logincount, loginfail as loginfail from HRDB where id = :hrdbid");
+$stmt = $db ->prepare("SELECT logincount + loginfail as total,logincount as logincount, loginfail as loginfail from hr_db where id = :hrdbid");
 $stmt->bindParam(':hrdbid', $_SESSION['pageid']);
         /*} else {
-$stmt = $db->prepare("SELECT count(id) as total, count(case when isnew = '1' then 1 else null end) as confirmed FROM HRDB WHERE region = '".$filter."'");           
+$stmt = $db->prepare("SELECT count(id) as total, count(case when isnew = '1' then 1 else null end) as confirmed FROM hr_db WHERE region = '".$filter."'");           
         }*/
 $stmt->execute();
 $row = $stmt->fetch();

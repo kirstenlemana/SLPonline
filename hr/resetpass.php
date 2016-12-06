@@ -18,7 +18,7 @@ $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         } 
 
 
-        $query = "UPDATE HRDB SET password = :pass, salt = :salt WHERE id=:id"; 
+        $query = "UPDATE hr_db SET password = :pass, salt = :salt WHERE id=:id"; 
          
         $query_params = array( 
             ':id' => $id, 

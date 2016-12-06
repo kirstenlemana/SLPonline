@@ -10,7 +10,7 @@ $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         $rovid = test_input($_POST['rovid']);
         $hrid = test_input($_POST['hrid']);
 
-        $query = "DELETE FROM RVtags WHERE roverid = :rovid AND hrdbid = :hrdbid";
+        $query = "DELETE FROM hr_RVtags WHERE roverid = :rovid AND hrdbid = :hrdbid";
         $query_params = array( 
             ':rovid' => $rovid,
             ':hrdbid' => $hrid

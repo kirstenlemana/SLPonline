@@ -1,7 +1,7 @@
 <?php
 require "../zxcd9.php";
 byteMe($_SESSION['id'],'hr_view',0.10);
-  $query = "SELECT region FROM HRDB WHERE emailaddress = :emailaddress";
+  $query = "SELECT region FROM hr_db WHERE emailaddress = :emailaddress";
   $query_params = array(':emailaddress' => $_SESSION['emailaddress']);
         try 
         { 
@@ -389,7 +389,7 @@ function filterRegion() {
 <?php
 $filter = $_SESSION['filter'];
         /*if ($filter == "NPMO") {*/
-$stmt = $db->prepare("SELECT count(id) as total, count(case when confirmed = '1' then 1 else null end) as confirmed FROM HRDB"); 
+$stmt = $db->prepare("SELECT count(id) as total, count(case when confirmed = '1' then 1 else null end) as confirmed FROM hr_db"); 
         /*} else {
 $stmt = $db->prepare("SELECT count(id) as total, count(case when isnew = '1' then 1 else null end) as confirmed FROM HRDB WHERE region = '".$filter."'");           
         }*/
@@ -485,7 +485,7 @@ $regionz = array("NPMO", "NCR", "CAR", "REGION I", "REGION II", "REGION III", "R
 
 $regtot = [];
 foreach ($regionz as $regvalue) {
-      $stmt = $db->prepare("SELECT COUNT(region) as regioncount FROM HRDB WHERE region = '".$regvalue."'");           
+      $stmt = $db->prepare("SELECT COUNT(region) as regioncount FROM hr_db WHERE region = '".$regvalue."'");           
       $stmt->execute();
       $row = $stmt->fetch();
       $regtot[] = intval($row['regioncount']);
@@ -493,7 +493,7 @@ foreach ($regionz as $regvalue) {
 
 $regconf = [];
 foreach ($regionz as $regvalue) {
-      $stmt = $db->prepare("SELECT COUNT(region) as regioncount FROM HRDB WHERE region = '".$regvalue."' AND confirmed = '1'");           
+      $stmt = $db->prepare("SELECT COUNT(region) as regioncount FROM hr_db WHERE region = '".$regvalue."' AND confirmed = '1'");           
       $stmt->execute();
       $row = $stmt->fetch();
       $regconf[] = intval($row['regioncount']);

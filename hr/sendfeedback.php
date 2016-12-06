@@ -56,7 +56,7 @@ $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
     }
          
         $query2 = " 
-            INSERT IGNORE INTO HRfeedback ( 
+            INSERT IGNORE INTO hr_feedback ( 
                 page,
                 feedback, 
                 feedbacker

@@ -15,7 +15,7 @@ function upload_dir(){
   $_SESSION['uid'] = $_GET['id'];
   $involved = [];
     $query = " 
-            SELECT m.hrdbid FROM RVtags m LEFT JOIN HRDB t ON m.hrdbid = t.id
+            SELECT m.hrdbid FROM hr_RVtags m LEFT JOIN hr_db t ON m.hrdbid = t.id
             WHERE 
             m.roverid = :rovid
             AND
@@ -50,8 +50,8 @@ function upload_dir(){
                 m.addedby, 
                 CONCAT(t.lastname, ', ', t.firstname) as name, 
                 z.filename 
-            FROM HRrover m 
-            LEFT JOIN HRDB t
+            FROM hr_rover m 
+            LEFT JOIN hr_db t
             ON m.addedby = t.id
             LEFT JOIN DOCDB z
             ON m.id=z.roverid
@@ -414,7 +414,7 @@ if( $stmt->rowCount() <= 0)
               <?php echo $row['event']; ?><br>
               with 
               <?php 
-                $stmt = $db->prepare("SELECT t.id, t.firstname FROM RVtags m LEFT JOIN HRDB t ON m.hrdbid=t.id WHERE m.roverid = :roverid");
+                $stmt = $db->prepare("SELECT t.id, t.firstname FROM hr_RVtags m LEFT JOIN hr_db t ON m.hrdbid=t.id WHERE m.roverid = :roverid");
                 $stmt->bindParam(':roverid', $_GET['id']);
                 $stmt->execute();
                 $rowCount = 0;
@@ -657,7 +657,7 @@ if( $stmt->rowCount() <= 0)
           <div class="col-md-6">
               <b>Comments:</b><br>
               <?php
-              $stmt = $db->prepare("SELECT m.comment, t.firstname, DATE_FORMAT(DATE_ADD(m.added, INTERVAL 8 HOUR), '%m/%d/%y %h:%i %p'), m.id FROM RVcomments m LEFT JOIN HRDB t ON m.addedby=t.id WHERE roverid = :roverid");
+              $stmt = $db->prepare("SELECT m.comment, t.firstname, DATE_FORMAT(DATE_ADD(m.added, INTERVAL 8 HOUR), '%m/%d/%y %h:%i %p'), m.id FROM hr_RVcomments m LEFT JOIN hr_db t ON m.addedby=t.id WHERE roverid = :roverid");
               $stmt->bindParam(':roverid', $_GET['id']);
               $stmt->execute();
               while ($row7 = $stmt->fetch(PDO::FETCH_NUM, PDO::FETCH_ORI_NEXT)) {
