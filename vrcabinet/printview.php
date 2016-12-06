@@ -37,7 +37,7 @@ if(!empty($_POST)) {
                       try {
                               $sql = $db->prepare("SELECT d.referenceno as ref,d.datereceived as dt,d.title as t,d.sourceoffice as src,
                               d.destoffice as dest,d.remarks as rem, group_concat(e.doc_comment,' [',e.added,']<br>') as gc,hr.firstname as fn FROM DOCDB as d LEFT JOIN docdb_comments as e ON e.docdbid=d.id 
-                               LEFT JOIN HRDB as hr ON hr.id=d.hrdbid
+                               LEFT JOIN hr_db as hr ON hr.id=d.hrdbid
                               WHERE e.docdbid=:id order by ref");
                               $sql->bindParam(':id', $printid);
                               $sql->execute();

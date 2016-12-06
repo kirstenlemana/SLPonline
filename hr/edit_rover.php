@@ -96,7 +96,7 @@ if(!empty($_GET))
         $query = " 
             SELECT 
                 *
-            FROM HRrover 
+            FROM hr_rover 
             WHERE 
                 id = :id
         "; 

@@ -761,7 +761,7 @@ $("#sendfeedback").click(function(event) {
 
 });
 <?PhP
-$sql = "SELECT id, CONCAT(lastname, ', ', firstname) as name FROM HRDB";
+$sql = "SELECT id, CONCAT(lastname, ', ', firstname) as name FROM hr_db";
 $partnerIDArray = [];
 $partnerArray = [];
 

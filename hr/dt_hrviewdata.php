@@ -69,9 +69,9 @@ class TableData {
 		
 		// SQL queries get data to display
 		if ($_SESSION['filter']=="NPMO") {
-			$sQuery = "SELECT SQL_CALC_FOUND_ROWS * FROM HRDB ".$sWhere." ".$sOrder." ".$sLimit;
+			$sQuery = "SELECT SQL_CALC_FOUND_ROWS * FROM hr_db ".$sWhere." ".$sOrder." ".$sLimit;
 		} else {
-			$sQuery = "SELECT SQL_CALC_FOUND_ROWS * FROM HRDB WHERE region='".$_SESSION['filter']."' ".$sOrder." ".$sLimit;
+			$sQuery = "SELECT SQL_CALC_FOUND_ROWS * FROM hr_db WHERE region='".$_SESSION['filter']."' ".$sOrder." ".$sLimit;
 		}
 		
 		$statement = $this->_db->prepare($sQuery);
@@ -126,7 +126,7 @@ header('Cache-Control: no-store, no-cache, must-revalidate');
 
 $table_data = new TableData();
 // Get the data
-$table_data->get('HRDB', 'id', array('id','firstname', 'lastname', 'emailaddress', 'contactnumber', 'designation', 'region', 'province', 'confirmed'));
+$table_data->get('hr_db', 'id', array('id','firstname', 'lastname', 'emailaddress', 'contactnumber', 'designation', 'region', 'province', 'confirmed'));
 /*
  * Alternatively, you may want to use the same class for several differnt tables for different pages.
  * By adding something similar to the following to your .htaccess file you can control this a little more...

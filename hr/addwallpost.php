@@ -11,7 +11,7 @@ $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
        // $comment = test_input($_POST['comment']);
 
 
-        $stmt = $db->prepare("INSERT INTO wallposts (wallowner, wall_msg, wallposter, wallposted) VALUES (:wallowner, :wall_msg, :wallposter, :wallposted)");
+        $stmt = $db->prepare("INSERT INTO hr_wallposts (wallowner, wall_msg, wallposter, wallposted) VALUES (:wallowner, :wall_msg, :wallposter, :wallposted)");
         $stmt->bindParam(':wallowner', $_POST['hrdbid']);
         $stmt->bindParam(':wall_msg', $_POST['comment']);
         $stmt->bindParam(':wallposter', $_SESSION["id"]);

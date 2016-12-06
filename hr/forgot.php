@@ -18,7 +18,7 @@ if (empty($_POST["emailaddress"])) {
 }
 
 
-    $query = "SELECT emailaddress, password FROM HRDB WHERE emailaddress = :emailaddress"; 
+    $query = "SELECT emailaddress, password FROM hr_db WHERE emailaddress = :emailaddress"; 
     $query_params = array( ':emailaddress' => $_POST['emailaddress'] );
     try { 
             $stmt = $db->prepare($query); 

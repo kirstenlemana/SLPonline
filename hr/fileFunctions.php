@@ -44,26 +44,6 @@ $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
                     die("Failed to run query: " . $ex->getMessage()); 
                 }
 
-            if ($_SESSION['id']==9) {
-                $query = " 
-                    UPDATE HRnotifications 
-                    SET isclicked = 0
-                    WHERE 
-                        DOCDBid = :id
-                ";
-
-                $query_params = array( 
-                    ':id' => $id 
-                ); 
-                 
-                try { 
-                    $stmt = $db->prepare($query); 
-                    $result = $stmt->execute($query_params); 
-                } 
-                catch(PDOException $ex) { 
-                    die("Failed to run query: " . $ex->getMessage()); 
-                }                
-            }
         }
 
         if ($_POST['action'] == 'delete') {
@@ -79,26 +59,12 @@ $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
                 catch(PDOException $ex) { 
                     die("Failed to run query: " . $ex->getMessage()); 
                 }
-                $query = "DELETE FROM HRnotifications WHERE DOCDBid = :id";
-                $query_params = array( 
-                    ':id' => $id 
-                ); 
-                 
-                try { 
-                    $stmt = $db->prepare($query); 
-                    $result = $stmt->execute($query_params); 
-                    if ($stmt == true) {
-                        echo "good";
-                    }
-                } 
-                catch(PDOException $ex) { 
-                    die("Failed to run query: " . $ex->getMessage()); 
-                } 
+            
 
         }
 
         if ($_POST['action'] == 'delete_comment') {
-                $query = "DELETE FROM RVcomments WHERE id = :id";
+                $query = "DELETE FROM hr_RVcomments WHERE id = :id";
                 $query_params = array( 
                     ':id' => $id 
                 ); 
@@ -119,7 +85,7 @@ $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
         if($_POST['action']=="editwp") {
              date_default_timezone_set('Asia/Brunei');
-            $stmt=$db->prepare("UPDATE wallposts SET wall_msg=:ewp,wallposted=:wallposted,wallposter=:wallposter WHERE wallpostid=:wpid");
+            $stmt=$db->prepare("UPDATE hr_wallposts SET wall_msg=:ewp,wallposted=:wallposted,wallposter=:wallposter WHERE wallpostid=:wpid");
             $stmt->bindparam(':wpid',$_SESSION['editid']);
             $stmt->bindParam(':ewp',$_POST['ewp']);   
             $stmt->bindParam(':wallposted', date('Y-m-d'));
@@ -128,7 +94,7 @@ $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
             echo "edited";
         }
         if($_POST['action'] == "delwp") {
-                      $stmt = $db->prepare("DELETE FROM wallposts WHERE wallpostid = :wpid");
+                      $stmt = $db->prepare("DELETE FROM hr_wallposts WHERE wallpostid = :wpid");
                       $stmt->bindParam(':wpid',$_POST['wpid']);
                       $stmt->execute();
                       echo "deleted";

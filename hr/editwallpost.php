@@ -4,7 +4,7 @@ if (isset($_POST['editid'])) {
   $_SESSION['editid'] = $_POST['editid'];
   die("visitpage");
 }
-        $stmt = $db->prepare("SELECT * FROM wallposts WHERE wallpostid=:id ");
+        $stmt = $db->prepare("SELECT * FROM hr_wallposts WHERE wallpostid=:id ");
         $stmt->bindParam(':id', $_SESSION['editid']);
         $stmt->execute();
         $rowwp = $stmt->fetch();

@@ -10,7 +10,7 @@ $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         $feel = test_input($_POST['feeling']);
 
         $query = " 
-            UPDATE HRDB 
+            UPDATE hr_db 
             SET feeling = :feeling  
             WHERE 
                 id = :id

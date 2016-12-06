@@ -68,7 +68,7 @@ class TableData {
 		}
 		
 		// SQL queries get data to display
-		$sQuery = "SELECT * FROM HRfeedback";
+		$sQuery = "SELECT * FROM hr_feedback";
 		$statement = $this->_db->prepare($sQuery);
 		
 		// Bind parameters
@@ -121,7 +121,7 @@ header('Cache-Control: no-store, no-cache, must-revalidate');
 
 $table_data = new TableData();
 // Get the data
-$table_data->get('HRrover', 'id', array('feeddate', 'feedback', 'response', 'implemented','feedbacker','id'));
+$table_data->get('hr_feedback', 'id', array('feeddate', 'feedback', 'response', 'implemented','feedbacker','id'));
 /*
  * Alternatively, you may want to use the same class for several differnt tables for different pages.
  * By adding something similar to the following to your .htaccess file you can control this a little more...

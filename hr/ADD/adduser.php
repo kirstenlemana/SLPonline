@@ -115,7 +115,7 @@ $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         $query = " 
             SELECT 
                 1 
-            FROM HRDB 
+            FROM hr_db 
             WHERE 
                 emailaddress = :emailaddress 
         "; 
@@ -147,7 +147,7 @@ $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         } 
 
         $query2 = " 
-            INSERT IGNORE INTO HRDB ( 
+            INSERT IGNORE INTO hr_db ( 
                 firstname, 
                 middlename, 
                 lastname, 

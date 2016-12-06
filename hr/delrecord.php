@@ -11,7 +11,7 @@ $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         $deleter = test_input($_POST['deleter']);
 
         $query = "
-        INSERT into HRdeleted (  
+        INSERT into hr_deleted (  
             id,
             firstname,
             middlename, 
@@ -73,7 +73,7 @@ $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
             compstatus, 
             compnotes, 
             permlvl 
-        FROM HRDB WHERE id=:id";
+        FROM hr_db WHERE id=:id";
          
         $query_params = array( 
             ':id' => $id 
@@ -90,7 +90,7 @@ $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         } 
 
 
-        $query = " UPDATE HRdeleted SET deleted=:deleted, deletedby=:deletedby WHERE id = :id";
+        $query = " UPDATE hr_deleted SET deleted=:deleted, deletedby=:deletedby WHERE id = :id";
         $query_params = array( 
             ':id' => $id,
             ':deleted' => date("Y-m-d"),
@@ -104,7 +104,7 @@ $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
             die("Failed to run query: " . $ex->getMessage()); 
         } 
 
-        $query = " DELETE FROM HRDB WHERE id = :id";
+        $query = " DELETE FROM hr_db WHERE id = :id";
         $query_params = array( 
             ':id' => $id
         ); 

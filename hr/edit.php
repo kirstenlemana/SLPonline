@@ -111,7 +111,7 @@ if(!empty($_GET))
                 compyear,
                 compstatus,
                 compnotes
-            FROM HRDB 
+            FROM hr_db 
             WHERE 
                 id = :id
         "; 
@@ -266,7 +266,7 @@ function isfemale() {
                       <?php
                       try {
                               $sql = $db->prepare("SELECT * FROM libhr_designation order by hrdesignationname");
-                              //$prof->bindParam(':hrdbida', $_SESSION['pageid']);
+                              //$prof->bindParam(':hr_dbida', $_SESSION['pageid']);
                               $sql->execute();
                          //     $p=$prof->fetch(PDO::FETCH_ASSOC);
                         
@@ -297,7 +297,7 @@ function isfemale() {
                       <?php
                       try {
                               $sql = $db->prepare("SELECT * FROM libhr_position order by hrpositionname");
-                              //$prof->bindParam(':hrdbida', $_SESSION['pageid']);
+                              //$prof->bindParam(':hr_dbida', $_SESSION['pageid']);
                               $sql->execute();
                          //     $p=$prof->fetch(PDO::FETCH_ASSOC);
                         
@@ -344,7 +344,7 @@ function isfemale() {
                       <?php
                       try {
                               $sql = $db->prepare("SELECT * FROM libhr_fundsource order by hrfundsourcename");
-                              //$prof->bindParam(':hrdbida', $_SESSION['pageid']);
+                              //$prof->bindParam(':hr_dbida', $_SESSION['pageid']);
                               $sql->execute();
                          //     $p=$prof->fetch(PDO::FETCH_ASSOC);
                         

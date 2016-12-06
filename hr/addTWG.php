@@ -13,7 +13,7 @@ $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         $status = test_input($_POST["twgstatus"]);
         $membership = test_input($_POST["twgmember"]);
 
-        $query = "INSERT IGNORE INTO HRgroups (HRDBid, groupleader, groupname, groupdesc, isactive) VALUES (:HRDBid, :groupleader, :groupname, :groupdesc, :isactive)"; 
+        $query = "INSERT IGNORE INTO hr_groups (HRDBid, groupleader, groupname, groupdesc, isactive) VALUES (:HRDBid, :groupleader, :groupname, :groupdesc, :isactive)"; 
          
         $query_params = array( 
             ':HRDBid' => $id,

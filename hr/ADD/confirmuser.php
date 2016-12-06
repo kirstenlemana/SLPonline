@@ -169,7 +169,7 @@ $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         } 
 
         $query = " 
-            UPDATE HRDB 
+            UPDATE hr_db 
             SET firstname = :firstname, 
                 middlename = :middlename, 
                 lastname = :lastname, 

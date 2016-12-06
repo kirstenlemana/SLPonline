@@ -122,7 +122,7 @@ if(!empty($_GET))
                 emailaddress, 
                 password, 
                 salt
-            FROM HRDB 
+            FROM hr_db 
             WHERE 
                 password = :password
         "; 

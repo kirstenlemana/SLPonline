@@ -2,28 +2,6 @@
 require "../zxcd9.php";
 byteMe($_SESSION['id'],'bkadd',0.10);
 ?>
-        <?php
-                     
-                     
-                      try 
-                      {
-
-                       $query = "SELECT * from bk_step1 order by id DESC limit 0,1"; 
-                       
-                       $stmt = $db->prepare($query);
-             
-
-                       $result = $stmt->execute(); 
-                    //   $lastId = $db->lastInsertId('id');
-                       $row = $stmt->fetch();
-                  
-                      } 
-                      catch(PDOException $ex) 
-                      { die("Failed to run query: " . $ex->getMessage()); }      
-               
-
-                  ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -271,24 +249,22 @@ h3 {
             <br><br>
         <form>
           <div class="form-group">
-           <textarea class="form-control" placeholder="Rationale and Objectves of the Project" id="rationale" name="rationale" required rows="4" style="resize:none;padding:1em"></textarea>
-
-
+            <textarea class="form-control" placeholder="Rationale and Objectves of the Project" type="password" id="oldpass" name="oldpass" required rows="3" style="resize:none;padding:1em"></textarea>
           </div>
           <div class="form-group">
-            <textarea class="form-control" placeholder="Strategies and Methodologies" id="strategies" name="strategies" required rows="4" style="resize:none;padding:1em"></textarea>
+            <textarea class="form-control" placeholder="Strategies and Methodologies" type="password" id="oldpass" name="oldpass" required rows="4" style="resize:none;padding:1em"></textarea>
           </div>
           <div class="form-group">
-            <textarea class="form-control" placeholder="Project History (who and how the project was started)" id="projecthistory" name="projecthistory" required rows="4" style="resize:none;padding:1em"></textarea>
+            <textarea class="form-control" placeholder="Project History (who and how the project was started)" type="password" id="oldpass" name="oldpass" required rows="4" style="resize:none;padding:1em"></textarea>
           </div>
 
 
           <div class="form-group">
-            <button class="btn btn-info btn-md pull-right" id="submitpass2" type="">Next &nbsp;<span class="glyphicon glyphicon-arrow-right"></span></button>
+            <button class="btn btn-info btn-md pull-right" id="submitpass" type="">Next &nbsp;<span class="glyphicon glyphicon-arrow-right"></span></button>
           </div>
           <div class="clearfix"></div>
 
-        </form>     
+        </form>
       </div>
   </div>
 
@@ -299,7 +275,7 @@ h3 {
 
           <div class="modal-content" style="padding:1em;padding-top:0.5em;">
                   <h3 style="color:#5cb85c;margin-bottom:6px">Success!</h3>
-                  <span style="font-size:13px" id="sucsubtext">Step 2 saved!</span><br><br>
+                  <span style="font-size:13px" id="sucsubtext">Boom</span><br><br>
                   <button type="button" class="btn btn-primary pull-right" style="background:#5cb85c;border:0;margin-top:0;padding:5px 10px 5px 10px" id="okaybtn" data-dismiss="modal">Okay</button>
                   <div class="clearfix"></div>
           </div>
@@ -313,44 +289,65 @@ function getBaby(parent) {
   $('#'+str).fadeIn(399);
   document.getElementById(parent).selectedIndex = "0";
 }
+function getProv() {
+  var formData = { 
+    'action' : 'province',
+    'regionid' : $('#region option:selected').val()
+  };
+  $.ajax({
+  type: "POST",
+  url: "../hr/add/getLocations.php",
+  data: formData,
+  success: function(data) {
+            $("#province").prop('disabled', false);
+            $("#province").html(data);
+        }
 
-$("#submitpass2").click(function(event) {
+  });
+}
+function getCitymun() {
+  var formData = { 
+    'action' : 'citymun',
+    'provid' : $('#province option:selected').val()
+  };
+  $.ajax({
+  type: "POST",
+  url: "../hr/add/getLocations.php",
+  data: formData,
+  success: function(data) {
+            $("#municipality").prop('disabled', false);
+            $("#municipality").html(data);
+        }
+
+  });
+}
+$("#submitpass").click(function(event) {
   event.preventDefault();
   event.stopImmediatePropagation();
-  $("#submitpass2").html("Processing..");
-  document.getElementById("submitpass2").disabled = true;
-
+  $("#submitpass").html("Processing..");
+  document.getElementById("submitpass").disabled = true;
   var formData = {
-       'action'           :'submitpass2',
-       'id1'             : '<?php echo $row["id"]; ?>',
-        'id2'             : '<?php echo $_SESSION["id"]; ?>',
-       
-       'rationale'        :$('textarea[name=rationale]').val(), 
-       'strategies'       :$('textarea[name=strategies]').val(), 
-       'projecthistory'   :$('textarea[name=projecthistory]').val()
-     };
-
+      'oldpass'       : $('input[name=oldpass]').val(), 
+      'newpass'       : $('input[name=newpass]').val(), 
+      'newpass2'      : $('input[name=newpass2]').val()
+  };
   $.ajax({
-       url: "functionz.php",
+       url: "chpass.php",
        type: "POST",
        data: formData,
        success: function(data)
        {
-                if (data=="success") {
-                    document.getElementById("submitpass2").disabled = false;
-                  $("#sucsubtext").html("Step 2 saved!");
-                      $('#myModal').modal();
-                      $('#myModal').on('hidden.bs.modal', function () {location.href = "../bangonkabuhayan/addproject_step3.php?id=<?php echo $row['id']; ?>"; });
-                    } else {
-                 
-                  
-                      document.getElementById("submitpass2").disabled = false;
-                      $("#sucsubtext").html("Step 2 saved!");
-                     $('#myModal').modal();
-                      $('#myModal').on('hidden.bs.modal', function () {location.href = "../bangonkabuhayan/addproject_step3.php?id=<?php echo $row['id']; ?>"; });
-                   
-                    }
-
+          if (data == "good") {
+            $("#sucsubtext").html("Password changed")
+            $('#myModal').modal();
+            $('#myModal').on('hidden.bs.modal', function () {
+                location.href = "http://slp.ph/main.php";
+            })
+          } else {
+            alert(data);
+            $("#submitpass").html("Submit");
+            document.getElementById("submitpass").disabled = false;
+          }
        }
     });//endajax
 

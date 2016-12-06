@@ -68,7 +68,7 @@ class TableData {
 		}
 		
 		// SQL queries get data to display
-		$sQuery = "SELECT m.id, m.doctype, m.title, n.firstname, n.region, m.filesize, m.filename, m.added, m.hrdbid FROM DOCDB m LEFT JOIN HRDB n ON m.hrdbid=n.id";
+		$sQuery = "SELECT m.id, m.doctype, m.title, n.firstname, n.region, m.filesize, m.filename, m.added, m.hrdbid FROM DOCDB m LEFT JOIN hr_db n ON m.hrdbid=n.id";
 		
 		$statement = $this->_db->prepare($sQuery);
 		

@@ -70,9 +70,9 @@ class TableData {
 		
 		// SQL queries get data to display
 		if ($_SESSION['filter']=="NPMO") {
-			$sQuery = "SELECT SQL_CALC_FOUND_ROWS * FROM HRDB ".$sWhere." ".$sOrder." ".$sLimit;
+			$sQuery = "SELECT SQL_CALC_FOUND_ROWS * FROM hr_db ".$sWhere." ".$sOrder." ".$sLimit;
 		} else {
-			$sQuery = "SELECT SQL_CALC_FOUND_ROWS * FROM HRDB WHERE region='".$_SESSION['filter']."' ".$sOrder." ".$sLimit;
+			$sQuery = "SELECT SQL_CALC_FOUND_ROWS * FROM hr_db WHERE region='".$_SESSION['filter']."' ".$sOrder." ".$sLimit;
 		}
 		
 		$statement = $this->_db->prepare($sQuery);

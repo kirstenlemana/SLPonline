@@ -2,26 +2,7 @@
 require "../zxcd9.php";
 byteMe($_SESSION['id'],'bkadd',0.10);
 ?>
-        <?php
-                     
-                     
-                      try 
-                      {
 
-                       $query = "SELECT * from bk_step1 order by id DESC limit 0,1"; 
-                       
-                       $stmt = $db->prepare($query);
-             
-
-                       $result = $stmt->execute(); 
-                    //   $lastId = $db->lastInsertId('id');
-                       $row = $stmt->fetch();
-                     
-                      } 
-                      catch(PDOException $ex) 
-                      { die("Failed to run query: " . $ex->getMessage()); }      
-               
-                  ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -268,18 +249,18 @@ h3 {
             <br><br>
         <form>
           <div class="form-group">
-            <textarea class="form-control" placeholder="Major Accomplishments" id="major" name="major" required rows="4" style="resize:none;padding:1em"></textarea>
+            <textarea class="form-control" placeholder="Major Accomplishments" type="password" id="oldpass" name="oldpass" required rows="4" style="resize:none;padding:1em"></textarea>
           </div>
           <div class="form-group">
-            <textarea class="form-control" placeholder="Impact on Program Participants"  id="impact" name="impact" required rows="4" style="resize:none;padding:1em"></textarea>
+            <textarea class="form-control" placeholder="Impact on Program Participants" type="password" id="oldpass" name="oldpass" required rows="4" style="resize:none;padding:1em"></textarea>
           </div>
           <div class="form-group">
-            <textarea class="form-control" placeholder="Results (discuss how the project meets its purpose and objectives relative to IMPACT, INNOVATION, ECONOMIC VIABILITY, SUSTAINABILITY, REPLICABILITY and COVERGENCE)" id="result" name="result" required rows="9" style="resize:none;padding:1em"></textarea>
+            <textarea class="form-control" placeholder="Results (discuss how the project meets its purpose and objectives relative to IMPACT, INNOVATION, ECONOMIC VIABILITY, SUSTAINABILITY, REPLICABILITY and COVERGENCE)" type="password" id="oldpass" name="oldpass" required rows="9" style="resize:none;padding:1em"></textarea>
           </div>
 
 
           <div class="form-group">
-            <button class="btn btn-info btn-md pull-right" id="submitpass3" type="">Next &nbsp;<span class="glyphicon glyphicon-arrow-right"></span></button>
+            <button class="btn btn-info btn-md pull-right" id="submitpass" type="">Next &nbsp;<span class="glyphicon glyphicon-arrow-right"></span></button>
           </div>
           <div class="clearfix"></div>
 
@@ -294,7 +275,7 @@ h3 {
 
           <div class="modal-content" style="padding:1em;padding-top:0.5em;">
                   <h3 style="color:#5cb85c;margin-bottom:6px">Success!</h3>
-                  <span style="font-size:13px" id="sucsubtext">Step 3 saved!</span><br><br>
+                  <span style="font-size:13px" id="sucsubtext">Boom</span><br><br>
                   <button type="button" class="btn btn-primary pull-right" style="background:#5cb85c;border:0;margin-top:0;padding:5px 10px 5px 10px" id="okaybtn" data-dismiss="modal">Okay</button>
                   <div class="clearfix"></div>
           </div>
@@ -340,41 +321,33 @@ function getCitymun() {
 
   });
 }
-$("#submitpass3").click(function(event) {
+$("#submitpass").click(function(event) {
   event.preventDefault();
   event.stopImmediatePropagation();
-  $("#submitpass3").html("Processing..");
-  document.getElementById("submitpass3").disabled = true;
-
+  $("#submitpass").html("Processing..");
+  document.getElementById("submitpass").disabled = true;
   var formData = {
-       'action'           :'submitpass3',
-       'id3'             : '<?php echo $row["id"]; ?>',
-        'id4'             : '<?php echo $_SESSION["id"]; ?>',
-       
-       'major'        :$('textarea[name=major]').val(), 
-       'impact'       :$('textarea[name=impact]').val(), 
-       'result'   :$('textarea[name=result]').val()
-     };
-
+      'oldpass'       : $('input[name=oldpass]').val(), 
+      'newpass'       : $('input[name=newpass]').val(), 
+      'newpass2'      : $('input[name=newpass2]').val()
+  };
   $.ajax({
-       url: "functionz.php",
+       url: "chpass.php",
        type: "POST",
        data: formData,
        success: function(data)
        {
-                if (data=="success") {
-                    document.getElementById("submitpass3").disabled = false;
-                  $("#sucsubtext").html("Step 3 saved!");
-                      $('#myModal').modal();
-                      $('#myModal').on('hidden.bs.modal', function () {location.href = "../bangonkabuhayan/addproject_step3.php?id=<?php echo $row['id']; ?>"; });
-                    } else {
-                 
-                      document.getElementById("submitpass3").disabled = false;
-                      $("#sucsubtext").html("Step 3 saved!");
-                     $('#myModal').modal();
-                      $('#myModal').on('hidden.bs.modal', function () {location.href = "../bangonkabuhayan/addproject_step3.php?id=<?php echo $row['id']; ?>"; });
-                    }
-
+          if (data == "good") {
+            $("#sucsubtext").html("Password changed")
+            $('#myModal').modal();
+            $('#myModal').on('hidden.bs.modal', function () {
+                location.href = "http://slp.ph/main.php";
+            })
+          } else {
+            alert(data);
+            $("#submitpass").html("Submit");
+            document.getElementById("submitpass").disabled = false;
+          }
        }
     });//endajax
 

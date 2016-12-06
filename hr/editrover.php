@@ -22,7 +22,7 @@ $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         $venue = test_input($_POST["venue"]);
 
         $query = " 
-            UPDATE HRrover 
+            UPDATE hr_rover 
             SET startdate = :startdate, 
                 starttime = :starttime, 
                 enddate = :enddate, 
@@ -60,7 +60,7 @@ $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         $subsector = $_POST['subsector'];
         $subsector = explode(",", $subsector);
 
-        $stmt = $db->prepare("INSERT INTO RVtags (roverid, hrdbid) VALUES (:roverid, :hrdbid)");
+        $stmt = $db->prepare("INSERT INTO hr_RVtags (roverid, hrdbid) VALUES (:roverid, :hrdbid)");
         $stmt->bindParam(':roverid', $id);
         $stmt->bindParam(':hrdbid', $hrdbid);
         $hrdbid = $_SESSION["id"];

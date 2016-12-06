@@ -9,7 +9,7 @@ $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
         $id = test_input($_POST['id']);
 
-        $query = " DELETE FROM HRrover WHERE id = :id";
+        $query = " DELETE FROM hr_rover WHERE id = :id";
         $query_params = array( 
             ':id' => $id
         ); 
@@ -21,7 +21,7 @@ $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
             die("Failed to run query: " . $ex->getMessage()); 
         } 
 
-        $query = " DELETE FROM RVtags WHERE roverid = :id";
+        $query = " DELETE FROM hr_RVtags WHERE roverid = :id";
         $query_params = array( 
             ':id' => $id
         ); 

@@ -59,9 +59,9 @@ $_SESSION['discard_after'] = $now + 1800;
 
 $filter = $_SESSION['filter'];
 if ($filter == "NPMO") {
-$stmt = $db->prepare("SELECT firstname, middlename, lastname, nickname, extname, sex, birthdate, emailaddress, contactnumber, designation, position, sg, employstatus, employdate, fundsource, region, province, municipality, remarks, encoded, confirmed, comptype, compyear, compstatus, compnotes  FROM HRDB"); 
+$stmt = $db->prepare("SELECT firstname, middlename, lastname, nickname, extname, sex, birthdate, emailaddress, contactnumber, designation, position, sg, employstatus, employdate, fundsource, region, province, municipality, remarks, encoded, confirmed, comptype, compyear, compstatus, compnotes  FROM hr_db"); 
 } else {
-$stmt = $db->prepare("SELECT firstname, middlename, lastname, nickname, extname, sex, birthdate, emailaddress, contactnumber, designation, position, sg, employstatus, employdate, fundsource, region, province, municipality, remarks, encoded, confirmed, comptype, compyear, compstatus, compnotes  FROM HRDB WHERE region = '".$filter."'"); 
+$stmt = $db->prepare("SELECT firstname, middlename, lastname, nickname, extname, sex, birthdate, emailaddress, contactnumber, designation, position, sg, employstatus, employdate, fundsource, region, province, municipality, remarks, encoded, confirmed, comptype, compyear, compstatus, compnotes  FROM hr_db WHERE region = '".$filter."'"); 
 }
 
 $stmt->execute();

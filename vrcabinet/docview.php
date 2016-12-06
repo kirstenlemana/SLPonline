@@ -7,7 +7,7 @@ function getFilesize($bytes, $decimals = 2) {
 }
 if (isset($_GET['id'])) {
   $_GET  = filter_input_array(INPUT_GET, FILTER_SANITIZE_NUMBER_INT);
-  $stmt = $db->prepare("SELECT m.remarks, m.doctype, m.added, m.title, m.filesize, m.filename, m.downloads, n.firstname, n.id as hrid, m.author FROM DOCDB m LEFT JOIN HRDB n ON m.hrdbid=n.id WHERE m.id = :id");
+  $stmt = $db->prepare("SELECT m.remarks, m.doctype, m.added, m.title, m.filesize, m.filename, m.downloads, n.firstname, n.id as hrid, m.author FROM DOCDB m LEFT JOIN hr_db n ON m.hrdbid=n.id WHERE m.id = :id");
   $stmt->bindParam(':id', $_GET['id']);
   $stmt->execute();
   $rowdv = $stmt->fetch();
@@ -314,7 +314,7 @@ h3 {
 
             <!--comments-->
             <?php
-              $stmtcom = $db->prepare("SELECT m.doc_comment, t.firstname, m.added, t.id FROM docdb_comments m LEFT JOIN HRDB t ON m.hrdbid=t.id WHERE m.docdbid = :docdbid");
+              $stmtcom = $db->prepare("SELECT m.doc_comment, t.firstname, m.added, t.id FROM docdb_comments m LEFT JOIN hr_db t ON m.hrdbid=t.id WHERE m.docdbid = :docdbid");
               $stmtcom->bindParam(':docdbid', $_GET['id']);
               $stmtcom->execute();
               while ($row7 = $stmtcom->fetch(PDO::FETCH_NUM, PDO::FETCH_ORI_NEXT)) {

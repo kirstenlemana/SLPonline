@@ -221,7 +221,7 @@ if(!empty($_GET))
                 compyear,
                 compstatus,
                 compnotes
-            FROM HRDB 
+            FROM hr_db 
             WHERE 
                 password = :password
         "; 

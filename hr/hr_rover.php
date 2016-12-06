@@ -68,7 +68,7 @@ class TableData {
 		}
 		
 		// SQL queries get data to display
-		$sQuery = "SELECT DISTINCT m.id, m.addedby, m.startdate, m.starttime, m.enddate, m.endtime, m.event, m.venue, REPLACE(m.startdate,'-','') as replacedate, m.remarks, j.id as fileatt FROM HRrover m LEFT JOIN RVtags z ON m.id=z.roverid LEFT JOIN DOCDB j ON m.id=j.roverid WHERE m.addedby = '".$_SESSION['uid']."' OR z.hrdbid = '".$_SESSION['uid']."' ORDER BY m.startdate";
+		$sQuery = "SELECT DISTINCT m.id, m.addedby, m.startdate, m.starttime, m.enddate, m.endtime, m.event, m.venue, REPLACE(m.startdate,'-','') as replacedate, m.remarks, j.id as fileatt FROM hr_rover m LEFT JOIN hr_RVtags z ON m.id=z.roverid LEFT JOIN DOCDB j ON m.id=j.roverid WHERE m.addedby = '".$_SESSION['uid']."' OR z.hrdbid = '".$_SESSION['uid']."' ORDER BY m.startdate";
 		$statement = $this->_db->prepare($sQuery);
 		
 		// Bind parameters
@@ -121,7 +121,7 @@ header('Cache-Control: no-store, no-cache, must-revalidate');
 
 $table_data = new TableData();
 // Get the data
-$table_data->get('HRrover', 'id', array('id','startdate', 'enddate', 'event', 'venue', 'remarks', 'starttime', 'endtime','replacedate', 'fileatt'));
+$table_data->get('hr_rover', 'id', array('id','startdate', 'enddate', 'event', 'venue', 'remarks', 'starttime', 'endtime','replacedate', 'fileatt'));
 /*
  * Alternatively, you may want to use the same class for several differnt tables for different pages.
  * By adding something similar to the following to your .htaccess file you can control this a little more...

@@ -11,7 +11,7 @@ $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         $comment = test_input($_POST['comment']);
 
 
-        $stmt = $db->prepare("INSERT INTO RVcomments (roverid, comment, added, addedby) VALUES (:roverid, :comment, :added, :addedby)");
+        $stmt = $db->prepare("INSERT INTO hr_RVcomments (roverid, comment, added, addedby) VALUES (:roverid, :comment, :added, :addedby)");
         $stmt->bindParam(':roverid', $id);
         $stmt->bindParam(':comment', $comment);
         $stmt->bindParam(':added', date("Y-m-d H:i:s"));

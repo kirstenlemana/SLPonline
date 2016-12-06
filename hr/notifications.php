@@ -34,8 +34,8 @@ if(empty($_SESSION['emailaddress']))
                 m.addedby, 
                 CONCAT(t.lastname, ', ', t.firstname) as name, 
                 z.filename 
-            FROM HRrover m 
-            LEFT JOIN HRDB t
+            FROM hr_rover m 
+            LEFT JOIN hr_db t
             ON m.addedby = t.id
             LEFT JOIN DOCDB z
             ON m.id=z.roverid

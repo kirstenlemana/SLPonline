@@ -6,7 +6,7 @@ echo "</head>";
 echo "<div style='width:100%;text-align:justify;overflow:none;>'";
 if ($_SESSION['permlvl']>0) {
 echo "NPMO: <br>";
-$stmt = $db->prepare("SELECT emailaddress FROM HRDB WHERE region=:region ");
+$stmt = $db->prepare("SELECT emailaddress FROM hr_db WHERE region=:region ");
 $par = "NPMO";
         $stmt->bindParam(':region', $par);
         $stmt->execute();
@@ -18,7 +18,7 @@ echo "<hr>";
 
 $par = "NCR";
 echo $par.": <br>";
-$stmt = $db->prepare("SELECT emailaddress FROM HRDB WHERE region=:region ");
+$stmt = $db->prepare("SELECT emailaddress FROM hr_db WHERE region=:region ");
         $stmt->bindParam(':region', $par);
         $stmt->execute();
 
@@ -29,7 +29,7 @@ echo "<hr>";
 
 $par = "CAR";
 echo $par.": <br>";
-$stmt = $db->prepare("SELECT emailaddress FROM HRDB WHERE region=:region ");
+$stmt = $db->prepare("SELECT emailaddress FROM hr_db WHERE region=:region ");
         $stmt->bindParam(':region', $par);
         $stmt->execute();
 
@@ -40,7 +40,7 @@ echo "<hr>";
 
 $par = "REGION I";
 echo $par.": <br>";
-$stmt = $db->prepare("SELECT emailaddress FROM HRDB WHERE region=:region ");
+$stmt = $db->prepare("SELECT emailaddress FROM hr_db WHERE region=:region ");
         $stmt->bindParam(':region', $par);
         $stmt->execute();
 
@@ -51,7 +51,7 @@ echo "<hr>";
 
 $par = "REGION II";
 echo $par.": <br>";
-$stmt = $db->prepare("SELECT emailaddress FROM HRDB WHERE region=:region ");
+$stmt = $db->prepare("SELECT emailaddress FROM hr_db WHERE region=:region ");
         $stmt->bindParam(':region', $par);
         $stmt->execute();
 
@@ -62,7 +62,7 @@ echo "<hr>";
 
 $par = "REGION III";
 echo $par.": <br>";
-$stmt = $db->prepare("SELECT emailaddress FROM HRDB WHERE region=:region ");
+$stmt = $db->prepare("SELECT emailaddress FROM hr_db WHERE region=:region ");
         $stmt->bindParam(':region', $par);
         $stmt->execute();
 
@@ -73,7 +73,7 @@ echo "<hr>";
 
 $par = "REGION IV-A";
 echo $par.": <br>";
-$stmt = $db->prepare("SELECT emailaddress FROM HRDB WHERE region=:region ");
+$stmt = $db->prepare("SELECT emailaddress FROM hr_db WHERE region=:region ");
         $stmt->bindParam(':region', $par);
         $stmt->execute();
 
@@ -84,7 +84,7 @@ echo "<hr>";
 
 $par = "REGION IV-B";
 echo $par.": <br>";
-$stmt = $db->prepare("SELECT emailaddress FROM HRDB WHERE region=:region ");
+$stmt = $db->prepare("SELECT emailaddress FROM hr_db WHERE region=:region ");
         $stmt->bindParam(':region', $par);
         $stmt->execute();
 
@@ -95,7 +95,7 @@ echo "<hr>";
 
 $par = "REGION V";
 echo $par.": <br>";
-$stmt = $db->prepare("SELECT emailaddress FROM HRDB WHERE region=:region ");
+$stmt = $db->prepare("SELECT emailaddress FROM hr_db WHERE region=:region ");
         $stmt->bindParam(':region', $par);
         $stmt->execute();
 
@@ -106,7 +106,7 @@ echo "<hr>";
 
 $par = "REGION VI";
 echo $par.": <br>";
-$stmt = $db->prepare("SELECT emailaddress FROM HRDB WHERE region=:region ");
+$stmt = $db->prepare("SELECT emailaddress FROM hr_db WHERE region=:region ");
         $stmt->bindParam(':region', $par);
         $stmt->execute();
 
@@ -117,7 +117,7 @@ echo "<hr>";
 
 $par = "REGION VII";
 echo $par.": <br>";
-$stmt = $db->prepare("SELECT emailaddress FROM HRDB WHERE region=:region ");
+$stmt = $db->prepare("SELECT emailaddress FROM hr_db WHERE region=:region ");
         $stmt->bindParam(':region', $par);
         $stmt->execute();
 
@@ -128,7 +128,7 @@ echo "<hr>";
 
 $par = "REGION VIII";
 echo $par.": <br>";
-$stmt = $db->prepare("SELECT emailaddress FROM HRDB WHERE region=:region ");
+$stmt = $db->prepare("SELECT emailaddress FROM hr_db WHERE region=:region ");
         $stmt->bindParam(':region', $par);
         $stmt->execute();
 
@@ -139,7 +139,7 @@ echo "<hr>";
 
 $par = "REGION IX";
 echo $par.": <br>";
-$stmt = $db->prepare("SELECT emailaddress FROM HRDB WHERE region=:region ");
+$stmt = $db->prepare("SELECT emailaddress FROM hr_db WHERE region=:region ");
         $stmt->bindParam(':region', $par);
         $stmt->execute();
 
@@ -150,7 +150,7 @@ echo "<hr>";
 
 $par = "REGION X";
 echo $par.": <br>";
-$stmt = $db->prepare("SELECT emailaddress FROM HRDB WHERE region=:region ");
+$stmt = $db->prepare("SELECT emailaddress FROM hr_db WHERE region=:region ");
         $stmt->bindParam(':region', $par);
         $stmt->execute();
 
@@ -161,7 +161,7 @@ echo "<hr>";
 
 $par = "REGION XI";
 echo $par.": <br>";
-$stmt = $db->prepare("SELECT emailaddress FROM HRDB WHERE region=:region ");
+$stmt = $db->prepare("SELECT emailaddress FROM hr_db WHERE region=:region ");
         $stmt->bindParam(':region', $par);
         $stmt->execute();
 
@@ -172,7 +172,7 @@ echo "<hr>";
 
 $par = "REGION XII";
 echo $par.": <br>";
-$stmt = $db->prepare("SELECT emailaddress FROM HRDB WHERE region=:region ");
+$stmt = $db->prepare("SELECT emailaddress FROM hr_db WHERE region=:region ");
         $stmt->bindParam(':region', $par);
         $stmt->execute();
 
@@ -183,7 +183,7 @@ echo "<hr>";
 
 $par = "CARAGA";
 echo $par.": <br>";
-$stmt = $db->prepare("SELECT emailaddress FROM HRDB WHERE region=:region ");
+$stmt = $db->prepare("SELECT emailaddress FROM hr_db WHERE region=:region ");
         $stmt->bindParam(':region', $par);
         $stmt->execute();
 
@@ -194,7 +194,7 @@ echo "<hr>";
 
 $par = "ARMM";
 echo $par.": <br>";
-$stmt = $db->prepare("SELECT emailaddress FROM HRDB WHERE region=:region ");
+$stmt = $db->prepare("SELECT emailaddress FROM hr_db WHERE region=:region ");
         $stmt->bindParam(':region', $par);
         $stmt->execute();
 
@@ -205,7 +205,7 @@ echo "<hr>";
 
 $par = "NIR";
 echo $par.": <br>";
-$stmt = $db->prepare("SELECT emailaddress FROM HRDB WHERE region=:region ");
+$stmt = $db->prepare("SELECT emailaddress FROM hr_db WHERE region=:region ");
         $stmt->bindParam(':region', $par);
         $stmt->execute();
 

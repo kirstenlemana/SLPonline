@@ -17,7 +17,7 @@ global $db;
                 try {
                   $idarray = [];
                   foreach($emailarray as $email) {
-                    $stmt = $db->prepare("SELECT id FROM HRDB WHERE emailaddress = '".$email."'");
+                    $stmt = $db->prepare("SELECT id FROM hr_db WHERE emailaddress = '".$email."'");
                     $stmt->execute();
 
                         
@@ -182,7 +182,7 @@ if(!empty($_POST))
     if($_POST['action'] == "getemails_rpmo") {
         $id = test_input($_POST['id']);
 
-        $stmt = $db->prepare("SELECT emailaddress FROM HRDB WHERE designation=:designation");
+        $stmt = $db->prepare("SELECT emailaddress FROM hr_db WHERE designation=:designation");
         $stmt->bindParam(':designation', $_POST['filter']);
         $stmt->execute();
         $emailarray = [];
@@ -196,7 +196,7 @@ if(!empty($_POST))
     if($_POST['action'] == "getemails_npmo_all") {
         $id = test_input($_POST['id']);
 
-        $stmt = $db->prepare("SELECT emailaddress FROM HRDB WHERE region ='NPMO'");
+        $stmt = $db->prepare("SELECT emailaddress FROM hr_db WHERE region ='NPMO'");
         $stmt->execute();
         $emailarray = [];
 
@@ -209,7 +209,7 @@ if(!empty($_POST))
     if($_POST['action'] == "getemails_npmo") {
         $id = test_input($_POST['id']);
 
-        $stmt = $db->prepare("SELECT emailaddress FROM HRDB m LEFT JOIN HRgroups n ON m.id=n.hrdbid WHERE m.region ='NPMO' AND n.groupname=:groupname");
+        $stmt = $db->prepare("SELECT emailaddress FROM hr_db m LEFT JOIN hr_groups n ON m.id=n.hrdbid WHERE m.region ='NPMO' AND n.groupname=:groupname");
         $stmt->bindParam(':groupname', $_POST['filter']);
         $stmt->execute();
         $emailarray = [];
@@ -223,7 +223,7 @@ if(!empty($_POST))
     if($_POST['action'] == "getemails_individual") {
         $id = test_input($_POST['id']);
 
-        $stmt = $db->prepare("SELECT emailaddress FROM HRDB WHERE id=:id ");
+        $stmt = $db->prepare("SELECT emailaddress FROM hr_db WHERE id=:id ");
         $stmt->bindParam(':id', $_POST['filter']);
         $stmt->execute();
         $emailarray = [];

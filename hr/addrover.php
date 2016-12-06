@@ -21,7 +21,7 @@ $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         $event = test_input($_POST["event"]);
         $venue = test_input($_POST["venue"]);
 
-        $query = "INSERT IGNORE INTO HRrover (refid, startdate, starttime, enddate, endtime, event, venue, remarks, added, addedby) VALUES (:id, :sdate, :stime, :edate, :etime, :event, :venue, :remarks, :added, :addedby)"; 
+        $query = "INSERT IGNORE INTO hr_rover (refid, startdate, starttime, enddate, endtime, event, venue, remarks, added, addedby) VALUES (:id, :sdate, :stime, :edate, :etime, :event, :venue, :remarks, :added, :addedby)"; 
          
         $query_params = array( 
             ':id' => $id, 
@@ -52,7 +52,7 @@ $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
         $subsector = explode(",", $subsector);
 
-        $stmt = $db->prepare("INSERT INTO RVtags (roverid, hrdbid) VALUES (:roverid, :hrdbid)");
+        $stmt = $db->prepare("INSERT INTO hr_RVtags (roverid, hrdbid) VALUES (:roverid, :hrdbid)");
         $stmt->bindParam(':roverid', $refid);
         $stmt->bindParam(':hrdbid', $hrdbid);
         $hrdbid = $_SESSION["id"];

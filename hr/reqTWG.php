@@ -11,7 +11,7 @@ $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         $twgname = test_input($_POST['twgname']);
         $twgremarks = test_input($_POST['twgremarks']);
 
-        $stmt = $db->prepare("INSERT INTO twg_request (twgoption, twgname, remarks, added, addedby) VALUES (:twgoption, :twgname, :remarks, :added, :addedby)");
+        $stmt = $db->prepare("INSERT INTO hr_twgrequest (twgoption, twgname, remarks, added, addedby) VALUES (:twgoption, :twgname, :remarks, :added, :addedby)");
         $stmt->bindParam(':twgoption', $option);
         $stmt->bindParam(':twgname', $twgname);
         $stmt->bindParam(':remarks', $twgremarks);

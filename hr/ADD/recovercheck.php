@@ -63,7 +63,7 @@ if(!empty($_POST))
         $password = hash('sha256', $password . $salt); 
     }
 
-  $query = "UPDATE HRDB SET password = :password, salt = :salt WHERE password = :confirm";
+  $query = "UPDATE hr_db SET password = :password, salt = :salt WHERE password = :confirm";
   $query_params = array( 
             ':password' => $password,
             ':salt' => $salt,
@@ -80,7 +80,7 @@ if(!empty($_POST))
             die("Failed to run queryyy: " . $ex->getMessage()); 
         }
 
-        $query = "SELECT emailaddress FROM HRDB WHERE salt = :salt"; 
+        $query = "SELECT emailaddress FROM hr_db WHERE salt = :salt"; 
         $query_params = array( 
             ':salt' => $salt
         ); 

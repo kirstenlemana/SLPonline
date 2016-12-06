@@ -9,7 +9,7 @@ $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
         $id = test_input($_POST['id']);
 
-        $query = "UPDATE HRDB SET permlvl = 1 WHERE id=:id"; 
+        $query = "UPDATE hr_db SET permlvl = 1 WHERE id=:id"; 
          
         $query_params = array( 
             ':id' => $id 

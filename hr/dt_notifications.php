@@ -121,7 +121,7 @@ header('Cache-Control: no-store, no-cache, must-revalidate');
 
 $table_data = new TableData();
 // Get the data
-$table_data->get('HRrover', 'id', array('added', 'notifier', 'msg', 'eventname', 'eventlink', 'roverid', 'isclicked'));
+$table_data->get('notifications', 'id', array('added', 'notifier', 'msg', 'eventname', 'eventlink', 'roverid', 'isclicked'));
 /*
  * Alternatively, you may want to use the same class for several differnt tables for different pages.
  * By adding something similar to the following to your .htaccess file you can control this a little more...
