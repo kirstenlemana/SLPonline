@@ -11,7 +11,7 @@ if(!empty($_POST))
 				      try 	
                 	{	
                  
-                     $stmt = $db->prepare("INSERT INTO HRfeedback (type, subject, feedback ,feeddate  ,feedbacker) VALUES (:typeofcomm,:subject,:remarks,:dt,:feedbacker)");                     
+                     $stmt = $db->prepare("INSERT INTO hr_feedback (type, subject, feedback ,feeddate  ,feedbacker) VALUES (:typeofcomm,:subject,:remarks,:dt,:feedbacker)");                     
                 
                       $stmt->bindParam(':typeofcomm', $typeofcomm);
                       $stmt->bindParam(':subject', $subject);
@@ -35,7 +35,7 @@ if(!empty($_POST))
               try   
                   { 
                  
-                 $stmt = $db->prepare("INSERT INTO hrfeedbackquestion (hrdbid, type, subject, feedback ,fdate) VALUES (:hrdbid,:typeofcomm,:subject,:remarks,:dt)");    
+                 $stmt = $db->prepare("INSERT INTO hr_feedbackquestion (hrdbid, type, subject, feedback ,fdate) VALUES (:hrdbid,:typeofcomm,:subject,:remarks,:dt)");    
                       $stmt->bindParam(':hrdbid', $_SESSION['id']);                
                       $stmt->bindParam(':typeofcomm', $typeofcomm);
                       $stmt->bindParam(':subject', $subject);

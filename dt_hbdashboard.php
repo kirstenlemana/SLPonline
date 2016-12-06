@@ -74,7 +74,7 @@ FROM lib_regions m
 LEFT JOIN PRTemployers k ON m.regname=k.region
 LEFT JOIN PRTdemand n ON m.regname=n.region
 LEFT JOIN PRTsupply z ON m.regname=z.region
-LEFT JOIN HRDB b ON z.encodedby=b.id
+LEFT JOIN hr_db b ON z.encodedby=b.id
 GROUP BY m.regname";
 		$statement = $this->_db->prepare($sQuery);
 		

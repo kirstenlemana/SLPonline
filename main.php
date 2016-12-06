@@ -1,7 +1,7 @@
 <?php
 require "zxcd9.php";
 byteMe($_SESSION['id'],'main',0.10);
-$stmt = $db->prepare("SELECT COUNT(id) as total FROM HRDB WHERE CONFIRMED = 1 UNION SELECT COUNT(id) FROM HRDB UNION SELECT SUM(numopenings) FROM PRTdemand UNION SELECT COUNT(id) FROM PRTsupply UNION SELECT SUM(amt) FROM bytez m WHERE m.hrdbid='".$_SESSION['id']."' UNION SELECT SUM(amt) FROM bytez");
+$stmt = $db->prepare("SELECT COUNT(id) as total FROM hr_db WHERE CONFIRMED = 1 UNION SELECT COUNT(id) FROM hr_db UNION SELECT SUM(numopenings) FROM PRTdemand UNION SELECT COUNT(id) FROM PRTsupply UNION SELECT SUM(amt) FROM bytez m WHERE m.hrdbid='".$_SESSION['id']."' UNION SELECT SUM(amt) FROM bytez");
 $stmt->execute();
 $totalarray = [];
 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -386,7 +386,7 @@ h3 {
           </thead>
           <tbody style="height:300px;overflow-y:scroll;display:block">
 <?php
-      $stmtcom = $db->prepare("SELECT t.firstname, m.msg, m.added, t.region, t.id FROM shoutbox m LEFT JOIN HRDB t ON m.hrdbid=t.id ORDER BY m.id DESC LIMIT 15");
+      $stmtcom = $db->prepare("SELECT t.firstname, m.msg, m.added, t.region, t.id FROM shoutbox m LEFT JOIN hr_db t ON m.hrdbid=t.id ORDER BY m.id DESC LIMIT 15");
       $stmtcom->execute();
       while ($row8 = $stmtcom->fetch(PDO::FETCH_NUM, PDO::FETCH_ORI_NEXT)) {
             echo '<tr><td style="font-size:12px;vertical-align:middle"><div class="row nopad" style="vertical-align:middle" data-bg-text="'.timeago(strtotime($row8[2])).'"><div class="col-sm-12 nopad" style="text-align:left;line-height:1.1;padding-left:0.7em">'.$row8[1].' -<a href="hr/user.php?id='.$row8[4].'" style="color:#00ADDe;text-decoration:none">'.ucwords(strtolower($row8[0])).'</a></span><span style="color:#888;"> ('.$row8[3].')</span></div><div class="clearfix"></div></div></td></tr>';

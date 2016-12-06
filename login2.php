@@ -104,7 +104,7 @@ global $db;
                 permlvl, 
                 emailaddress, 
                 designation  
-            FROM HRDB 
+            FROM hr_db 
             WHERE 
                 emailaddress = :emailaddress
         "; 
@@ -167,7 +167,7 @@ global $db;
                 $_SESSION['sessionid'] = $this_session;
                 $_SESSION['designation'] = $row['designation'];
                 $_SESSION['permlvl'] = $row['permlvl']; 
-                $query = "UPDATE HRDB SET logincount = (logincount + 1), sessionid = :sessionid WHERE emailaddress = :emailaddress";
+                $query = "UPDATE hr_db SET logincount = (logincount + 1), sessionid = :sessionid WHERE emailaddress = :emailaddress";
                 $query_params = array( 
                     ':sessionid' => $this_session, 
                     ':emailaddress' => $_POST['emailaddress'] 
@@ -180,7 +180,7 @@ global $db;
             
         } else {
             $submitted_emailaddress = htmlentities($_POST['emailaddress'], ENT_QUOTES, 'UTF-8'); 
-            $sql = "UPDATE HRDB SET loginfail = (loginfail + 1) WHERE emailaddress = :emailaddress";
+            $sql = "UPDATE hr_db SET loginfail = (loginfail + 1) WHERE emailaddress = :emailaddress";
                 $query_params = array( 
                 ':emailaddress' => $_POST['emailaddress'] 
                 );

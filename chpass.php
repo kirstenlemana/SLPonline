@@ -28,7 +28,7 @@ if(!empty($_POST))
                 id, 
                 password, 
                 salt  
-            FROM HRDB 
+            FROM hr_db 
             WHERE 
                 id = :id
         "; 
@@ -66,7 +66,7 @@ if(!empty($_POST))
                     $password = hash('sha256', $password . $salt); 
                 }
                 $query = " 
-                    UPDATE HRDB 
+                    UPDATE hr_db 
                     SET password = :password, 
                         salt = :salt  
                     WHERE 
