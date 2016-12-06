@@ -29,7 +29,7 @@ byteMe($_SESSION['id'],'hb_feedbackportaldetails',0.10);
         $countcurrent = $row['countcurrent'];
 
 
-      $query="SELECT hrfeedbackquestion.subject as subject, hrfeedbackquestion.feedback as feedback, hrdb.firstname as first, hrdb.middlename as mid, hrdb.lastname as last, hrfeedbackquestion.fdate as fdate from hrfeedbackquestion INNER JOIN hrdb on hrfeedbackquestion.hrdbid=hrdb.id where hrfeedbackquestion.id=:id
+      $query="SELECT hr_feedbackquestion.subject as subject, hr_feedbackquestion.feedback as feedback, hr_db.firstname as first, hr_db.middlename as mid, hr_db.lastname as last, hr_feedbackquestion.fdate as fdate from hr_feedbackquestion INNER JOIN hr_db on hr_feedbackquestion.hrdbid=hr_db.id where hr_feedbackquestion.id=:id
       ";
       $query_params = array(':id' => $subfeedfilter);
         try 
@@ -164,7 +164,7 @@ body {
                 hrdb.region,
                 hr_profilepics.name,
                 hrdb.position
-                from hrf_replies LEFT JOIN hrdb on hrf_replies.feedbacker=hrdb.id
+                from hrf_replies LEFT JOIN hr_db on hrf_replies.feedbacker=hrdb.id
                 LEFT JOIN hr_profilepics on hr_profilepics.hrdbid=hrdb.id
                  WHERE hrf_replies.qid = :qid1
               

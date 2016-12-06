@@ -80,10 +80,10 @@ class TableData {
 			count(c.qid) as count,
 			max(c.dt) as dt,
 			d.firstname as lastfeedbacker
-			from hrfeedbackquestion as a
-			LEFT JOIN hrdb as b ON a.hrdbid=b.id
+			from hr_feedbackquestion as a
+			LEFT JOIN hr_db as b ON a.hrdbid=b.id
 			LEFT JOIN hrf_replies as c ON c.qid=a.id
-			LEFT JOIN hrdb as d ON d.id=a.latestfeedbacker
+			LEFT JOIN hr_db as d ON d.id=a.latestfeedbacker
 			GROUP BY a.id";
 
 		$statement = $this->_db->prepare($sQuery);
@@ -138,7 +138,7 @@ header('Cache-Control: no-store, no-cache, must-revalidate');
 
 $table_data = new TableData();
 // Get the data
-$table_data->get('hrfeedbackquestion', 'id', array('id','subject','first','mid','last','count','dt','lastfeedbacker'));
+$table_data->get('hr_feedbackquestion', 'id', array('id','subject','first','mid','last','count','dt','lastfeedbacker'));
 /*
  * Alternatively, you may want to use the same class for several differnt tables for different pages.
  * By adding something similar to the following to your .htaccess file you can control this a little more...

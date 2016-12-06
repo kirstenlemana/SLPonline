@@ -16,7 +16,7 @@ require "../zxcd9.php";
         
         
 
-         $stmt1 = $db->prepare("UPDATE hrfeedbackquestion set latestfeedbacker=:feedbacker1 where id=:qid");
+         $stmt1 = $db->prepare("UPDATE hr_feedbackquestion set latestfeedbacker=:feedbacker1 where id=:qid");
          $stmt1->bindParam(':feedbacker1', $_SESSION['id']);
           $stmt1->bindParam(':qid', $_POST['qid']);
            $stmt1->execute(); 
