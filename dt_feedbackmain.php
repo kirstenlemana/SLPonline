@@ -68,7 +68,7 @@ class TableData {
 		}
 		
 		// SQL queries get data to display
-		$sQuery = "SELECT m.id, m.feedback, m.implemented, SUM(IF(n.feedbackid>=0,1,0)) as votes, SUM(IF(n.hrdbid=".$_SESSION['id'].",1,0)) as alreadyvoted FROM HRfeedback m LEFT JOIN feedback_votes n ON m.id=n.feedbackid GROUP BY id";
+		$sQuery = "SELECT m.id, m.feedback, m.implemented, SUM(IF(n.feedbackid>=0,1,0)) as votes, SUM(IF(n.hrdbid=".$_SESSION['id'].",1,0)) as alreadyvoted FROM hr_feedback m LEFT JOIN feedback_votes n ON m.id=n.feedbackid GROUP BY id";
 		$statement = $this->_db->prepare($sQuery);
 		
 		// Bind parameters
@@ -121,7 +121,7 @@ header('Cache-Control: no-store, no-cache, must-revalidate');
 
 $table_data = new TableData();
 // Get the data
-$table_data->get('HRrover', 'id', array('id', 'feedback', 'votes', 'implemented','alreadyvoted','votes'));
+$table_data->get('hr_rover', 'id', array('id', 'feedback', 'votes', 'implemented','alreadyvoted','votes'));
 /*
  * Alternatively, you may want to use the same class for several differnt tables for different pages.
  * By adding something similar to the following to your .htaccess file you can control this a little more...
