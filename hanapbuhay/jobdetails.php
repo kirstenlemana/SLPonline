@@ -60,7 +60,7 @@ require "../zxcd9.php";
             ON m.id=z.demandid
             LEFT JOIN PRTemployers k
             ON m.partner=k.id
-            LEFT JOIN HRDB p 
+            LEFT JOIN hr_db p 
             ON m.encodedby=p.id
             WHERE 
                 m.id = :id

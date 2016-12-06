@@ -21,7 +21,7 @@ $query = "
                 province, 
                 municipality, 
                 remarks 
-            FROM HRDB 
+            FROM hr_db 
             WHERE 
                 id = :id
         "; 

@@ -6,7 +6,7 @@ if(!empty($_GET['id'])) {
   $_SESSION["partnerid"] = $_GET['id'];
 }
 
-        $query = "SELECT m.orgname, m.address, m.psic, m.region, m.createdby, m.contactperson, m.contactemail, m.contactnumber, m.npmo, t.firstname, t.region FROM PRTemployers m LEFT JOIN HRDB t ON m.createdby=t.id WHERE m.id = :id"; 
+        $query = "SELECT m.orgname, m.address, m.psic, m.region, m.createdby, m.contactperson, m.contactemail, m.contactnumber, m.npmo, t.firstname, t.region FROM PRTemployers m LEFT JOIN hr_db t ON m.createdby=t.id WHERE m.id = :id"; 
         $query_params = array(':id' => $_SESSION['partnerid']);
         try 
         { $stmt = $db->prepare($query); $result = $stmt->execute($query_params); } 
@@ -491,7 +491,7 @@ $filter = $_SESSION['filter'];
         /*if ($filter == "NPMO") {*/
 $stmt = $db->prepare("SELECT count(id) as total, count(case when sex = '1' then 1 else null end) as confirmed FROM PRTsupply WHERE region = '".$filter."'"); 
         /*} else {
-$stmt = $db->prepare("SELECT count(id) as total, count(case when isnew = '1' then 1 else null end) as confirmed FROM HRDB WHERE region = '".$filter."'");           
+$stmt = $db->prepare("SELECT count(id) as total, count(case when isnew = '1' then 1 else null end) as confirmed FROM hr_db WHERE region = '".$filter."'");           
         }*/
 $stmt->execute();
 $row = $stmt->fetch();

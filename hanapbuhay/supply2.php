@@ -27,7 +27,7 @@ $query = "
                 compyear,
                 compstatus,
                 compnotes
-            FROM HRDB 
+            FROM hr_db 
             WHERE 
                 id = :id
         "; 
