@@ -424,7 +424,7 @@ $('#refnumber').val($('#logtype option:selected').val()+'-'+$('#admintype option
 
 </script>
                   <div class="form-group" style="margin-top:1em">
-                      <select class="form-control" onchange="typeChange2()" id="doctypeselector">
+                      <select class="form-control" onchange="typeChange2()" id="doctypeselector" name="doctypeselector">
                         <option value="">Select Document Type</option>
 
                         <!-- get this --> 
@@ -779,10 +779,16 @@ $(function () {
         <div class="modal-dialog modal-sm">
 
           <div class="modal-content" style="padding:1em;padding-top:0.5em">
-                  <h3 style="color:#5cb85c;margin-bottom:6px">Success!</h3>
+                  <? if($_POST['doctypeselector']=="Admin Doc"){ ?>
+                  <h3 style="color:#5cb85c;margin-bottom:6px">Success!</h3>                
                    <span style="font-size:13px" id="sucsubtext">Your document was successfully upload and your Reference Number is: </span><br>
                   <span style="font-size:13px">Note: If you sent email notifications, emails may take 30mins to arrive in inbox</span><br><br>
                   <button type="button" class="btn btn-primary pull-right" style="background:#5cb85c;border:0;margin-top:0;padding:5px 10px 5px 10px" id="okaybtn" data-dismiss="modal">Okay</button>
+                 <?php } else{ ?>
+                  <h3 style="color:#5cb85c;margin-bottom:6px">Success!</h3>                
+                  <span style="font-size:13px">Note: If you sent email notifications, emails may take 30mins to arrive in inbox</span><br><br>
+                  <button type="button" class="btn btn-primary pull-right" style="background:#5cb85c;border:0;margin-top:0;padding:5px 10px 5px 10px" id="okaybtn" data-dismiss="modal">Okay</button>
+                  <?php }?>
                   <div class="clearfix"></div>
           </div>
           
