@@ -451,7 +451,7 @@ $('#refnumber').val($('#logtype option:selected').val()+'-'+$('#admintype option
                       </select>
                   </div>
 
-                  <div class="form-group" margin-top:1em" id="admintypeholder">
+                  <div class="form-group" id="admintypeholder">
                       <select class="form-control" id="admintype" name="admintype">
                         <option value=""><?php echo $rowadmin['admindoctype'];?></option>
                            <option value="">Select Admin Document Type</option>
@@ -669,7 +669,7 @@ $('#refnumber').val($('#logtype option:selected').val()+'-'+$('#admintype option
                       </div>
                   </div>
 <?PhP
-$sql = "SELECT id, CONCAT(lastname, ', ', firstname) as name FROM HRDB";
+$sql = "SELECT id, CONCAT(lastname, ', ', firstname) as name FROM hr_db";
 //$partnerIDArray = [];
 //$partnerArray = [];
 
