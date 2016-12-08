@@ -1,7 +1,7 @@
 <?php
-require "../zxcd9.php";
-byteMe($_SESSION['id'],'hb_jobs',0.10);
-$query = " 
+      require "../zxcd9.php";
+      byteMe($_SESSION['id'],'hb_jobs',0.10);
+      $query = " 
             SELECT 
                 firstname, 
                 middlename, 
@@ -33,7 +33,6 @@ $query = "
         catch(PDOException $ex) 
         { die("Failed to run query: " . $ex->getMessage()); } 
         $row = $stmt->fetch();
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -70,98 +69,100 @@ body {
     right: -15px;
 }
 .slidedown {
-  -webkit-transform: scaleY(0);
-       -o-transform: scaleY(0);
-      -ms-transform: scaleY(0);
-          transform: scaleY(0);
+    -webkit-transform: scaleY(0);
+    -o-transform: scaleY(0);
+    -ms-transform: scaleY(0);
+    transform: scaleY(0);
   
-  -webkit-transform-origin: top;
-       -o-transform-origin: top;
-      -ms-transform-origin: top;
-          transform-origin: top;
+    -webkit-transform-origin: top;
+    -o-transform-origin: top;
+    -ms-transform-origin: top;
+    transform-origin: top;
   
-  -webkit-transition: -webkit-transform 0.2s ease;
-            -o-transition: -o-transform 0.2s ease;
-          -ms-transition: -ms-transform 0.2s ease;
-                  transition: transform 0.2s ease;
+    -webkit-transition: -webkit-transform 0.2s ease;
+    -o-transition: -o-transform 0.2s ease;
+    -ms-transition: -ms-transform 0.2s ease;
+    transition: transform 0.2s ease;
 }
 
 .slidedown.active {
-  -webkit-transform: scaleY(1);
-       -o-transform: scaleY(1);
-      -ms-transform: scaleY(1);
-          transform: scaleY(1);
+    -webkit-transform: scaleY(1);
+    -o-transform: scaleY(1);
+    -ms-transform: scaleY(1);
+    transform: scaleY(1);
 }
 .successcontent {
-  display:none;
+    display:none;
 }
 .cleanselect {
-  -webkit-appearance:none;-moz-appearance:none;-ms-appearance:none;appearance:none;background:#fff url(../imgs/arrows.png) no-repeat right 9px;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    -ms-appearance:none;
+    appearance:none;background:#fff url(../imgs/arrows.png) no-repeat right 9px;
 }
 .mainlink {
-  font-size: 1.8em;
-  margin-top: 1px;
+    font-size: 1.8em;
+    margin-top: 1px;
 }
 .form-group div {
-  margin-bottom: 0.5em;
+    margin-bottom: 0.5em;
 }
 .disabled {
-  background:rgba(1,1,1,0.2);
-  border:0px solid;
-  cursor:progress;
+    background:rgba(1,1,1,0.2);
+    border:0px solid;
+    cursor:progress;
 }
 tbody tr {
-  cursor: pointer;
+    cursor: pointer;
 }
 .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
-  background-color: #2c3e50;
-  color: #fff;
+    background-color: #2c3e50;
+    color: #fff;
 }
 .dataTables_filter {
-   display:none;
+    display:none;
 }
 
-    .form-control {
-        display: block;
-        width: 100%;
-        height: 45px;
-        padding: 0px 0px 0px 10px;
-        font-size: 15px;
-        line-height: 1.42857143;
-        color: #2c3e50;
-        background-color: #ffffff;
-        background-image: none;
-        border: 1px solid #dce4ec;
-        border-radius: 4px;
+.form-control {
+    display: block;
+    width: 100%;
+    height: 45px;
+    padding: 0px 0px 0px 10px;
+    font-size: 15px;
+    line-height: 1.42857143;
+    color: #2c3e50;
+    background-color: #ffffff;
+    background-image: none;
+    border: 1px solid #dce4ec;
+    border-radius: 4px;
     }
-    .btn2 {
-      color: #fff;
-      background-color: #2c3e50;
-      display: inline-block;
-      margin-bottom: 0;
-      font-weight: normal;
-      text-align: center;
-      vertical-align: middle;
-      -ms-touch-action: manipulation;
-      touch-action: manipulation;
-      cursor: pointer;
-      background-image: none;
-      border: 1px solid transparent;
-      white-space: nowrap;
-      padding: 5px 15px;
-      font-size: 15px;
-      line-height: 1.42857143;
-      border-radius: 4px;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
+.btn2 {
+    color: #fff;
+    background-color: #2c3e50;
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 5px 15px;
+    font-size: 15px;
+    line-height: 1.42857143;
+    border-radius: 4px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
     }
 </style>
 </style>
 </head>
 <body>
-<?php include '../nav.php'; ?>
-
+  <?php include '../nav.php'; ?>
 <div id="slideout">
     <img src="http://img.usabilitypost.com.s3.amazonaws.com/1104/css_slideout/feedback.png" alt="Feedback" />
     <div id="slideout_inner">
@@ -176,21 +177,17 @@ tbody tr {
       </form>
           <div class="form-group">
               <button class="btn2 btn-primary" id="sendfeedback" style="margin-left:1em">Submit</button>
-          </div>
-      
+          </div>    
       </div>
     </div>
 </div>
 <script type="text/javascript" language="javascript" class="init">
 var oTable = "";
 $(document).ready(function() {
-
-function toTitleCase(str)
-{
+function toTitleCase(str) {
     return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
 }
-function parselimit(strz)
-{
+function parselimit(strz) {
     var m = new String(strz);
     if (m.length > 32) {
       m = m.substring(0,32);
@@ -295,15 +292,12 @@ function parseStatus(str) {
                             if (data == "visitpage") {
                               location.href="jobdetails.php?id="+redirection;
                             }
-                          }
-
+                        }
                     });
   });
-
 });
 </script>
 <div class="container-fluid">
-  
     <div class="row">
         <div id="maincontent" class="col-md-5" style="border:0px solid #000">
           <div style="height:100%;background-color:#fff;margin-top:0;padding:2em;padding-top:0.8em">
@@ -319,31 +313,31 @@ function parseStatus(str) {
           <div style="background-color:#fff;height:90%;padding:2em;padding-bottom:4em">
           <?php 
               echo '<div class="pull-left col-md-4" style="margin-left:-1em"><select id="provincefilter" onchange="filterProvince()" class="form-control" style="height:31px"><option value="" selected>Filter by Province</option>';
-              $query = "SELECT * FROM lib_regions WHERE regname = :region"; 
-                  $query_params = array(':region' => $_SESSION['filter']);
-                  try 
-                  { $stmt = $db->prepare($query); $result = $stmt->execute($query_params); } 
-                  catch(PDOException $ex) 
-                  { die("Failed to run query: " . $ex->getMessage()); } 
-                  $rowzzz = $stmt->fetch();
-                  $regcode = $rowzzz['regid'];
+                $query = "SELECT * FROM lib_regions WHERE regname = :region"; 
+                    $query_params = array(':region' => $_SESSION['filter']);
+                    try 
+                    { $stmt = $db->prepare($query); $result = $stmt->execute($query_params); } 
+                    catch(PDOException $ex) 
+                    { die("Failed to run query: " . $ex->getMessage()); } 
+                    $rowzzz = $stmt->fetch();
+                    $regcode = $rowzzz['regid'];
 
-                  $query = "SELECT * FROM lib_provinces WHERE regid = :region"; 
-                  $query_params = array(':region' => $regcode);
-                  try 
-                  { $stmt = $db->prepare($query); $result = $stmt->execute($query_params); } 
-                  catch(PDOException $ex) 
-                  { die("Failed to run query: " . $ex->getMessage()); } 
-                  while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                     if ($_SESSION['filter']=="NPMO") {
-                      echo "<option value=''>NPMO</option>";
-                      break;
-                     } else {
-                        echo "<option>".$row['provname']."</option>";
-                     }
-                  }
-              echo '</select></div>';
-            ?>
+                    $query = "SELECT * FROM lib_provinces WHERE regid = :region"; 
+                    $query_params = array(':region' => $regcode);
+                    try 
+                    { $stmt = $db->prepare($query); $result = $stmt->execute($query_params); } 
+                    catch(PDOException $ex) 
+                    { die("Failed to run query: " . $ex->getMessage()); } 
+                    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                       if ($_SESSION['filter']=="NPMO") {
+                        echo "<option value=''>NPMO</option>";
+                        break;
+                       } else {
+                          echo "<option>".$row['provname']."</option>";
+                       }
+                    }
+                echo '</select></div>';
+              ?>
             <script>
 function filterProvince() {
       var regionvalue = document.getElementById("provincefilter").value;
@@ -403,13 +397,12 @@ $("#sendfeedback").click(function(event) {
       'page'        : "partner_jobs",
       'feedback'    : $('textarea[name=feedback]').val(),
       'feedbacker'    : "<?php echo $_SESSION['id']; ?>"
-    };
+};
                 $.ajax({
                    url: "../sendfeedback.php",
                    type: "POST",
                    data: formData,
-                   success: function(data)
-                   {
+                   success: function(data) {
                       if (data == "good") {
                         $("#loadicon").hide();
                         document.getElementById("formz").innerHTML = "<div style='padding:10px;color:#fff'><h2>Feedback Sent!</h2>Thank you!</div>"
@@ -430,7 +423,6 @@ $("#sendfeedback").click(function(event) {
 </script>
 <script>
 $(document).ready(function() {
-
 $("#formsubmit").click(function() {
   event.preventDefault();
   event.stopImmediatePropagation();
@@ -438,8 +430,6 @@ $("#formsubmit").click(function() {
   $('#supplyForm').bootstrapValidator('validate');
   return false;
 }); //endHRSUBMIT
-
-
 });
 </script>
 <?php
@@ -574,7 +564,6 @@ $(function () {
         }]
     });
 });
-
 </script>
 </body>
 </html>
