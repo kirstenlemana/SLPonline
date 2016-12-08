@@ -29,18 +29,14 @@ $query = "
                 compnotes
             FROM hr_db 
             WHERE 
-                id = :id
-        "; 
-        $query_params = array( 
-            ':id' => $_SESSION['id'] 
-        );
+                id = :id"; 
+        $query_params = array(':id' => $_SESSION['id']);
         try 
-        { $stmt = $db->prepare($query); $result = $stmt->execute($query_params); } 
+          { $stmt = $db->prepare($query); $result = $stmt->execute($query_params); } 
         catch(PDOException $ex) 
-        { die("Failed to run query: " . $ex->getMessage()); } 
-        $row = $stmt->fetch();
-
-?>
+          { die("Failed to run query: " . $ex->getMessage()); } 
+               $row = $stmt->fetch();
+        ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -60,42 +56,41 @@ $query = "
     <script type="text/javascript" src="../js/bootstrapValidator.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <style>
-
 body {
     background-color: #f7f9fb;
     background-size: cover;
     font-family: "Lato";
-}
+     }
 .navbar-nav > li > a, .navbar-brand {
     padding-top:15px !important; 
     padding-bottom:0 !important;
     height: 45px;
-}
+     }
 .navbar {min-height:45px !important;background-color: #000}
 #bootstrapSelectForm .selectContainer .form-control-feedback {
     right: -15px;
-}
+     }
 .slidedown {
   -webkit-transform: scaleY(0);
        -o-transform: scaleY(0);
-      -ms-transform: scaleY(0);
+       -ms-transform: scaleY(0);
           transform: scaleY(0);
   
   -webkit-transform-origin: top;
-       -o-transform-origin: top;
-      -ms-transform-origin: top;
+           -o-transform-origin: top;
+           -ms-transform-origin: top;
           transform-origin: top;
   
   -webkit-transition: -webkit-transform 0.2s ease;
             -o-transition: -o-transform 0.2s ease;
-          -ms-transition: -ms-transform 0.2s ease;
-                  transition: transform 0.2s ease;
+            -ms-transition: -ms-transform 0.2s ease;
+              transition: transform 0.2s ease;
 }
 
 .slidedown.active {
   -webkit-transform: scaleY(1);
        -o-transform: scaleY(1);
-      -ms-transform: scaleY(1);
+       -ms-transform: scaleY(1);
           transform: scaleY(1);
 }
 .successcontent {
@@ -121,28 +116,28 @@ body {
 @-moz-keyframes spin {
   from {
     -moz-transform: rotate(0deg);
-  }
+}
   to {
     -moz-transform: rotate(360deg);
-  }
+}
 }
 
 @-webkit-keyframes spin {
   from {
     -webkit-transform: rotate(0deg);
-  }
+}
   to {
     -webkit-transform: rotate(360deg);
-  }
+}
 }
 
 @keyframes spin {
   from {
     transform: rotate(0deg);
-  }
+}
   to {
     transform: rotate(360deg);
-  }
+}
 }
 .disabled {
   background:rgba(1,1,1,0.2);
@@ -257,17 +252,17 @@ tbody tr {
       <div id="formz" style="margin-right:5px">
       <form>
           <div class="form-group" style="padding:10px;padding-bottom:0px">
-            <div class="col-sm-12" style="margin-left:5px">
-                <textarea name="feedback" maxlength="250" class="form-control" id="feedback" placeholder="Any comments, ideas, or suggestions are welcome!" style="resize:none;padding-top:8px;" rows="3"></textarea>
-            </div>
+          <div class="col-sm-12" style="margin-left:5px">
+             <textarea name="feedback" maxlength="250" class="form-control" id="feedback" placeholder="Any comments, ideas, or suggestions are welcome!" style="resize:none;padding-top:8px;" rows="3"></textarea>
           </div>
+          </div> 
       </form>
           <div class="form-group">
               <button class="btn2 btn-primary" id="sendfeedback" style="margin-left:1em">Submit</button>
           </div>
       
-      </div>
     </div>
+  </div>
 </div>
 <script type="text/javascript" language="javascript" class="init">
 var oTable = "";
@@ -288,41 +283,32 @@ var oTable = "";
           </div>
         </div>
     </div><!--endrow-->
-    <div class="row col-md-12" style="position:absolute;bottom:1em"><center>
-      This page is under development
-    </div>
-</div><!--container-->
+      <div class="row col-md-12" style="position:absolute;bottom:1em"><center>
+        This page is under development
+      </div>
+    </div><!--container-->
 <script>
 $(document).ready(function() {
 $("#searchbox").keyup(function() {
-   oTable.fnFilter(this.value);
-});    
+   oTable.fnFilter(this.value);});    
 $("#formsubmit").click(function() {
   event.preventDefault();
   event.stopImmediatePropagation();
   $("#statusdisp").html('');
   $('#supplyForm').bootstrapValidator('validate');
-  return false;
-}); //endHRSUBMIT
-
-});
-</script>
+  return false;}); //endHRSUBMIT
+  });
+  </script>
 <script>
-$(document).ready(function() {
-key = '<?php echo $row["region"]; ?>';
-
-$("#loadicon").hide();
-
-
-$("#formsubmit").click(function() {
+  $(document).ready(function() {
+    key = '<?php echo $row["region"]; ?>';
+  $("#loadicon").hide();
+  $("#formsubmit").click(function() {
   event.preventDefault();
   event.stopImmediatePropagation();
   $("#statusdisp").html('');
   $('#supplyForm').bootstrapValidator('validate');
-  return false;
-}); //endHRSUBMIT
-
-
+return false;}); //endHRSUBMIT
 });
 </script>
 </body>
