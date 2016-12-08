@@ -1,4 +1,5 @@
 <?php
+//test
 require("../../mailer/PHPMailerAutoload.php");
 require("../../mailer/class.phpmailer.php");
 require("../../mailer/class.smtp.php");
