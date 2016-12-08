@@ -5,9 +5,7 @@
  * Copyright: 2010 - Allan Jardine
  * License:   GPL v2 or BSD (3-point)
  */
-  
 class TableData {
- 
  	private $_db;
 	public function __construct() {
 		require("../l33tz9.php");
@@ -18,7 +16,6 @@ class TableData {
 		if ( isset( $_GET['iDisplayStart'] ) && $_GET['iDisplayLength'] != '-1' ) {
 			$sLimit = "LIMIT ".intval( $_GET['iDisplayStart'] ).", ".intval( $_GET['iDisplayLength'] );
 		}
-		
 		// Ordering
 		$sOrder = "";
 		if ( isset( $_GET['iSortCol_0'] ) ) {
@@ -28,14 +25,12 @@ class TableData {
 					$sortDir = (strcasecmp($_GET['sSortDir_'.$i], 'ASC') == 0) ? 'ASC' : 'DESC';
 					$sOrder .= "`".$columns[ intval( $_GET['iSortCol_'.$i] ) ]."` ". $sortDir .", ";
 				}
-			}
-			
+			}	
 			$sOrder = substr_replace( $sOrder, "", -2 );
 			if ( $sOrder == "ORDER BY" ) {
 				$sOrder = "";
 			}
 		}
-		
 		/* 
 		 * Filtering
 		 * NOTE this does not match the built-in DataTables filtering which does it
@@ -53,28 +48,24 @@ class TableData {
 			$sWhere = substr_replace( $sWhere, "", -3 );
 			$sWhere .= ')';
 		}
-		
 		// Individual column filtering
 		for ( $i=0 ; $i<count($columns) ; $i++ ) {
 			if ( isset($_GET['bSearchable_'.$i]) && $_GET['bSearchable_'.$i] == "true" && $_GET['sSearch_'.$i] != '' ) {
 				if ( $sWhere == "" ) {
 					$sWhere = "WHERE ";
-				}
-				else {
+		   	  } else {
 					$sWhere .= " AND ";
 				}
 				$sWhere .= "`".$columns[$i]."` LIKE :search".$i." ";
 			}
 		}
-		
 		// SQL queries get data to display
 		if ($_SESSION['filter']=='NPMO') {
 			$sQuery = "SELECT m.id, t.tag, t.sector, m.firstname, m.lastname, m.sex, m.birthdate, m.province, m.municipality, m.status, m.education, m.pantawidid, m.hasNSO, m.hasNBI, GROUP_CONCAT(DISTINCT t.tag SEPARATOR ', ') as subsectors FROM PRTsupplytags t LEFT JOIN PRTsupply m ON t.supplyrefid=m.id WHERE t.sector='".$_SESSION['sector']."' GROUP BY m.id";
-		} else {
+	  } else {
 			$sQuery = "SELECT m.id, t.tag, t.sector, m.firstname, m.lastname, m.sex, m.birthdate, m.province, m.municipality, m.status, m.education, m.pantawidid, m.hasNSO, m.hasNBI, GROUP_CONCAT(DISTINCT t.tag SEPARATOR ', ') as subsectors FROM PRTsupplytags t LEFT JOIN PRTsupply m ON t.supplyrefid=m.id WHERE REGION = '".$_SESSION['filter']."' AND t.sector='".$_SESSION['sector']."' GROUP BY m.id";
 		}
 		$statement = $this->_db->prepare($sQuery);
-		
 		// Bind parameters
 		if ( isset($_GET['sSearch']) && $_GET['sSearch'] != "" ) {
 			$statement->bindValue(':search', '%'.$_GET['sSearch'].'%', PDO::PARAM_STR);
@@ -85,14 +76,11 @@ class TableData {
 			}
 		}
 		$statement->execute();
-		$rResult = $statement->fetchAll();
-		
+		$rResult = $statement->fetchAll();	
 		$iFilteredTotal = current($this->_db->query('SELECT FOUND_ROWS()')->fetch());
-		
 		// Get total number of rows in table
 		$sQuery = "SELECT COUNT(`".$index_column."`) FROM `".$table."`";
 		$iTotal = current($this->_db->query($sQuery)->fetch());
-		
 		// Output
 		$output = array(
 			"sEcho" => intval($_GET['sEcho']),
@@ -100,7 +88,6 @@ class TableData {
 			"iTotalDisplayRecords" => $iFilteredTotal,
 			"aaData" => array()
 		);
-		
 		// Return array of values
 		foreach($rResult as $aRow) {
 			$row = array();			
@@ -115,14 +102,12 @@ class TableData {
 			}
 			$output['aaData'][] = $row;
 		}
-		
 		echo json_encode( $output );
 	}
 }
 header('Pragma: no-cache');
 header('Cache-Control: no-store, no-cache, must-revalidate');
 // Create instance of TableData class
-
 $table_data = new TableData();
 // Get the data
 $table_data->get('PRTsupply', 'id', array('id', 'firstname', 'lastname', 'subsectors', 'sex', 'birthdate', 'education', 'province', 'municipality','sector','pantawidid', 'hasNSO', 'hasNBI','status', 'tag'));
