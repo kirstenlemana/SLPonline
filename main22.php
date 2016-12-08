@@ -377,19 +377,87 @@ h3 {
       </div>
     </div>
     <div class="row" style="margin-top:1em">
-      <div style="border:solid 1px #c5d6de;margin-left:1em;background:#fff;text-align:center;padding:0;">
+  <div style="background:#f6f8fa;font-size:15px;padding:1em;padding-left:1.5em;border:solid 1px #c5d6de;margin-left:0.9em;text-align:center;padding-top:0.8em;padding-bottom:0.8em">
+            <b>Recent Activities</b>
+          </div>
+       
+    <div style="border:solid 1px #c5d6de;margin-left:1.1em;background:#fff;padding:1em;padding-left:1.5em;padding-right:1.5em;font-size:12px;padding-bottom:0">
+       
+          
+     <?php 
+    $stmt=$db->prepare("SELECT w.wall_msg,h.firstname,h.sex,w.wallposted,p.name,h.lastname,h.id,w.wallowner,h1.firstname,h1.lastname,w.wallposter FROM hr_wallposts as w LEFT JOIN hr_db as h on w.wallposter=h.id LEFT JOIN hr_profilepics as p on p.hrdbid=h.id LEFT JOIN hr_db as h1 on h1.id=w.wallowner ORDER BY w.wallpostid DESC LIMIT 0,5");
+    $stmt->execute();
+    while($rowWP=$stmt->fetch(PDO::FETCH_NUM,pdo::FETCH_ORI_NEXT)) { 
+
+     if($rowWP[7]==$rowWP[10]){
+               if($rowWP[4]=="" ) {
+                        if($rowWP[2]==0) {             
+                         echo '<div class="row"><div class="col-md-3"><a href="../hr/user.php?id='.$rowWP[6].'"><img src="../imgs/partner.png" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$rowWP[1].' '.$rowWP[5].'</a></b><br>'.date("M j - h:i a",strtotime($rowWP[3])).'</span><br>'.$rowWP[0].'</div></div><hr>';
+                        } else {
+                          echo '<div class="row"><div class="col-md-3"><a href="../hr/user.php?id='.$rowWP[6].'"><img src="../imgs/female.png" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$rowWP[1].' '.$rowWP[5].'</a></b><br>'.date("M j - h:i a",strtotime($rowWP[3])).'</span><br>'.$rowWP[0].'</div></div><hr>';
+                        }
+               } else {  
+
+                  
+                        echo '<div class="row"><div class="col-md-3"><a href="../hr/user.php?id='.$rowWP[6].'"><img src="../docs/profilepics/'.$rowWP[4].'" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$rowWP[1].' '.$rowWP[5].'</a></b></b><br>'.date("M j - h:i a",strtotime($rowWP[3])).'</span><br>'.$rowWP[0].'</div></div><hr style="padding-bottom:0">';
+               }
+    } else {
+              if($rowWP[4]=="" ) {
+                          if($rowWP[2]==0) {             
+                           echo '<div class="row"><div class="col-md-3"><a href="../hr/user.php?id='.$rowWP[6].'"><img src="../imgs/partner.png" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$rowWP[1].' '.$rowWP[5].'</a><span class="glyphicon glyphicon-triangle-right"></span><a href="../hr/user.php?id='.$rowWP[7].'">'.$rowWP[8].'&nbsp;'.$rowWP[9].'</a></b><br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($rowWP[3])).'</span><br>'.$rowWP[0].'</div></div><hr>';
+                          } else {
+                            echo '<div class="row"><div class="col-md-3"><a href="../hr/user.php?id='.$rowWP[6].'"><img src="../imgs/female.png" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$rowWP[1].' '.$rowWP[5].'</a><span class="glyphicon glyphicon-triangle-right"></span><a href="../hr/user.php?id='.$rowWP[7].'">'.$rowWP[8].'&nbsp;'.$rowWP[9].'</a></b><br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($rowWP[3])).'</span><br>'.$rowWP[0].'</div></div><hr>';
+                          }
+                 } else {  
+
+                    
+                          echo '<div class="row"><div class="col-md-3"><a href="../hr/user.php?id='.$rowWP[6].'"><img src="../docs/profilepics/'.$rowWP[4].'" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$rowWP[1].' '.$rowWP[5].'</a><span class="glyphicon glyphicon-triangle-right"></span><a href="../hr/user.php?id='.$rowWP[7].'">'.$rowWP[8].'&nbsp;'.$rowWP[9].'</a></b><br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($rowWP[3])).'</span><br>'.$rowWP[0].'</div></div><hr style="padding-bottom:0">';
+                 }
+
+
+
+    }
+
+
+
+    }
+    ?>
+
+    </div>
+   </div>
+  </div>
+    <div class="col-md-3" style="padding:1em;padding-top:0;padding-right:0">
+
+  <div class="row" style="padding-left:1em;padding-right:0.5em"> 
+<!--<div style="border:solid 1px #c5d6de;margin-left:1em;background:#fff;padding:1em;padding-left:1.5em;padding-right:1.5em;font-size:12px;padding-bottom:0"> -->
+  <div style="border:solid 1px #c5d6de;margin-left:1em;background:#fff;padding:0;">
 
         <!--shoutbox table-->
-        <table class="table table-bordered" style="margin-top:0em;line-height:0.9;vertical-align:middle;border:0;" id="shoutbox">
-          <thead style="background:#f6f8fa">
-            <th><b>National Shoutbox</b></th>
-          </thead>
-          <tbody style="height:300px;overflow-y:scroll;display:block">
+        <table class="table table-bordered" style="margin-top:0em;line-height:0.9;vertical-align:middle;border:0;padding:0" id="shoutbox">
+          <thead style="background:#f6f8fa;">
+            <th style="font-size:15px"><b>National Shoutbox</b></th>
+          </thead> 
+        
+       <!--   <tbody style="height:800px;overflow-y:scroll;display:block"> -->
+            <tbody style="height:800px;overflow:hidden;display:block">
 <?php
-      $stmtcom = $db->prepare("SELECT t.firstname, m.msg, m.added, t.region, t.id FROM shoutbox m LEFT JOIN hr_db t ON m.hrdbid=t.id ORDER BY m.id DESC LIMIT 15");
+      $stmtcom = $db->prepare("SELECT t.firstname, m.msg, m.added, t.region, t.id,hp.name,t.lastname,t.sex,hp.name FROM shoutbox as m LEFT JOIN hr_db as t ON m.hrdbid=t.id LEFT JOIN hr_profilepics as hp on hp.hrdbid=t.id  ORDER BY m.id DESC LIMIT 10");
       $stmtcom->execute();
       while ($row8 = $stmtcom->fetch(PDO::FETCH_NUM, PDO::FETCH_ORI_NEXT)) {
-            echo '<tr><td style="font-size:12px;vertical-align:middle"><div class="row nopad" style="vertical-align:middle" data-bg-text="'.timeago(strtotime($row8[2])).'"><div class="col-sm-12 nopad" style="text-align:left;line-height:1.1;padding-left:0.7em">'.$row8[1].' -<a href="hr/user.php?id='.$row8[4].'" style="color:#00ADDe;text-decoration:none">'.ucwords(strtolower($row8[0])).'</a></span><span style="color:#888;"> ('.$row8[3].')</span></div><div class="clearfix"></div></div></td></tr>';
+         //   echo '<tr><td style="font-size:12px;vertical-align:middle"><div class="row nopad" style="vertical-align:middle" data-bg-text="'.timeago(strtotime($row8[2])).'"><div class="col-sm-12 nopad" style="text-align:left;line-height:1.1;padding-left:0.7em">'.$row8[1].' -<a href="hr/user.php?id='.$row8[4].'" style="color:#00ADDe;text-decoration:none">'.ucwords(strtolower($row8[0])).'</a></span><span style="color:#888;"> ('.$row8[3].')</span></div><div class="clearfix"></div></div></td></tr>';
+        if($row8[8]=="") {
+              if($row8[7]==0) {
+                  echo '<tr><td style="font-size:12px;vertical-align:middle"><div class="row nopad"><div class="col-md-3"><a style="text-decoration:none;" href="../hr/user.php?id='.$row8[4].'"><img src="../imgs/partner.png" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$row8[0].' '.$row8[6].'</a> ('.$row8[3].')<br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($row8[2])).'</span><br><span style="color:#2c3e50;font-size:12px;font-weight: normal;">'.$row8[1].'</span></div></div></td></tr>';
+              } else {
+                  echo '<tr><td style="font-size:12px;vertical-align:middle"><div class="row nopad"><div class="col-md-3"><a style="text-decoration:none;" href="../hr/user.php?id='.$row8[4].'"><img src="../imgs/female.png" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$row8[0].' '.$row8[6].'</a> ('.$row8[3].')<br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($row8[2])).'</span><br><span style="color:#2c3e50;font-size:12px;font-weight: normal;">'.$row8[1].'</span></div></div></td></tr>';
+              }
+        } else {
+          
+              echo '<tr><td style="font-size:12px;vertical-align:middle"><div class="row nopad"><div class="col-md-3"><a style="text-decoration:none;" href="../hr/user.php?id='.$row8[4].'"><img src="../docs/profilepics/'.$row8[5].'" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$row8[0].' '.$row8[6].'</a> ('.$row8[3].')<br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($row8[2])).'</span><br><span style="color:#2c3e50;font-size:12px;font-weight: normal;">'.$row8[1].'</span></div></div></td></tr>';
+        }        
+
+
+
       }
 ?>
           </tbody>
@@ -397,8 +465,8 @@ h3 {
         <!--shoutbox table-->
 
 
-        <div class="form-group" style="margin:0;padding:0 1em 0 1em;margin-bottom:1em">
-                    <div class="input-group" style="margin-bottom:0;margin-top:1em">
+        <div class="form-group" style="margin:0;padding:0 1em 0 1em;margin-bottom:1em;">
+                    <div class="input-group" style="margin-bottom:0;margin-top:5em">
                       <input id="comment" name="comment" class="form-control" placeholder="" style="height:31.4px">
                       <div class="input-group-btn">
                         <button id="postcomment" class="btn btn-primary" style="padding:2px 8px 4px 8px">Post</button>
@@ -407,46 +475,28 @@ h3 {
         </div>
         <div class="clearfix"></div>
       </div>
+
+  </div>
+  </div>
+  <div class="col-md-3" style="padding:1em;padding-top:0;padding-right:0;padding-left:0.5em">
+
+
+<div class="row" style="padding-top:0em;padding-left:1em;padding-right:0.5em">
+    <div style="border:solid 1px #c5d6de;margin-left:1em;background:#fff;text-align:center;padding:1em;padding-left:1.5em;padding-right:1.5em;">
+        <div class="row" style="padding-right:1.6em;margin-bottom:0;padding-bottom:0;padding-left:1.6em">
+          <p class="pull-left" style="font-size: 12px; color:#ccc">Posted by: ITU</p>
+          <p class="pull-right" style="font-size: 12px; color:#ccc">07 December 2016</p>
+        </div>
+        <div style="color:#444444;border-collapse:collapse;font-size:14pt;font-family:proxima_nova,&#39;Open Sans&#39;,&#39;Lucida Grande&#39;,&#39;Segoe UI&#39;,Arial,Verdana,&#39;Lucida Sans Unicode&#39;,Tahoma,&#39;Sans Serif&#39;;">
+        Congratulations SLP!
+      </div>
+      <img src="http://www.slp.ph/imgs/nprew.png" style="max-width:100%">
+      <br><br>
+      Our sincerest congratulations on the successful NPREW at Hotel Rembrandt, Quezon City, Metro Manila last Dec. 01-04. Reference documents will be available in the e-library.
+      <br>
+      <br>
     </div>
   </div>
-    <div class="col-md-3" style="padding:1em;padding-top:0;padding-right:0">
-
-  <div class="row" style="padding-left:1em;padding-right:0.5em"> 
-    <div style="border:solid 1px #c5d6de;margin-left:1em;background:#fff;padding:1em;padding-left:1.5em;padding-right:1.5em;font-size:12px">
-     <?php 
-    $stmt=$db->prepare("SELECT w.wall_msg,h.firstname,h.sex,w.wallposted,p.name,h.lastname,h.id,w.wallowner,h1.firstname,h1.lastname FROM hr_wallposts as w LEFT JOIN hr_db as h on w.wallposter=h.id LEFT JOIN hr_profilepics as p on p.hrdbid=h.id LEFT JOIN hr_db as h1 on h1.id=w.wallowner ORDER BY w.wallpostid DESC LIMIT 0,10");
-    $stmt->execute();
-    while($rowWP=$stmt->fetch(PDO::FETCH_NUM,pdo::FETCH_ORI_NEXT)) { 
-       if($rowWP[4]=="" ) {
-                if($rowWP[2]==0) {             
-                 echo '<div class="row"><div class="col-md-3"><a href="../hr/user.php?id='.$rowWP[6].'"><img src="../imgs/partner.png" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$rowWP[1].' '.$rowWP[5].'</a><span class="glyphicon glyphicon-triangle-right"></span><a href="../hr/user.php?id='.$rowWP[7].'">'.$rowWP[8].'&nbsp;'.$rowWP[9].'</a></b><br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($rowWP[3])).'</span><br>'.$rowWP[0].'</div></div><hr>';
-                } else {
-                  echo '<div class="row"><div class="col-md-3"><a href="../hr/user.php?id='.$rowWP[6].'"><img src="../imgs/female.png" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$rowWP[1].' '.$rowWP[5].'</a><span class="glyphicon glyphicon-triangle-right"></span><a href="../hr/user.php?id='.$rowWP[7].'">'.$rowWP[8].'&nbsp;'.$rowWP[9].'</a></b><br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($rowWP[3])).'</span><br>'.$rowWP[0].'</div></div><hr>';
-                }
-       } else {  
-          
-                echo '<div class="row"><div class="col-md-3"><a href="../hr/user.php?id='.$rowWP[6].'"><img src="../docs/profilepics/'.$rowWP[4].'" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$rowWP[1].' '.$rowWP[5].'</a><span class="glyphicon glyphicon-triangle-right"></span><a href="../hr/user.php?id='.$rowWP[7].'">'.$rowWP[8].'&nbsp;'.$rowWP[9].'</a></b><br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($rowWP[3])).'</span><br>'.$rowWP[0].'</div></div><hr>';
-
-       }
-    }
-    ?>
-
-    </div>
-  </div>
-  </div>
-  <div class="col-md-3" style="padding:1em;padding-top:0;padding-right:0">
-
-  <div class="row" style="padding-left:1em;padding-right:0.5em"> 
-    <div style="border:solid 1px #c5d6de;margin-left:1em;background:#fff;text-align:center;padding:1em;padding-left:1.5em;padding-right:1.5em;font-size:12px">
-      09/01/2016 - Advisory: We are experiencing technical difficulties with sending automated emails to <b>yahoo</b> email addresses. The following are directly affected and are temporarily non-functional:
-      <div class="col-md-offset-4" style="text-align:center"><ul style="text-align:left;margin-bottom:0.5em;margin-top:0.5em">
-        <li>Account confirmation</li>
-        <li>Forgot password feature</li>
-      </ul></div>
-      Apologies for the inconvenience. We will be providing updates once the issue is resolved.
-    </div>
-  </div>
-
 
 <div class="row" style="padding-top:1em;padding-left:1em;padding-right:0.5em">
     <div style="border:solid 1px #c5d6de;margin-left:1em;background:#fff;text-align:center;padding:1em;padding-left:1.5em;padding-right:1.5em;">
@@ -460,11 +510,11 @@ h3 {
       <br>
       <img src="http://www.slp.ph/imgs/elibraryupdate.png" style="max-width:100%">
       <br>
-      Thank you for all the feedback. Your suggestions have helped make <a href="http://www.slp.ph" style="text-decoration:none;color:#4583ed">SLP.PH</a> COOLer and better with its freshly organized E-Library!
+      Thanks for the feedback. Your suggestions have helped make <a href="http://www.slp.ph" style="text-decoration:none;color:#4583ed">SLP.PH</a> COOLer and better with its E-Library update!
       <br><br>
       <b>But we're not done!</b>
       <br>
-      You can help make it even better by uploading important SLP files such as:
+      You can help make it even better by uploading:
       <div>
           <ul style=" display: inline-block;
         text-align:left;">
@@ -473,43 +523,12 @@ h3 {
             <li>Templates and Forms</li>
           </ul>
       </div>
-      <span style="text-align:justify">As an incentive, we will be giving an <span style="color:#2ecc71;font-weight:bold">additional 20 bytez for <b>all</b> E-Library uploads that fall under the above categories</span> (promo runs until 31 September 2016)! Again, we thank you for your continued support. Happy working!</span>
+      <span style="text-align:justify">As an incentive, we are giving an <span style="color:#2ecc71;font-weight:bold">additional 20 bytez for <b>all</b> E-Lib uploads that fall under the above categories</span> (promo runs til Sept. 31)! Again, thank you for your continued support. Happy working!</span>
       <br>
       <br>
     </div>
-
   </div>
 
-  <div class="row" style="padding-top:1em;padding-left:1em;padding-right:0.5em">
-    <div style="border:solid 1px #c5d6de;margin-left:1em;background:#fff;text-align:center;padding:1em;padding-left:1.5em;padding-right:1.5em;">
-        <div class="row" style="padding-right:1.6em;margin-bottom:0;padding-bottom:0;padding-left:1.6em">
-          <p class="pull-left" style="font-size: 12px; color:#ccc">Posted by: ITU</p>
-          <p class="pull-right" style="font-size: 12px; color:#ccc">22 August 2016</p>
-        </div>
-        <center>
-          <img src="imgs/slpphtrend.png" style="max-width:100%"><br>
-          <h2 style="color:black;margin-bottom:0;margin-top:0"><b>It's a BRAND NEW day</b></h2>
-          <p style="color:black; font-size: 18px">And it's time to upload a profile photo.</p>
-        </center>
-        <p class="text-justify" style="font-size: 12px">
-          Starting today, the <b>profile picture uploading feature </b> is now available for SLP.PH users!
-          Along with this, other enhancements are listed below: <br>
-          <ul style="font-size:12px;text-align:left"></center>
-            <li><b>Profile pictures</b> - simply hover and click on the upload button on your profile page to upload!</li>
-            <li><b>Announcements page</b> - this will always be updated with the latest SLP news.</li>
-            <li><a href="faqs.php" style="color:#00ADDe"><b>Frequently Asked Questions (FAQs) page</b></a> - for anything and everything system related, for now.</li>
-            <li><b>Brand new server and enhanced security protocols</b> - to make your browsing faster and safer!</li>
-            <li><b>Other enhancements and optimizations</b> - fixing of minor errors encountered throughout different systems.</li>
-          </ul>
-
-      <p class="text-left" style="font-size: 12px"><span style="font-size: 16px"><b>But you ain't seen nothing yet.</b></span> SLP.PH is set to unravel COOLer(convenient online) features that will make your browsing experience more exciting so stay tuned! Also, we love to hear from you so don't hesitate to send your feedback so that we keep improving our systems!</p>
-      <hr>
-      <p class="text-center" style="font-size: 12px"><span style="font-size: 14px"><b style="color:#2ecc71">PROMO: Earn 40 Bytez instantly when you upload your initial profile photo! <br>Promo runs until August 31, 2016.</b></span></p></p>
-      <img src="http://www.slp.ph/imgs/profpic.jpg" style="max-width:100%;margin-top:1em">
-      </center>
-    </div>
-
-  </div>
 
   </div>
   <div class="col-md-3" style="padding:1em;padding-top:0em;border:0px solid blue;padding-left:0.5em;padding-right:0.5em;margin-top:0">
@@ -669,7 +688,12 @@ if ($("#comment").val() == "") {
                    success: function(data)
                    {
                       if (data == "commented") {
-                        $("#shoutbox").prepend('<tr><td style="font-size:12px;vertical-align:middle"><div class="row nopad" style="vertical-align:middle" data-bg-text="now"><div class="col-sm-12 nopad" style="text-align:left;line-height:1.1;padding-left:1em"> '+$('input[name=comment]').val()+' -<a href="http://slp.ph/hr/viewdata/user.php?id=" style="color:#00ADDe;text-decoration:none"><?php echo $_SESSION["firstname"]; ?></a></span><span style="color:#888;"> (<?php echo $_SESSION["filter"];?>)</span></div><div class="clearfix"></div></div></td></tr>');
+                        $("#shoutbox").prepend('<tr><td style="font-size:12px;vertical-align:middle"><div class="row nopad"><div class="col-md-3"><a style="text-decoration:none;" href="../hr/user.php?id="><img src="../imgs/partner.png" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><a href="http://slp.ph/hr/viewdata/user.php?id=" style="font-weight:bold;text-decoration:none"><?php echo $_SESSION["firstname"].' '.$_SESSION["lastname"]; ?></a>&nbsp;</span><span style="font-weight:bold">(<?php echo $_SESSION["filter"];?>)</span> <span style="color:#888;"> <br>now</span><br>'+$('input[name=comment]').val()+'</div><div class="clearfix"></div></div></td></tr>');
+                        
+                          
+
+
+
                         $("#comment").val("");
                       } else {
                         alert(data);
