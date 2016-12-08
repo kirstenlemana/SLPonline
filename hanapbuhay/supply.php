@@ -31,13 +31,11 @@ $query = "
             WHERE 
                 id = :id
         "; 
-        $query_params = array( 
-            ':id' => $_SESSION['id'] 
-        );
+        $query_params = array(':id' => $_SESSION['id']);
         try 
-        { $stmt = $db->prepare($query); $result = $stmt->execute($query_params); } 
+          { $stmt = $db->prepare($query); $result = $stmt->execute($query_params); } 
         catch(PDOException $ex) 
-        { die("Failed to run query: " . $ex->getMessage()); } 
+          { die("Failed to run query: " . $ex->getMessage()); } 
         $row = $stmt->fetch();
 
 ?>
@@ -231,11 +229,11 @@ tbody tr {
     </div>
 </div>
 <script type="text/javascript" language="javascript" class="init">
-var oTable = "";
-$(document).ready(function() {
+    var oTable = "";
+    $(document).ready(function() {
 function toTitleCase(str)
 {
-      return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
 }
 function parselimit(strz)
 {
@@ -287,7 +285,7 @@ function parseStatus(str) {
 
             { "bVisible": false, "aTargets":[2] }
             ]
-} );
+});
   oTable = $('#viewdata').dataTable();
       $('#viewdata').on( 'click', 'tbody tr', function () {
         var redirection = $(this).attr('id');
@@ -309,7 +307,6 @@ function parseStatus(str) {
 
 </script>
 <div class="container-fluid">
-  
     <div class="row">
         <div id="maincontent" class="col-md-5" style="border:0px solid #000;height:90%;margin-right:0">
           <div style="height:100%;background-color:#fff;margin-top:0;padding:2em;padding-top:0.8em">
@@ -318,7 +315,6 @@ function parseStatus(str) {
             <div id="data_adding" style="display:none">Adding participants for: <b id="data_provmuni" style="display:none;color:#00AADe">Province > Municipality</b> <span id="btnsupply_reset" style="color:rgb(217, 83, 79);cursor:pointer" class="glyphicon glyphicon-remove"></span></div>
             <div id="supply_part1" style="background:#fff;display:none;text-align:center;">
             <form id="supplyForm" method="post" action="" autocomplete="off">
-
 <?php if ($_SESSION['filter']=="NPMO") { ?>
                         <div class="form-group">
                             <div class="col-sm-12">
@@ -386,55 +382,48 @@ function parseStatus(str) {
                           </form>
                           <div class="row">
                               <button id="btnsupply2" class="btn btn-info" style="width:100px;margin-top:1em;padding:6px">Next <span class="glyphicon glyphicon-chevron-right"></span></button>
-                          </div>
-                          
+                          </div>     
             </div>
             <div id="supply_part2" style="display:none;">
               <div class="row">
               <form id="supplyForm2" method="post" action="" autocomplete="off">
                             
 <script>
-function getProv(val) {
-
-  var formData = { 'region' : $('#region option:selected').val() };
-  $.ajax({
-  type: "POST",
-  url: "getProv.php",
-  data: formData,
-  success: function(data) {
-            $("#prov").html(data);
-        }
-
+    function getProv(val) {
+      var formData = { 'region' : $('#region option:selected').val() };
+      $.ajax({
+      type: "POST",
+      url: "getProv.php",
+      data: formData,
+      success: function(data) {
+                $("#prov").html(data);
+     }
   });
 }
-function getCity(val) {
-
-  var formData = { 'provi' : $('#prov option:selected').val() };
-  $.ajax({
-  type: "POST",
-  url: "getCity.php",
-  data: formData,
-  success: function(data) {
-            $("#city").prop('disabled', false);
-            $("#city").html(data);
-        }
-
+    function getCity(val) {
+      var formData = { 'provi' : $('#prov option:selected').val() };
+      $.ajax({
+      type: "POST",
+      url: "getCity.php",
+      data: formData,
+      success: function(data) {
+                $("#city").prop('disabled', false);
+                $("#city").html(data);
+     }
   });
 }
-function getBrgy(val) {
-  var formData = { 'city' : $('#city option:selected').val() };
-  $.ajax({
-  type: "POST",
-  url: "getBrgy.php",
-  data: formData,
-  success: function(data) {
-            $("#brgy").prop('disabled', false);
-            $("#brgy").html(data);
-        }
-
+    function getBrgy(val) {
+      var formData = { 'city' : $('#city option:selected').val() };
+      $.ajax({
+      type: "POST",
+      url: "getBrgy.php",
+      data: formData,
+      success: function(data) {
+                $("#brgy").prop('disabled', false);
+                $("#brgy").html(data);
+     }
   });
 }
-
 pantawid = 0;
 hasnso = 0;
 hasnbi = 0;
@@ -536,8 +525,7 @@ function sectorChange() {
             vals = data.u.split(",");
             break;
         }
-        
-        if (key != "") {
+          if (key != "") {
             document.getElementById("filter2").disabled = false;
             $secondChoice.empty();
             $secondChoice.append("<option>Select Sub-Sector(s)</option>");
@@ -548,12 +536,10 @@ function sectorChange() {
             $secondChoice.empty();
             $secondChoice.append("<option value=''>Select Sub-Sector(s)</option>");
             document.getElementById("filter2").disabled = true;
-        }
-        
+        } 
       });
 }
 function changeValue2(){
-
           $('#idg').show();
           var option=document.getElementById('filter2').value;
           $("#subsector").tagit("createTag", option);
@@ -615,15 +601,15 @@ function changeValue2(){
                             </div>
                             <div class="form-group">
                               <div class="col-sm-6">
-                                    <select class="form-control cleanselect" id="sex" name="sex" required>
-                                      <option value="" selected>Select Sex</option>
-                                      <option>Male</option>
-                                      <option>Female</option>
-                                    </select>
+                                  <select class="form-control cleanselect" id="sex" name="sex" required>
+                                    <option value="" selected>Select Sex</option>
+                                    <option>Male</option>
+                                    <option>Female</option>
+                                  </select>
                               </div>
-                              <div class="col-sm-6">
-                                <input name="birthdate" class="form-control" id="address" placeholder="Birthday (mm/dd/yyyy)" >
-                              </div>
+                            <div class="col-sm-6">
+                                  <input name="birthdate" class="form-control" id="address" placeholder="Birthday (mm/dd/yyyy)" >
+                            </div>
                             </div>
                             <div class="form-group" style="margin-bottom:0em">
                               <div class="col-sm-6" style="margin-bottom:0em">
@@ -635,7 +621,7 @@ function changeValue2(){
                                       <option value="4">5'8 to 5'10 ft</option>
                                       <option value="5">Above 5'10 ft</option>
                                     </select>
-                              </div>
+                               </div>
                               <div class="col-sm-6" style="margin-bottom:0em">
                                 <input name="contactnumber" class="form-control" id="contactnumber" placeholder="Contact Number" style="margin-bottom:0.8em">
                               </div>
@@ -697,42 +683,36 @@ function changeValue2(){
                   </form>
                   </div>
                 </div>
-
-            <button id="btnsupply1" class="btn btn-info" style="margin-top:1em;padding:6px">Add Participant</button>
-            
-            <div class="row">
-              <div id="container" style="width:100%; margin: 0 auto"></div>
-            </div>
-
-          </div>
-        </div>
-        <div id="tableHolder" class="col-md-7" style="border:0px solid #000;margin-left:0">
-          <div style="background-color:#fff;height:100%;padding:2em;margin-left:0">
-                  <div class="col-md-4" style="margin-left:0;padding-left:0;padding-bottom:1em">
-                    <input id="searchbox" type="text" class="form-control" placeholder="Search Sectors.." style="height:31px"/>
-                  </div>
-                  <table cellpadding="0" cellspacing="0" border="0" class="table table-bordered table-hover hover" id="viewdata">
-                    <thead>
-                      <tr>
-                      <th>Sectors</th>
-                      <th style="padding-right:1em">Supply</th>
-                      <th>Region</th>
-                      </tr>
-                    </thead>
-                  </table>
-                  
-                  <div class="col-md-6 pull-right" style="color:#5cb85c;font-size:12px;text-align:right">
+                    <button id="btnsupply1" class="btn btn-info" style="margin-top:1em;padding:6px">Add Participant</button>
+                    <div class="row">
+                      <div id="container" style="width:100%; margin: 0 auto"></div>
+                      </div>
+                    </div>
+                </div>
+                <div id="tableHolder" class="col-md-7" style="border:0px solid #000;margin-left:0">
+                  <div style="background-color:#fff;height:100%;padding:2em;margin-left:0">
+                          <div class="col-md-4" style="margin-left:0;padding-left:0;padding-bottom:1em">
+                            <input id="searchbox" type="text" class="form-control" placeholder="Search Sectors.." style="height:31px"/>
+                          </div>
+                          <table cellpadding="0" cellspacing="0" border="0" class="table table-bordered table-hover hover" id="viewdata">
+                            <thead>
+                              <tr>
+                              <th>Sectors</th>
+                              <th style="padding-right:1em">Supply</th>
+                              <th>Region</th>
+                              </tr>
+                            </thead>
+                          </table>
+                <div class="col-md-6 pull-right" style="color:#5cb85c;font-size:12px;text-align:right">
                     <span id="reloadstamp"></span>
-                  </div>
+                </div>
                   <br>
-              
           </div>
         </div>
     </div><!--endrow-->
 </div><!--container-->
 <script>
 $(document).ready(function() {
-
 key = '<?php echo $row["region"]; ?>';
 $("#searchbox").keyup(function() {
    oTable.fnFilter(this.value);
@@ -797,35 +777,32 @@ $("#sendfeedback").click(function(event) {
                    }
                 });//endAjax
   }); //endsendfeedback
-
-
 });
 </script>
 <script>
-<?php
-$stmt = $db->prepare("SELECT COUNT(id) as total FROM PRTsupply");
-$stmt->execute();
-$row = $stmt->fetch();
-$total = $row["total"];
-$stmt = $db->prepare("SELECT COUNT(id) as total FROM PRTsupply WHERE encodedby = '".$_SESSION['id']."'");
-$stmt->execute();
-$row = $stmt->fetch();
-$totalencoded = $row["total"];
-$stmt = $db->prepare("SELECT COUNT(id) as total FROM PRTsupply WHERE encodedby = '".$_SESSION['id']."' AND employed != '0000-00-00'");
-$stmt->execute();
-$row = $stmt->fetch();
-$totalemployed = $row["total"];
-?>
-$(function () {
-
+    <?php
+    $stmt = $db->prepare("SELECT COUNT(id) as total FROM PRTsupply");
+    $stmt->execute();
+    $row = $stmt->fetch();
+    $total = $row["total"];
+    $stmt = $db->prepare("SELECT COUNT(id) as total FROM PRTsupply WHERE encodedby = '".$_SESSION['id']."'");
+    $stmt->execute();
+    $row = $stmt->fetch();
+    $totalencoded = $row["total"];
+    $stmt = $db->prepare("SELECT COUNT(id) as total FROM PRTsupply WHERE encodedby = '".$_SESSION['id']."' AND employed != '0000-00-00'");
+    $stmt->execute();
+    $row = $stmt->fetch();
+    $totalemployed = $row["total"];
+    ?>
+    $(function () {
     $(document).ready(function () {
-var colors = Highcharts.getOptions().colors;
-var total = <?php echo $total;?>;
-if (total == '') {
-  total = '0';
-}
-var totalencoded = <?php echo $totalencoded;?>;
-var totalemployed = <?php echo $totalemployed;?>;
+      var colors = Highcharts.getOptions().colors;
+      var total = <?php echo $total;?>;
+      if (total == '') {
+        total = '0';
+    }
+      var totalencoded = <?php echo $totalencoded;?>;
+      var totalemployed = <?php echo $totalemployed;?>;
         $('#container').highcharts({
             chart: {
                 plotBackgroundColor: null,
