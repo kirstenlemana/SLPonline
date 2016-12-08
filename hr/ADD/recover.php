@@ -10,7 +10,6 @@
     <script src="../../js/jquery-1.10.2.min.js"></script>
     <link rel="stylesheet" href="../../css/flatbootstrap.css"/>
     <style>
-
 body {
     background-color: #f7f9fb;
     background-size: cover;
@@ -30,18 +29,15 @@ body {
        -o-transform: scaleY(0);
       -ms-transform: scaleY(0);
           transform: scaleY(0);
-  
   -webkit-transform-origin: top;
        -o-transform-origin: top;
       -ms-transform-origin: top;
           transform-origin: top;
-  
   -webkit-transition: -webkit-transform 0.2s ease;
             -o-transition: -o-transform 0.2s ease;
           -ms-transition: -ms-transform 0.2s ease;
                   transition: transform 0.2s ease;
 }
-
 .slidedown.active {
   -webkit-transform: scaleY(1);
        -o-transform: scaleY(1);
@@ -92,15 +88,12 @@ $username = "jmigdela_slpmain";
 $password = "turtles98"; 
 $host = "localhost"; 
 $dbname = "jmigdela_slponline";
-
 $options = array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'); 
-try 
-{ 
+try { 
     $db = new PDO("mysql:host={$host};dbname={$dbname};charset=utf8", $username, $password, $options);
     $db->exec("SET time_zone = '+0:00'");
 } 
-catch(PDOException $ex) 
-{ 
+catch(PDOException $ex) { 
     die("Failed to connect: " . $ex->getMessage()); 
 } 
 $db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
@@ -113,9 +106,7 @@ function test_input($data) {
    $data = htmlspecialchars($data);
    return $data;
 }
-
-if(!empty($_GET)) 
-{ 
+if(!empty($_GET)) { 
         $query = " 
             SELECT 
                 id, 
@@ -129,23 +120,20 @@ if(!empty($_GET))
         $query_params = array( 
             ':password' => test_input($_GET['id']) 
         ); 
-         
-        try 
-        { $stmt = $db->prepare($query); $result = $stmt->execute($query_params); } 
-        catch(PDOException $ex) 
-        { die("Failed to run query: " . $ex->getMessage()); } 
-
-        $row = $stmt->fetch();
+        try { 
+          $stmt = $db->prepare($query); $result = $stmt->execute($query_params); } 
+        catch(PDOException $ex) { 
+        die("Failed to run query: " . $ex->getMessage()); } 
+          $row = $stmt->fetch();
         if ($row['password'] == "") {
           echo "This password link is not valid or has already expired. Please check if you've already changed your password.<br>If you feel this is an error, please email <b>jmodelacruz@e-dswd.net";
           die;
         }
-} else {
+        } else {
           echo "This password link is not valid or has already expired. Please check if you've already changed your password.<br>If you feel this is an error, please email <b>jmodelacruz@e-dswd.net";
           die;
 }
 //ENDGET
-
 ?>
      <div class="row" style="margin-top:3em;">
       <div class="col-md-offset-1 col-md-10"><center>
@@ -155,8 +143,7 @@ if(!empty($_GET))
      <div class="row" style="margin-top:2em;">
       <form action="recover.php" method="post" id="resetForm" autocomplete="off">
                         <div class="col-md-offset-3 col-sm-6">
-
-                                <div class="form-group">
+                              <div class="form-group">
                                   <label for="nickname" class="col-sm-4 control-label">New Password</label>
                                   <div class="col-sm-8" style="padding-right:0px">
                                     <input name="password" type="password" class="form-control" id="password" >
@@ -173,7 +160,7 @@ if(!empty($_GET))
                                   <button id="resetpass" type="submit" class="btn col-md-offset-8 col-md-4 btn-success">Submit</button>
                                 </div>
                         </div>
-  </div>
+        </div>
 </form>
 </div><!--endcontainer-->
             <div class="container-fluid" id="successcont"><center>
@@ -197,8 +184,7 @@ $("#resetForm").submit(function() {
        url: "recovercheck.php",
        type: "POST",
        data: resetData,
-       success: function(data)
-       {
+       success: function(data){
           if (data == "loginok") {
             $("#maincont").hide();
             $("#successcont").show();
