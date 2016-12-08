@@ -8,6 +8,8 @@ if(!empty($_POST))
 { 
     if($_POST['action'] == "uploadpics") 
     {
+
+            date_default_timezone_set('Asia/Brunei');
             $ext=date("mdY");
             $maxsize=10000000;
             $FILE_EXTS = array('jpg','jpeg','png', 'bmp', 'JPG', 'JPEG', 'PNG', 'BMP');         
@@ -45,12 +47,13 @@ if(!empty($_POST))
             catch(PDOException $e)  {
                       echo "Error: " . $e->getMessage();
             }
+               byteMe($_SESSION['id'],'uploadpic',3);
 
                     if ($_POST['switch']>0) 
                     {
                           $refid = $db->lastInsertId();
                           sendEmail($refid,$uploadname,$doctype);
-                          byteMe($_SESSION['id'],'upload',3);
+                          byteMe($_SESSION['id'],'uploadpic',3);
                           echo "Success";
                     } 
                     else 
@@ -62,6 +65,8 @@ if(!empty($_POST))
     }
 
     if($_POST['action'] == "reuploadpics") {
+
+            date_default_timezone_set('Asia/Brunei');
             $ext=date("mdY");
             $maxsize=5000000;
             $FILE_EXTS = array('jpg','jpeg','png', 'bmp', 'tiff');      
@@ -112,6 +117,7 @@ if(!empty($_POST))
                     echo "Error: " . $e->getMessage();
                 }
             }
+            byteMe($_SESSION['id'],'reuploadpic',1);
          echo "Success";
       
     }
