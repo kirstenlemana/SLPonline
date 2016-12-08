@@ -423,6 +423,7 @@ if(!empty($_POST))
                                 } catch(PDOException $e) {
                                     echo "Error: " . $e->getMessage();
                                 }
+                                 byteMe($_SESSION['id'],'upload',1);
 
                         }//end if empty
                         else//not empty
@@ -468,6 +469,9 @@ if(!empty($_POST))
                                 } catch(PDOException $e) {
                                     echo "Error: " . $e->getMessage();
                                 }
+
+                                 byteMe($_SESSION['id'],'upload',1);
+
                             }
                         }
                               if ($_POST['switch']>0) {
@@ -544,6 +548,9 @@ if(!empty($_POST))
                                 } catch(PDOException $e) {
                                     echo "Error: " . $e->getMessage();
                                 }
+                                
+                                 byteMe($_SESSION['id'],'upload',1);
+
                             }
  
                      if ($_POST['switch']>0) {
@@ -594,14 +601,14 @@ if($_POST['action'] == "reuploadadmin"){
             $dateondoc3  = "$parts[2]-$parts[0]-$parts[1]";
               if($_POST['admintype1']=="" && $_POST['logtype1']=="") {
                 try {   
-                    $stmt = $db->prepare("UPDATE DOCDB SET doctype=:doctype, title=:title, author=:author, remarks=:remarks, added=:added, hrdbid=:hrdbid, sourceoffice=:sourceoffice,sourcename=:sourcename,sourcepos=:sourcepos,destoffice=:destoffice, destname=:destname,destpos=:destpos,datereceived=:resdate3,docdate=:dateondoc3,lastedited=:lastedited WHERE id=:id"); 
+                    $stmt = $db->prepare("UPDATE DOCDB SET doctype=:doctype, title=:title, author=:author, remarks=:remarks, added=:added, sourceoffice=:sourceoffice,sourcename=:sourcename,sourcepos=:sourcepos,destoffice=:destoffice, destname=:destname,destpos=:destpos,datereceived=:resdate3,docdate=:dateondoc3,lastedited=:lastedited WHERE id=:id"); 
                     $stmt->bindParam(':id', $_SESSION['editid']);
                     $stmt->bindParam(':doctype', $_POST['doctype']);
                     $stmt->bindParam(':title', $_POST['docsubject']);
                     $stmt->bindParam(':author', $_POST['author']);
                     $stmt->bindParam(':remarks', $_POST['remarks']);
                     $stmt->bindParam(':added', date('Y-m-d'));
-                    $stmt->bindParam(':hrdbid', $_SESSION['id']);
+                   // $stmt->bindParam(':hrdbid', $_SESSION['id']);
                  //   $stmt->bindParam(':admintype', $_POST['admintype']);
                   //  $stmt->bindParam(':logtype', $_POST['logtype']);
                   //  $stmt->bindParam(':refnumber', $_POST['refnumber']);
@@ -621,14 +628,14 @@ if($_POST['action'] == "reuploadadmin"){
                 }
               }else{
                 try {   
-                    $stmt = $db->prepare("UPDATE DOCDB SET doctype=:doctype, title=:title, author=:author, remarks=:remarks, added=:added, hrdbid=:hrdbid,admindoctype=:admintype,logtype=:logtype,referenceno=:refnumber, sourceoffice=:sourceoffice,sourcename=:sourcename,sourcepos=:sourcepos,destoffice=:destoffice, destname=:destname,destpos=:destpos,datereceived=:resdate3,docdate=:dateondoc3,lastedited=:lastedited WHERE id=:id"); 
+                    $stmt = $db->prepare("UPDATE DOCDB SET doctype=:doctype, title=:title, author=:author, remarks=:remarks, added=:added, admindoctype=:admintype,logtype=:logtype,referenceno=:refnumber, sourceoffice=:sourceoffice,sourcename=:sourcename,sourcepos=:sourcepos,destoffice=:destoffice, destname=:destname,destpos=:destpos,datereceived=:resdate3,docdate=:dateondoc3,lastedited=:lastedited WHERE id=:id"); 
                     $stmt->bindParam(':id', $_SESSION['editid']);
                     $stmt->bindParam(':doctype', $_POST['doctype']);
                     $stmt->bindParam(':title', $_POST['docsubject']);
                     $stmt->bindParam(':author', $_POST['author']);
                     $stmt->bindParam(':remarks', $_POST['remarks']);
                     $stmt->bindParam(':added',date('Y-m-d'));
-                    $stmt->bindParam(':hrdbid', $_SESSION['id']);
+                    //$stmt->bindParam(':hrdbid', $_SESSION['id']);
                     $stmt->bindParam(':admintype', $_POST['admintype']);
                     $stmt->bindParam(':logtype', $_POST['logtype']);
                     $stmt->bindParam(':refnumber', $_POST['refnumber']);
@@ -709,7 +716,7 @@ if($_POST['action'] == "reuploadadmin"){
 
                             try {
                                 move_uploaded_file($_FILES['file']['tmp_name'], $uploadfile);
-                                $stmt = $db->prepare("UPDATE DOCDB SET doctype=:doctype, title=:title, author=:author, filename=:filename, filesize=:filesize, remarks=:remarks, added=:added, hrdbid=:hrdbid, admindoctype=:admintype, logtype=:logtype,referenceno=:refnumber,sourceoffice=:sourceoffice,sourcename=:sourcename,sourcepos=:sourcepos,destoffice=:destoffice, destname=:destname,destpos=:destpos,datereceived=:resdate2,docdate=:dateondoc2,lastedited=:lastedited WHERE id=:id"); 
+                                $stmt = $db->prepare("UPDATE DOCDB SET doctype=:doctype, title=:title, author=:author, filename=:filename, filesize=:filesize, remarks=:remarks, added=:added,admindoctype=:admintype, logtype=:logtype,referenceno=:refnumber,sourceoffice=:sourceoffice,sourcename=:sourcename,sourcepos=:sourcepos,destoffice=:destoffice, destname=:destname,destpos=:destpos,datereceived=:resdate2,docdate=:dateondoc2,lastedited=:lastedited WHERE id=:id"); 
                                 $stmt->bindParam(':id', $_SESSION['editid']);
                                 $stmt->bindParam(':doctype', $_POST['doctype']);
                                 $stmt->bindParam(':title', $_POST['docsubject']);
@@ -718,7 +725,7 @@ if($_POST['action'] == "reuploadadmin"){
                                 $stmt->bindParam(':filesize', $file_size);
                                 $stmt->bindParam(':remarks', $_POST['remarks']);
                                 $stmt->bindParam(':added', date('Y-m-d'));
-                                $stmt->bindParam(':hrdbid', $_SESSION['id']);
+                               // $stmt->bindParam(':hrdbid', $_SESSION['id']);
                                 $stmt->bindParam(':admintype', $_POST['admintype']);
                                 $stmt->bindParam(':logtype', $_POST['logtype']);
                                 $stmt->bindParam(':refnumber', $_POST['refnumber']);
