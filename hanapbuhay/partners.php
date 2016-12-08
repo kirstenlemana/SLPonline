@@ -24,16 +24,14 @@ $query = "
             FROM hr_db 
             WHERE 
                 id = :id
-        "; 
+         "; 
         $query_params = array( 
-            ':id' => $_SESSION['id'] 
-        );
+            ':id' => $_SESSION['id']);
         try 
-        { $stmt = $db->prepare($query); $result = $stmt->execute($query_params); } 
+         { $stmt = $db->prepare($query); $result = $stmt->execute($query_params); } 
         catch(PDOException $ex) 
-        { die("Failed to run query: " . $ex->getMessage()); } 
+         { die("Failed to run query: " . $ex->getMessage()); } 
         $row = $stmt->fetch();
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -54,7 +52,6 @@ $query = "
     <script type="text/javascript" src="../js/bootstrapValidator.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <style>
-
 body {
     background-color: #f7f9fb;
     background-size: cover;
@@ -70,55 +67,57 @@ body {
     right: -15px;
 }
 .slidedown {
-  -webkit-transform: scaleY(0);
-       -o-transform: scaleY(0);
-      -ms-transform: scaleY(0);
-          transform: scaleY(0);
+    -webkit-transform: scaleY(0);
+    -o-transform: scaleY(0);
+    -ms-transform: scaleY(0);
+    transform: scaleY(0);
   
-  -webkit-transform-origin: top;
-       -o-transform-origin: top;
-      -ms-transform-origin: top;
-          transform-origin: top;
+    -webkit-transform-origin: top;
+    -o-transform-origin: top;
+    -ms-transform-origin: top;
+    transform-origin: top;
   
-  -webkit-transition: -webkit-transform 0.2s ease;
-            -o-transition: -o-transform 0.2s ease;
-          -ms-transition: -ms-transform 0.2s ease;
-                  transition: transform 0.2s ease;
+    -webkit-transition: -webkit-transform 0.2s ease;
+    -o-transition: -o-transform 0.2s ease;
+    -ms-transition: -ms-transform 0.2s ease;
+    transition: transform 0.2s ease;
 }
-
 .slidedown.active {
-  -webkit-transform: scaleY(1);
-       -o-transform: scaleY(1);
-      -ms-transform: scaleY(1);
-          transform: scaleY(1);
+    -webkit-transform: scaleY(1);
+    -o-transform: scaleY(1);
+    -ms-transform: scaleY(1);
+    transform: scaleY(1);
 }
 .successcontent {
-  display:none;
+    display:none;
 }
 .cleanselect {
-  -webkit-appearance:none;-moz-appearance:none;-ms-appearance:none;appearance:none;background:#fff url(../imgs/arrows.png) no-repeat right 9px;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    -ms-appearance:none;
+    appearance:none;background:#fff url(../imgs/arrows.png) no-repeat right 9px;
 }
 .mainlink {
-  font-size: 1.8em;
-  margin-top: 1px;
+    font-size: 1.8em;
+    margin-top: 1px;
 }
 .form-group div {
-  margin-bottom: 0.5em;
+    margin-bottom: 0.5em;
 }
 .disabled {
-  background:rgba(1,1,1,0.2);
-  border:0px solid;
-  cursor:progress;
+    background:rgba(1,1,1,0.2);
+    border:0px solid;
+    cursor:progress;
 }
 tbody tr {
-  cursor: pointer;
+    cursor: pointer;
 }
 .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
-  background-color: #2c3e50;
-  color: #fff;
-}
+    background-color: #2c3e50;
+    color: #fff;
+  }
 .dataTables_filter {
-   display:none;
+    display:none;
 }
 
     .form-control {
@@ -135,26 +134,26 @@ tbody tr {
         border-radius: 4px;
     }
     .btn2 {
-      color: #fff;
-      background-color: #2c3e50;
-      display: inline-block;
-      margin-bottom: 0;
-      font-weight: normal;
-      text-align: center;
-      vertical-align: middle;
-      -ms-touch-action: manipulation;
-      touch-action: manipulation;
-      cursor: pointer;
-      background-image: none;
-      border: 1px solid transparent;
-      white-space: nowrap;
-      padding: 5px 15px;
-      font-size: 15px;
-      line-height: 1.42857143;
-      border-radius: 4px;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
+        color: #fff;
+        background-color: #2c3e50;
+        display: inline-block;
+        margin-bottom: 0;
+        font-weight: normal;
+        text-align: center;
+        vertical-align: middle;
+        -ms-touch-action: manipulation;
+        touch-action: manipulation;
+        cursor: pointer;
+        background-image: none;
+        border: 1px solid transparent;
+        white-space: nowrap;
+        padding: 5px 15px;
+        font-size: 15px;
+        line-height: 1.42857143;
+        border-radius: 4px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
     }
 </style>
 </style>
