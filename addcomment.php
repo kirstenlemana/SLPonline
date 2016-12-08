@@ -35,12 +35,16 @@ function test_input($data) {
 function byteMe ($recipient,$page,$amt) {
 global $db;    
         try {
+
+            date_default_timezone_set('Asia/Brunei');
             $stmt = $db->prepare("INSERT IGNORE INTO bytez (hrdbid,pagename,amt,added) VALUES (:hrdbid,:pagename,:amt,:added)");
             $stmt->bindParam(':hrdbid', $recipient);
             $stmt->bindParam(':pagename', $page);
             $stmt->bindParam(':amt', $amt);
-            $date2 = date("Y-m-d H:i:s");
-            $stmt->bindParam(':added', $date2);
+            //$date2 = date("Y-m-d H:i:s");
+            //$stmt->bindParam(':added', date("Y-m-d H:i:s"));
+            $date1 = date("Y-m-d H:i:s");
+            $stmt->bindParam(':added', $date1);
             $stmt->execute();
         } catch(PDOException $e) {
             echo "Error: " . $e->getMessage();
@@ -57,10 +61,11 @@ if(!empty($_POST))
 
      if($_POST['action'] == "comment") {
         $id = test_input($_POST['id']);
-
+        date_default_timezone_set('Asia/Brunei');
         $stmt = $db->prepare("INSERT INTO shoutbox (hrdbid,msg,added) VALUES (:hrdbid,:msg,:added)");
         $stmt->bindParam(':hrdbid', $_POST['hrdbid']);
         $stmt->bindParam(':msg', $_POST['comment']);
+        $date2 = date("Y-m-d H:i:s");
         $stmt->bindParam(':added', $date2);
         $stmt->execute();
         byteMe($_SESSION['id'],'comment',0.25);
