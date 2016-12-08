@@ -1,152 +1,129 @@
 <?php
-require "../zxcd9.php";
-
+  require "../zxcd9.php";
 //start post
-if(!empty($_POST)) 
-{ 
-//filter input
-$_GET   = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
-$_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
-   
+  if(!empty($_POST)) 
+  { 
+  //filter input
+  $_GET   = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
+  $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);   
    if (empty($_POST["sector"])) {
      echo "Missing Sector";
-     die;
-   } else {
+    die;
+  } else {
      $sector = test_input($_POST["sector"]);
    }
-
    if (empty($_POST["subsector"])) {
      echo "Missing Sub-Sector";
-     die;
-   } else {
+    die;
+  } else {
      $subsector = test_input($_POST["subsector"]);
    }
-
    if (empty($_POST["jobname"])) {
      echo "Missing jobname";
-     die;
-   } else {
+   die;
+ } else {
      $jobname = test_input($_POST["jobname"]);
      if (!preg_match("/^[a-zA-Z0-9 ]*$/",$jobname)) {
        echo "jobname"; 
-       die;
+     die;
      }
    }
    if (empty($_POST["numopenings"])) {
      echo "Missing numopenings";
-     die;
-   } else {
+   die;
+ } else {
      $numopenings = test_input($_POST["numopenings"]);
      if (!preg_match("/^[0-9]*$/",$numopenings)) {
        echo "numopenings"; 
-       die;
+     die;
      }
    }
    if (empty($_POST["workingdays"])) {
      echo "Missing workingdays";
-     die;
-   } else {
+   die;
+ } else {
      $workingdays = test_input($_POST["workingdays"]);
      if (!preg_match("/^[0-9]*$/",$workingdays)) {
        echo "workingdays"; 
-       die;
+     die;
      }
    }
    if (empty($_POST["workinghours"])) {
      echo "Missing workinghours";
-     die;
-   } else {
+   die;
+} else {
      $workinghours = test_input($_POST["workinghours"]);
      if (!preg_match("/^[0-9]*$/",$workinghours)) {
        echo "workinghours"; 
-       die;
+     die;
      }
    }
    if (empty($_POST["employstatus"])) {
      echo "Missing employstatus";
-     die;
-   } else {
+   die;
+ } else {
      $employstatus = test_input($_POST["employstatus"]);
-     if (!preg_match("/^[a-zA-Z ]*$/",$employstatus)) {
+   if (!preg_match("/^[a-zA-Z ]*$/",$employstatus)) {
        echo "employstatus"; 
-       die;
+   die;
      }
    }
-
     $prefsex = test_input($_POST["prefsex"]);
     if ($prefsex == "Male") {
         $prefsex = 0;
-    } else if ($prefsex == "Female") {
+  } else if ($prefsex == "Female") {
         $prefsex = 1;
-    }
-
+  }
     $prefage = test_input($_POST["prefage"]);
     $prefheight = test_input($_POST["prefheight"]);
-
      $requirements = test_input($_POST["requirements"]);
-
-   if (empty($_POST["salary"])) {
-     echo "Missing salary";
-     die;
-   } else {
+    if (empty($_POST["salary"])) {
+       echo "Missing salary";
+    die;
+  } else {
      $salary = test_input($_POST["salary"]);
-     if (!preg_match("/^[a-zA-Z0-9\-\, ]*$/",$salary)) {
+    if (!preg_match("/^[a-zA-Z0-9\-\, ]*$/",$salary)) {
        echo "salary"; 
-       die;
+    die;
      }
    }
-
    if (empty($_POST["partner"])) {
      echo "Partner name missing";
-     die;
-   } else {
+   die;
+ } else {
      $partner = test_input($_POST["partner"]);
    }
-
    if (empty($_POST["province"])) {
      echo "province required";
-     die;
-   } else {
+   die;
+ } else {
      $province = test_input($_POST["province"]);
    }
-
-
      $municipality = test_input($_POST["municipality"]);
-   
-
      $description = test_input($_POST["description"]);
-     
-   
      $contactperson = test_input($_POST["contactperson"]);
      if (!preg_match("/^[a-zA-Z\.\, ]*$/",$contactperson)) {
        echo "contactperson"; 
-       die;
+     die;
      }
-
      $contacttitle = test_input($_POST["contacttitle"]);
      if (!preg_match("/^[a-zA-Z\.\, ]*$/",$contacttitle)) {
        echo "contacttitle"; 
-       die;
+     die;
      }
-   
-
      $contactnumber = test_input($_POST["contactnumber"]);
      if (!preg_match("/^[0-9]*$/",$contactnumber)) {
        echo "contactnumber"; 
-       die;
+     die;
      }
-   
-   if (!empty($_POST["contactemail"])) {
-        $contactemail = test_input($_POST["contactemail"]);
-        if(!filter_var($_POST['contactemail'], FILTER_VALIDATE_EMAIL)) { 
+     if (!empty($_POST["contactemail"])) {
+           $contactemail = test_input($_POST["contactemail"]);
+     if(!filter_var($_POST['contactemail'], FILTER_VALIDATE_EMAIL)) { 
             echo "contactemail"; 
-            die;
+     die;
         } 
     }
-
-    $id = test_input($_POST["id"]);
-         
+    $id = test_input($_POST["id"]);    
         $query2 = " 
             UPDATE PRTdemand 
             SET partner = :partner, 
@@ -207,46 +184,35 @@ $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
             ':encoded' => date('Y-m-d'),
             ':id' => $id
         ); 
-         
         try 
         { 
             // Execute the query to create the user 
             $stmt = $db->prepare($query2); 
             $result = $stmt->execute($query_params2);
-
         } 
         catch(PDOException $ex) 
         { 
             die("Failed to run queryyy: " . $ex->getMessage()); 
         } 
-
         //getid
         $refid = $id;
         $stmt = $db->prepare("DELETE FROM PRTdemandtags WHERE demandid=:demandid");
         $stmt->bindParam(':demandid', $id);
         $stmt->execute();
-
-
         //psic
         $sector = $_POST['sector'];
         $subsector = $_POST['subsector'];
         $subsector = explode(",", $subsector);
-
         $stmt = $db->prepare("INSERT INTO PRTdemandtags (demandid, sector, tag) VALUES (:demandid, :sector, :tag)");
         $stmt->bindParam(':demandid', $demandid);
         $stmt->bindParam(':sector', $sector);
         $stmt->bindParam(':tag', $tag);
-
         foreach($subsector as $val) {
             $demandid = $refid;
             $sector = $sector;
             $tag = $val;
             $stmt->execute();
         }
-
-        
-        echo "loginok";
-        
+            echo "loginok";
 }//end post
-     
 ?>
