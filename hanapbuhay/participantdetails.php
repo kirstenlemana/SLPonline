@@ -1,22 +1,18 @@
 <?php
-require "../zxcd9.php";
-if(!empty($_GET['id'])) {
-  $_GET   = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
+  require "../zxcd9.php";
+  if(!empty($_GET['id'])) {
+    $_GET   = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
 }
 function dob($dob) {
     //calculate years of age (input string: YYYY-MM-DD)
     list($year, $month, $day) = explode("-", $dob);
-
     $year_diff  = date("Y") - $year;
     $month_diff = date("m") - $month;
     $day_diff   = date("d") - $day;
-
     if ($day_diff < 0 || $month_diff < 0)
         $year_diff--;
-
     return $year_diff." years old";
 }
-
 function parseEd($str) {
     if ($str==1) {
     return "No Grade Completed";
@@ -48,15 +44,14 @@ function parseEd($str) {
     return "Grad Studies (M.A., M.S., Ph.D)";
   }
 }
-        $query = "SELECT id, firstname, middlename, remarks, contactnumber, lastname, region, province, municipality, sex, birthdate, education, remarks, pantawidid FROM PRTsupply WHERE id = :id"; 
-        $query_params = array(':id' => $_GET['id']);
-        try 
-        { $stmt = $db->prepare($query); $result = $stmt->execute($query_params); } 
-        catch(PDOException $ex) 
-        { die("Failed to run query: " . $ex->getMessage()); } 
-        $row = $stmt->fetch();
+    $query = "SELECT id, firstname, middlename, remarks, contactnumber, lastname, region, province, municipality, sex, birthdate, education, remarks, pantawidid FROM PRTsupply WHERE id = :id"; 
+    $query_params = array(':id' => $_GET['id']);
+      try 
+      { $stmt = $db->prepare($query); $result = $stmt->execute($query_params); } 
+      catch(PDOException $ex) 
+      { die("Failed to run query: " . $ex->getMessage()); } 
+      $row = $stmt->fetch();
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -70,7 +65,6 @@ function parseEd($str) {
     <script src="../js/jquery-1.10.2.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
     <style>
-
 body {
     background-color: #f7f9fb;
     background-size: cover;
@@ -84,149 +78,147 @@ body {
 }
 .navbar {min-height:45px !important;background-color: #000}
 #bootstrapSelectForm .selectContainer .form-control-feedback {
-    right: -15px;
+     right: -15px;
 }
 .disabled {
-  background:rgba(1,1,1,0.2);
-  border:0px solid;
-  cursor:progress;
+     background:rgba(1,1,1,0.2);
+     border:0px solid;
+     cursor:progress;
 }
 .vcenter {
-  min-height: 90%;  
-  min-height: 90vh; 
-
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex; 
-  
-    -webkit-box-align : center;
-  -webkit-align-items : center;
-       -moz-box-align : center;
-       -ms-flex-align : center;
-          align-items : center;
-  width: 100%;
-         -webkit-box-pack : center;
-            -moz-box-pack : center;
-            -ms-flex-pack : center;
-  -webkit-justify-content : center;
-          justify-content : center;
+     min-height: 90%;  
+     min-height: 90vh; 
+     display: -webkit-box;
+     display: -moz-box;
+     display: -ms-flexbox;
+     display: -webkit-flex;
+     display: flex; 
+     -webkit-box-align : center;
+     -webkit-align-items : center;
+     -moz-box-align : center;
+     -ms-flex-align : center;
+     align-items : center;
+     width: 100%;
+     -webkit-box-pack : center;
+     -moz-box-pack : center;
+     -ms-flex-pack : center;
+     -webkit-justify-content : center;
+     justify-content : center;
 }
 table {
-  border-collapse: inherit;
+     border-collapse: inherit;
 }
 .slpdrop {
-  margin-bottom:1em;
+     margin-bottom:1em;
 }
 .slpdropsub {
-  background: #000;
-  color:#fff;
+     background: #000;
+     color:#fff;
 }
 .slpdropsub li a {
-  background: #000;
-  color:#fff;
+     background: #000;
+     color:#fff;
 }
 -webkit-tap-highlight-color: rgba(0,0,0,0);
 button {
-    outline: none;
+      outline: none;
 }
 .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
-  background: #000;
+      background: #000;
 }
 .dashpanel {
-  border:solid 1px #c5d6de;margin:1em;margin-top:0;background:#fff;text-align: center;
-  height:100%;
-  border-radius: 4px;
+      border:solid 1px #c5d6de;margin:1em;margin-top:0;background:#fff;text-align: center;
+      height:100%;
+      border-radius: 4px;
 }
 .bluetext {
-  color: #00ADDe;
+      color: #00ADDe;
 }
 .padfix {
-  padding-right: 0;
-  margin-bottom:1em;
-  margin-right: 1em;
+      padding-right: 0;
+      margin-bottom:1em;
+      margin-right: 1em;
 }
 .padfix2{
-  padding-right:0em;
-  padding-left: 1em;
+      padding-right:0em;
+      padding-left: 1em;
 }
 .padfix3 {
-  padding-left:1em;
-  padding-right:0;
+      padding-left:1em;
+      padding-right:0;
 }
 .padfix4 {
-  padding: 1em;
-  padding-right:0;
+      padding: 1em;
+      padding-right:0;
 }
 .dashpanelheader {
-  font-weight:900;padding-top:0.5em;padding-left:1em;font-size:18px;
-  margin-bottom: 0;text-align: left;
+      font-weight:900;padding-top:0.5em;padding-left:1em;font-size:18px;
+      margin-bottom: 0;text-align: left;
 }
 @media (min-width: 990px) {
   .slpdrop {
-    font-weight:900;
-    font-size:22px;
+      font-weight:900;
+      font-size:22px;
   }
   .padfix {
-    padding-right: 0;
-    margin-right: 0;
-    margin-bottom: 0;
+      padding-right: 0;
+      margin-right: 0;
+      margin-bottom: 0;
   }
   .padfix2{
-    padding-right:0em;
-    padding-left: 2em;
+      padding-right:0em;
+      padding-left: 2em;
   }
   .padfix3 {
-    padding-left:0;
-    padding-right: 1em;
+      padding-left:0;
+      padding-right: 1em;
   }
   .padfix4 {
-    padding: 1em;
-    padding-right:1em;
-  }
+      padding: 1em;
+      padding-right:1em;
+    }
 }
 .dashpanelsubhead {
-  text-align:left;padding-left:1.2em;margin-bottom:0;padding-bottom:0;
+      text-align:left;padding-left:1.2em;margin-bottom:0;padding-bottom:0;
 }
 thead th {
-  text-align: center;
-  cursor: pointer;
+      text-align: center;
+      cursor: pointer;
 }
 .dataTables_paginate {
-  float:none;
+      float:none;
 }
 h3 {
-  font-weight: 400
+      font-weight: 400
 }
 .nopad {
-  margin:0;
-  padding:0;
-  padding-top:4px;
+      margin:0;
+      padding:0;
+      padding-top:4px;
 }
 .nopad::after {
-    color: #ccc;
-    content: attr(data-bg-text);
-    display: block;
-    font-size: 12px;
-    text-align:right;
-    line-height: 1;
-    padding:0;
-    margin:0;
-    margin-top: 0px;
-    position: relative;
-    bottom: 0px;
-    right: 0px;
+      color: #ccc;
+      content: attr(data-bg-text);
+      display: block;
+      font-size: 12px;
+      text-align:right;
+      line-height: 1;
+      padding:0;
+      margin:0;
+      margin-top: 0px;
+      position: relative;
+      bottom: 0px;
+      right: 0px;
 }
 .labelhover:hover {
-  background: #000;
-  color: #fff;
+      background: #000;
+      color: #fff;
 }
 .editbtn {
-  color:#18bc9c;
+      color:#18bc9c;
 }
 .delbtn{
-  color:#e74c3c;
+      color:#e74c3c;
 }
 </style>
 </head>
@@ -310,8 +302,6 @@ $("#submitpass").click(function(event) {
           }
        }
     });//endajax
-
-
 });
 $("#deleter").click(function(event) {
   var r = confirm("You are about to delete a participant. Are you sure?");
