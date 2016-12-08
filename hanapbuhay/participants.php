@@ -1,16 +1,13 @@
 <?php
-require "../zxcd9.php";
-
-if(isset($_POST['sector'])) {
-  $_SESSION['sector'] = $_POST['sector'];
-  die("visitpage");
+  require "../zxcd9.php";
+  if(isset($_POST['sector'])) {
+    $_SESSION['sector'] = $_POST['sector'];
+    die("visitpage");
+  }
+  if(!empty($_GET['psic'])) {
+    $_GET   = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
+    $psicfilter = $_GET['psic'];
 }
-
-if(!empty($_GET['psic'])) {
-  $_GET   = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
-  $psicfilter = $_GET['psic'];
-}
-
 $query = " 
             SELECT 
                 firstname, 
@@ -81,80 +78,80 @@ body {
     right: -15px;
 }
 .slidedown {
-  -webkit-transform: scaleY(0);
-       -o-transform: scaleY(0);
-      -ms-transform: scaleY(0);
-          transform: scaleY(0);
+   -webkit-transform: scaleY(0);
+   -o-transform: scaleY(0);
+   -ms-transform: scaleY(0);
+   transform: scaleY(0);
   
-  -webkit-transform-origin: top;
-       -o-transform-origin: top;
-      -ms-transform-origin: top;
-          transform-origin: top;
+   -webkit-transform-origin: top;
+   -o-transform-origin: top;
+   -ms-transform-origin: top;
+   transform-origin: top;
   
-  -webkit-transition: -webkit-transform 0.2s ease;
-            -o-transition: -o-transform 0.2s ease;
-          -ms-transition: -ms-transform 0.2s ease;
-                  transition: transform 0.2s ease;
+   -webkit-transition: -webkit-transform 0.2s ease;
+   -o-transition: -o-transform 0.2s ease;
+   -ms-transition: -ms-transform 0.2s ease;
+   transition: transform 0.2s ease;
 }
 
 .slidedown.active {
-  -webkit-transform: scaleY(1);
-       -o-transform: scaleY(1);
-      -ms-transform: scaleY(1);
-          transform: scaleY(1);
+   -webkit-transform: scaleY(1);
+   -o-transform: scaleY(1);
+   -ms-transform: scaleY(1);
+   transform: scaleY(1);
 }
 .successcontent {
-  display:none;
+   display:none;
 }
 .cleanselect {
-  -webkit-appearance:none;-moz-appearance:none;-ms-appearance:none;appearance:none;background:#fff url(../imgs/arrows.png) no-repeat right 9px;
+   -webkit-appearance:none;-moz-appearance:none;-ms-appearance:none;appearance:none;background:#fff url(../imgs/arrows.png) no-repeat right 9px;
 }
 .mainlink {
-  font-size: 1.8em;
-  margin-top: 1px;
+    font-size: 1.8em;
+    margin-top: 1px;
 }
 .cl-effect-1 a::before,
 .cl-effect-1 a::after {
-  display: inline-block;
-  opacity: 0;
-  -webkit-transition: -webkit-transform 0.3s, opacity 0.2s;
-  -moz-transition: -moz-transform 0.3s, opacity 0.2s;
-  transition: transform 0.3s, opacity 0.2s;
+    display: inline-block;
+    opacity: 0;
+    -webkit-transition: -webkit-transform 0.3s, opacity 0.2s;
+    -moz-transition: -moz-transform 0.3s, opacity 0.2s;
+    transition: transform 0.3s, opacity 0.2s;
 }
 
 .cl-effect-1 a::before {
-  margin-right: 10px;
-  content: '[';
-  -webkit-transform: translateX(20px);
-  -moz-transform: translateX(20px);
-  transform: translateX(20px);
+    margin-right: 10px;
+    content: '[';
+    -webkit-transform: translateX(20px);
+    -moz-transform: translateX(20px);
+    transform: translateX(20px);
 }
 
 .cl-effect-1 a::after {
-  margin-left: 10px;
-  content: ']';
-  -webkit-transform: translateX(-20px);
-  -moz-transform: translateX(-20px);
-  transform: translateX(-20px);
+    margin-left: 10px;
+    content: ']';
+    -webkit-transform: translateX(-20px);
+    -moz-transform: translateX(-20px);
+    transform: translateX(-20px);
 }
 
 .cl-effect-1 a:hover::before,
 .cl-effect-1 a:hover::after,
 .cl-effect-1 a:focus::before,
 .cl-effect-1 a:focus::after {
-  opacity: 1;
-  -webkit-transform: translateX(0px);
-  -moz-transform: translateX(0px);
-  transform: translateX(0px);
+    opacity: 1;
+    -webkit-transform: translateX(0px);
+    -moz-transform: translateX(0px);
+    transform: translateX(0px);
 }
 .form-group div {
-  margin-bottom: 0.5em;
+    margin-bottom: 0.5em;
 }
 .spin {
-  -webkit-animation: spin 1000ms infinite linear;
-  -moz-animation: spin 1000ms infinite linear;
-  -o-animation: spin 1000ms infinite linear;
-  animation: spin 1000ms infinite linear;
+    -webkit-animation: spin 1000ms infinite linear;
+    -moz-animation: spin 1000ms infinite linear;
+    -o-animation: spin 1000ms infinite linear;
+    animation: spin 1000ms infinite linear;
 }
 
 @-moz-keyframes spin {
@@ -398,7 +395,6 @@ function parseHEA(str) {
         location.href="participantdetails.php?id="+redirection;
     });
 });
-
 </script>
 <div class="container-fluid">
   <div class="row">
@@ -480,9 +476,6 @@ $("#formsubmit").click(function() {
   $('#supplyForm').bootstrapValidator('validate');
   return false;
 }); //endHRSUBMIT
-
-
-
 });
 </script>
 </body>
