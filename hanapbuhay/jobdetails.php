@@ -4,7 +4,6 @@ require "../zxcd9.php";
       $_SESSION['sector'] = $_POST['sector'];
       die("visitpage");
     }
-
     if(!empty($_GET['id'])) {
       $jobfilter = $_GET['id'];
       $_SESSION['jobid'] = $jobfilter;
@@ -21,11 +20,10 @@ require "../zxcd9.php";
         );
         try 
         { $stmt = $db->prepare($query); $result = $stmt->execute($query_params); } 
-        catch(PDOException $ex) 
-        { die("Failed to run query: " . $ex->getMessage()); } 
+        catch(PDOException $ex) {
+        die("Failed to run query: " . $ex->getMessage()); } 
         $row = $stmt->fetch();
         $countcurrent = $row['countcurrent'];
-
         $query = " 
             SELECT 
                 k.orgname, 
@@ -95,7 +93,6 @@ require "../zxcd9.php";
     <script src="../js/bootstrap.min.js"></script>
     <script type="text/javascript" src="http://momentjs.com/downloads/moment.min.js"></script>
     <style>
-
 body {
     background-color: #f7f9fb;
     background-size: cover;
@@ -111,26 +108,29 @@ body {
     right: -15px;
 }
 .successcontent {
-  display:none;
+    display:none;
 }
 .cleanselect {
-  -webkit-appearance:none;-moz-appearance:none;-ms-appearance:none;appearance:none;background:#fff url(../imgs/arrows.png) no-repeat right 9px;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    -ms-appearance:none;
+    appearance:none;background:#fff url(../imgs/arrows.png) no-repeat right 9px;
 }
 .mainlink {
-  font-size: 1.8em;
-  margin-top: 1px;
+    font-size: 1.8em;
+    margin-top: 1px;
 }
 .form-group div {
-  margin-bottom: 0.5em;
+    margin-bottom: 0.5em;
 }
 .disabled {
-  background:rgba(1,1,1,0.2);
-  border:0px solid;
-  cursor:progress;
+    background:rgba(1,1,1,0.2);
+    border:0px solid;
+    cursor:progress;
 }
 .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
-  background-color: #2c3e50;
-  color: #fff;
+    background-color: #2c3e50;
+    color: #fff;
 }
 .highlightyellow {
     background: rgba(251, 243, 21, 0.3);
@@ -168,15 +168,13 @@ $("#canceljob").click(function(){
                    url: "canceljob.php",
                    type: "POST",
                    data: formData,
-                   success: function(data)
-                   {
+                   success: function(data) {
                       if (data == "loginok") {
                         $("#loadicon").hide();
                         $("#statusdisp").html('<font color="green">Success!</font>');
                         document.getElementById("formsubmit").disabled = false;
                         document.getElementById("formsubmit").classList.remove("disabled");
                         $("#formsubmit").html('Register');
-
                       } else {
                         $("#statusdisp").show();
                         $("#statusdisp").html(data);
@@ -189,7 +187,6 @@ $("#canceljob").click(function(){
                    }
                 });//endAjax
 });
-  
 //oTable.fnFilter('<?php $psicfilter="construction"; echo $psicfilter;?>',1);
 });
 </script>
@@ -222,7 +219,6 @@ $("#canceljob").click(function(){
           <div class="col-md-3" style="text-align:right">
                 <h3 style="margin-top:0;margin-bottom:0;font-size:40px;margin-bottom:0" id="openingshead"><?php echo $countcurrent; ?>/<?php echo $row['numopenings']; ?></h3>
                 <span style="font-size:13px;color:#555555">Openings</span>
-
           </div>
         </div>
         <div class="row">
@@ -246,35 +242,32 @@ $("#canceljob").click(function(){
                         <table cellpadding="0" cellspacing="0" border="0" class="table table-bordered table-hover hover" id="viewdata" style="background-color:#fff;width:100%">
                           <thead>
                             <tr>
-          <th></th>
-          <th>Name</th>
-          <th>Last Name</th>
-          <th>Sub-Sector(s)</th>
-          <th>Sex</th>
-          <th>Age</th>
-          <th>HEA</th>
-          <th>Province</th>
-          <th>City/Muni.</th>
-          <th>Sector</th>
-          <th>4Ps</th>
-          <th>NSO</th>
-          <th>NBI</th>
-          <th>Status</th>
-          </tr>
+                              <th></th>
+                              <th>Name</th>
+                              <th>Last Name</th>
+                              <th>Sub-Sector(s)</th>
+                              <th>Sex</th>
+                              <th>Age</th>
+                              <th>HEA</th>
+                              <th>Province</th>
+                              <th>City/Muni.</th>
+                              <th>Sector</th>
+                              <th>4Ps</th>
+                              <th>NSO</th>
+                              <th>NBI</th>
+                              <th>Status</th>
+                            </tr>
                           </thead>
                         </table>
                         <br><br><center><span id="btnspan"></span>
-                    </div>
+            </div>
       </div>
     </div>
   </div>
-
-
 <script>
                       $("#tabler").show();
                       $("#openingshead").html("<?php echo $countcurrent; ?>/<?php echo $row['numopenings']; ?>");
                       $("#btnspan").html('<button class="btn btn-info" id="approve">Save Selection</button>');
-                      
                       function selectedBox(str) {
                         return str;
                       }
