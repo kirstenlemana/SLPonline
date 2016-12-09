@@ -1,7 +1,6 @@
 <?php
 require "../zxcd9.php";
   byteMe($_SESSION['id'],'hr_profile',0.10);
-
   $_GET   = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
   $_SESSION['uid'] = $_GET['id'];
     $_SESSION['pageid'] = $_GET['id'];
@@ -17,21 +16,16 @@ require "../zxcd9.php";
             echo "failed";
             die;
         }
-
         $row = $stmt->fetch();
         $filter = $row['region'];
         if ($filter == "NPMO") {
           $filter = "";
         }
-function timeago($ptime)
-{
+function timeago($ptime) {
     $etime = time() - $ptime;
-
-    if ($etime < 1)
-    {
-        return '0 seconds';
+    if ($etime < 1){
+    return '0 seconds';
     }
-
     $a = array( 365 * 24 * 60 * 60  =>  'year',
                  30 * 24 * 60 * 60  =>  'month',
                       24 * 60 * 60  =>  'day',
@@ -47,18 +41,16 @@ function timeago($ptime)
                        'second' => 'seconds'
                 );
 
-    foreach ($a as $secs => $str)
-    {
+    foreach ($a as $secs => $str) {
         $d = $etime / $secs;
-        if ($d >= 1)
+    if ($d >= 1)
         {
             $r = round($d);
-            return $r . ' ' . ($r > 1 ? $a_plural[$str] : $str) . ' ago';
+    return $r . ' ' . ($r > 1 ? $a_plural[$str] : $str) . ' ago';
         }
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -81,13 +73,8 @@ function timeago($ptime)
     <script src="../js/tag-it.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript" src="http://momentjs.com/downloads/moment.min.js"></script>
       <script src="https://code.highcharts.com/highcharts.js"></script>
-
-    <style>
-
+   <style>
 body {
-    background-color: #f7f9fb;
-    background-size: cover;
-    font-family: "Lato";
 }
 .navbar-nav > li > a, .navbar-brand {
     padding-top:15px !important; 
@@ -126,13 +113,11 @@ body {
 .autocomplete-suggestions strong { font-weight: bold; color: #000; }
 .autocomplete-group { padding: 2px 5px; }
 .autocomplete-group strong { font-weight: bold; font-size: 16px; color: #000; display: block; border-bottom: 1px solid #000; }
-
 .spinner {
   margin: 20px auto 0;
   width: 90px;
   text-align: center;
 }
-
 .spinner > div {
   width: 20px;
   height: 50px;
@@ -142,30 +127,25 @@ body {
   -webkit-animation: sk-bouncedelay 1.6s infinite ease-in-out both;
   animation: sk-bouncedelay 1.6s infinite ease-in-out both;
 }
-
 .spinner .bounce1 {
     background: red;
   -webkit-animation-delay: -1.2s;
   animation-delay: -1.2s;
 }
-
 .spinner .bounce2 {
     background: yellow;
   -webkit-animation-delay: -0.8s;
   animation-delay: -0.8s;
 }
-
 .spinner .bounce3 {
     background: blue;
   -webkit-animation-delay: -0.4s;
   animation-delay: -0.4s;
 }
-
 @-webkit-keyframes sk-bouncedelay {
   0%, 80%, 100% { -webkit-transform: scale(0) }
   40% { -webkit-transform: scale(1.0) }
 }
-
 @keyframes sk-bouncedelay {
   0%, 80%, 100% { 
     -webkit-transform: scale(0.0);
@@ -195,8 +175,7 @@ body {
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex; 
-  
-    -webkit-box-align : center;
+      -webkit-box-align : center;
   -webkit-align-items : center;
        -moz-box-align : center;
        -ms-flex-align : center;
@@ -256,7 +235,6 @@ tbody tr {
   cursor: default;
 }
 #box {
-
 }
 #overlay {  
   position: absolute;
@@ -276,7 +254,6 @@ tbody tr {
 <?php require "nav.php"; ?>
 <div class="row" style="margin:0;padding:0;margin-left:1em;margin-right:1em;border:solid 1px #c5d6de;background:#fff;text-align:center;padding:0">
         <div class="col-md-3 wellz" style="padding:1em">
-
           <div id="box" style="margin-bottom:1em">
 <?php
 if ($_SESSION['permlvl']>0 || ($_SESSION['permlvl']<1 && $_SESSION['id']==$_SESSION['pageid'])  ) { 
@@ -288,7 +265,6 @@ if ($_SESSION['permlvl']>0 || ($_SESSION['permlvl']<1 && $_SESSION['id']==$_SESS
     </div>
 <?php
 }
-
       try {
         $prof = $db->prepare("SELECT * FROM hr_profilepics WHERE hrdbid=:hrdbida");
         $prof->bindParam(':hrdbida', $_SESSION['pageid']);
@@ -311,8 +287,7 @@ if ($_SESSION['permlvl']>0 || ($_SESSION['permlvl']<1 && $_SESSION['id']==$_SESS
           $bytez = $byte->fetch();
           ?> 
 </div>
-          
-          <span style="font-size:18px;font-weight:200;margin-top:1em">
+     <span style="font-size:18px;font-weight:200;margin-top:1em">
           <?php
           $fullnamez = $row['firstname'].' '.$row['middlename'].' '.$row['lastname'];
           if ($row['nickname'] != "") {
@@ -325,7 +300,6 @@ if ($_SESSION['permlvl']>0 || ($_SESSION['permlvl']<1 && $_SESSION['id']==$_SESS
           <span style="font-size:14px;color:#888"><?php echo $row['designation'];?><br>
           <?php if ($row['region'] == "NPMO") { echo $row['region']; } else { echo $row['region'].' - '.$row['province'].' - '.$row['municipality']; }?>
           </span><br><br>
-
           <span class="glyphicon glyphicon-question-sign" id="tooltip3" data-toggle="popover" data-original-title="Bytez <span class='glyphicon glyphicon-flash'>" data-content="Bytez are automatically earned by using the system. What are they for? Nothing for now." rel="popover" data-placement="top" data-trigger="hover" ></span>
           Bytez: <b><?php echo number_format($bytez['total']); ?></b><span class="glyphicon glyphicon-flash"></span><br>
           <!-- Single button -->
@@ -338,7 +312,6 @@ if ($_SESSION['permlvl']>0 || ($_SESSION['permlvl']<1 && $_SESSION['id']==$_SESS
                     if ($_SESSION['id']==$_GET['id'] || $_SESSION['permlvl']>0) {
                       echo '<li id="editprofile"><a href="edit.php?id='.$_GET['id'].'" style="color:#000"><span class="glyphicon glyphicon-cog"></span> &nbsp;Edit Profile</a></li>';
                     }
-
                     if ($_SESSION['permlvl']>0) {
                       echo '<li id="deleteacct"><a href="#" style="color:#000"><span class="glyphicon glyphicon-warning-sign"></span> &nbsp;Delete Account</a></li>';  
                       echo '<li id="levelup"><a href="#" style="color:#000"><span class="glyphicon glyphicon-arrow-up"></span> &nbsp;Level up</a></li>';
@@ -346,40 +319,34 @@ if ($_SESSION['permlvl']>0 || ($_SESSION['permlvl']<1 && $_SESSION['id']==$_SESS
                       echo '<li id="resendconfirm"><a href="#" style="color:#000"><span class="glyphicon glyphicon-eye-open"></span> &nbsp;Resend Confirm</a></li>';
                     }
                     ?>
-                    
                 </ul>
           </div>
         </div>
-
 <div class="col-md-6" style="padding:1em;text-align:left;border-right:2px solid #ccc">
-            
             <div class="row"> 
             <div class="col-md-7">
-       
             <table style="width:100%" id="userdetails" style="border:2px solid red">
                <br/>
               <tr style=""><td style="font-size:14px"><b>Email Address:</b></td><td><?php echo $row['emailaddress'];?></td></tr>
               <tr><td style="font-size:14px"><b>Contact Number:</b></td><td><?php echo $row['contactnumber'];?></td></tr>
               <tr><td style="font-size:14px"><b>Employment Date:</b></td><td><?php echo $row['employdate'];?></td></tr>
-               
-              <?php if ($_SESSION['permlvl']>0) { ?>
+          <?php 
+            if ($_SESSION['permlvl']>0) { 
+          ?>
               <tr style="color:#d9534f;font-size:14px"><td><b>Employment Status:</b></td><td> <?php echo $row['employstatus'];?> (Hidden)</td></tr>
               <tr style="color:#d9534f;font-size:14px"><td><b>Fund Source:</b></td><td> <?php echo $row['fundsource'];?> (Hidden)</td></tr>
               <tr style="color:#d9534f;font-size:14px"><td><b>Birthdate:</b></td><td> <?php echo $row['birthdate'];?> (Hidden)</td></tr>
               <?php } ?>
              </table>
-
-              </div>
-                  <div class="col-md-5" style="padding:1em;";>
+</div>
+            <div class="col-md-5" style="padding:1em;";>
                       <h6 style="text-align:center">LOGIN ATTEMPTS</h6>
                       <div id="container" style="min-width: 200px; height: 200px; max-width: 200px; margin: 0 auto"></div>
                 </div>
           </div>
-                     
           <div class="row">   
-           <div class="col-md-11">
-              
-         <table style="width:100%" id="userdetails">
+          <div class="col-md-11">
+            <table style="width:100%" id="userdetails">
                <tr><td style="visibility:none;color:#fff">.</td></tr>
               <tr><td colspan="2" style="font-size:14px"><b>Working Groups &nbsp;<span class="glyphicon glyphicon-question-sign" id="tooltip1" data-toggle="popover" data-original-title="Technical Working Groups" data-content="<span class='glyphicon glyphicon-star' style='color:#ffcc09'></span> - Indicates head / focal person<br><b>NITWG</b> - National Inter-agency TWG<br><b>DSWD</b> - TWG within DSWD<br><b>SLP</b> - TWG within SLP" rel="popover" data-placement="top" data-trigger="hover" ></span> &nbsp;<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#requestTWG" style="margin-top:2px;padding:0;padding-left:3px;padding-right:3px;font-size:11px;font-weight:bold">Request Change</button> &nbsp;<?php if ($_SESSION['id']==9) { echo '<button type="button" class="btn btn-info" data-toggle="modal" data-target="#twgmodal" style="margin-top:2px;padding:0;padding-left:3px;padding-right:3px;font-weight:bold;font-size:11px">Add</button>'; } ?></b></td></tr>
                                   <?php
@@ -409,14 +376,10 @@ if ($_SESSION['permlvl']>0 || ($_SESSION['permlvl']<1 && $_SESSION['id']==$_SESS
                                       }
                                   ?>
             </table>
-            </div>
           </div>
+      </div>
 </div> 
-
-
-
-
-        <div class="col-md-3 wellz" style="padding:1em;">
+      <div class="col-md-3 wellz" style="padding:1em;">
           <b style="font-size:20px">
 <?php if ($row['nickname'] != "") {
             echo $row['nickname'];
@@ -433,8 +396,7 @@ if ($_SESSION['permlvl']>0 || ($_SESSION['permlvl']<1 && $_SESSION['id']==$_SESS
       }
 ?>
           </table>
-
-          <div class="form-group" style="padding:0 1em 0 1em;margin-bottom:1em">
+      <div class="form-group" style="padding:0 1em 0 1em;margin-bottom:1em">
                     <div class="input-group" style="margin-bottom:0;margin-top:1em">
                       <input id="comment" name="comment" class="form-control" placeholder="" style="height:31.4px">
                       <div class="input-group-btn">
@@ -443,9 +405,7 @@ if ($_SESSION['permlvl']>0 || ($_SESSION['permlvl']<1 && $_SESSION['id']==$_SESS
                     </div><!-- /input-group -->
           </div>
         </div>
-
 </div><!--ROW-->
-
 <div class="row" style="margin:1em;padding:0;margin-left:1em;margin-right:1em;border:solid 1px #c5d6de;background:#fff;text-align:center;padding:0">
     <div class="row">
           <div class="col-md-12" style="margin-top:0;text-align:left;padding-left:2.5em">
@@ -492,7 +452,6 @@ if ($_SESSION['permlvl']>0 || ($_SESSION['permlvl']<1 && $_SESSION['id']==$_SESS
               }
               function parseImg(str) {
                 if (str=="AM") {
-
                 }
               }
               oTable = $('#viewdata').dataTable({
@@ -567,8 +526,7 @@ if ($_SESSION['permlvl']>0 || ($_SESSION['permlvl']<1 && $_SESSION['id']==$_SESS
                             }
                         },
                         { "bVisible": false, "aTargets":[0,2,3,6,7,9] }
-                                ]
-              });
+                  });
 $('#viewdata').on( 'click', 'tbody tr', function () {
           var redirection = $(this).attr('id');
           window.location.href = "viewrover.php?id="+redirection;
@@ -591,8 +549,7 @@ $('#viewdata').on( 'click', 'tbody tr', function () {
                               </div><!-- /btn-group -->
                             </div><!-- /input-group -->
                         </div>
-
-                        <div class="form-group">
+                       <div class="form-group">
                             <div class="input-group">
                               <input type="text" class="form-control" aria-label="..." placeholder="End Date" id="enddate" name="enddate">
                               <div class="input-group-btn">
@@ -614,19 +571,15 @@ $('#viewdata').on( 'click', 'tbody tr', function () {
                               //$prof->bindParam(':hrdbida', $_SESSION['pageid']);
                               $sql->execute();
                          //     $p=$prof->fetch(PDO::FETCH_ASSOC);
-                        
-                        while($hreventname=$sql->fetch(PDO::FETCH_ASSOC))
+                      while($hreventname=$sql->fetch(PDO::FETCH_ASSOC))
                         {
                       ?>
                         <option value=" <?php echo $hreventname['hreventname']; ?>"> <?php echo $hreventname['hreventname']; ?> </option>
-                    
-                      <?php
-                        }
-                              } catch(PDOException $e) {
+                     <?php
+                    } catch(PDOException $e) {
                             echo "Error: " . $e->getMessage();
                             }//en
-                   
-                        ?>
+                     ?>
                       </select>
                     <!-- upto this -->  
                           </div>
@@ -641,8 +594,7 @@ $sql = "SELECT id, CONCAT(lastname, ', ', firstname) as name FROM hr_db";
 $partnerIDArray = [];
 $partnerArray = [];
 
-foreach ($db->query($sql) as $results)
-{
+foreach ($db->query($sql) as $results) {
   $partnerIDArray[] = intval($results["id"]);
   $partnerArray[] = $results["name"];
 }
@@ -657,8 +609,7 @@ $(function () {
     var partnerArray = <?php echo json_encode($partnerArray);?>;
     var arr = [];
     var element = {};
-    
-    for (var i = 0; i < partnerArray.length; i++) {
+for (var i = 0; i < partnerArray.length; i++) {
         var idname=partnerIDArray[i];
         var name=partnerArray[i];
         element[idname] = name;
@@ -689,41 +640,36 @@ $(function () {
 });
 });
 </script></form>
-                            <div class="form-group">
-                                    <input type="text" name="autocompleteajax" id="autocompleteajax" class="form-control" placeholder="Tag other people.."/>
-                                    <input type="hidden" id="autocomplete-ajax-x" disabled="disabled"/>
-                            </div>
-                            <span id="tagpart" style="padding-left:5px;display:none">Tagged:</span>
-                            <div class="form-group" style="margin-bottom:0.2em;" id="idg">
-                                  <input name="subsector" id="subsector" value="" type="">
-                            </div>
-
-                            <button id="addrover" class="btn btn-success pull-right" style="">Add Record</button>
+            <div class="form-group">
+                  <input type="text" name="autocompleteajax" id="autocompleteajax" class="form-control" placeholder="Tag other people.."/>
+                  <input type="hidden" id="autocomplete-ajax-x" disabled="disabled"/>
+            </div>
+                  <span id="tagpart" style="padding-left:5px;display:none">Tagged:</span>
+                  <div class="form-group" style="margin-bottom:0.2em;" id="idg">
+                  <input name="subsector" id="subsector" value="" type="">
+            </div>
+                  <button id="addrover" class="btn btn-success pull-right" style="">Add Record</button>
                   </div>
           </div>
-          
       </div>
     </div>
   </div>
 <!-- Modal -->
       <div class="modal fade" id="myModal" role="dialog" style="margin-top:3em">
         <div class="modal-dialog modal-sm">
-
-          <div class="modal-content" style="padding:1em;padding-top:0.5em;">
+            <div class="modal-content" style="padding:1em;padding-top:0.5em;">
                   <h3 style="color:#5cb85c;margin-bottom:6px">Success!</h3>
                   <span style="font-size:13px" id="sucsubtext">Profile picture uploaded.</span><br><br>
                   <button type="button" class="btn btn-primary pull-right" style="background:#5cb85c;border:0;margin-top:0;padding:5px 10px 5px 10px" id="okaybtn" data-dismiss="modal">Okay</button>
                   <div class="clearfix"></div>
-          </div>
-          
+            </div>
         </div>
       </div>
       <!-- Modal -->
 <!-- Modal -->
   <div class="modal fade" id="requestTWG" role="dialog">
     <div class="modal-dialog">
-    
-      <!-- Modal content-->
+    <!-- Modal content-->
       <div class="modal-content" style="padding:1em">
         <div class="modal-body">
               <div class="form-group" style="margin-bottom:0">
@@ -744,7 +690,6 @@ $(function () {
               <div class="clearfix"></div>
         </div>
       </div>
-      
     </div>
   </div>
     <!-- Modal -->
@@ -753,7 +698,7 @@ $(function () {
       <!-- Modal content-->
       <div class="modal-content" style="padding:1em" id="upprof">
         <div class="modal-body">
-              <div class="form-group" style="margin-bottom:0">
+            <div class="form-group" style="margin-bottom:0">
 <h3 style="margin-top:0">Profile Picture</h3>
             <form id="myForm" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="dt" value="<?php echo date("m-d-Y h:i:sa"); ?>" />
@@ -774,14 +719,12 @@ $(function () {
                     $at->bindParam(':id', $_SESSION['pageid']);
                     $at->execute();
                     $rows=$at->fetch();
-            
-                 } catch(PDOException $e) {
+           } catch(PDOException $e) {
                   echo "Error: " . $e->getMessage();
                   }//endtry
 if ( ($_SESSION['permlvl']>0 && $rows['hrdbid']==$_SESSION['pageid']) || ($_SESSION['permlvl']<1 && $rows['hrdbid']==$_SESSION['pageid']) ) { 
 // reupload 
-  ?>        
-            
+?>        
             <button type="button" id="profileBtnRe" class="btn btn-info pull-left" style="padding:6;margin-top:1.2em;margin-bottom:2em">
             <span class="glyphicon glyphicon-cloud-upload"></span> Reupload</button>
             <br><br>
@@ -795,7 +738,6 @@ if ( ($_SESSION['permlvl']>0 && $rows['hrdbid']!=$_SESSION['pageid']) || ($_SESS
             <br><br>
 <?php 
 }
-
 ?>
   </form>
             </body>
@@ -805,12 +747,10 @@ if ( ($_SESSION['permlvl']>0 && $rows['hrdbid']!=$_SESSION['pageid']) || ($_SESS
       </div>
     </div>
   </div>
-
-  <!-- Modal -->
+<!-- Modal -->
   <div class="modal fade" id="twgmodal" role="dialog">
     <div class="modal-dialog">
-    
-      <!-- Modal content-->
+     <!-- Modal content-->
       <div class="modal-content" style="padding:1em;padding-top:0">
         <div class="modal-body" style="padding-top:0">
           <h2>Technical Working Groups</h2>
@@ -847,7 +787,6 @@ if ( ($_SESSION['permlvl']>0 && $rows['hrdbid']!=$_SESSION['pageid']) || ($_SESS
               <div class="clearfix"></div>
         </div>
       </div>
-      
     </div>
   </div>
 <script>
@@ -867,8 +806,7 @@ $("#saveFeeling").click(function(event) {
                    url: "addfeel.php",
                    type: "POST",
                    data: formData,
-                   success: function(data)
-                   {
+                   success: function(data) {
                       if (data == "good") {
                         $("#sucsubtext").html("Status update added")
                         $('#myModal').modal();
@@ -894,8 +832,7 @@ $("#saveTWG").click(function(event) {
                    url: "addTWG.php",
                    type: "POST",
                    data: formData,
-                   success: function(data)
-                   {
+                   success: function(data){
                       if (data == "good") {
                         $("#sucsubtext").html("TWG added")
                         $('#myModal').modal();
@@ -909,7 +846,6 @@ $("#saveTWG").click(function(event) {
                    }
                 });//endAjax
 });
-      
   time1 = "";
   time2 = "";
   $('#selectampm1 li').on('click', function(){
@@ -920,11 +856,9 @@ $("#saveTWG").click(function(event) {
       time2 = $(this).text();
       $('#ampm2').html(time2 + ' <span class="caret"></span>');
   });
-
   $("#addrover").click(function(event) {
     event.preventDefault();
     event.stopImmediatePropagation();
-    
     errors = 0;
     errorlist = "";
     if ($('input[name=startdate]').val() == "") {
@@ -964,8 +898,7 @@ $("#saveTWG").click(function(event) {
                        url: "addrover.php",
                        type: "POST",
                        data: formData,
-                       success: function(data)
-                       {
+                       success: function(data) {
                           if (data == "good") {
                             $("#sucsubtext").html("Rover record added")
                             $('#myModal').modal();
@@ -984,11 +917,8 @@ $("#saveTWG").click(function(event) {
       } else {
         alert(errorlist);
       }
-
-
-    });
-
-  $('#subsector').tagit({
+ });
+$('#subsector').tagit({
         readOnly: true,
         onTagClicked: function(evt, ui) {
             var tagname = ($('#subsector').tagit('tagLabel', ui.tag));
@@ -1008,8 +938,7 @@ $("#saveTWG").click(function(event) {
                    url: "delrecord.php",
                    type: "POST",
                    data: formData,
-                   success: function(data)
-                   {
+                   success: function(data) {
                       if (data == "good") {
                         alert("Success!");
                         location.href = "index.php";
@@ -1029,8 +958,7 @@ $("#saveTWG").click(function(event) {
            url: "levelup.php",
            type: "POST",
            data: formData,
-           success: function(data)
-           {
+           success: function(data) {
               if (data == "good") {
                 $("#sucsubtext").html("User level increased")
                 $('#myModal').modal();
@@ -1052,8 +980,7 @@ $("#saveTWG").click(function(event) {
            url: "resetpass.php",
            type: "POST",
            data: formData,
-           success: function(data)
-           {
+           success: function(data) {
               if (data == "good") {
                 $("#sucsubtext").html("Password reset")
                         $('#myModal').modal();
@@ -1063,10 +990,8 @@ $("#saveTWG").click(function(event) {
               } else {
                 alert(data);
               }
-           }
         });//endAjax
   });
-
   $("#resendconfirm").click(function(event) {
         var formData = {
           'id'        : "<?php echo $_GET['id']; ?>"
@@ -1075,8 +1000,7 @@ $("#saveTWG").click(function(event) {
            url: "resend.php",
            type: "POST",
            data: formData,
-           success: function(data)
-           {
+           success: function(data) {
               if (data == "good") {
                 $("#sucsubtext").html("Confirmation email resent")
                 $('#myModal').modal();
@@ -1096,8 +1020,7 @@ $("#saveTWG").click(function(event) {
            url: "reqTWG.php",
            type: "POST",
            data: formData,
-           success: function(data)
-           {
+           success: function(data) {
               if (data == "good") {
                 $("#sucsubtext").html("TWG change request sent")
                         $('#myModal').modal();
@@ -1112,7 +1035,7 @@ $("#saveTWG").click(function(event) {
   });
   // UPLOAD BUTTON
 $("#profileBtn").click(function(event) {
-     $("#loadoverlay").show();
+$("#loadoverlay").show();
      var fd = new FormData;                  
      file1 = $('#userfile').prop('files')[0];
      fd.append('action', 'uploadpics');
@@ -1127,9 +1050,8 @@ $("#profileBtn").click(function(event) {
                 processData: false,
                 data: fd,                         
                 type: 'POST',
-                success: function(data){
+                success: function(data) {
                     $("#loadoverlay").hide();
-
                     if (data=="Success") {
                       $('#myModal').modal();
                        $("#uploadprofile").hide()
@@ -1158,7 +1080,7 @@ $("#profileBtnRe").click(function(event) {
                 processData: false,
                 data: fd1,                         
                 type: 'post',
-                success: function(data){
+                success: function(data) {
                     $("#loadoverlay").hide();
                     if (data=="Success") {
                       $('#myModal').modal();
@@ -1189,8 +1111,7 @@ $("#profileBtnRe").click(function(event) {
                    url: "addwallpost.php",
                    type: "POST",
                    data: formData,
-                   success: function(data)
-                   {
+                   success: function(data) {
                       if (data == "good") {
                         $("#comment").val("");
                         location.reload();
@@ -1219,8 +1140,7 @@ if ($("#comment").val() == "") {
                    url: "addwallpost.php",
                    type: "POST",
                    data: formData,
-                   success: function(data)
-                   {
+                   success: function(data) {
                       if (data == "good") {
                         $("#comment").val("");
                         location.reload();
@@ -1233,16 +1153,13 @@ if ($("#comment").val() == "") {
                 });
                 //endAjax
 }); //endpost
-
   $("#sendfeedback").click(function(event) {
       sendFeedback("viewdata_user",$('textarea[name=feedback]').val(),"<?php echo $_SESSION['id']; ?>");
   });
     var heights = $(".wellz").map(function() {
         return $(this).height();
     }).get(),
-
     maxHeight = Math.max.apply(null, heights);
-
     $(".wellz").height(maxHeight);
     var picker2 = new Pikaday({ 
       field: $('#startdate')[0], 
@@ -1278,8 +1195,7 @@ $row = $stmt->fetch();
 ?>
 <script>
 $(function () {
-
-    $(document).ready(function () {
+$(document).ready(function () {
       var colors = Highcharts.getOptions().colors,
         logincount = '<?php echo $row["logincount"]; ?>',
         loginfail = '<?php echo $row["loginfail"]; ?>';
@@ -1351,8 +1267,7 @@ $(function () {
                     name: 'SUCCESS',
                     y: parseInt(logincount),
                     color: '#2c3e50'
-                    
-                }, {
+             }, {
                     name: 'FAILED',
                     y: parseInt(loginfail),
                     color: '#d8d8d8'
@@ -1362,10 +1277,5 @@ $(function () {
     });
 });
 </script>
-
-
-
-
-
 </body>
 </html>
