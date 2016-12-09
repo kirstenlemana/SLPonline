@@ -14,7 +14,6 @@ require "../zxcd9.php";
     <script src="../js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../js/bootstrapValidator.js"></script>
     <style>
-
 body {
     background-color: #f7f9fb;
     background-size: cover;
@@ -41,7 +40,6 @@ body {
   -o-animation: spin 1000ms infinite linear;
   animation: spin 1000ms infinite linear;
 }
-
 @-moz-keyframes spin {
   from {
     -moz-transform: rotate(0deg);
@@ -50,7 +48,6 @@ body {
     -moz-transform: rotate(360deg);
   }
 }
-
 @-webkit-keyframes spin {
   from {
     -webkit-transform: rotate(0deg);
@@ -59,7 +56,6 @@ body {
     -webkit-transform: rotate(360deg);
   }
 }
-
 @keyframes spin {
   from {
     transform: rotate(0deg);
@@ -68,7 +64,6 @@ body {
     transform: rotate(360deg);
   }
 }
-
 .disabled {
   background:rgba(1,1,1,0.2);
   border:0px solid;
@@ -82,8 +77,7 @@ body {
 <script type="text/javascript" src="../js/editForm.js"></script>
 <div class="container-fluid">
 <?php
-if(!empty($_GET)) 
-{ 
+if(!empty($_GET)) { 
   $_GET   = filter_input_array(INPUT_GET, FILTER_SANITIZE_NUMBER_INT);
         $query = " 
             SELECT 
@@ -118,15 +112,15 @@ if(!empty($_GET))
         $query_params = array( 
             ':id' => $_GET['id'] 
         ); 
-         
-        try 
-        { $stmt = $db->prepare($query); $result = $stmt->execute($query_params); } 
-        catch(PDOException $ex) 
-        { die("Failed to run query: " . $ex->getMessage()); } 
+        try  {
+         $stmt = $db->prepare($query); $result = $stmt->execute($query_params);
+         } 
+        catch(PDOException $ex) {
+        die("Failed to run query: " . $ex->getMessage()); 
+        } 
         $row = $stmt->fetch();
         $birthdate = date('m/d/Y', strtotime($row['birthdate']));
         $employdate = date('m/d/Y', strtotime($row['employdate']));
-
         if ($row['password'] == "") {
 ?>
     <div class='row'>
@@ -136,13 +130,10 @@ if(!empty($_GET))
           <br><font size='90px' color='#5cb85c'><img src='../imgs/ufo.png'></font>
           <br><font size='70px' color='#d9534f'>Oops!</font><br>
           <br><font size='4px'>Missing object.<br><br>If you feel this is an error, please send an email to: <b>jmodelacruz@e-dswd.net.</font></b>
-          
       </div>
       <!--end iferror-->
-
 <?php
-        die;
-        }
+        die; }
 ?>
 <!--ifsuccess-->
       <div class="col-md-offset-2 col-md-8 successcontent">
@@ -153,8 +144,7 @@ if(!empty($_GET))
           <br><br><a href="http://slp.ph/hr/user.php?id=<?php echo $_GET['id'];?>"><button class="btn btn-success" id="btnAddnew">Leave this page</button></a>
       </div>
       <!--end ifsuccess-->
-
-        <div class="col-md-offset-2 col-md-8" id="maincontent">
+      <div class="col-md-offset-2 col-md-8" id="maincontent">
           <div class="row">
               <div class="col-sm-12" role="alert" style="border:0px solid;padding:5px 0px 15px 0px;font-size:20px">
                 <center>
@@ -254,7 +244,6 @@ function isfemale() {
                                 </div>
                               </div>
                         </div>
-
                         <div class="row">
                               <div class="col-sm-6">
                                 <div class="form-group">
@@ -274,14 +263,12 @@ function isfemale() {
                         {
                       ?>
                         <option value=" <?php echo $hrdesignationname['hrdesignationname']; ?>"> <?php echo $hrdesignationname['hrdesignationname']; ?> </option>
-                    
                       <?php
                         }
-                              } catch(PDOException $e) {
+                        } catch(PDOException $e) {
                             echo "Error: " . $e->getMessage();
                             }//en
-                   
-                        ?>
+                      ?>
                       </select>
                     <!-- upto this -->    
                                   </div>
@@ -300,19 +287,16 @@ function isfemale() {
                               //$prof->bindParam(':hr_dbida', $_SESSION['pageid']);
                               $sql->execute();
                          //     $p=$prof->fetch(PDO::FETCH_ASSOC);
-                        
-                        while($hrpositionname=$sql->fetch(PDO::FETCH_ASSOC))
+                      while($hrpositionname=$sql->fetch(PDO::FETCH_ASSOC))
                         {
                       ?>
                         <option value=" <?php echo $hrpositionname['hrpositionname']; ?>"> <?php echo $hrpositionname['hrpositionname']; ?> </option>
-                    
                       <?php
                         }
-                              } catch(PDOException $e) {
+                        } catch(PDOException $e) {
                             echo "Error: " . $e->getMessage();
                             }//en
-                   
-                        ?>
+                      ?>
                       </select>
                     <!-- upto this --> 
                                   </div>
@@ -347,19 +331,16 @@ function isfemale() {
                               //$prof->bindParam(':hr_dbida', $_SESSION['pageid']);
                               $sql->execute();
                          //     $p=$prof->fetch(PDO::FETCH_ASSOC);
-                        
-                        while($hrfundsourcename=$sql->fetch(PDO::FETCH_ASSOC))
+                      while($hrfundsourcename=$sql->fetch(PDO::FETCH_ASSOC))
                         {
                       ?>
                         <option value=" <?php echo $hrfundsourcename['hrfundsourcename']; ?>"> <?php echo $hrfundsourcename['hrfundsourcename']; ?> </option>
-                    
                       <?php
                         }
                               } catch(PDOException $e) {
                             echo "Error: " . $e->getMessage();
                             }//en
-                   
-                        ?>
+                      ?>
                       </select>
                     <!-- upto this --> 
                                 </div>
@@ -384,16 +365,16 @@ function isfemale() {
                                            <!-- get this --> 
                       <?php
                       $query = "SELECT * FROM lib_regions"; 
-                      try 
-                      { $stmt = $db->prepare($query); $result = $stmt->execute(); } 
-                      catch(PDOException $ex) 
-                      { die("Failed to run query: " . $ex->getMessage()); } 
+                      try { 
+                          $stmt = $db->prepare($query); $result = $stmt->execute(); } 
+                      catch(PDOException $ex) { 
+                      die("Failed to run query: " . $ex->getMessage()); 
+                      } 
                       while ($rowl = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                         echo "<option value='".$rowl["regid"]."'>".$rowl['regname']."</option>";
+                          echo "<option value='".$rowl["regid"]."'>".$rowl['regname']."</option>";
                       }
-                  ?>
+                      ?>
                       </select>
-
 <!-- up to this -->
                                     </div>
                                   </div>
@@ -472,7 +453,6 @@ function isfemale() {
                                   </div>
                                 </div>
                         </div>
-
                         <div class="row">
                                 <div class="col-sm-6">
                                   <div class="form-group">
@@ -519,10 +499,8 @@ function isfemale() {
                       </div>
   </form>
         </div>
-
         <div class="col-md-2"></div>
-    </div>
-
+  </div>
 </div><!--endcontainer-->
 <?php
 } else {
@@ -534,8 +512,7 @@ function isfemale() {
           <br><font size='90px' color='#5cb85c'><img src='../imgs/ufo.png'></font>
           <br><font size='70px' color='#d9534f'>Oops!</font><br>
           <br><font size='4px'>Missing object.<br><br>If you feel this is an error, please send an email to: <b>jmodelacruz@e-dswd.net.</font></b>
-          
-      </div>
+    </div>
       <!--end iferror-->
 <?php } ?>          
 <script>
@@ -552,8 +529,7 @@ function getProv() {
             $("#province").prop('disabled', false);
             $("#province").html(data);
         }
-
-  });
+    });
 }
 function getCitymun() {
   var formData = { 
@@ -568,8 +544,7 @@ function getCitymun() {
             $("#municipality").prop('disabled', false);
             $("#municipality").html(data);
         }
-
-  });
+    });
 }
 $(document).ready(function() {
 sexload = '<?php echo $row['sex'];?>';
@@ -580,7 +555,6 @@ var found3 = [];
 			  if($.inArray(this.value, found3) != -1) $(this).remove();
 			  found3.push(this.value);
 		});
-
 if (sexload == 0) {
   document.getElementById("sexmale").checked = true;
   document.getElementById("sexfemale").checked = false;
@@ -588,25 +562,21 @@ if (sexload == 0) {
   document.getElementById("sexmale").checked = false;
   document.getElementById("sexfemale").checked = true;
 }
-
   $("#loadicon").hide();
   $(".successcontent").hide();
   $("#maincontent").show();
-  
-$("#hrsubmit").click(function(event) {
+  $("#hrsubmit").click(function(event) {
   event.preventDefault();
   event.stopImmediatePropagation();
   $("#statusdisp").html('');
   $('#editForm').bootstrapValidator('validate');
   return false;
 }); //endHRSUBMIT
-
 $('#btnAddnew').click(function() {
       $(".successcontent").hide();
       $("#maincontent").show();
       $('#editForm').data('bootstrapValidator').resetForm(true);
 });//endreset
-
 });//end DOC READY
 </script>
 </body>
