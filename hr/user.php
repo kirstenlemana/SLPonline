@@ -2,6 +2,7 @@
 require "../zxcd9.php";
   byteMe($_SESSION['id'],'hr_profile',0.10);
   $_GET   = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
+   $_SESSION['uid'] = $_GET['id'];
     $_SESSION['pageid'] = $_GET['id'];
   $query = "SELECT firstname, middlename, lastname, nickname, sex, birthdate, emailaddress, contactnumber, designation, position, employstatus, employdate, fundsource, region, province, municipality, comptype, compyear, compstatus, compnotes, inactive, feeling FROM hr_db WHERE id = :id";
   $query_params = array(':id' => $_GET['id']);
@@ -1454,6 +1455,9 @@ function delwp(row){
  //endpost
 }
 
+
 </script>
+
+
 </body>
 </html>
