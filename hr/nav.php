@@ -7,14 +7,12 @@ try {
 }//endtry
 $row3 = $stmt2->fetch();
 $notifs = $row3['idz'];
-
 try {
     $stmt2 = $db->prepare("SELECT * FROM `notifications` WHERE recipient = '".$_SESSION['id']."' AND isclicked = 0 ORDER BY notifid DESC");
     $stmt2->execute();
 } catch(PDOException $e) {
     echo "Error: " . $e->getMessage();
 }//endtry
-
 $notiArray = [];
 $i = 0;
 while ($row2 = $stmt2->fetch(PDO::FETCH_NUM, PDO::FETCH_ORI_NEXT)) {
@@ -45,7 +43,7 @@ while ($row2 = $stmt2->fetch(PDO::FETCH_NUM, PDO::FETCH_ORI_NEXT)) {
                    }
                 });//endAjax
 }
-  </script>
+</script>
 <nav class="navbar navbar-default navbar-static-top">
   <div class="container">
     <div class="navbar-header" >
@@ -112,7 +110,6 @@ while ($row2 = $stmt2->fetch(PDO::FETCH_NUM, PDO::FETCH_ORI_NEXT)) {
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color:rgba(255,255,255,0.5);"><span class="badge nonotif" style="<?php if ($notifs > 0) { echo 'background: #e74c3c;color: #fff;'; } ?>"><?php echo $notifs; ?> &nbsp;<span class="glyphicon glyphicon-bell <?php if ($notifs >0) { echo 'spin'; } ?>"></span></span></a>
           <ul class="dropdown-menu" style="width:160px">
 <?php
-
 $i = 0;
   foreach($notiArray as $notif) {
       echo '<li style="font-size:10px;width:160px;white-space:none;border-bottom:1px solid #ccc" onclick="triggerClicked('.$notif[0].','.'\''.$notif[5].'\')"><a href="#" style="width:160px;padding-left:10px;white-space:none;"><b style="color:#00AADe">'.$notif[2].'</b> '.$notif[3].' <b>'.$notif[4].'</b></a></li>';
@@ -122,15 +119,12 @@ $i = 0;
       break;
     }
   }
-
-
 if ($notifs == 0) {
     echo '<li id="notifbox"><a href="#">No new notifications</a></li>';
     echo '<li id="notifbox"><a href="http://slp.ph/hr/notifications.php" style="color:#00AADe">View all previous</a></li>';
 }
-
 ?>            
-          </ul>
+    </ul>
         </li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> <?php echo $_SESSION['firstname']; ?> <span class="caret"></span></a>
