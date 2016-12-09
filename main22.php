@@ -396,7 +396,7 @@ h3 {
 
 
 
-     $stmt=$db->prepare("SELECT bz.pagename,h2.firstname,h2.lastname,bz.added,hp1.name,h2.id,h2.sex FROM bytez as bz LEFT JOIN hr_db as h2 ON h2.id=bz.hrdbid LEFT JOIN hr_profilepics as hp1 on h2.id=hp1.hrdbid ORDER BY bz.added DESC LIMIT 3 ");
+     $stmt=$db->prepare("SELECT bz.pagename,h2.firstname,h2.lastname,bz.added,hp1.name,h2.id,h2.sex FROM bytez as bz LEFT JOIN hr_db as h2 ON h2.id=bz.hrdbid LEFT JOIN hr_profilepics as hp1 on h2.id=hp1.hrdbid ORDER BY bz.added DESC LIMIT 2 ");
             $stmt->execute();
 
             while($rowsb=$stmt->fetch(PDO::FETCH_NUM,pdo::FETCH_ORI_NEXT)) { 
@@ -454,7 +454,7 @@ h3 {
 
 
 
-    $stmt=$db->prepare("SELECT w.wall_msg,h.firstname,h.sex,w.wallposted,p.name,h.lastname,h.id,w.wallowner,h1.firstname,h1.lastname,w.wallposter FROM hr_wallposts as w LEFT JOIN hr_db as h on w.wallposter=h.id LEFT JOIN hr_profilepics as p on p.hrdbid=h.id LEFT JOIN hr_db as h1 on h1.id=w.wallowner ORDER BY w.wallpostid DESC LIMIT 5");
+    $stmt=$db->prepare("SELECT w.wall_msg,h.firstname,h.sex,w.wallposted,p.name,h.lastname,h.id,w.wallowner,h1.firstname,h1.lastname,w.wallposter FROM hr_wallposts as w LEFT JOIN hr_db as h on w.wallposter=h.id LEFT JOIN hr_profilepics as p on p.hrdbid=h.id LEFT JOIN hr_db as h1 on h1.id=w.wallowner ORDER BY w.wallpostid DESC LIMIT 3");
     $stmt->execute();
     while($rowWP=$stmt->fetch(PDO::FETCH_NUM,pdo::FETCH_ORI_NEXT)) { 
 
