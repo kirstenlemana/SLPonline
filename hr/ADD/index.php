@@ -16,7 +16,6 @@ require "../../zxcd9.php";
     <script src="../../js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../js/bootstrapValidator.js"></script>
     <style>
-
 body {
     background-color: #f7f9fb;
     background-size: cover;
@@ -48,7 +47,6 @@ body {
   -o-animation: spin 1000ms infinite linear;
   animation: spin 1000ms infinite linear;
 }
-
 @-moz-keyframes spin {
   from {
     -moz-transform: rotate(0deg);
@@ -57,7 +55,6 @@ body {
     -moz-transform: rotate(360deg);
   }
 }
-
 @-webkit-keyframes spin {
   from {
     -webkit-transform: rotate(0deg);
@@ -66,7 +63,6 @@ body {
     -webkit-transform: rotate(360deg);
   }
 }
-
 @keyframes spin {
   from {
     transform: rotate(0deg);
@@ -91,7 +87,7 @@ body {
       -moz-border-radius: 0 5px 5px 0;
       border-radius: 0 5px 5px 0;
     }
-    #slideout_inner {
+#slideout_inner {
       position: fixed;
       top: 25%;
       left: -250px;
@@ -108,15 +104,15 @@ body {
       -moz-border-radius: 0 0 5px 0;
       border-radius: 0 0 5px 0;
     }
-    #slideout_inner textarea {
+#slideout_inner textarea {
       width: 190px;
       height: 100px;
       margin-bottom: 6px;
     }
-    #slideout:hover {
+#slideout:hover {
       left: 250px;
     }
-    #slideout:hover #slideout_inner {
+#slideout:hover #slideout_inner {
       left: 0;
     }
 </style>
@@ -137,18 +133,15 @@ body {
           <div class="form-group">
               <button class="btn btn-primary" id="sendfeedback" style="padding:4px;margin-left:1em">Submit</button>
           </div>
-      
       </div>
     </div>
   </div>
-
 <?php
 include "../../nav.php";
 if ($_SESSION['permlvl'] < 1) {
   echo "<div class='container-fluid'><div class='col-md-offset-2 col-md-8' style='margin-top:5em;text-align:center'><img src='../imgs/search.png'><br><br>Access to this function is only available to <b>HR focals.</b><br>If you believe you should have access to this, please send an email to jmodelacruz@e-dswd.net.";
   die;
 }
-
 ?>
 <script type="text/javascript" src="../../js/hrForm.js"></script>
 <div class="container-fluid">
@@ -179,7 +172,6 @@ function isfemale() {
   sex = "1";
   console.log(sex);
 }
-
 </script>
 <form class="form-horizontal" id="hrForm" method="post" action="" autocomplete="off">
                           <div class="form-group">
@@ -261,7 +253,6 @@ function isfemale() {
                                 </div>
                               </div>
                         </div>
-
                         <div class="row">
                               <div class="col-sm-6">
                                 <div class="form-group">
@@ -276,19 +267,15 @@ function isfemale() {
                               //$prof->bindParam(':hrdbida', $_SESSION['pageid']);
                               $sql->execute();
                          //     $p=$prof->fetch(PDO::FETCH_ASSOC);
-                        
-                        while($hrdesignationname=$sql->fetch(PDO::FETCH_ASSOC))
-                        {
+                      while($hrdesignationname=$sql->fetch(PDO::FETCH_ASSOC)) {
                       ?>
                         <option value=" <?php echo $hrdesignationname['hrdesignationname']; ?>"> <?php echo $hrdesignationname['hrdesignationname']; ?> </option>
-                    
                       <?php
                         }
                               } catch(PDOException $e) {
                             echo "Error: " . $e->getMessage();
                             }//en
-                   
-                        ?>
+                      ?>
                       </select>
                     <!-- upto this -->      
                                   </div>
@@ -308,18 +295,15 @@ function isfemale() {
                               $sql->execute();
                          //     $p=$prof->fetch(PDO::FETCH_ASSOC);
                         
-                        while($hrpositionname=$sql->fetch(PDO::FETCH_ASSOC))
-                        {
+                        while($hrpositionname=$sql->fetch(PDO::FETCH_ASSOC)){
                       ?>
                         <option value=" <?php echo $hrpositionname['hrpositionname']; ?>"> <?php echo $hrpositionname['hrpositionname']; ?> </option>
-                    
                       <?php
                         }
                               } catch(PDOException $e) {
                             echo "Error: " . $e->getMessage();
                             }//en
-                   
-                        ?>
+                      ?>
                       </select>
                     <!-- upto this --> 
                                   </div>
@@ -363,7 +347,6 @@ function isfemale() {
                       }
                         ?>
                       </select>
-
 <!-- up to this -->   
                                 </div>
                               </div>
@@ -421,7 +404,6 @@ function isfemale() {
                                 </div>
                               </div>
                       </div>
-
                       <div class="form-group">
                             <label for="remarks" class="col-sm-2 control-label">Remarks</label>
                             <div class="col-sm-10">
@@ -461,7 +443,6 @@ function isfemale() {
                                   </div>
                                 </div>
                         </div>
-
                         <div class="row">
                                 <div class="col-sm-6">
                                   <div class="form-group">
@@ -484,8 +465,7 @@ function isfemale() {
                                   </div>
                                 </div>
                         </div>
-
-                      <div class="row" style="margin-bottom:2em">
+                        <div class="row" style="margin-bottom:2em">
                           <div class="col-sm-6">
                             <div class="form-group">
                                 <label class="col-sm-4 control-label" id="captchaOperation"></label>
@@ -507,9 +487,7 @@ function isfemale() {
                             </div>
                           </div>
                       </div>
-  
-        </div>
-
+    </div>
     </div>
     <div class="col-md-2"></div>
 </div>
@@ -527,7 +505,6 @@ function getProv() {
             $("#province").prop('disabled', false);
             $("#province").html(data);
         }
-
   });
 }
 function getCitymun() {
@@ -543,11 +520,9 @@ function getCitymun() {
             $("#municipality").prop('disabled', false);
             $("#municipality").html(data);
         }
-
   });
 }
 $(document).ready(function() {
-
 $("#loadicon").hide();
 $("#hrsubmit").click(function(event) {
   event.preventDefault();
@@ -556,7 +531,6 @@ $("#hrsubmit").click(function(event) {
   $('#hrForm').bootstrapValidator('validate');
   return false;
 }); //endHRSUBMIT
-
 $('#btnAddnew').click(function() {
   location.reload();
   $('#hrForm').data('bootstrapValidator').resetForm(true);
@@ -566,9 +540,7 @@ $('#btnAddnew').click(function() {
   $("#hrsubmit").html('Submit');
       $(".successcontent").hide();
       $("#maincontent").show();
-
 });//endreset
-
 });//end DOC READY
 </script>
 <script>
@@ -577,7 +549,6 @@ $(document).ready(function() {
   $("#sendfeedback").click(function(event) {
     event.preventDefault();
     event.stopImmediatePropagation();
-    
     $("#loadicon2").show();
     $("#feedback").hide();
     $("#sendfeedback").html('Processing..');
