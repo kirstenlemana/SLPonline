@@ -13,17 +13,13 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     $emailarray[] = $row['emailaddress'];
     $passarray[] = $row['password'];
 }
-
 $i = 0;
 foreach ($namearray as $name) {
-  
 ob_start();
 ?>
 <table width=100% cellpadding=12 cellspacing=0 border=0>
   <tr><td><div style="overflow: hidden;"><font size=-1>
     <div style="Margin:0;padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;min-width:100%;background-color:#f1f2f6">
-
-
 <table style="border-spacing:0;width:100%;background-color:#f1f2f6;table-layout:fixed">
 <tr>
 <td align="center" style="padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;vertical-align:top">
@@ -122,20 +118,15 @@ ob_start();
     </td>
     </tr>
     </table>
-
 </td>
 </tr>
 </table>
-
 <table width="610" style="border-spacing:0;Margin:0 auto">
 <tr>
 <td style="padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;vertical-align:top">
-
 </td>
 </tr>
 </table>
-
-
 </center>
 </td>
 </tr>
@@ -148,7 +139,6 @@ ob_start();
         $myvar = ob_get_clean();
         $mail = new PHPMailer();
         $mail->IsSMTP();
-        
         $mail->SMTPAuth = true;
         $mail->SMTPSecure = 'ssl';
         $mail->Host = "smtp.gmail.com";
@@ -157,14 +147,11 @@ ob_start();
         $mail->Password = "slp12345";
         $mail->From = "livelihood@dswd.gov.ph";
         $mail->FromName = "Livelihood";
-
-
         $mail->Subject = "[SLP] BOOM! We've started it for you, ".$name.".";
         $mail->IsHTML(true);
         $mail->Body = $myvar;
         $mail->AddAddress($emailarray[$i]);
-        
-       if(!$mail->Send()) {
+      if(!$mail->Send()) {
           echo "Mail Error: " . $mail->ErrorInfo;
        } else {
           echo "Sent: ".$name."<br>";
@@ -173,5 +160,4 @@ $i++;
 }
 echo "done";
  /*
-        
 */?>
