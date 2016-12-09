@@ -54,11 +54,19 @@ function timeago($ptime)
     <link rel="shortcut icon" href="imgs/favicon.ico" type="image/x-icon">
     <link rel="icon" href="imgs/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/flatbootstrap.min.css"/>
+    <link href="css/jquery.cssemoticons.css" media="screen" rel="stylesheet" type="text/css" />
     <script src="js/jquery-1.10.2.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script type="text/javascript" language="javascript" src="js/jquery.dataTables.js"></script>
     <script src="js/DTbootstrap.js"></script>
+    <script src="js/jquery.cssemoticons.min.js" type="text/javascript"></script>
     <style>
+
+ #small { font-size: 12px; }
+ #large { font-size: 72px; }
+ #regular { font-size: 20px; }
+ .wrapped { width: 350px; }
+
 
 body {
     background-color: #f7f9fb;
@@ -509,13 +517,13 @@ h3 {
          //   echo '<tr><td style="font-size:12px;vertical-align:middle"><div class="row nopad" style="vertical-align:middle" data-bg-text="'.timeago(strtotime($row8[2])).'"><div class="col-sm-12 nopad" style="text-align:left;line-height:1.1;padding-left:0.7em">'.$row8[1].' -<a href="hr/user.php?id='.$row8[4].'" style="color:#00ADDe;text-decoration:none">'.ucwords(strtolower($row8[0])).'</a></span><span style="color:#888;"> ('.$row8[3].')</span></div><div class="clearfix"></div></div></td></tr>';
         if($row8[8]=="") {
               if($row8[7]==0) {
-                  echo '<tr><td style="font-size:12px;vertical-align:middle"><div class="row nopad"><div class="col-md-3"><a style="text-decoration:none;" href="../hr/user.php?id='.$row8[4].'"><img src="../imgs/partner.png" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$row8[0].' '.$row8[6].'</a> ('.$row8[3].')<br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($row8[2])).'</span><br><span style="color:#2c3e50;font-size:12px;font-weight: normal;">'.$row8[1].'</span></div></div></td></tr>';
+                  echo '<tr><td style="font-size:12px;vertical-align:middle"><div class="row nopad"><div class="col-md-3"><a style="text-decoration:none;" href="../hr/user.php?id='.$row8[4].'"><img src="../imgs/partner.png" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$row8[0].' '.$row8[6].'</a> ('.$row8[3].')<br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($row8[2])).'</span><br><span style="color:#2c3e50;font-size:12px;font-weight: normal;"><p class="text" id="small">'.$row8[1].'</p></span></div></div></td></tr>';
               } else {
-                  echo '<tr><td style="font-size:12px;vertical-align:middle"><div class="row nopad"><div class="col-md-3"><a style="text-decoration:none;" href="../hr/user.php?id='.$row8[4].'"><img src="../imgs/female.png" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$row8[0].' '.$row8[6].'</a> ('.$row8[3].')<br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($row8[2])).'</span><br><span style="color:#2c3e50;font-size:12px;font-weight: normal;">'.$row8[1].'</span></div></div></td></tr>';
+                  echo '<tr><td style="font-size:12px;vertical-align:middle"><div class="row nopad"><div class="col-md-3"><a style="text-decoration:none;" href="../hr/user.php?id='.$row8[4].'"><img src="../imgs/female.png" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$row8[0].' '.$row8[6].'</a> ('.$row8[3].')<br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($row8[2])).'</span><br><span style="color:#2c3e50;font-size:12px;font-weight: normal;"><p class="text" id="small">'.$row8[1].'</p></span></div></div></td></tr>';
               }
         } else {
           
-              echo '<tr><td style="font-size:12px;vertical-align:middle"><div class="row nopad"><div class="col-md-3"><a style="text-decoration:none;" href="../hr/user.php?id='.$row8[4].'"><img src="../docs/profilepics/'.$row8[5].'" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$row8[0].' '.$row8[6].'</a> ('.$row8[3].')<br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($row8[2])).'</span><br><span style="color:#2c3e50;font-size:12px;font-weight: normal;">'.$row8[1].'</span></div></div></td></tr>';
+              echo '<tr><td style="font-size:12px;vertical-align:middle"><div class="row nopad"><div class="col-md-3"><a style="text-decoration:none;" href="../hr/user.php?id='.$row8[4].'"><img src="../docs/profilepics/'.$row8[5].'" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$row8[0].' '.$row8[6].'</a> ('.$row8[3].')<br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($row8[2])).'</span><br><span style="color:#2c3e50;font-size:12px;font-weight: normal;"><p class="text" id="small">'.$row8[1].'</p></span></div></div></td></tr>';
         }        
 
 
@@ -535,7 +543,7 @@ h3 {
                       </div>
                     </div><!-- /input-group -->
         </div>
-        <div class="clearfix"></div>
+       
       </div>
 
   </div>
@@ -694,6 +702,29 @@ h3 {
         </div>
       </div>
       <!-- Modal -->
+<script type="text/javascript">
+    $(document).ready(function(){
+      $('.text').emoticonize({
+        //delay: 800,
+        //animate: false,
+        //exclude: 'pre, code, .no-emoticons'
+      });
+      $('#toggle-headline').toggle(
+        function(){
+          $('#large').unemoticonize({
+            //delay: 800,
+            //animate: false
+          })
+        }, 
+        function(){
+          $('#large').emoticonize({
+            //delay: 800,
+            //animate: false
+          })
+        }
+      );
+    })
+  </script>
 <script src="js/countUp.js"></script>
 <script type="text/javascript" src="js/feedback.js"></script>
 <script>
