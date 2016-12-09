@@ -1,12 +1,10 @@
 <?php
 require "../zxcd9.php";
 byteMe($_SESSION['id'],'hb_feedbackportaldetails',0.10);
- 
-   if(isset($_POST['subfeed'])) {
+    if(isset($_POST['subfeed'])) {
       $_SESSION['subfeed'] = $_POST['subfeed'];
       die("visitpage");
     }
-
     if(!empty($_GET['id'])) {
       $subfeedfilter = $_GET['id'];
       $_SESSION['subfeedfilter'] = $subfeedfilter;
@@ -21,25 +19,21 @@ byteMe($_SESSION['id'],'hb_feedbackportaldetails',0.10);
         $query_params = array( 
             ':engagedto' => $subfeedfilter
         );
-        try 
-        { $stmt = $db->prepare($query); $result = $stmt->execute($query_params); } 
-        catch(PDOException $ex) 
-        { die("Failed to run query: " . $ex->getMessage()); } 
+        try { 
+          $stmt = $db->prepare($query); $result = $stmt->execute($query_params); } 
+        catch(PDOException $ex) { 
+        die("Failed to run query: " . $ex->getMessage()); } 
         $row = $stmt->fetch();
         $countcurrent = $row['countcurrent'];
-
-
-      $query="SELECT hr_feedbackquestion.subject as subject, hr_feedbackquestion.feedback as feedback, hr_db.firstname as first, hr_db.middlename as mid, hr_db.lastname as last, hr_feedbackquestion.fdate as fdate from hr_feedbackquestion INNER JOIN hr_db on hr_feedbackquestion.hrdbid=hr_db.id where hr_feedbackquestion.id=:id
+        $query="SELECT hr_feedbackquestion.subject as subject, hr_feedbackquestion.feedback as feedback, hr_db.firstname as first, hr_db.middlename as mid, hr_db.lastname as last, hr_feedbackquestion.fdate as fdate from hr_feedbackquestion INNER JOIN hr_db on hr_feedbackquestion.hrdbid=hr_db.id where hr_feedbackquestion.id=:id
       ";
       $query_params = array(':id' => $subfeedfilter);
-        try 
-        { $stmt = $db->prepare($query); $result = $stmt->execute($query_params); 
-
+        try { 
+          $stmt = $db->prepare($query); $result = $stmt->execute($query_params); 
         } 
-        catch(PDOException $ex) 
-        { die("Failed to run query: " . $ex->getMessage()); } 
+        catch(PDOException $ex) { 
+        die("Failed to run query: " . $ex->getMessage()); } 
         $row = $stmt->fetch();
-        
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -58,7 +52,6 @@ byteMe($_SESSION['id'],'hb_feedbackportaldetails',0.10);
     <script src="../js/bootstrap.min.js"></script>
     <script type="text/javascript" src="http://momentjs.com/downloads/moment.min.js"></script>
     <style>
-
 body {
     background-color: #f7f9fb;
     background-size: cover;
@@ -101,7 +94,6 @@ body {
 .highlight {
     background: rgba(92, 184, 92, 0.2);
 }
-
 .tagged {
     -moz-border-radius: 4px;
     border-radius: 3px;
@@ -125,7 +117,6 @@ body {
   include "../nav.php";
 ?>
 <script type="text/javascript" language="javascript" class="init">
-
 </script>
 <div class="container-fluid">
   <div class="row">
@@ -133,7 +124,6 @@ body {
       <div style="background:#fff;margin-bottom:1em;padding:1.2em;" class="col-md-12">
         <div class="row">
           <div class="col-md-10">
-
                 <h3 style="margin-top:0;margin-bottom:0;font-size:40px;font-weight:bold"><img src='../imgs/write.png' width='50' height='50'><?php echo $row['subject']; ?></h3>
                 <span style="font-size:25px;margin-bottom:1em"><?php echo $row['feedback'].'<br>'; 
                 ?></span>
@@ -145,7 +135,6 @@ body {
           <div class="col-md-2" style="text-align:right">
                 <h3 style="margin-top:0;margin-bottom:0;font-size:40px;margin-bottom:0" id="openingshead"><?php echo $countcurrent; ?>/<?php echo $row['numopenings']; ?></h3>
                 <span style="font-size:13px;color:#555555">total replies</span>
-
           </div>
         </div>
   <div class="row" >
@@ -157,7 +146,7 @@ body {
 <col width="20%">
 <col width="*">
     <?php
-                $stmtcom = $db->prepare("SELECT hrf_replies.message,
+              $stmtcom = $db->prepare("SELECT hrf_replies.message,
                 hrdb.firstname,
                 hrdb.lastname,
                 hrf_replies.dt,
@@ -167,17 +156,13 @@ body {
                 from hrf_replies LEFT JOIN hr_db on hrf_replies.feedbacker=hrdb.id
                 LEFT JOIN hr_profilepics on hr_profilepics.hrdbid=hrdb.id
                  WHERE hrf_replies.qid = :qid1
-              
-                 ");
+                   ");
               $stmtcom->bindParam(':qid1', $_GET['id']);
               $stmtcom->execute();
-         
-              while ($row7 = $stmtcom->fetch(PDO::FETCH_NUM, PDO::FETCH_ORI_NEXT)) {
-                $replyno = $replyno + 1;
-
-                  echo " <tr><td><img src='../docs/".$row7[5]."' width='60' height='60' align='left' style='border-radius:50%'>
+                while ($row7 = $stmtcom->fetch(PDO::FETCH_NUM, PDO::FETCH_ORI_NEXT)) {
+              $replyno = $replyno + 1;
+                    echo " <tr><td><img src='../docs/".$row7[5]."' width='60' height='60' align='left' style='border-radius:50%'>
                   <span style='color:#00134d;font-size:17px;font-weight:bold;padding-left: 0.3em'>".$row7[1].' '.$row7[2]."</span>
-
                   <br><span style='color:#00134d;font-size:13px;padding-left:0.5em'> ".$row7[4]."</span><br><span style='color:#00134d;font-size:13px;padding-left:0.5em'> ".$row7[6]."</span>
                   </td>";
                     echo "<td><img src='../imgs/paper.png' width='20' height='20'><span style='color:#00134d;font-size:12px;'> Reply #".$replyno." on: </span><span style='color:#a6a6a6;font-size:12px'> ".$row7[3]." </span><hr style='margin-top:0em;margin-bottom:0.5em;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$row7[0]."</td></tr>";
@@ -187,12 +172,10 @@ body {
               }
               ?>
               <!--comments-->
-
               </table>
-                 <br>
+                <br>
                 <a href="#top" class="btn btn-primary btn-xs" role="button">Back to top</a> 
-                 <a href="feedback_portal2.php" class="btn btn-primary btn-xs" id="back" role="button">Back</a> 
-
+                <a href="feedback_portal2.php" class="btn btn-primary btn-xs" id="back" role="button">Back</a> 
        </div>
       </div>
       </div>
@@ -203,7 +186,6 @@ body {
 <div class="row" style="margin-right:0em;margin-top:1em">
   <div class="col-md-offset-3 col-md-6 padfix padfix2" style="">
     <div style="border:solid 1px #c5d6de;margin-left:1em;background:#fff;text-align:left;padding:1em;padding-left:2em">
-   
         <div class="row">
           <div class="col-sm-10">
             <div class="form-group">
@@ -229,20 +211,15 @@ $("#postcomment").click(function(event) {
       'qid'       : "<?php echo $_GET['id']; ?>",
       'message'       : $('input[name=commentbox]').val()
     };
-
                 $.ajax({
                    url: "fp_functions.php",
                    type: "POST",
                    data: formData,
-                   success: function(data)
-                   {
+                   success: function(data) {
                       if (data == "commented") {
                         $("#commentable").append("<tr><td><img src='../imgs/user.png' width='60' height='60' align='left'><span style='color:#00134d;font-size:17px;font-weight:bold;padding-left:0.3em'>"+"<?php echo $_SESSION['firstname'].' '.$_SESSION['lastname']; ?></span><br><span style='color:#00134d;font-size:13px;padding-left: 0.3em'>Region ...</span> <br><span style='color:#00134d;font-size:13px;padding-left: 0.3em'>Position ... </span></td><td><img src='../imgs/paper.png' width='20' height='20'><span style='color:#00134d;font-size:12px'>Reply # ...</span> on:<span style='color:#a6a6a6;font-size:12px'>  (now)</span> <hr style='margin-top:0em;margin-bottom:0.5em;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+$('input[name=commentbox]').val()+"</td></tr>");
-                     
-
                       } else {
                        alert(data);
-                     
                       }
                         $("#postcomment").html("Post");
                         document.getElementById("postcomment").disabled = false;
@@ -251,6 +228,5 @@ $("#postcomment").click(function(event) {
                 //endAjax
 }); //endpost
 </script>
-
 </body>
 </html>
