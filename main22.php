@@ -454,7 +454,7 @@ h3 {
 
 
 
-    $stmt=$db->prepare("SELECT w.wall_msg,h.firstname,h.sex,w.wallposted,p.name,h.lastname,h.id,w.wallowner,h1.firstname,h1.lastname,w.wallposter FROM hr_wallposts as w LEFT JOIN hr_db as h on w.wallposter=h.id LEFT JOIN hr_profilepics as p on p.hrdbid=h.id LEFT JOIN hr_db as h1 on h1.id=w.wallowner ORDER BY w.wallpostid DESC LIMIT 3");
+    $stmt=$db->prepare("SELECT w.wall_msg,h.firstname,h.sex,w.wallposted,p.name,h.lastname,h.id,w.wallowner,h1.firstname,h1.lastname,w.wallposter FROM hr_wallposts as w LEFT JOIN hr_db as h on w.wallposter=h.id LEFT JOIN hr_profilepics as p on p.hrdbid=h.id LEFT JOIN hr_db as h1 on h1.id=w.wallowner ORDER BY w.wallpostid DESC LIMIT 5");
     $stmt->execute();
     while($rowWP=$stmt->fetch(PDO::FETCH_NUM,pdo::FETCH_ORI_NEXT)) { 
 
@@ -505,11 +505,11 @@ h3 {
         <!--shoutbox table-->
         <table class="table table-bordered" style="margin-top:0em;line-height:0.9;vertical-align:middle;border:0;padding:0" id="shoutbox">
           <thead style="background:#f6f8fa;">
-            <th style="font-size:15px"><b>National Shoutbox</b></th>
+            <th style="font-size:15px;"><b>National Shoutbox</b></th>
           </thead> 
         
        <!--   <tbody style="height:800px;overflow-y:scroll;display:block"> -->
-            <tbody style="height:800px;overflow:hidden;display:block">
+            <tbody style="height:800px;overflow:hidden;display:block;">
 <?php
       $stmtcom = $db->prepare("SELECT t.firstname, m.msg, m.added, t.region, t.id,hp.name,t.lastname,t.sex,hp.name FROM shoutbox as m LEFT JOIN hr_db as t ON m.hrdbid=t.id LEFT JOIN hr_profilepics as hp on hp.hrdbid=t.id  ORDER BY m.id DESC LIMIT 10");
       $stmtcom->execute();
@@ -517,13 +517,13 @@ h3 {
          //   echo '<tr><td style="font-size:12px;vertical-align:middle"><div class="row nopad" style="vertical-align:middle" data-bg-text="'.timeago(strtotime($row8[2])).'"><div class="col-sm-12 nopad" style="text-align:left;line-height:1.1;padding-left:0.7em">'.$row8[1].' -<a href="hr/user.php?id='.$row8[4].'" style="color:#00ADDe;text-decoration:none">'.ucwords(strtolower($row8[0])).'</a></span><span style="color:#888;"> ('.$row8[3].')</span></div><div class="clearfix"></div></div></td></tr>';
         if($row8[8]=="") {
               if($row8[7]==0) {
-                  echo '<tr><td style="font-size:12px;vertical-align:middle"><div class="row nopad"><div class="col-md-3"><a style="text-decoration:none;" href="../hr/user.php?id='.$row8[4].'"><img src="../imgs/partner.png" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$row8[0].' '.$row8[6].'</a> ('.$row8[3].')<br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($row8[2])).'</span><br><span style="color:#2c3e50;font-size:12px;font-weight: normal;"><p class="text" id="small">'.$row8[1].'</p></span></div></div></td></tr>';
+                  echo '<tr><td style="font-size:12px;vertical-align:middle;width:10%"><div class="row nopad"><div class="col-md-3"><a style="text-decoration:none;" href="../hr/user.php?id='.$row8[4].'"><img src="../imgs/partner.png" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$row8[0].' '.$row8[6].'</a> ('.$row8[3].')<br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($row8[2])).'</span><br><span style="color:#2c3e50;font-size:12px;font-weight: normal;"><p class="text" id="small">'.$row8[1].'</p></span></div></div></td></tr>';
               } else {
-                  echo '<tr><td style="font-size:12px;vertical-align:middle"><div class="row nopad"><div class="col-md-3"><a style="text-decoration:none;" href="../hr/user.php?id='.$row8[4].'"><img src="../imgs/female.png" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$row8[0].' '.$row8[6].'</a> ('.$row8[3].')<br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($row8[2])).'</span><br><span style="color:#2c3e50;font-size:12px;font-weight: normal;"><p class="text" id="small">'.$row8[1].'</p></span></div></div></td></tr>';
+                  echo '<tr><td style="font-size:12px;vertical-align:middle;width:10%"><div class="row nopad"><div class="col-md-3"><a style="text-decoration:none;" href="../hr/user.php?id='.$row8[4].'"><img src="../imgs/female.png" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$row8[0].' '.$row8[6].'</a> ('.$row8[3].')<br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($row8[2])).'</span><br><span style="color:#2c3e50;font-size:12px;font-weight: normal;"><p class="text" id="small">'.$row8[1].'</p></span></div></div></td></tr>';
               }
         } else {
           
-              echo '<tr><td style="font-size:12px;vertical-align:middle"><div class="row nopad"><div class="col-md-3"><a style="text-decoration:none;" href="../hr/user.php?id='.$row8[4].'"><img src="../docs/profilepics/'.$row8[5].'" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$row8[0].' '.$row8[6].'</a> ('.$row8[3].')<br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($row8[2])).'</span><br><span style="color:#2c3e50;font-size:12px;font-weight: normal;"><p class="text" id="small">'.$row8[1].'</p></span></div></div></td></tr>';
+              echo '<tr><td style="font-size:12px;vertical-align:middle;width:10%"><div class="row nopad"><div class="col-md-3"><a style="text-decoration:none;" href="../hr/user.php?id='.$row8[4].'"><img src="../docs/profilepics/'.$row8[5].'" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$row8[0].' '.$row8[6].'</a> ('.$row8[3].')<br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($row8[2])).'</span><br><span style="color:#2c3e50;font-size:12px;font-weight: normal;"><p class="text" id="small">'.$row8[1].'</p></span></div></div></td></tr>';
         }        
 
 
