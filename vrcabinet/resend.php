@@ -9,7 +9,6 @@ if (isset($_POST['resendid'])) {
         $stmt->execute();
         $rowe = $stmt->fetch();
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -29,7 +28,6 @@ if (isset($_POST['resendid'])) {
     <script src="../js/tag-it.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript" src="../js/jquery.autocomplete.min.js"></script>
     <style>
-
 body {
     background-color: #f7f9fb;
     background-size: cover;
@@ -45,47 +43,47 @@ body {
     right: -15px;
 }
 .slidedown {
-  -webkit-transform: scaleY(0);
-       -o-transform: scaleY(0);
-      -ms-transform: scaleY(0);
-          transform: scaleY(0);
+    -webkit-transform: scaleY(0);
+    -o-transform: scaleY(0);
+    -ms-transform: scaleY(0);
+    transform: scaleY(0);
   
-  -webkit-transform-origin: top;
-       -o-transform-origin: top;
-      -ms-transform-origin: top;
-          transform-origin: top;
+    -webkit-transform-origin: top;
+    -o-transform-origin: top;
+    -ms-transform-origin: top;
+    transform-origin: top;
   
-  -webkit-transition: -webkit-transform 0.2s ease;
-            -o-transition: -o-transform 0.2s ease;
-          -ms-transition: -ms-transform 0.2s ease;
-                  transition: transform 0.2s ease;
+    -webkit-transition: -webkit-transform 0.2s ease;
+    -o-transition: -o-transform 0.2s ease;
+    -ms-transition: -ms-transform 0.2s ease;
+    transition: transform 0.2s ease;
 }
 
 .slidedown.active {
-  -webkit-transform: scaleY(1);
-       -o-transform: scaleY(1);
-      -ms-transform: scaleY(1);
-          transform: scaleY(1);
+     -webkit-transform: scaleY(1);
+     -o-transform: scaleY(1);
+     -ms-transform: scaleY(1);
+     transform: scaleY(1);
 }
 .disabled {
-  background:rgba(1,1,1,0.2);
-  border:0px solid;
-  cursor:progress;
+     background:rgba(1,1,1,0.2);
+     border:0px solid;
+     cursor:progress;
 }
 .fileUpload {
-    position: relative;
-    overflow: hidden;
+     position: relative;
+     overflow: hidden;
 }
 .fileUpload input.upload {
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin: 0;
-    padding: 0;
-    font-size: 20px;
-    cursor: pointer;
-    opacity: 0;
-    filter: alpha(opacity=0);
+     position: absolute;
+     top: 0;
+     right: 0;
+     margin: 0;
+     padding: 0;
+     font-size: 20px;
+     cursor: pointer;
+     opacity: 0;
+     filter: alpha(opacity=0);
 }
 .autocomplete-suggestions { cursor:pointer;border: 1px solid #999; background: #FFF; cursor: default; overflow: auto; -webkit-box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64); -moz-box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64); box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64); }
 .autocomplete-suggestion { cursor:pointer;padding: 2px 5px; white-space: nowrap; overflow: hidden; }
@@ -96,46 +94,41 @@ body {
 .autocomplete-group strong { font-weight: bold; font-size: 16px; color: #000; display: block; border-bottom: 1px solid #000; }
 
 .spinner {
-  margin: 20px auto 0;
-  width: 90px;
-  text-align: center;
+     margin: 20px auto 0;
+     width: 90px;
+     text-align: center;
 }
-
 .spinner > div {
-  width: 20px;
-  height: 50px;
-  background-color: #333;
-  border-radius: 10px;
-  display: inline-block;
-  -webkit-animation: sk-bouncedelay 1.6s infinite ease-in-out both;
-  animation: sk-bouncedelay 1.6s infinite ease-in-out both;
+     width: 20px;
+     height: 50px;
+     background-color: #333;
+     border-radius: 10px;
+     display: inline-block;
+     -webkit-animation: sk-bouncedelay 1.6s infinite ease-in-out both;
+     animation: sk-bouncedelay 1.6s infinite ease-in-out both;
 }
-
 .spinner .bounce1 {
-    background: #ff3030;
-  -webkit-animation-delay: -1.2s;
-  animation-delay: -1.2s;
+     background: #ff3030;
+     -webkit-animation-delay: -1.2s;
+     animation-delay: -1.2s;
 }
-
 .spinner .bounce2 {
-    background: #fee123;
-  -webkit-animation-delay: -0.8s;
-  animation-delay: -0.8s;
+     background: #fee123;
+     -webkit-animation-delay: -0.8s;
+     animation-delay: -0.8s;
 }
 
 .spinner .bounce3 {
     background: #0071ce;
-  -webkit-animation-delay: -0.4s;
-  animation-delay: -0.4s;
+    -webkit-animation-delay: -0.4s;
+    animation-delay: -0.4s;
 }
-
-@-webkit-keyframes sk-bouncedelay {
-  0%, 80%, 100% { -webkit-transform: scale(0) }
-  40% { -webkit-transform: scale(1.0) }
+    @-webkit-keyframes sk-bouncedelay {
+    0%, 80%, 100% { -webkit-transform: scale(0) }
+    40% { -webkit-transform: scale(1.0) }
 }
-
-@keyframes sk-bouncedelay {
-  0%, 80%, 100% { 
+    @keyframes sk-bouncedelay {
+    0%, 80%, 100% { 
     -webkit-transform: scale(0.0);
     transform: scale(0.0);
   } 40% { 
@@ -155,29 +148,29 @@ body {
     vertical-align: middle;
 }
 .vcenter {
-  min-height: 90%;  
-  min-height: 90vh; 
+    min-height: 90%;  
+    min-height: 90vh; 
 
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex; 
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex; 
   
     -webkit-box-align : center;
-  -webkit-align-items : center;
-       -moz-box-align : center;
-       -ms-flex-align : center;
-          align-items : center;
-  width: 100%;
-         -webkit-box-pack : center;
-            -moz-box-pack : center;
-            -ms-flex-pack : center;
-  -webkit-justify-content : center;
-          justify-content : center;
+    -webkit-align-items : center;
+    -moz-box-align : center;
+    -ms-flex-align : center;
+    align-items : center;
+    width: 100%;
+    -webkit-box-pack : center;
+    -moz-box-pack : center;
+    -ms-flex-pack : center;
+    -webkit-justify-content : center;
+    justify-content : center;
 }
 table {
-  border-collapse: inherit;
+    border-collapse: inherit;
 }
 </style>
 </head>
@@ -189,9 +182,7 @@ table {
       <div class="bounce2"></div>
       <div class="bounce3"></div>
     </div>
-
 </div>
-
   <div id="slideout">
     <img src="http://slp.ph/imgs/feedback.png" alt="Feedback" />
     <div id="slideout_inner">
@@ -207,11 +198,9 @@ table {
           <div class="form-group">
               <button class="btn btn-primary" id="sendfeedback" style="padding:4px;margin-left:1em">Submit</button>
           </div>
-      
       </div>
     </div>
   </div>
-
 <?php include "../nav.php"; ?>
 <script>
 emailmaster = [];
@@ -286,7 +275,6 @@ function changeValue2(str){
              dataType:"json"
           });//endajax
       }
-
 }
 function removeIsRegion(str) {
   var regionlistarray = ["NCR","CAR","REGION I","REGION II","REGION III","REGION IV-A","REGION IV-B","REGION V","REGION VI","REGION VII","REGION VIII","REGION IX","REGION X","REGION XI","REGION XII","CARAGA","ARMM","NIR"]
@@ -294,7 +282,6 @@ function removeIsRegion(str) {
       $("#recip_region").prop('disabled',false);
   }
 }
-
 function getEmail(str,str2) {
           var aData = { 
             'action'    : "getemails_individual", 
@@ -329,10 +316,7 @@ function typeChange(){
                 <div class="col-md-offset-2 col-md-8" style="margin-top:0">
                   <h2 style="font-weight:bold;margin-bottom:0">Resend</h2>
                   File: <span style="color:#00ADDe"><?php echo $rowe['title'];?></span>
-
 <form id="myForm" method="POST" enctype="multipart/form-data">
-
-                 
                   <div id="notificationpanel" style="margin-top:1em;">
                     <hr>
                     Email notifications will be sent to the selected recipients. Please note that due to technical restrictions, we can only notify one (1) region at a time (for now). There are no restrictions for NPMO or RPMO group recipients.
@@ -349,18 +333,15 @@ function typeChange(){
                               //$prof->bindParam(':hrdbida', $_SESSION['pageid']);
                               $sql->execute();
                          //     $p=$prof->fetch(PDO::FETCH_ASSOC);
-                        
                         while($npmoname=$sql->fetch(PDO::FETCH_ASSOC))
                         {
                       ?>
                         <option value=" <?php echo $npmoname['npmoname']; ?>"> <?php echo $npmoname['npmoname']; ?> </option>
-                    
                       <?php
                         }
                               } catch(PDOException $e) {
                             echo "Error: " . $e->getMessage();
                             }//en
-                   
                         ?>
                       </select>
                     <!-- upto this -->      
@@ -377,18 +358,15 @@ function typeChange(){
                               //$prof->bindParam(':hrdbida', $_SESSION['pageid']);
                               $sql->execute();
                          //     $p=$prof->fetch(PDO::FETCH_ASSOC);
-                        
                         while($rpmoname=$sql->fetch(PDO::FETCH_ASSOC))
                         {
                       ?>
                         <option value=" <?php echo $rpmoname['rpmoname']; ?>"> <?php echo $rpmoname['rpmoname']; ?> </option>
-                    
                       <?php
                         }
                               } catch(PDOException $e) {
                             echo "Error: " . $e->getMessage();
                             }//en
-                   
                         ?>
                       </select>
                     <!-- upto this -->           
@@ -405,52 +383,46 @@ function typeChange(){
                               //$prof->bindParam(':hrdbida', $_SESSION['pageid']);
                               $sql->execute();
                          //     $p=$prof->fetch(PDO::FETCH_ASSOC);
-                        
                         while($regname=$sql->fetch(PDO::FETCH_ASSOC))
                         {
                       ?>
                         <option value=" <?php echo $regname['regname']; ?>"> <?php echo $regname['regname']; ?> </option>
-                    
                       <?php
                         }
                               } catch(PDOException $e) {
                             echo "Error: " . $e->getMessage();
                             }//en
-                   
                         ?>
                       </select>
                     <!-- upto this -->  
-
                       </div>
                   </div>
-<?PhP
-$sql = "SELECT id, CONCAT(lastname, ', ', firstname) as name FROM hr_db";
-$partnerIDArray = [];
-$partnerArray = [];
+    <?PhP
+    $sql = "SELECT id, CONCAT(lastname, ', ', firstname) as name FROM hr_db";
+    $partnerIDArray = [];
+    $partnerArray = [];
 
-foreach ($db->query($sql) as $results)
-{
-  $partnerIDArray[] = intval($results["id"]);
-  $partnerArray[] = $results["name"];
-}
+    foreach ($db->query($sql) as $results)
+    {
+      $partnerIDArray[] = intval($results["id"]);
+      $partnerArray[] = $results["name"];
+    }
 
-$object = new StdClass;
-$i = 0;
-foreach ($partnerIDArray as $foo)
-{
-  $object->$foo = $partnerArray[$i];
-  $i++;
-}
-?>
-<script>
-$(document).ready(function() {
-  window.selectPartner = "";
-  window.taggedPeople = [];
-$(function () {
-    'use strict';
-
+    $object = new StdClass;
+    $i = 0;
+    foreach ($partnerIDArray as $foo)
+    {
+      $object->$foo = $partnerArray[$i];
+      $i++;
+    }
+    ?>
+    <script>
+    $(document).ready(function() {
+      window.selectPartner = "";
+      window.taggedPeople = [];
+    $(function () {
+        'use strict';
     var countriesArray = $.map(<?php echo json_encode($object);?>, function (value, key) { return { value: value, data: key }; });
-    
     $('#autocompleteajax').autocomplete({
         lookup: countriesArray,
         lookupFilter: function(suggestion, originalQuery, queryLowerCase) {
@@ -487,7 +459,6 @@ $(function () {
             $('#autocomplete-ajax-x-2').val(hint);
         },
         onInvalidateSelection: function() {
-            
         }
     });
 });
@@ -509,49 +480,49 @@ $(function () {
                     <?php
                     if ($rowe['doctype']=="Blast") {
                     ?>
-<div class="bodycontainer" style="margin-top:1em;margin-bottom:1em">
-      <div style="padding:0;width:100%!important;margin:0" marginheight="0" marginwidth="0"><center><table cellpadding="8" cellspacing="0" style="padding:0;width:100%!important;background:#ffffff;margin:0;background-color:#ffffff" border="0"><tr><td valign="top">
-      <table cellpadding="0" cellspacing="0" style="border-radius:4px;border:1px #dceaf5 solid;border-collapse:none" border="0" align="center">
-      <tr><td><table cellpadding="0" cellspacing="0" style="line-height:25px" border="0" align="center"><tr><td colspan="3" height="30"></td></tr><tr><td width="36"></td>
-      <td width="454" align="center" style="color:#444444;border-collapse:collapse;font-size:9pt;font-family:proxima_nova,&#39;Open Sans&#39;,&#39;Lucida Grande&#39;,&#39;Segoe UI&#39;,Arial,Verdana,&#39;Lucida Sans Unicode&#39;,Tahoma,&#39;Sans Serif&#39;;max-width:454px" valign="top">
-      <div style="border:1px solid #ccc;background:#e1e1e1;height:130px;width:90%;vertical-align:middle;font-size:12px;line-height:1.1"><h3>Your image here</h3><br>Recommended file size: 500kb<br>Larger file size may not load on mobile devices</div>
-      Cant see this image? <a href="#" style="color:#4583ed">Click here</a>
-      <td width="36"></td></tr><tr><td colspan="3" height="36"></td></tr></table></td></tr></table><table cellpadding="0" cellspacing="0" align="center" border="0"><tr><td height="10"></td></tr><tr><td style="padding:0;border-collapse:collapse"><table cellpadding="0" cellspacing="0" align="center" border="0"><tr style="color:#a8b9c6;font-size:11px;font-family:proxima_nova,&#39;Open Sans&#39;,&#39;Lucida Grande&#39;,&#39;Segoe UI&#39;,Arial,Verdana,&#39;Lucida Sans Unicode&#39;,Tahoma,&#39;Sans Serif&#39;"><td width="200" align="left"></td>
-      <td width="328" align="right"><span style="font-size:12px">Sent through <a href="http://slp.ph" style="text-decoration:none;color:#4583ed">SLP Online</a> by <span id="emailfrom"><?php echo $_SESSION["fullname"]; ?></span></span><br></td></td>
-      </tr></table></td></tr></table></td></tr></table></center></div></div>
-      <hr style="margin-bottom:0">
+                  <div class="bodycontainer" style="margin-top:1em;margin-bottom:1em">
+                  <div style="padding:0;width:100%!important;margin:0" marginheight="0" marginwidth="0"><center><table cellpadding="8" cellspacing="0" style="padding:0;width:100%!important;background:#ffffff;margin:0;background-color:#ffffff" border="0"><tr><td valign="top">
+                  <table cellpadding="0" cellspacing="0" style="border-radius:4px;border:1px #dceaf5 solid;border-collapse:none" border="0" align="center">
+                  <tr><td><table cellpadding="0" cellspacing="0" style="line-height:25px" border="0" align="center"><tr><td colspan="3" height="30"></td></tr><tr><td width="36"></td>
+                  <td width="454" align="center" style="color:#444444;border-collapse:collapse;font-size:9pt;font-family:proxima_nova,&#39;Open Sans&#39;,&#39;Lucida Grande&#39;,&#39;Segoe UI&#39;,Arial,Verdana,&#39;Lucida Sans Unicode&#39;,Tahoma,&#39;Sans Serif&#39;;max-width:454px" valign="top">
+                  <div style="border:1px solid #ccc;background:#e1e1e1;height:130px;width:90%;vertical-align:middle;font-size:12px;line-height:1.1"><h3>Your image here</h3><br>Recommended file size: 500kb<br>Larger file size may not load on mobile devices</div>
+                  Cant see this image? <a href="#" style="color:#4583ed">Click here</a>
+                  <td width="36"></td></tr><tr><td colspan="3" height="36"></td></tr></table></td></tr></table><table cellpadding="0" cellspacing="0" align="center" border="0"><tr><td height="10"></td></tr><tr><td style="padding:0;border-collapse:collapse"><table cellpadding="0" cellspacing="0" align="center" border="0"><tr style="color:#a8b9c6;font-size:11px;font-family:proxima_nova,&#39;Open Sans&#39;,&#39;Lucida Grande&#39;,&#39;Segoe UI&#39;,Arial,Verdana,&#39;Lucida Sans Unicode&#39;,Tahoma,&#39;Sans Serif&#39;"><td width="200" align="left"></td>
+                  <td width="328" align="right"><span style="font-size:12px">Sent through <a href="http://slp.ph" style="text-decoration:none;color:#4583ed">SLP Online</a> by <span id="emailfrom"><?php echo $_SESSION["fullname"]; ?></span></span><br></td></td>
+                  </tr></table></td></tr></table></td></tr></table></center></div></div>
+                  <hr style="margin-bottom:0">
                     <?php
                     } else {
                     ?>
 <!--EMAIL-->
-                      <div class="bodycontainer" style="margin-top:1em;margin-bottom:1em">
-<div style="padding:0;width:100%!important;margin:0" marginheight="0" marginwidth="0"><center><table cellpadding="8" cellspacing="0" style="padding:0;width:100%!important;background:#ffffff;margin:0;background-color:#ffffff" border="0"><tr><td valign="top">
-<table cellpadding="0" cellspacing="0" style="border-radius:4px;border:1px #dceaf5 solid;border-collapse:none" border="0" align="center"><tr><td colspan="3" height="6"></td></tr><tr style="line-height:0px"><td width="100%" style="font-size:0px" align="center" height="1">
-  <img width="40px" style="max-height:104px;width:55px;margin-top:15px" alt="" src="http://slp.ph/imgs/emailslplogo.png"></td></tr><tr><td><table cellpadding="0" cellspacing="0" style="line-height:25px" border="0" align="center"><tr><td colspan="3" height="30"></td></tr><tr><td width="36"></td>
-<td width="454" align="left" style="color:#444444;border-collapse:collapse;font-size:11pt;font-family:proxima_nova,&#39;Open Sans&#39;,&#39;Lucida Grande&#39;,&#39;Segoe UI&#39;,Arial,Verdana,&#39;Lucida Sans Unicode&#39;,Tahoma,&#39;Sans Serif&#39;;max-width:454px" valign="top">
-  Dear Sir/Madam,<br><br>
-  This is to provide you with a copy of the <b id="emaildoctype" style="color:red">Doc Type</b> with subject <b id="emailsubject" style="color:red">Document Title / Subject</b> <span id="emaildate"></span>.
-  <br><br>
-  <i id="emailsummary" style="color:red">Remarks / Summary</i>
-  <br><br>
-  <table border="0" cellpadding="0" cellspacing="0" style="background-color:#18bc9c; border:0px solid #4285f4; border-radius:5px;">
-            <tr>
-                <td align="center" valign="middle" style="color:#FFFFFF; font-family:Helvetica, Arial, sans-serif; font-size:15px; font-weight:bold; line-height:140%; padding-top:9px; padding-right:26px; padding-bottom:8px; padding-left:26px;">
+                  <div class="bodycontainer" style="margin-top:1em;margin-bottom:1em">
+                  <div style="padding:0;width:100%!important;margin:0" marginheight="0" marginwidth="0"><center><table cellpadding="8" cellspacing="0" style="padding:0;width:100%!important;background:#ffffff;margin:0;background-color:#ffffff" border="0"><tr><td valign="top">
+                  <table cellpadding="0" cellspacing="0" style="border-radius:4px;border:1px #dceaf5 solid;border-collapse:none" border="0" align="center"><tr><td colspan="3" height="6"></td></tr><tr style="line-height:0px"><td width="100%" style="font-size:0px" align="center" height="1">
+                    <img width="40px" style="max-height:104px;width:55px;margin-top:15px" alt="" src="http://slp.ph/imgs/emailslplogo.png"></td></tr><tr><td><table cellpadding="0" cellspacing="0" style="line-height:25px" border="0" align="center"><tr><td colspan="3" height="30"></td></tr><tr><td width="36"></td>
+                  <td width="454" align="left" style="color:#444444;border-collapse:collapse;font-size:11pt;font-family:proxima_nova,&#39;Open Sans&#39;,&#39;Lucida Grande&#39;,&#39;Segoe UI&#39;,Arial,Verdana,&#39;Lucida Sans Unicode&#39;,Tahoma,&#39;Sans Serif&#39;;max-width:454px" valign="top">
+                    Dear Sir/Madam,<br><br>
+                    This is to provide you with a copy of the <b id="emaildoctype" style="color:red">Doc Type</b> with subject <b id="emailsubject" style="color:red">Document Title / Subject</b> <span id="emaildate"></span>.
+                    <br><br>
+                    <i id="emailsummary" style="color:red">Remarks / Summary</i>
+                    <br><br>
+                    <table border="0" cellpadding="0" cellspacing="0" style="background-color:#18bc9c; border:0px solid #4285f4; border-radius:5px;">
+                              <tr>
+                  <td align="center" valign="middle" style="color:#FFFFFF; font-family:Helvetica, Arial, sans-serif; font-size:15px; font-weight:bold; line-height:140%; padding-top:9px; padding-right:26px; padding-bottom:8px; padding-left:26px;">
                     <a href="" target="_blank" style="color:#FFFFFF; text-decoration:none;">View Details</a>
-                </td>
-                <td align="center" valign="middle" style="background-color:#4285f4; color:#FFFFFF; font-family:Helvetica, Arial, sans-serif; font-size:15px; font-weight:bold; line-height:140%; padding-top:9px; padding-right:26px; padding-bottom:8px; padding-left:26px; border-radius:5px;border-top-left-radius: 0px;border-bottom-left-radius: 0px">
+                  </td>
+                  <td align="center" valign="middle" style="background-color:#4285f4; color:#FFFFFF; font-family:Helvetica, Arial, sans-serif; font-size:15px; font-weight:bold; line-height:140%; padding-top:9px; padding-right:26px; padding-bottom:8px; padding-left:26px; border-radius:5px;border-top-left-radius: 0px;border-bottom-left-radius: 0px">
                     <a href="" target="_blank" style="color:#FFFFFF; text-decoration:none;">Download</a>
-                </td>
+                  </td>
             </tr>
   </table>
   <br>
   Thank you for your usual support and cooperation. Happy working!
   <br>
     </td>
-<td width="36"></td>
-</tr><tr><td colspan="3" height="36"></td></tr></table></td></tr></table><table cellpadding="0" cellspacing="0" align="center" border="0"><tr><td height="10"></td></tr><tr><td style="padding:0;border-collapse:collapse"><table cellpadding="0" cellspacing="0" align="center" border="0"><tr style="color:#a8b9c6;font-size:11px;font-family:proxima_nova,&#39;Open Sans&#39;,&#39;Lucida Grande&#39;,&#39;Segoe UI&#39;,Arial,Verdana,&#39;Lucida Sans Unicode&#39;,Tahoma,&#39;Sans Serif&#39;"><td width="200" align="left"></td>
-<td width="328" align="right"><span style="font-size:12px">Sent through <a href="http://slp.ph" style="text-decoration:none;color:#4583ed">SLP Online</a> by <span id="emailfrom"><?php echo $_SESSION['fullname']; ?></span></span></td>
-</tr></table></td></tr></table></td></tr></table></center></div>
+                <td width="36"></td>
+                </tr><tr><td colspan="3" height="36"></td></tr></table></td></tr></table><table cellpadding="0" cellspacing="0" align="center" border="0"><tr><td height="10"></td></tr><tr><td style="padding:0;border-collapse:collapse"><table cellpadding="0" cellspacing="0" align="center" border="0"><tr style="color:#a8b9c6;font-size:11px;font-family:proxima_nova,&#39;Open Sans&#39;,&#39;Lucida Grande&#39;,&#39;Segoe UI&#39;,Arial,Verdana,&#39;Lucida Sans Unicode&#39;,Tahoma,&#39;Sans Serif&#39;"><td width="200" align="left"></td>
+                <td width="328" align="right"><span style="font-size:12px">Sent through <a href="http://slp.ph" style="text-decoration:none;color:#4583ed">SLP Online</a> by <span id="emailfrom"><?php echo $_SESSION['fullname']; ?></span></span></td>
+                </tr></table></td></tr></table></td></tr></table></center></div>
 
                   </div>
                   <hr style="margin-bottom:0">
@@ -560,8 +531,7 @@ $(function () {
                     }
                     ?>
 
-                </div><!--end notifpanel-->
-                
+                </div><!--end notifpanel-->    
               </form>
           </div>
           <div class="col-md-12" style="padding-right:0">
@@ -574,14 +544,12 @@ $(function () {
 <!-- Modal -->
       <div class="modal fade" id="myModal" role="dialog" style="margin-top:3em">
         <div class="modal-dialog modal-sm">
-
           <div class="modal-content" style="padding:1em;padding-top:0.5em;">
                   <h3 style="color:#5cb85c;margin-bottom:6px">Resent!</h3>
                   <span style="font-size:13px">Note: Emails sent may take 30mins to arrive</span><br><br>
                   <button type="button" class="btn btn-primary pull-right" style="background:#5cb85c;border:0;margin-top:0;padding:5px 10px 5px 10px" id="okaybtn" data-dismiss="modal">Okay</button>
                   <div class="clearfix"></div>
           </div>
-          
         </div>
       </div>
       <!-- Modal -->
@@ -606,8 +574,6 @@ $('#subsector').tagit({
             console.log(emailmaster);
         }
 });
-
-
         //$("#angelimg").hide().delay( 400 ).fadeIn( 500 );
         //$("#searchblock").hide().delay( 1000 ).slideDown( 400 );
 
@@ -656,11 +622,8 @@ $("#uploadBtn").click(function(event) {
                 }
       });
 });
-
-
 });
 </script>
 <script type="text/javascript" src="http://momentjs.com/downloads/moment.min.js"></script>
-
 </body>
 </html>
