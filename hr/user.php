@@ -72,6 +72,7 @@ function timeago($ptime)
     <link rel="stylesheet" type="text/css" href="../css/DTbootstrap.css">
     <link href="../css/jquery.tagit.css" rel="stylesheet" type="text/css">
     <link href="../css/tagit.ui-zendesk.css" rel="stylesheet" type="text/css">
+    <link href="../css/jquery.cssemoticons.css" media="screen" rel="stylesheet" type="text/css" />
     <script src="../js/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="../js/jquery.dataTables.js"></script>
     <script src="../js/DTbootstrap.js"></script>
@@ -79,9 +80,13 @@ function timeago($ptime)
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="../js/tag-it.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript" src="http://momentjs.com/downloads/moment.min.js"></script>
-      <script src="https://code.highcharts.com/highcharts.js"></script>
-
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="../js/jquery.cssemoticons.min.js" type="text/javascript"></script>
     <style>
+ #small { font-size: 15px; }
+ #large { font-size: 72px; }
+ #regular { font-size: 20px; }
+ .wrapped { width: 350px; }
 
 body {
     background-color: #f7f9fb;
@@ -477,9 +482,9 @@ if ($_SESSION['permlvl']>0 || ($_SESSION['permlvl']<1 && $_SESSION['id']==$_SESS
 
 
         if($_SESSION['permlvl']>0 || $_SESSION['id']==$row8[4]) {
-            echo '<tr style="cursor:default;"><td style="font-size:15px;vertical-align:middle"><div class="col-sm-12" style="text-align:left;line-height:1.1;padding-left:0.7em">'.$row8[1].'<br><span style="font-size:12px"><a href="http://slp.ph/hr/user.php?id='.$row8[4].'" style="color:#00ADDe;text-decoration:none">'.ucwords(strtolower($row8[0])).'</a></span><span style="color:#444;font-size:12px"> ('.$row8[3].') <span style="color:#888;font-size:12px">'.timeago(strtotime($row8[2])).'</span></span></span>&nbsp;&nbsp;<span class="glyphicon glyphicon-edit" onclick="editwp('.$row8[5].');" style="color:#34495e;font-size:12px"></span>&nbsp;<span class="glyphicon glyphicon-remove" onclick="delwp('.$row8[5].');" style="color:#e74c3c;font-size:12px"></span><br><br></div><div class="clearfix"></div></div></td></tr>';
+            echo '<tr style="cursor:default;"><td style="font-size:15px;vertical-align:middle"><div class="col-sm-12" style="text-align:left;line-height:1.1;padding-left:0.7em"><span class="text" id="small">'.$row8[1].'</span><br><span style="font-size:12px"><a href="http://slp.ph/hr/user.php?id='.$row8[4].'" style="color:#00ADDe;text-decoration:none">'.ucwords(strtolower($row8[0])).'</a></span><span style="color:#444;font-size:12px"> ('.$row8[3].') <span style="color:#888;font-size:12px">'.timeago(strtotime($row8[2])).'</span></span></span>&nbsp;&nbsp;<span class="glyphicon glyphicon-edit" onclick="editwp('.$row8[5].');" style="color:#34495e;font-size:12px"></span>&nbsp;<span class="glyphicon glyphicon-remove" onclick="delwp('.$row8[5].');" style="color:#e74c3c;font-size:12px"></span><br><br><br></div><div class="clearfix"></div></div></td></tr>';
           }else{
-             echo '<tr style="cursor:default;"><td style="font-size:15px;vertical-align:middle"><div class="col-sm-12" style="text-align:left;line-height:1.1;padding-left:0.7em">'.$row8[1].'<br><span style="font-size:12px"><a href="http://slp.ph/hr/user.php?id='.$row8[4].'" style="color:#00ADDe;text-decoration:none">'.ucwords(strtolower($row8[0])).'</a></span><span style="color:#444;font-size:12px"> ('.$row8[3].') <span style="color:#888;font-size:12px">'.timeago(strtotime($row8[2])).'</span></span></span><br><br></div><div class="clearfix"></div></div></td></tr>';
+             echo '<tr style="cursor:default;"><td style="font-size:15px;vertical-align:middle"><div class="col-sm-12" style="text-align:left;line-height:1.1;padding-left:0.7em"><span class="text" id="small">'.$row8[1].'</span></p><br><span style="font-size:12px"><a href="http://slp.ph/hr/user.php?id='.$row8[4].'" style="color:#00ADDe;text-decoration:none">'.ucwords(strtolower($row8[0])).'</a></span><span style="color:#444;font-size:12px"> ('.$row8[3].') <span style="color:#888;font-size:12px">'.timeago(strtotime($row8[2])).'</span></span></span><br><br><br></div><div class="clearfix"></div></div></td></tr>';
 
           }
 
@@ -895,6 +900,29 @@ if ( ($_SESSION['permlvl']>0 && $rows['hrdbid']!=$_SESSION['pageid']) || ($_SESS
       
     </div>
   </div>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $('.text').emoticonize({
+        //delay: 800,
+        //animate: false,
+        //exclude: 'pre, code, .no-emoticons'
+      });
+      $('#toggle-headline').toggle(
+        function(){
+          $('#large').unemoticonize({
+            //delay: 800,
+            //animate: false
+          })
+        }, 
+        function(){
+          $('#large').emoticonize({
+            //delay: 800,
+            //animate: false
+          })
+        }
+      );
+    })
+  </script>
 <script>
 $( document ).ready(function() {
   $("#tooltip1").popover({
