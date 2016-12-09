@@ -393,10 +393,10 @@ h3 {
 
             while($rowsb=$stmt->fetch(PDO::FETCH_NUM,pdo::FETCH_ORI_NEXT)) { 
 
-                if($rowsb[4]=="") {
+              if($rowsb[4]=="") {
                         if($rowsb[6]==0) {
                             if($rowsb[0]=="upload") { 
-                              echo '<div class="row"><div class="col-md-3"><a href="../hr/user.php?id='.$rowsb[5].'"><img src="../imgs/partner.png" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$rowsb[1].' '.$rowsb[2].'</b></a> File '.$rowsb[0].'&nbsp;in E-Library<br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($rowsb[3])).'</span></div></div><hr>';
+                              echo '<div class="row"><div class="col-md-3"><a href="../hr/user.php?id='.$rowsb[5].'"><img src="../imgs/partner.png" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$rowsb[1].' '.$rowsb[2].'</b></a>&nbsp;'.$rowsb[0].'ed a file in E-Library<br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($rowsb[3])).'</span></div></div><hr>';
                             }elseif($rowsb[0]=="uploadpic"){
                                   echo '<div class="row"><div class="col-md-3"><a href="../hr/user.php?id='.$rowsb[5].'"><img src="../imgs/partner.png" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$rowsb[1].' '.$rowsb[2].'</b></a>'.$rowsb[0].'ed his new profile photo.<br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($rowsb[3])).'</span></div></div><hr>';
                             }elseif($rowsb[0]=="reuploadpic"){
@@ -404,7 +404,7 @@ h3 {
                             }
                         }else {
                             if($rowsb[0]=="upload") { 
-                              echo '<div class="row"><div class="col-md-3"><a href="../hr/user.php?id='.$rowsb[5].'"><img src="../imgs/female.png" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$rowsb[1].' '.$rowsb[2].'</b></a> File '.$rowsb[0].'&nbsp;in E-Library<br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($rowsb[3])).'</span></div></div><hr>';
+                              echo '<div class="row"><div class="col-md-3"><a href="../hr/user.php?id='.$rowsb[5].'"><img src="../imgs/female.png" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$rowsb[1].' '.$rowsb[2].'</b></a>&nbsp;'.$rowsb[0].'ed a file in E-Library<br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($rowsb[3])).'</span></div></div><hr>';
                             }elseif($rowsb[0]=="uploadpic"){
                                   echo '<div class="row"><div class="col-md-3"><a href="../hr/user.php?id='.$rowsb[5].'"><img src="../imgs/female.png" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$rowsb[1].' '.$rowsb[2].'</b></a>'.$rowsb[0].'ed her new profile photo.<br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($rowsb[3])).'</span></div></div><hr>';
                             }elseif($rowsb[0]=="reuploadpic"){
@@ -416,7 +416,7 @@ h3 {
                       
                     if($rowsb[6]==0){                    
                         if($rowsb[0]=="upload") { 
-                              echo '<div class="row"><div class="col-md-3"><a href="../hr/user.php?id='.$rowsb[5].'"><img src="../docs/profilepics/'.$rowsb[4].'" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$rowsb[1].' '.$rowsb[2].'</b></a> File '.$rowsb[0].'&nbsp;in E-Library<br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($rowsb[3])).'</span></div></div><hr>';
+                              echo '<div class="row"><div class="col-md-3"><a href="../hr/user.php?id='.$rowsb[5].'"><img src="../docs/profilepics/'.$rowsb[4].'" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$rowsb[1].' '.$rowsb[2].'</b></a>&nbsp;'.$rowsb[0].'ed a file in E-Library<br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($rowsb[3])).'</span></div></div><hr>';
                         }elseif($rowsb[0]=="uploadpic"){
                                   echo '<div class="row"><div class="col-md-3"><a href="../hr/user.php?id='.$rowsb[5].'"><img src="../docs/profilepics/'.$rowsb[4].'" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$rowsb[1].' '.$rowsb[2].'</b></a>'.$rowsb[0].'ed his new profile photo.<br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($rowsb[3])).'</span></div></div><hr>';
                         }elseif($rowsb[0]=="reuploadpic"){
@@ -425,7 +425,7 @@ h3 {
                     }
                     else{
                         if($rowsb[0]=="upload") { 
-                              echo '<div class="row"><div class="col-md-3"><a href="../hr/user.php?id='.$rowsb[5].'"><img src="../docs/profilepics/'.$rowsb[4].'" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$rowsb[1].' '.$rowsb[2].'</b></a> File '.$rowsb[0].'&nbsp;in E-Library<br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($rowsb[3])).'</span></div></div><hr>';
+                              echo '<div class="row"><div class="col-md-3"><a href="../hr/user.php?id='.$rowsb[5].'"><img src="../docs/profilepics/'.$rowsb[4].'" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$rowsb[1].' '.$rowsb[2].'</b></a>&nbsp;'.$rowsb[0].'ed a file in E-Library<br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($rowsb[3])).'</span></div></div><hr>';
                         }elseif($rowsb[0]=="uploadpic"){
                                   echo '<div class="row"><div class="col-md-3"><a href="../hr/user.php?id='.$rowsb[5].'"><img src="../docs/profilepics/'.$rowsb[4].'" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$rowsb[1].' '.$rowsb[2].'</b></a>'.$rowsb[0].'ed her new profile photo.<br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($rowsb[3])).'</span></div></div><hr>';
                         }elseif($rowsb[0]=="reuploadpic"){
@@ -434,7 +434,6 @@ h3 {
 
                     }
               }
-
             
 
     }
