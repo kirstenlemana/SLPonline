@@ -4,20 +4,14 @@ require("../mailer/class.phpmailer.php");
 require("../mailer/class.smtp.php");
 require "../zxcd9.php";
 //start post
-if(!empty($_POST)) 
-{ 
+if(!empty($_POST)) { 
 //filter input
 $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
-
         $id = test_input($_POST['id']);
-
         $query = "SELECT firstname, emailaddress, password FROM hr_db WHERE id=:id"; 
-         
         $query_params = array( 
             ':id' => $id 
         ); 
-         
         try { 
             $stmt = $db->prepare($query); 
             $result = $stmt->execute($query_params); 
@@ -29,18 +23,14 @@ $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         $subjectname = $row["firstname"];
         $emailaddress = $row["emailaddress"];
         $password = $row["password"];
-
         $from = "noreply@slp.ph";
         $fromname = "SLP Online";
-
 ob_start();
 ?>
 <body>
 <table width=100% cellpadding=12 cellspacing=0 border=0>
   <tr><td><div style="overflow: hidden;"><font size=-1>
     <div style="Margin:0;padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;min-width:100%;background-color:#f1f2f6">
-
-
 <table style="border-spacing:0;width:100%;background-color:#f1f2f6;table-layout:fixed">
 <tr>
 <td align="center" style="padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;vertical-align:top">
@@ -139,20 +129,15 @@ ob_start();
     </td>
     </tr>
     </table>
-
 </td>
 </tr>
 </table>
-
 <table width="610" style="border-spacing:0;Margin:0 auto">
 <tr>
 <td style="padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;vertical-align:top">
-
 </td>
 </tr>
 </table>
-
-
 </center>
 </td>
 </tr>
@@ -163,10 +148,8 @@ ob_start();
 </body>
 <?php
         $myvar = ob_get_clean();
-
         $mail = new PHPMailer();
         $mail->IsSMTP();
-        
         $mail->SMTPAuth = true;
         $mail->SMTPSecure = 'ssl';
         $mail->Host = "smtp.gmail.com";
@@ -175,20 +158,14 @@ ob_start();
         $mail->Password = "turtles98!!";
         $mail->From = "info@slp.ph";
         $mail->FromName = "SLP";
-
         $mail->IsHTML(true);
-        
         $mail->Subject = "[SLP] BOOM! We've started it for you, ".$subjectname.".";
         $mail->Body = $myvar;
         $mail->AddAddress($emailaddress);
-        
-       if(!$mail->Send()) {
+        if(!$mail->Send()) {
           echo "Mail Error: " . $mail->ErrorInfo;
        } else {
           echo "good";
        }
-
-
 }//end post
-     
 ?>
