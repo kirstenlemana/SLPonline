@@ -6,13 +6,13 @@
     try 
     { 
         $db = new PDO("mysql:host={$host};dbname={$dbname};charset=utf8", $username, $password, $options);
-    $db->exec("SET time_zone = '+0:00'");
+        $db->exec("SET time_zone = '+0:00'");
     } 
     catch(PDOException $ex) 
     { 
         die("Failed to connect to the database: " . $ex->getMessage()); 
     } 
-    $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); 
+        $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,7 +28,6 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <style>
-
 body {
     background-color: #f7f9fb;
     background-size: cover;
@@ -38,7 +37,6 @@ body {
     padding-top:15px !important; 
     padding-bottom:0 !important;
     height: 40px;
-    
 }
 .navbar {min-height:45px !important;background-color: #000}
 #bootstrapSelectForm .selectContainer .form-control-feedback {
@@ -52,24 +50,22 @@ body {
 .vcenter {
   min-height: 90%;  
   min-height: 90vh; 
-
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex; 
-  
-    -webkit-box-align : center;
+  -webkit-box-align : center;
   -webkit-align-items : center;
-       -moz-box-align : center;
-       -ms-flex-align : center;
-          align-items : center;
+  -moz-box-align : center;
+  -ms-flex-align : center;
+  align-items : center;
   width: 100%;
-         -webkit-box-pack : center;
-            -moz-box-pack : center;
-            -ms-flex-pack : center;
+  -webkit-box-pack : center;
+  -moz-box-pack : center;
+  -ms-flex-pack : center;
   -webkit-justify-content : center;
-          justify-content : center;
+  justify-content : center;
 }
 table {
   border-collapse: inherit;
@@ -85,9 +81,9 @@ table {
   background: #000;
   color:#fff;
 }
--webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
 button {
-    outline: none;
+  outline: none;
 }
 .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
   background: #000;
@@ -122,29 +118,29 @@ button {
   margin-bottom: 0;text-align: left;
 }
 @media (min-width: 990px) {
-  .slpdrop {
-    font-weight:900;
-    font-size:22px;
+ .slpdrop {
+   font-weight:900;
+   font-size:22px;
   }
-  .padfix {
-    padding-right: 0;
-    margin-right: 0;
-    margin-bottom: 0;
+ .padfix {
+   padding-right: 0;
+   margin-right: 0;
+   margin-bottom: 0;
   }
-  .padfix2{
-    padding-right:0em;
-    padding-left: 2em;
+ .padfix2{
+   padding-right:0em;
+   padding-left: 2em;
   }
-  .padfix3 {
-    padding-left:0;
-    padding-right: 1em;
+ .padfix3 {
+   padding-left:0;
+   padding-right: 1em;
   }
-  .padfix4 {
-    padding: 1em;
-    padding-right:1em;
+ .padfix4 {
+   padding: 1em;
+   padding-right:1em;
   }
 }
-.dashpanelsubhead {
+ .dashpanelsubhead {
   text-align:left;padding-left:1.2em;margin-bottom:0;padding-bottom:0;
 }
 thead th {
@@ -163,18 +159,18 @@ h3 {
   padding-top:4px;
 }
 .nopad::after {
-    color: #ccc;
-    content: attr(data-bg-text);
-    display: block;
-    font-size: 12px;
-    text-align:right;
-    line-height: 1;
-    padding:0;
-    margin:0;
-    margin-top: 0px;
-    position: relative;
-    bottom: 0px;
-    right: 0px;
+  color: #ccc;
+  content: attr(data-bg-text);
+  display: block;
+  font-size: 12px;
+  text-align:right;
+  line-height: 1;
+  padding:0;
+  margin:0;
+  margin-top: 0px;
+  position: relative;
+  bottom: 0px;
+  right: 0px;
 }
 .labelhover:hover {
   background: #000;
@@ -311,8 +307,7 @@ tr {
               <td>12312</td>
               <td>06/20/16</td>
             </tr>
-        </table>
-        
+        </table>        
           </div>
         </div>
   </div>
@@ -357,7 +352,6 @@ $(document).ready(function () {
                         fontSize: '12px',
                     }
             },
-
             tooltip: {
                 formatter: function() {
                     var point = this.point,
@@ -429,8 +423,7 @@ $(document).ready(function () {
                     color: colors[5]
                 }]
             }]
-        });
-                  
+        });    
     });
 </script>
 </body>
