@@ -9,17 +9,12 @@ function upload_dir(){
   $dir = $_SERVER['DOCUMENT_ROOT']."/docs/";
   return($dir);
 }
-
-
-if(empty($_SESSION['emailaddress'])) 
-{ 
+if(empty($_SESSION['emailaddress'])) { 
     header("Location: login.php"); 
     die("Redirecting to login"); 
 } else {
   $_GET   = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
   $_SESSION['uid'] = $_GET['id'];
-
-
   $query = " 
             SELECT 
                 m.id, 
@@ -45,29 +40,22 @@ if(empty($_SESSION['emailaddress']))
         $query_params = array( 
             ':id' => $_GET['id'] 
         ); 
-         
-        try 
-        { $stmt = $db->prepare($query); $result = $stmt->execute($query_params); } 
+        try { $stmt = $db->prepare($query); $result = $stmt->execute($query_params); } 
         catch(PDOException $ex) 
         { die("Failed to run query: " . $ex->getMessage()); } 
         $row = $stmt->fetch();
-
         $parts = explode('-', $row['startdate']);
         $stdate  = "$parts[1]/$parts[2]/$parts[0]";
         $sdate  = "$parts[1]/$parts[2]";
-
         $parts = explode('-', $row['enddate']);
         $endate  = "$parts[1]/$parts[2]/$parts[0]";
         $edate  = "$parts[1]/$parts[2]";
-
         if ($_SESSION['id'] == $row['refid']) {
           $isdisabled = "";
         } else {
           $isdisabled = "disabled";
         }
 }
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -88,15 +76,11 @@ if(empty($_SESSION['emailaddress']))
     <script src="../js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="../js/tag-it.js" type="text/javascript" charset="utf-8"></script>
-
     <link rel="stylesheet" type="text/css" href="../css/jquery.datepick.css"> 
 <script type="text/javascript" src="../js/jquery.plugin.js"></script> 
 <script type="text/javascript" src="../js/jquery.datepick.js"></script>
 <script type="text/javascript" src="http://momentjs.com/downloads/moment.min.js"></script>
-    
-    
-    <style>
-
+<style>
 body {
     background-color: #f7f9fb;
     background-size: cover;
@@ -119,18 +103,15 @@ body {
        -o-transform: scaleY(0);
       -ms-transform: scaleY(0);
           transform: scaleY(0);
-  
   -webkit-transform-origin: top;
        -o-transform-origin: top;
       -ms-transform-origin: top;
           transform-origin: top;
-  
   -webkit-transition: -webkit-transform 0.2s ease;
             -o-transition: -o-transform 0.2s ease;
           -ms-transition: -ms-transform 0.2s ease;
                   transition: transform 0.2s ease;
 }
-
 .slidedown.active {
   -webkit-transform: scaleY(1);
        -o-transform: scaleY(1);
@@ -171,7 +152,6 @@ table a:not(.btn), .table a:not(.btn) {
   -o-animation: spin 1000ms infinite linear;
   animation: spin 1000ms infinite linear;
 }
-
 @-moz-keyframes spin {
   from {
     -moz-transform: rotate(0deg);
@@ -180,7 +160,6 @@ table a:not(.btn), .table a:not(.btn) {
     -moz-transform: rotate(360deg);
   }
 }
-
 @-webkit-keyframes spin {
   from {
     -webkit-transform: rotate(0deg);
@@ -189,7 +168,6 @@ table a:not(.btn), .table a:not(.btn) {
     -webkit-transform: rotate(360deg);
   }
 }
-
 @keyframes spin {
   from {
     transform: rotate(0deg);
@@ -215,7 +193,7 @@ table a:not(.btn), .table a:not(.btn) {
       -moz-border-radius: 0 5px 5px 0;
       border-radius: 0 5px 5px 0;
     }
-    #slideout_inner {
+#slideout_inner {
       z-index: 999;
       position: fixed;
       top: 25%;
@@ -233,17 +211,17 @@ table a:not(.btn), .table a:not(.btn) {
       -moz-border-radius: 0 0 5px 0;
       border-radius: 0 0 5px 0;
     }
-    #slideout_inner textarea {
+#slideout_inner textarea {
       z-index: 999;
       width: 190px;
       height: 100px;
       margin-bottom: 6px;
     }
-    #slideout:hover {
+#slideout:hover {
       z-index: 999;
       left: 250px;
     }
-    #slideout:hover #slideout_inner {
+#slideout:hover #slideout_inner {
       z-index: 999;
       left: 0;
     }
@@ -286,7 +264,6 @@ table a:not(.btn), .table a:not(.btn) {
 <body>
 <?php
 include "../nav.php";
-
 ?>
 <div class="container-fluid"><br>
   <div class="row">
@@ -321,7 +298,6 @@ include "../nav.php";
                 }
                 function parseImg(str) {
                   if (str=="AM") {
-
                   }
                 }
                 oTable = $('#viewdata').dataTable({
@@ -382,28 +358,19 @@ include "../nav.php";
                         },
                           { "bVisible": false, "aTargets":[3,4,5,6,7] }
                                   ]
-                });
+                                  });
 $('#viewdata').on( 'click', 'tbody tr', function () {
           var redirection = $(this).attr('link');
           window.location.href = redirection;
         });
-
               </script>
             </span>
           </div>
-
-
         </div>
-        
-
       </div>
     </div>
   </div>
-
-
-
-
-  <br>
+<br>
 </div><!--endcontainerfluid-->
 <script>
 $(document).ready(function() {
@@ -434,12 +401,9 @@ document.getElementById("ampm1").innerHTML = '<?php echo $row["starttime"]; ?>  
 time1 = document.getElementById("ampm1").value = '<?php echo $row["starttime"]; ?>';
 document.getElementById("ampm2").innerHTML = '<?php echo $row["endtime"]; ?>  <span class="caret"/>';
 time2 = document.getElementById("ampm2").value = '<?php echo $row["endtime"]; ?>';
-
-
 $("#addrover").click(function(event) {
     event.preventDefault();
     event.stopImmediatePropagation();
-    
     errors = 0;
     errorlist = "";
     if ($('input[name=startdate]').val() == "") {
@@ -491,10 +455,7 @@ $("#addrover").click(function(event) {
       } else {
         alert(errorlist);
       }
-
-
     });
-
 });//end doc ready
 </script>
 <script>
@@ -505,9 +466,7 @@ $(document).ready(function() {
                 var d = t[1]+"/"+t[2];
                 return zz;
               }
-
   $("#loadicon").hide();
-  
   $("#hrsubmit").click(function(event) {
   event.preventDefault();
   event.stopImmediatePropagation();
@@ -515,8 +474,6 @@ $(document).ready(function() {
   $('#editForm').bootstrapValidator('validate');
   return false;
 }); //endHRSUBMIT
-
-
 $("#attachbtn").click(function(event) {
   event.preventDefault();
   event.stopImmediatePropagation();
@@ -527,15 +484,12 @@ $("#editbtn").click(function(event) {
   event.stopImmediatePropagation();
   $("#editpanel").show();
 }); //endedit
-
-  
-$("#goback").click(function(event) {
+  $("#goback").click(function(event) {
   event.preventDefault();
   event.stopImmediatePropagation();
   history.back();
 }); //endHRSUBMIT
-
-$("#deleterecord").click(function(event) {
+  $("#deleterecord").click(function(event) {
     var r = confirm("You are about to delete a record. This will be recorded. Are you sure?");
     if (r == true) {
       var formData = {
@@ -558,7 +512,6 @@ $("#deleterecord").click(function(event) {
                 });//endAjax
     }
 });
-
 }); //enddocready
 </script>
 <script type="text/javascript" src="../js/jquery.autocomplete.min.js"></script>
