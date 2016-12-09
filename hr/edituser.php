@@ -1,12 +1,10 @@
 <?php
 require "../zxcd9.php";
 //start post
-if(!empty($_POST)) 
-{ 
+if(!empty($_POST)) { 
 //filter input
 $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
-   if (empty($_POST["firstname"])) {
+    if (empty($_POST["firstname"])) {
      echo "firstname";
      die;
    } else {
@@ -36,25 +34,21 @@ $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
        die;
      }
    }
-
-   $nickname = test_input($_POST["nickname"]);
+     $nickname = test_input($_POST["nickname"]);
    if (!preg_match("/^[a-zA-Z ]*$/",$nickname)) {
        echo "nickname"; 
        die;
    }
-
-   $extname = test_input($_POST["extname"]);
+     $extname = test_input($_POST["extname"]);
    if (!preg_match("/^[a-zA-Z .]*$/",$extname)) {
        echo "extname"; 
        die;
    }
-
-   $sex = test_input($_POST["sex"]);
+     $sex = test_input($_POST["sex"]);
    if (!preg_match("/^[0-9]*$/",$sex)) {
        echo "sex"; 
        die;
    }
-
    if (empty($_POST["emailaddress"])) {
       echo "emailaddress";
       die;
@@ -95,9 +89,7 @@ $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
        echo "remarks"; 
        die;
     } 
-
-
-     if (empty($_POST["id"])) {
+    if (empty($_POST["id"])) {
        echo "id empty";
        die;
      } else {
@@ -107,10 +99,8 @@ $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
          die;
        }
      }
-
-     $position = test_input($_POST["position"]);
-
-        $query = " 
+       $position = test_input($_POST["position"]);
+       $query = " 
             UPDATE hr_db 
             SET firstname = :firstname, 
                 middlename = :middlename, 
@@ -135,10 +125,8 @@ $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
             WHERE 
                 id = :id
         "; 
-         
         $parts = explode('/', $_POST['birthdate']);
         $bdate  = "$parts[2]-$parts[0]-$parts[1]";
-
         $parts2 = explode('/', $_POST['employdate']);
         $edate  = "$parts2[2]-$parts2[0]-$parts2[1]";
         if ($_POST['comptype'] == "None issued") {
@@ -146,14 +134,12 @@ $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         } else {
           $comptype = $_POST['comptype'];
         }
-
         if ($_POST['compyear'] == "-") {
           $compyear = "";
         } else {
           $compyear = $_POST['compyear'];
         }
-
-        if ($_POST['compstatus'] == "-") {
+          if ($_POST['compstatus'] == "-") {
           $compstatus = "";
         } else {
           $compstatus = $_POST['compstatus'];
@@ -181,9 +167,7 @@ $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
             ':compnotes' => $_POST['compnotes'],
             ':id' => $id,
         ); 
-         
-        try 
-        { 
+        try { 
             $stmt = $db->prepare($query); 
             $result = $stmt->execute($query_params);
         } 
@@ -192,8 +176,6 @@ $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
             die("Failed to run queryyy: " . $ex->getMessage()); 
         } 
         echo "loginok";
-       
-
-}//end post
+  }//end post
      
 ?>
