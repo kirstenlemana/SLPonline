@@ -509,7 +509,7 @@ h3 {
           </thead> 
         
        <!--   <tbody style="height:800px;overflow-y:scroll;display:block"> -->
-            <tbody style="height:800px;overflow:hidden;display:block;">
+            <tbody style="height:800px;overflow:hidden;">
 <?php
       $stmtcom = $db->prepare("SELECT t.firstname, m.msg, m.added, t.region, t.id,hp.name,t.lastname,t.sex,hp.name FROM shoutbox as m LEFT JOIN hr_db as t ON m.hrdbid=t.id LEFT JOIN hr_profilepics as hp on hp.hrdbid=t.id  ORDER BY m.id DESC LIMIT 10");
       $stmtcom->execute();
