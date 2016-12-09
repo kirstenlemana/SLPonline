@@ -286,6 +286,8 @@ if(!empty($_POST))
     }
 
     if($_POST['action'] == "delete") {
+
+        date_default_timezone_set('Asia/Brunei');
         $docid = test_input($_POST['docdbid']);
         $file_name=$_POST['docfilename'];
         if ($file_name=="") {
@@ -309,6 +311,7 @@ if(!empty($_POST))
     
 
         echo "deleted";
+        byteMe($_SESSION['id'],'deleted',0.10);
     }
 
     if($_POST['action'] == "reupload") {
