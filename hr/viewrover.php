@@ -853,7 +853,7 @@ if( $stmt->rowCount() <= 0)
       <!-- Modal -->
 </div><!--endcontainerfluid-->
 <?PhP
-$sql = "SELECT id, CONCAT(lastname, ', ', firstname) as name FROM HRDB";
+$sql = "SELECT id, CONCAT(lastname, ', ', firstname) as name FROM hr_db";
 $partnerIDArray = [];
 $partnerArray = [];
 
