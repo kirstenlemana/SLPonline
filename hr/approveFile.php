@@ -1,25 +1,18 @@
 <?php
 require "../zxcd9.php";
 //start post
-if(!empty($_POST)) 
-{ 
+if(!empty($_POST)) { 
 //filter input
 $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
-
         $id = test_input($_POST['docid']);
-
         $query = " 
             UPDATE DOCDB 
             SET approved = 1 
             WHERE 
                 id = :id
         ";
-
         $query_params = array( 
-            ':id' => $id 
-        ); 
-         
+            ':id' => $id ); 
         try { 
             $stmt = $db->prepare($query); 
             $result = $stmt->execute($query_params); 
@@ -29,5 +22,4 @@ $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         } 
         echo "good";
 }//end post
-     
 ?>
