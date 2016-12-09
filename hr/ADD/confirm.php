@@ -3,7 +3,6 @@ $username = "jmigdela_slpmain";
 $password = "turtles98"; 
 $host = "localhost"; 
 $dbname = "jmigdela_slponline";
-
 $options = array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'); 
 try 
 { 
@@ -78,7 +77,6 @@ body {
   -o-animation: spin 1000ms infinite linear;
   animation: spin 1000ms infinite linear;
 }
-
 @-moz-keyframes spin {
   from {
     -moz-transform: rotate(0deg);
@@ -87,7 +85,6 @@ body {
     -moz-transform: rotate(360deg);
   }
 }
-
 @-webkit-keyframes spin {
   from {
     -webkit-transform: rotate(0deg);
@@ -96,7 +93,6 @@ body {
     -webkit-transform: rotate(360deg);
   }
 }
-
 @keyframes spin {
   from {
     transform: rotate(0deg);
@@ -121,7 +117,7 @@ body {
       -moz-border-radius: 0 5px 5px 0;
       border-radius: 0 5px 5px 0;
     }
-    #slideout_inner {
+#slideout_inner {
       position: fixed;
       top: 25%;
       left: -250px;
@@ -138,15 +134,15 @@ body {
       -moz-border-radius: 0 0 5px 0;
       border-radius: 0 0 5px 0;
     }
-    #slideout_inner textarea {
+#slideout_inner textarea {
       width: 190px;
       height: 100px;
       margin-bottom: 6px;
     }
-    #slideout:hover {
+#slideout:hover {
       left: 250px;
     }
-    #slideout:hover #slideout_inner {
+#slideout:hover #slideout_inner {
       left: 0;
     }
 </style>
@@ -161,9 +157,9 @@ body {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../" style="font-weight:900"><img src="../../imgs/slpsmall.png" style="display:inline;margin-right:0.5em;margin-top:-0.2em">SLP</a>
+<a class="navbar-brand" href="../" style="font-weight:900"><img src="../../imgs/slpsmall.png" style="display:inline;margin-right:0.5em;margin-top:-0.2em">SLP</a>
     </div>
-   <!-- Collect the nav links, forms, and other content for toggling -->
+<!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
       </ul>
@@ -177,24 +173,18 @@ $username = "jmigdela_slpmain";
 $password = "turtles98"; 
 $host = "localhost"; 
 $dbname = "jmigdela_slponline";
-
 $options = array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'); 
-try 
-{ 
+try { 
     $db = new PDO("mysql:host={$host};dbname={$dbname};charset=utf8", $username, $password, $options);
     $db->exec("SET time_zone = '+0:00'");
 } 
-catch(PDOException $ex) 
-{ 
+catch(PDOException $ex) { 
     die("Failed to connect: " . $ex->getMessage()); 
 } 
-
 $db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-
-if(!empty($_GET)) 
-{ 
+if(!empty($_GET)) { 
         $query = " 
             SELECT 
                 firstname, 
@@ -229,13 +219,13 @@ if(!empty($_GET))
             ':password' => $_GET['confirm'] 
         ); 
          
-        try 
-        { $stmt = $db->prepare($query); $result = $stmt->execute($query_params); } 
-        catch(PDOException $ex) 
-        { die("Failed to run query: " . $ex->getMessage()); } 
-        $row = $stmt->fetch();
-        $birthdate = date('m/d/Y', strtotime($row['birthdate']));
-        $employdate = date('m/d/Y', strtotime($row['employdate']));
+        try{ 
+          $stmt = $db->prepare($query); $result = $stmt->execute($query_params); } 
+        catch(PDOException $ex)  {
+        die("Failed to run query: " . $ex->getMessage()); } 
+          $row = $stmt->fetch();
+          $birthdate = date('m/d/Y', strtotime($row['birthdate']));
+          $employdate = date('m/d/Y', strtotime($row['employdate']));
 
         if ($row['password'] == "") {
 ?>
@@ -249,7 +239,6 @@ if(!empty($_GET))
           
       </div>
       <!--end iferror-->
-
 <?php
         die;
         }
@@ -263,7 +252,6 @@ if(!empty($_GET))
           <br><br><a href="http://slp.ph/hr"><button class="btn btn-success" id="btnAddnew">Leave this page</button></a>
       </div>
       <!--end ifsuccess-->
-
         <div class="col-md-offset-2 col-md-8" id="maincontent">
           <div class="row">
               <div class="col-sm-12" role="alert" style="border:0px solid;padding:5px 0px 15px 0px;font-size:20px">
@@ -276,7 +264,6 @@ if(!empty($_GET))
               </div>
             </div>
 <script>
-
 function ismale() {
   sex = "0";
   console.log(sex);
@@ -366,8 +353,7 @@ function isfemale() {
                                 </div>
                               </div>
                         </div>
-
-                        <div class="row">
+                            <div class="row">
                               <div class="col-sm-6">
                                 <div class="form-group">
                                   <label for="designation" class="col-sm-4 control-label">Designation</label>
@@ -381,19 +367,16 @@ function isfemale() {
                               //$prof->bindParam(':hrdbida', $_SESSION['pageid']);
                               $sql->execute();
                          //     $p=$prof->fetch(PDO::FETCH_ASSOC);
-                        
-                        while($hrdesignationname=$sql->fetch(PDO::FETCH_ASSOC))
+                         while($hrdesignationname=$sql->fetch(PDO::FETCH_ASSOC))
                         {
                       ?>
                         <option value=" <?php echo $hrdesignationname['hrdesignationname']; ?>"> <?php echo $hrdesignationname['hrdesignationname']; ?> </option>
-                    
                       <?php
                         }
                               } catch(PDOException $e) {
                             echo "Error: " . $e->getMessage();
                             }//en
-                   
-                        ?>
+                      ?>
                       </select>
                     <!-- upto this -->      
                                   </div>
@@ -413,17 +396,14 @@ function isfemale() {
                               $sql->execute();
                          //     $p=$prof->fetch(PDO::FETCH_ASSOC);
                         
-                        while($hrpositionname=$sql->fetch(PDO::FETCH_ASSOC))
-                        {
+                      while($hrpositionname=$sql->fetch(PDO::FETCH_ASSOC)) {
                       ?>
                         <option value=" <?php echo $hrpositionname['hrpositionname']; ?>"> <?php echo $hrpositionname['hrpositionname']; ?> </option>
-                    
-                      <?php
+                        <?php
                         }
-                              } catch(PDOException $e) {
+                        } catch(PDOException $e) {
                             echo "Error: " . $e->getMessage();
                             }//en
-                   
                         ?>
                       </select>
                     <!-- upto this --> 
@@ -459,18 +439,14 @@ function isfemale() {
                               //$prof->bindParam(':hrdbida', $_SESSION['pageid']);
                               $sql->execute();
                          //     $p=$prof->fetch(PDO::FETCH_ASSOC);
-                        
-                        while($hrfundsourcename=$sql->fetch(PDO::FETCH_ASSOC))
-                        {
+                        while($hrfundsourcename=$sql->fetch(PDO::FETCH_ASSOC)){
                       ?>
                         <option value=" <?php echo $hrfundsourcename['hrfundsourcename']; ?>"> <?php echo $hrfundsourcename['hrfundsourcename']; ?> </option>
-                    
                       <?php
                         }
-                              } catch(PDOException $e) {
+                        } catch(PDOException $e) {
                             echo "Error: " . $e->getMessage();
                             }//en
-                   
                         ?>
                       </select>
                     <!-- upto this --> 
@@ -504,8 +480,7 @@ function isfemale() {
                                   <label for="designation" class="col-sm-4 control-label">Province</label>
                                   <div class="col-sm-8">
                                         <select class="form-control cleanselect" id="province" name="province" onchange="getCitymun()">
-                                          
-              <?php
+                <?php
                   if ($row['province']=="") {
                     echo  "<option value=''>Select Province</option>";
                   } else {
@@ -513,19 +488,18 @@ function isfemale() {
                   }
                   $query = "SELECT * FROM lib_regions WHERE regname = :region"; 
                   $query_params = array(':region' => $row['region']);
-                  try 
-                  { $stmt = $db->prepare($query); $result = $stmt->execute($query_params); } 
-                  catch(PDOException $ex) 
-                  { die("Failed to run query: " . $ex->getMessage()); } 
+                  try { 
+                    $stmt = $db->prepare($query); $result = $stmt->execute($query_params); } 
+                  catch(PDOException $ex)  { 
+                    die("Failed to run query: " . $ex->getMessage()); } 
                   $row = $stmt->fetch();
                   $regcode = $row['regid'];
-
                   $query = "SELECT * FROM lib_provinces WHERE regid = :region"; 
                   $query_params = array(':region' => $regcode);
-                  try 
-                  { $stmt = $db->prepare($query); $result = $stmt->execute($query_params); } 
-                  catch(PDOException $ex) 
-                  { die("Failed to run query: " . $ex->getMessage()); } 
+                  try  { 
+                    $stmt = $db->prepare($query); $result = $stmt->execute($query_params); } 
+                  catch(PDOException $ex)  { 
+                    die("Failed to run query: " . $ex->getMessage()); } 
                   while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                      echo "<option value='".$row["provid"]."'>".$row['provname']."</option>";
                   }
@@ -545,8 +519,7 @@ function isfemale() {
                                 </div>
                               </div>
                       </div>
-
-                      <div class="row" >
+                          <div class="row" >
                               <div class="col-sm-6">
                                 <div class="form-group">
                                   <label for="nickname" class="col-sm-4 control-label">Password</label>
@@ -615,7 +588,6 @@ function isfemale() {
                                   </div>
                                 </div>
                         </div>
-
                         <div class="row">
                                 <div class="col-sm-6">
                                   <div class="form-group">
@@ -662,10 +634,8 @@ function isfemale() {
                       </div>
   </form>
         </div>
-
-        <div class="col-md-2"></div>
+      <div class="col-md-2"></div>
     </div>
-
 </div><!--endcontainer-->
 <?php
 } else {
@@ -677,7 +647,6 @@ function isfemale() {
           <br><font size='90px' color='#5cb85c'><img src='../../imgs/ufo.png'></font>
           <br><font size='70px' color='#d9534f'>Oops!</font><br>
           <br><font size='4px'>Missing object. Its possible that this account has already been confirmed.<br><br>If you feel this is an error, please send an email to: <b>jmodelacruz@e-dswd.net.</font></b>
-          
       </div>
       <!--end iferror-->
 <?php } ?>          
@@ -695,7 +664,6 @@ function getCitymun() {
             $("#municipality").prop('disabled', false);
             $("#municipality").html(data);
         }
-
   });
 }
 $(document).ready(function() {
@@ -707,7 +675,6 @@ var found3 = [];
 			  if($.inArray(this.value, found3) != -1) $(this).remove();
 			  found3.push(this.value);
 		});
-
 if (sexload == 0) {
   document.getElementById("sexmale").checked = true;
   document.getElementById("sexfemale").checked = false;
@@ -715,25 +682,21 @@ if (sexload == 0) {
   document.getElementById("sexmale").checked = false;
   document.getElementById("sexfemale").checked = true;
 }
-
   $("#loadicon").hide();
   $(".successcontent").hide();
   $("#maincontent").show();
-  
-$("#hrsubmit").click(function(event) {
+  $("#hrsubmit").click(function(event) {
   event.preventDefault();
   event.stopImmediatePropagation();
   $("#statusdisp").html('');
   $('#hrForm').bootstrapValidator('validate');
   return false;
 }); //endHRSUBMIT
-
 $('#btnAddnew').click(function() {
       $(".successcontent").hide();
       $("#maincontent").show();
       $('#hrForm').data('bootstrapValidator').resetForm(true);
 });//endreset
-
 });//end DOC READY
 </script>
 <script>
@@ -742,7 +705,6 @@ $(document).ready(function() {
   $("#sendfeedback").click(function(event) {
     event.preventDefault();
     event.stopImmediatePropagation();
-    
     $("#loadicon2").show();
     $("#feedback").hide();
     $("#sendfeedback").html('Processing..');
@@ -756,8 +718,7 @@ $(document).ready(function() {
                    url: "../sendfeedback.php",
                    type: "POST",
                    data: formData,
-                   success: function(data)
-                   {
+                   success: function(data){
                       if (data == "good") {
                         $("#loadicon2").hide();
                         document.getElementById("formz").innerHTML = "<div style='padding:10px;color:#fff'><h2>Feedback Sent!</h2>Thank you!</div>"
