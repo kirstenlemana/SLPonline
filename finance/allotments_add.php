@@ -1,7 +1,6 @@
 <?php
 require "../zxcd9.php";
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -17,7 +16,6 @@ require "../zxcd9.php";
     <script src="../js/bootstrap.min.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <style>
-
 body {
     background-color: #f7f9fb;
     background-size: cover;
@@ -27,7 +25,6 @@ body {
     padding-top:15px !important; 
     padding-bottom:0 !important;
     height: 40px;
-    
 }
 .navbar {min-height:45px !important;background-color: #000}
 #bootstrapSelectForm .selectContainer .form-control-feedback {
@@ -41,14 +38,12 @@ body {
 .vcenter {
   min-height: 90%;  
   min-height: 90vh; 
-
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex; 
-  
-    -webkit-box-align : center;
+     -webkit-box-align : center;
   -webkit-align-items : center;
        -moz-box-align : center;
        -ms-flex-align : center;
@@ -185,16 +180,19 @@ tr {
 </style>
 </head>
 <body>
-<?php require "../nav.php"; ?>
+<?php
+  require "../nav.php"; 
+?>
 <div class="row" style="margin:0;padding:0">
   <div class="col-md-2">
-    <?php require "nav_side.php"; ?>
+    <?php
+    require "nav_side.php"; 
+    ?>
   </div>
   <div class="col-md-10">
       <div class="row">
         <div class="col-md-12">
           <div style="border:solid 1px #c5d6de;background:#fff;text-align:left;padding:0em;padding-left:1em;margin-bottom:2em;width:100%">
-          
               <div class="row row-eq-height" >
                  <div class="col-md-6" style="background-color:#007ee5;padding:2em;color:#fff;">
                   SLP Finance System
@@ -249,9 +247,8 @@ tr {
                       </div>
                       </div><br>
                        <div class="row">
-                     
-                      <div class="col-md-6" id="saaholder">
-                        <input class="form-control" style="padding-right:0;" id="saa" name="saa" placeholder="Sub-Aro Number">
+                       <div class="col-md-6" id="saaholder">
+                         <input class="form-control" style="padding-right:0;" id="saa" name="saa" placeholder="Sub-Aro Number">
                       </div>
                       <div class="col-md-6" id="uacsholder">
                         <select class="form-control" id="uacs1" name="uacs1">
@@ -281,9 +278,6 @@ tr {
                       </div>
                     </div>
                   </div> 
-
-
-
                   <div class="form-group">
                     <div class="row">
                       <div class="col-md-6">
@@ -292,10 +286,10 @@ tr {
                              <option value="" selected>Select Fund Source</option>
                               <?php
                               $query1 = "SELECT * FROM libhr_fundsource "; 
-                              try 
-                              { $stmt1 = $db->prepare($query1); $result = $stmt1->execute(); } 
-                              catch(PDOException $ex) 
-                              { die("Failed to run query: " . $ex->getMessage()); } 
+                              try { 
+                                $stmt1 = $db->prepare($query1); $result = $stmt1->execute(); } 
+                              catch(PDOException $ex) { 
+                              die("Failed to run query: " . $ex->getMessage()); } 
                               while ($row1 = $stmt1->fetch(PDO::FETCH_ASSOC)) {
                                  echo "<option value='".$row1['hrfundsourcename']."'>".$row1['hrfundsourcename']."</option>";
                               }
@@ -331,30 +325,20 @@ tr {
       </div>
   </div>
 </div>
-
 <!-- Modal -->
       <div class="modal fade" id="myModal" role="dialog" style="margin-top:3em">
         <div class="modal-dialog modal-sm">
-
           <div class="modal-content" style="padding:1em;padding-top:0.5em;">
                   <h3 style="color:#5cb85c;margin-bottom:6px">Success!</h3>
                   <span style="font-size:13px" id="sucsubtext">Fund Allotments saved!</span><br><br>
                   <button type="button" class="btn btn-primary pull-right" style="background:#5cb85c;border:0;margin-top:0;padding:5px 10px 5px 10px" id="okaybtn" data-dismiss="modal">Okay</button>
                   <div class="clearfix"></div>
           </div>
-          
         </div>
       </div>
       <!-- Modal -->
-
-
-
 <script>
-
-
-
 $("#addfundallot").click(function(event) {
-
   event.preventDefault();
   event.stopImmediatePropagation();
   $("#addfundallot").html("Processing..");
@@ -371,14 +355,12 @@ $("#addfundallot").click(function(event) {
        'fundsourceyear'   :$('#fundsourceyear option:selected').val(),
        'amt'              :$('input[name=amt]').val(), 
        'd8'               :$('input[name=d8]').val()
-
-     };
+  };
   $.ajax({
        url: "func.php",
        type: "POST",
        data: formData,
-       success: function(data)
-       {
+       success: function(data) {
                 if (data=="success") {
                       document.getElementById("addfundallot").disabled = true;
                       $("#sucsubtext").html("Fund allotment saved!");
@@ -387,21 +369,10 @@ $("#addfundallot").click(function(event) {
                 } else {
                       //alert(data);
                 }
-
        }
     });//endajax
-
-
 });
-
-
-
-
-
-
-
 $(document).ready(function () {
-
       $('[data-toggle="tooltip"]').tooltip(); 
                 encoded = 500;
                 budget = 320;
@@ -440,7 +411,6 @@ $(document).ready(function () {
                         fontSize: '12px',
                     }
             },
-
             tooltip: {
                 formatter: function() {
                     var point = this.point,
@@ -513,8 +483,7 @@ $(document).ready(function () {
                 }]
             }]
         });
-                  
-    });
+      });
 </script>
 <script type="text/javascript" src="http://momentjs.com/downloads/moment.min.js"></script>
 <script src="../js/pikaday.min.js"></script>
