@@ -6,15 +6,12 @@ $username = "jmigdela_slpmain";
 $password = "turtles98"; 
 $host = "localhost"; 
 $dbname = "jmigdela_slponline";
-
 $options = array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'); 
-try 
-{ 
+try { 
     $db = new PDO("mysql:host={$host};dbname={$dbname};charset=utf8", $username, $password, $options);
     $db->exec("SET time_zone = '+0:00'");
 } 
-catch(PDOException $ex) 
-{ 
+catch(PDOException $ex) { 
     die("Failed to connect: " . $ex->getMessage()); 
 } 
 $db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
@@ -35,13 +32,10 @@ function test_input($data) {
    $data = htmlspecialchars($data);
    return $data;
 }
-
 //start post
-if(!empty($_POST)) 
-{ 
+if(!empty($_POST)) { 
 //filter input
 $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
    if (empty($_POST["firstname"])) {
      echo "firstname";
      die;
@@ -72,25 +66,21 @@ $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
        die;
      }
    }
-
    $nickname = test_input($_POST["nickname"]);
    if (!preg_match("/^[a-zA-Z ]*$/",$nickname)) {
        echo "nickname"; 
        die;
    }
-
    $extname = test_input($_POST["extname"]);
    if (!preg_match("/^[a-zA-Z .]*$/",$extname)) {
        echo "extname"; 
        die;
    }
-
    $sex = test_input($_POST["sex"]);
    if (!preg_match("/^[0-9]*$/",$sex)) {
        echo "sex"; 
        die;
    }
-
    if (empty($_POST["emailaddress"])) {
       echo "Missing emailaddress";
       die;
@@ -111,10 +101,7 @@ $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
            die;
          }
        }
-
     $designation = test_input($_POST["designation"]);
-
-
     $contactnumber = test_input($_POST["contactnumber"]);
     if (!preg_match("/^[0-9]*$/",$contactnumber)) {
        echo "contactnumber"; 
@@ -135,9 +122,7 @@ $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
        echo "remarks"; 
        die;
     } 
-
     $employstatus = test_input($_POST["employstatus"]);
-
     if (empty($_POST["password"])) {
        echo "password";
        die;
@@ -148,8 +133,7 @@ $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
          die;
        }
      }
-
-     if (empty($_POST["confirm"])) {
+    if (empty($_POST["confirm"])) {
        echo "confirm empty";
        die;
      } else {
@@ -159,15 +143,12 @@ $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
          die;
        }
      }
-      
         $salt = dechex(mt_rand(0, 2147483647)) . dechex(mt_rand(0, 2147483647)); 
         $password = $_POST['password'];
         $password = hash('sha256', $password . $salt);
-        for($round = 0; $round < 65536; $round++) 
-        { 
+        for($round = 0; $round < 65536; $round++) { 
             $password = hash('sha256', $password . $salt); 
         } 
-
         $query = " 
             UPDATE hr_db 
             SET firstname = :firstname, 
@@ -196,10 +177,8 @@ $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
             WHERE 
                 password = :password2
         "; 
-         
         $parts = explode('/', $_POST['birthdate']);
         $bdate  = "$parts[2]-$parts[0]-$parts[1]";
-
         $parts2 = explode('/', $_POST['employdate']);
         $edate  = "$parts2[2]-$parts2[0]-$parts2[1]";
         if ($_POST['comptype'] == "None issued") {
@@ -207,19 +186,16 @@ $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         } else {
           $comptype = $_POST['comptype'];
         }
-
         if ($_POST['compyear'] == "-") {
           $compyear = "";
         } else {
           $compyear = $_POST['compyear'];
         }
-
         if ($_POST['compstatus'] == "-") {
           $compstatus = "";
         } else {
           $compstatus = $_POST['compstatus'];
         }
-
         $query_params = array( 
             ':firstname' => $firstname, 
             ':middlename' => $midname, 
@@ -246,29 +222,23 @@ $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
             ':compstatus' => $compstatus,
             ':compnotes' => $compnotes
         ); 
-         
-        try 
-        { 
+        try { 
             $stmt = $db->prepare($query); 
             $result = $stmt->execute($query_params);
         } 
-        catch(PDOException $ex) 
-        { 
+        catch(PDOException $ex) { 
             echo "failed";
             die;
             die("Failed to run queryyy: " . $ex->getMessage()); 
         } 
         $from = "noreply@slp.ph";
         $fromname = "SLP Online";
-
-ob_start();
+        ob_start();
 ?>
 <body>
 <table width=100% cellpadding=12 cellspacing=0 border=0>
   <tr><td><div style="overflow: hidden;"><font size=-1>
     <div style="Margin:0;padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;min-width:100%;background-color:#f1f2f6">
-
-
 <table style="border-spacing:0;width:100%;background-color:#f1f2f6;table-layout:fixed">
 <tr>
 <td align="center" style="padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;vertical-align:top">
@@ -347,20 +317,15 @@ ob_start();
     </td>
     </tr>
     </table>
-
 </td>
 </tr>
 </table>
-
 <table width="610" style="border-spacing:0;Margin:0 auto">
 <tr>
 <td style="padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;vertical-align:top">
-
 </td>
 </tr>
 </table>
-
-
 </center>
 </td>
 </tr>
@@ -370,26 +335,19 @@ ob_start();
 </font></div></table></table></div></div>
 </body>
 <?php
-
         $myvar = ob_get_clean();
         $message = 'hallo';
         $mail = new PHPMailer();
         $mail->IsSMTP();
-        
         require("../../lcefgmai.php");
-        
         $mail->IsHTML(true);
-
         $mail->Subject = "SLP Online Account Information";
         $mail->Body = $myvar;
         $mail->AddAddress($_POST['emailaddress']);
-        
-       if(!$mail->Send()) {
+      if(!$mail->Send()) {
           echo "Mail Error: " . $mail->ErrorInfo;
        } else {
           echo "loginok";
        }
-
-}//end post
-     
+       }//end post
 ?>
