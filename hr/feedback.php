@@ -9,17 +9,12 @@ function upload_dir(){
   $dir = $_SERVER['DOCUMENT_ROOT']."/docs/";
   return($dir);
 }
-
-
-if(empty($_SESSION['emailaddress'])) 
-{ 
+if(empty($_SESSION['emailaddress'])) { 
     header("Location: login.php"); 
     die("Redirecting to login"); 
 } else {
   $_GET   = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
   $_SESSION['uid'] = $_GET['id'];
-
-
   $query = " 
             SELECT 
                 m.id, 
@@ -45,29 +40,23 @@ if(empty($_SESSION['emailaddress']))
         $query_params = array( 
             ':id' => $_GET['id'] 
         ); 
-         
-        try 
-        { $stmt = $db->prepare($query); $result = $stmt->execute($query_params); } 
-        catch(PDOException $ex) 
-        { die("Failed to run query: " . $ex->getMessage()); } 
+        try { 
+          $stmt = $db->prepare($query); $result = $stmt->execute($query_params); } 
+        catch(PDOException $ex) { 
+          die("Failed to run query: " . $ex->getMessage()); } 
         $row = $stmt->fetch();
-
         $parts = explode('-', $row['startdate']);
         $stdate  = "$parts[1]/$parts[2]/$parts[0]";
         $sdate  = "$parts[1]/$parts[2]";
-
         $parts = explode('-', $row['enddate']);
         $endate  = "$parts[1]/$parts[2]/$parts[0]";
         $edate  = "$parts[1]/$parts[2]";
-
         if ($_SESSION['id'] == $row['refid']) {
           $isdisabled = "";
         } else {
           $isdisabled = "disabled";
         }
 }
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -88,15 +77,11 @@ if(empty($_SESSION['emailaddress']))
     <script src="../js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="../js/tag-it.js" type="text/javascript" charset="utf-8"></script>
-
     <link rel="stylesheet" type="text/css" href="../css/jquery.datepick.css"> 
 <script type="text/javascript" src="../js/jquery.plugin.js"></script> 
 <script type="text/javascript" src="../js/jquery.datepick.js"></script>
 <script type="text/javascript" src="http://momentjs.com/downloads/moment.min.js"></script>
-    
-    
-    <style>
-
+  <style>
 body {
     background-color: #f7f9fb;
     background-size: cover;
@@ -119,18 +104,15 @@ body {
        -o-transform: scaleY(0);
       -ms-transform: scaleY(0);
           transform: scaleY(0);
-  
   -webkit-transform-origin: top;
        -o-transform-origin: top;
       -ms-transform-origin: top;
           transform-origin: top;
-  
   -webkit-transition: -webkit-transform 0.2s ease;
             -o-transition: -o-transform 0.2s ease;
           -ms-transition: -ms-transform 0.2s ease;
                   transition: transform 0.2s ease;
 }
-
 .slidedown.active {
   -webkit-transform: scaleY(1);
        -o-transform: scaleY(1);
@@ -171,7 +153,6 @@ table a:not(.btn), .table a:not(.btn) {
   -o-animation: spin 1000ms infinite linear;
   animation: spin 1000ms infinite linear;
 }
-
 @-moz-keyframes spin {
   from {
     -moz-transform: rotate(0deg);
@@ -180,7 +161,6 @@ table a:not(.btn), .table a:not(.btn) {
     -moz-transform: rotate(360deg);
   }
 }
-
 @-webkit-keyframes spin {
   from {
     -webkit-transform: rotate(0deg);
@@ -189,7 +169,6 @@ table a:not(.btn), .table a:not(.btn) {
     -webkit-transform: rotate(360deg);
   }
 }
-
 @keyframes spin {
   from {
     transform: rotate(0deg);
@@ -296,13 +275,11 @@ table a:not(.btn), .table a:not(.btn) {
           <div class="form-group">
               <button class="btn btn-primary" id="sendfeedback" style="padding:4px;margin-left:1em">Submit</button>
           </div>
-      
       </div>
     </div>
   </div>
 <?php
 include "../nav.php";
-
 ?>
 <div class="container-fluid"><br>
   <div class="row">
@@ -335,7 +312,6 @@ include "../nav.php";
                 }
                 function parseImg(str) {
                   if (str=="AM") {
-
                   }
                 }
                 oTable = $('#viewdata').dataTable({
@@ -353,8 +329,7 @@ include "../nav.php";
                       $(nRow).attr('link', aData[4]);
                       return nRow;
                     },
-                  "aoColumnDefs": [
-                          { 
+                  "aoColumnDefs": [ { 
                            "aTargets":[0],
                            "fnCreatedCell": function(nTd, sData, oData, iRow, iCol)
                             {
@@ -390,8 +365,7 @@ include "../nav.php";
                         },
                         { 
                          "aTargets":[3],
-                         "fnCreatedCell": function(nTd, sData, oData, iRow, iCol)
-                          {
+                         "fnCreatedCell": function(nTd, sData, oData, iRow, iCol){
                               $(nTd).css('text-align', 'center');
                               $(nTd).css('width', '15%');
                           },
@@ -405,7 +379,6 @@ include "../nav.php";
                           }
                         },
                           { "bVisible": false, "aTargets":[0,4,5] }
-                                  ]
                 });
                 <?php if ($_SESSION['id']!=9) {
                 ?>
@@ -413,23 +386,14 @@ include "../nav.php";
                 <?php
                 }
                 ?>
-
-              </script>
+            </script>
             </span>
           </div>
-
-
         </div>
-        
-
       </div>
     </div>
   </div>
-
-
-
-
-  <br>
+<br>
 </div><!--endcontainerfluid-->
 <script>
 $(document).ready(function() {
@@ -439,9 +403,7 @@ $(document).ready(function() {
                 var d = t[1]+"/"+t[2];
                 return zz;
               }
-
   $("#loadicon").hide();
-  
   $("#hrsubmit").click(function(event) {
   event.preventDefault();
   event.stopImmediatePropagation();
@@ -449,8 +411,6 @@ $(document).ready(function() {
   $('#editForm').bootstrapValidator('validate');
   return false;
 }); //endHRSUBMIT
-
-
 $("#attachbtn").click(function(event) {
   event.preventDefault();
   event.stopImmediatePropagation();
@@ -461,14 +421,11 @@ $("#editbtn").click(function(event) {
   event.stopImmediatePropagation();
   $("#editpanel").show();
 }); //endedit
-
-  
 $("#goback").click(function(event) {
   event.preventDefault();
   event.stopImmediatePropagation();
   history.back();
 }); //endHRSUBMIT
-
 $("#deleterecord").click(function(event) {
     var r = confirm("You are about to delete a record. This will be recorded. Are you sure?");
     if (r == true) {
