@@ -461,26 +461,26 @@ h3 {
      if($rowWP[7]==$rowWP[10]){
                if($rowWP[4]=="" ) {
                         if($rowWP[2]==0) {             
-                         echo '<div class="row"><div class="col-md-3"><a href="../hr/user.php?id='.$rowWP[6].'"><img src="../imgs/partner.png" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$rowWP[1].' '.$rowWP[5].'</a></b><br>'.date("M j - h:i a",strtotime($rowWP[3])).'</span><br>'.$rowWP[0].'</div></div><hr>';
+                         echo '<div class="row"><div class="col-md-3"><a href="../hr/user.php?id='.$rowWP[6].'"><img src="../imgs/partner.png" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$rowWP[1].' '.$rowWP[5].'</a></b><br>'.date("M j - h:i a",strtotime($rowWP[3])).'</span><br><p class="text" id="small">'.$rowWP[0].'</p></div></div><hr>';
                         } else {
-                          echo '<div class="row"><div class="col-md-3"><a href="../hr/user.php?id='.$rowWP[6].'"><img src="../imgs/female.png" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$rowWP[1].' '.$rowWP[5].'</a></b><br>'.date("M j - h:i a",strtotime($rowWP[3])).'</span><br>'.$rowWP[0].'</div></div><hr>';
+                          echo '<div class="row"><div class="col-md-3"><a href="../hr/user.php?id='.$rowWP[6].'"><img src="../imgs/female.png" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$rowWP[1].' '.$rowWP[5].'</a></b><br>'.date("M j - h:i a",strtotime($rowWP[3])).'</span><br><p class="text" id="small">'.$rowWP[0].'</p></div></div><hr>';
                         }
                } else {  
 
                   
-                        echo '<div class="row"><div class="col-md-3"><a href="../hr/user.php?id='.$rowWP[6].'"><img src="../docs/profilepics/'.$rowWP[4].'" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$rowWP[1].' '.$rowWP[5].'</a></b></b><br></span><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($rowWP[3])).'</span><br>'.$rowWP[0].'</div></div><hr style="padding-bottom:0">';
+                        echo '<div class="row"><div class="col-md-3"><a href="../hr/user.php?id='.$rowWP[6].'"><img src="../docs/profilepics/'.$rowWP[4].'" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$rowWP[1].' '.$rowWP[5].'</a></b></b><br></span><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($rowWP[3])).'</span><br><p class="text" id="small">'.$rowWP[0].'</p></div></div><hr style="padding-bottom:0">';
                }
     } else {
               if($rowWP[4]=="" ) {
                           if($rowWP[2]==0) {             
-                           echo '<div class="row"><div class="col-md-3"><a href="../hr/user.php?id='.$rowWP[6].'"><img src="../imgs/partner.png" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$rowWP[1].' '.$rowWP[5].'</a><span class="glyphicon glyphicon-triangle-right"></span><a href="../hr/user.php?id='.$rowWP[7].'">'.$rowWP[8].'&nbsp;'.$rowWP[9].'</a></b><br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($rowWP[3])).'</span><br>'.$rowWP[0].'</div></div><hr>';
+                           echo '<div class="row"><div class="col-md-3"><a href="../hr/user.php?id='.$rowWP[6].'"><img src="../imgs/partner.png" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$rowWP[1].' '.$rowWP[5].'</a><span class="glyphicon glyphicon-triangle-right"></span><a href="../hr/user.php?id='.$rowWP[7].'">'.$rowWP[8].'&nbsp;'.$rowWP[9].'</a></b><br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($rowWP[3])).'</span><br><p class="text" id="small">'.$rowWP[0].'</p></div></div><hr>';
                           } else {
-                            echo '<div class="row"><div class="col-md-3"><a href="../hr/user.php?id='.$rowWP[6].'"><img src="../imgs/female.png" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$rowWP[1].' '.$rowWP[5].'</a><span class="glyphicon glyphicon-triangle-right"></span><a href="../hr/user.php?id='.$rowWP[7].'">'.$rowWP[8].'&nbsp;'.$rowWP[9].'</a></b><br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($rowWP[3])).'</span><br>'.$rowWP[0].'</div></div><hr>';
+                            echo '<div class="row"><div class="col-md-3"><a href="../hr/user.php?id='.$rowWP[6].'"><img src="../imgs/female.png" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$rowWP[1].' '.$rowWP[5].'</a><span class="glyphicon glyphicon-triangle-right"></span><a href="../hr/user.php?id='.$rowWP[7].'">'.$rowWP[8].'&nbsp;'.$rowWP[9].'</a></b><br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($rowWP[3])).'</span><br><p class="text" id="small">'.$rowWP[0].'</p></div></div><hr>';
                           }
                  } else {  
 
                     
-                          echo '<div class="row"><div class="col-md-3"><a href="../hr/user.php?id='.$rowWP[6].'"><img src="../docs/profilepics/'.$rowWP[4].'" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$rowWP[1].' '.$rowWP[5].'</a><span class="glyphicon glyphicon-triangle-right"></span><a href="../hr/user.php?id='.$rowWP[7].'">'.$rowWP[8].'&nbsp;'.$rowWP[9].'</a></b><br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($rowWP[3])).'</span><br>'.$rowWP[0].'</div></div><hr style="padding-bottom:0">';
+                          echo '<div class="row"><div class="col-md-3"><a href="../hr/user.php?id='.$rowWP[6].'"><img src="../docs/profilepics/'.$rowWP[4].'" width="50" height="50" style="border-radius:50%"></div><div class="col-md-9"><b>'.$rowWP[1].' '.$rowWP[5].'</a><span class="glyphicon glyphicon-triangle-right"></span><a href="../hr/user.php?id='.$rowWP[7].'">'.$rowWP[8].'&nbsp;'.$rowWP[9].'</a></b><br><span style="color:#999;font-size:9px">'.date("M j - h:i a",strtotime($rowWP[3])).'</span><br><p class="text" id="small">'.$rowWP[0].'</p></div></div><hr style="padding-bottom:0">';
                  }
 
 
