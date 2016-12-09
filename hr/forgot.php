@@ -5,10 +5,8 @@ require("../mailer/class.smtp.php");
 require "../zxcd9.php";
 if(!empty($_POST)) 
 { 
-  
 //filter input
 $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
 if (empty($_POST["emailaddress"])) {
   echo "emailerror";
 } else {
@@ -16,8 +14,6 @@ if (empty($_POST["emailaddress"])) {
       echo "emailerror";
   } 
 }
-
-
     $query = "SELECT emailaddress, password FROM hr_db WHERE emailaddress = :emailaddress"; 
     $query_params = array( ':emailaddress' => $_POST['emailaddress'] );
     try { 
@@ -38,11 +34,10 @@ ob_start();
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
     <tr style="background-color:#4285f4; height:8em; padding-top:2em;color:#fff">
         <td align="center" width="100%">
-                          <img src="http://i.imgur.com/sREcfLZ.png" style="height:2.8em"><br>
+          <img src="http://i.imgur.com/sREcfLZ.png" style="height:2.8em"><br>
         </td>
     </tr>
 </table>
-
   <div class="row" style="display:block">
     <div style="margin:2em 10% 0 10%">
       <p class="lead" style="font-family: Helvetica; color:#0A0A23; font-size:16px">You are recieving this because you have requested for your password to be reset. Please click on the button below to continue.<br>
@@ -60,8 +55,6 @@ ob_start();
             </tr>
         </table>
 </div></center>
-  
-
   <div class="row" style="display:block;padding-top:0;font-family:Helvetica">
     <div style="margin:0em 10% 0 10%"><center>
       <p style="font-size:11px;color:#aaa">This is an automated email, replies cannot be read.</p>
@@ -75,7 +68,6 @@ ob_start();
         $myvar = ob_get_clean();
         $mail = new PHPMailer();
         $mail->IsSMTP();
-        
         $mail->SMTPAuth = true;
         $mail->SMTPSecure = 'ssl';
         $mail->Host = "sg2plcpnl0084.prod.sin2.secureserver.net";
@@ -93,11 +85,9 @@ ob_start();
                      } else {
                         echo "loginok";
                      }
-        
         } else {
         	echo "emailerror";
         }
-
 } //emptypost
 
 ?>
