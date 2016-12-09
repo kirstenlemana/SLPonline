@@ -1,8 +1,5 @@
 <?php
-
-
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -17,7 +14,6 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <style>
-
 body {
     background-color: #f7f9fb;
     background-size: cover;
@@ -27,7 +23,6 @@ body {
     padding-top:15px !important; 
     padding-bottom:0 !important;
     height: 40px;
-    
 }
 .navbar {min-height:45px !important;background-color: #000}
 #bootstrapSelectForm .selectContainer .form-control-feedback {
@@ -41,14 +36,12 @@ body {
 .vcenter {
   min-height: 90%;  
   min-height: 90vh; 
-
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex; 
-  
-    -webkit-box-align : center;
+     -webkit-box-align : center;
   -webkit-align-items : center;
        -moz-box-align : center;
        -ms-flex-align : center;
@@ -59,8 +52,7 @@ body {
             -ms-flex-pack : center;
   -webkit-justify-content : center;
           justify-content : center;
-}
-table {
+}table {
   border-collapse: inherit;
 }
 .slpdrop {
@@ -179,12 +171,16 @@ tr {
 </style>
 </head>
 <body>
-<?php require "navfin.php"; ?>
+<?php 
+  require "navfin.php"; 
+?>
 <div class="row" style="margin:0;padding:0">
   <div class="col-md-2">
-      <?php require "nav_side.php"; ?>
+      <?php 
+        require "nav_side.php";
+      ?>
   </div>
-  <div class="col-md-10">
+    <div class="col-md-10">
       <div class="row">
         <div class="col-md-12">
           <div style="border:solid 1px #c5d6de;background:#fff;text-align:left;padding:2em;margin-bottom:2em;width:100%">
@@ -203,9 +199,7 @@ tr {
                     </div>
                 </div>
               </div>
-
-                    
-          <table class="table table-bordered" style="margin-top:2em;line-height:0.9;vertical-align:middle;border-top:2;padding-bottom:0;margin-bottom:2em;width:100%">
+       <table class="table table-bordered" style="margin-top:2em;line-height:0.9;vertical-align:middle;border-top:2;padding-bottom:0;margin-bottom:2em;width:100%">
           <thead style="background:#f6f8fa">
             <tr>
                 <th rowspan="2" style="vertical-align:middle">UACS</th>
@@ -249,12 +243,8 @@ tr {
                 <td><span class="glyphicon glyphicon-edit"></span> <span class="glyphicon glyphicon-remove"></span></td>
             </tr>
           </thead>
-        </table>
-
-        
-
-
-                    </div>
+          </table>
+             </div>
           </div>
         </div>
   </div>
@@ -299,7 +289,6 @@ $(document).ready(function () {
                         fontSize: '12px',
                     }
             },
-
             tooltip: {
                 formatter: function() {
                     var point = this.point,
@@ -372,8 +361,7 @@ $(document).ready(function () {
                 }]
             }]
         });
-                  
-    });
+      });
 </script>
 </body>
 </html>
