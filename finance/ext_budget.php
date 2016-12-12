@@ -1,8 +1,3 @@
-<?php
-
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -17,7 +12,6 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <style>
-
 body {
     background-color: #f7f9fb;
     background-size: cover;
@@ -27,108 +21,105 @@ body {
     padding-top:15px !important; 
     padding-bottom:0 !important;
     height: 40px;
-    
 }
 .navbar {min-height:45px !important;background-color: #000}
 #bootstrapSelectForm .selectContainer .form-control-feedback {
     right: -15px;
 }
 .disabled {
-  background:rgba(1,1,1,0.2);
-  border:0px solid;
-  cursor:progress;
+    background:rgba(1,1,1,0.2);
+    border:0px solid;
+    cursor:progress;
 }
 .vcenter {
-  min-height: 90%;  
-  min-height: 90vh; 
-
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex; 
-  
+    min-height: 90%;  
+    min-height: 90vh; 
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex; 
     -webkit-box-align : center;
-  -webkit-align-items : center;
-       -moz-box-align : center;
-       -ms-flex-align : center;
-          align-items : center;
-  width: 100%;
-         -webkit-box-pack : center;
-            -moz-box-pack : center;
-            -ms-flex-pack : center;
-  -webkit-justify-content : center;
-          justify-content : center;
+    -webkit-align-items : center;
+    -moz-box-align : center;
+    -ms-flex-align : center;
+    align-items : center;
+    width: 100%;
+    -webkit-box-pack : center;
+    -moz-box-pack : center;
+    -ms-flex-pack : center;
+    -webkit-justify-content : center;
+    justify-content : center;
 }
 table {
-  border-collapse: inherit;
+    border-collapse: inherit;
 }
 .slpdrop {
-  margin-bottom:1em;
+    margin-bottom:1em;
 }
 .slpdropsub {
-  background: #000;
-  color:#fff;
+    background: #000;
+    color:#fff;
 }
 .slpdropsub li a {
-  background: #000;
-  color:#fff;
-}
+    background: #000;
+    color:#fff;
+ }
 -webkit-tap-highlight-color: rgba(0,0,0,0);
 button {
     outline: none;
 }
 .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
-  background: #000;
+    background: #000;
 }
 .dashpanel {
-  border:solid 1px #c5d6de;margin:1em;margin-top:0;background:#fff;text-align: center;
-  height:100%;
-  border-radius: 4px;
+    border:solid 1px #c5d6de;margin:1em;margin-top:0;background:#fff;text-align: center;
+    height:100%;
+    border-radius: 4px;
 }
 .bluetext {
-  color: #00ADDe;
+    color: #00ADDe;
 }
 .padfix {
-  padding-right: 0;
-  margin-bottom:1em;
-  margin-right: 1em;
+    padding-right: 0;
+    margin-bottom:1em;
+    margin-right: 1em;
 }
 .padfix2{
-  padding-right:0em;
-  padding-left: 1em;
+    padding-right:0em;
+    padding-left: 1em;
 }
 .padfix3 {
-  padding-left:1em;
-  padding-right:0;
+    padding-left:1em;
+    padding-right:0;
 }
 .padfix4 {
-  padding: 1em;
-  padding-right:0;
+    padding: 1em;
+    padding-right:0;
 }
 .dashpanelheader {
-  font-weight:900;padding-top:0.5em;padding-left:1em;font-size:18px;
-  margin-bottom: 0;text-align: left;
+    font-weight:900;padding-top:0.5em;padding-left:1em;font-size:18px;
+    margin-bottom: 0;text-align: left;
 }
 @media (min-width: 990px) {
-  .slpdrop {
+.slpdrop {
     font-weight:900;
     font-size:22px;
   }
-  .padfix {
+.padfix {
     padding-right: 0;
     margin-right: 0;
     margin-bottom: 0;
   }
-  .padfix2{
+.padfix2{
     padding-right:0em;
     padding-left: 2em;
   }
-  .padfix3 {
+.padfix3 {
     padding-left:0;
     padding-right: 1em;
   }
-  .padfix4 {
+.padfix4 {
     padding: 1em;
     padding-right:1em;
   }
@@ -184,8 +175,7 @@ tr {
   <div class="col-md-12" style="padding-left:4em;padding-right:4em;padding-top:2em">
       <div class="row">
         <div class="col-md-12">
-          <div style="border:solid 1px #c5d6de;background:#fff;text-align:left;padding:0em;padding-left:1em;margin-bottom:2em;width:100%">
-          
+          <div style="border:solid 1px #c5d6de;background:#fff;text-align:left;padding:0em;padding-left:1em;margin-bottom:2em;width:100%">          
               <div class="row" style="height:100%">
                 <div class="col-md-6" style="background-color:#007ee5;padding:3em;color:#fff;height:450px">
                   SLP Finance System<h3>Thank you, Migs.</h3>
@@ -210,7 +200,6 @@ tr {
                   </div>
                 </div>
               </div>
-
           </div>
         </div>
       </div>
@@ -256,7 +245,6 @@ $(document).ready(function () {
                         fontSize: '12px',
                     }
             },
-
             tooltip: {
                 formatter: function() {
                     var point = this.point,
@@ -328,8 +316,7 @@ $(document).ready(function () {
                     color: colors[5]
                 }]
             }]
-        });
-                  
+        });    
     });
 </script>
 </body>
