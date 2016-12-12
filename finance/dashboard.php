@@ -1,8 +1,5 @@
 <?php
-
-
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -18,7 +15,6 @@
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/treemap.js"></script>
     <style>
-
 body {
     background-color: #f7f9fb;
     background-size: cover;
@@ -28,7 +24,6 @@ body {
     padding-top:15px !important; 
     padding-bottom:0 !important;
     height: 40px;
-    
 }
 .navbar {min-height:45px !important;background-color: #000}
 #bootstrapSelectForm .selectContainer .form-control-feedback {
@@ -42,14 +37,12 @@ body {
 .vcenter {
   min-height: 90%;  
   min-height: 90vh; 
-
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex; 
-  
-    -webkit-box-align : center;
+     -webkit-box-align : center;
   -webkit-align-items : center;
        -moz-box-align : center;
        -ms-flex-align : center;
@@ -180,11 +173,13 @@ tr {
 </style>
 </head>
 <body>
-<?php require "navfin.php"; ?>
+<?php 
+  require "navfin.php"; 
+?>
 <script>
-                function com(x) {
-                    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                }
+         function com(x) {
+         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+         }
                 grants = [1712661841,390018373,3846533228,2783154608];
                 admincosts = [173801468,173801468,173801468,173801468];
                 ps = [45457250,45457250,45457250,45457250];
@@ -193,7 +188,6 @@ tr {
                 sum3 = ps.reduce(function(ps, b) { return ps + b; }, 0);
 $(function () {
     $(document).ready(function () {
-
       var colors = Highcharts.getOptions().colors;
         $('#cont1').highcharts({
             chart: {
@@ -227,7 +221,6 @@ $(function () {
                         fontSize: '20px',
                     }
             },
-
             tooltip: {
                 formatter: function() {
                     var point = this.point,
@@ -278,7 +271,6 @@ $(function () {
                     name: 'GRANTS',
                     y: parseInt(sum1),
                     color: colors[2]
-                    
                 }, {
                     name: 'ADMIN',
                     y: parseInt(sum2),
@@ -435,8 +427,7 @@ $(function () {
         }
     });
 });
-
-            </script>
+   </script>
 <div class="row" style="margin:0;padding:0">
   <div class="col-md-3">
       <div style="border:solid 1px #c5d6de;background:#fff;text-align:left;padding:0;margin:0">
@@ -462,28 +453,26 @@ $(function () {
                     DASHBOARD<br>
                     <div class="row" style="margin-top:0em">
                       <div class="col-md-5">
-                                  <div style="border:solid px #c5d6de;background:#fff;text-align:left;padding:0em;margin-top:-1.5em;margin-bottom:0em;height:470px" id="cont3">
-                                    Pie chart: Admin Costs
-                                  </div>
+                           <div style="border:solid px #c5d6de;background:#fff;text-align:left;padding:0em;margin-top:-1.5em;margin-bottom:0em;height:470px" id="cont3">
+                                Pie chart: Admin Costs
                       </div>
+                    </div>
                       <div class="col-md-7">
-                            <div class="row">
-                                  <div style="border:solid 0px #c5d6de;background:#fff;text-align:left;padding:2em;margin-bottom:2em;height:300px" id="cont1">
-                                    Pie Chart: National Obligation
-                                  </div>
+                        <div class="row">
+                            <div style="border:solid 0px #c5d6de;background:#fff;text-align:left;padding:2em;margin-bottom:2em;height:300px" id="cont1">
+                                 Pie Chart: National Obligation
+                                 </div>
                             </div>
                             <div class="row">
                               <div style="border:solid 0px #c5d6de;background:#fff;text-align:left;padding:0;margin-bottom:2em;margin-top:-2em" id="cont2">
                                 Column chart: Regional Obligation
                               </div>
                             </div>
-                            
-                      <div>
-
+                         <div>
                     </div>
-          </div>
+                 </div>
+             </div>
         </div>
-  </div>
-</div>
+     </div>
 </body>
 </html>
