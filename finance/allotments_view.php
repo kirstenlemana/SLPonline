@@ -5,19 +5,16 @@ if (isset($_POST['editid'])) {
   die("visitpage");
 }
 $_SESSION['pageid'] = $_GET['id'];
-
 if (isset($_GET['id'])) {
  // $_GET  = filter_input_array(INPUT_GET, FILTER_SANITIZE_NUMBER_INT);
   $stmt = $db->prepare("SELECT fa.region as region,fa.type as type,fa.subtype as subtype,fa.saa as saa,fa.uacs as uacs,fa.fundsource as fundsource,fa.fundsourceyear as fundsourceyear,fa.amount as amount,fa.dateadded as dateadded,fa.d8 as d8, hrd.firstname as fn, hrd.id as id,fa.allotid as allotid, fa.purpose from fin_allotments as fa LEFT JOIN hr_db as hrd ON fa.hrdbid=hrd.id  WHERE allotid = :id");
   $stmt->bindParam(':id', $_GET['id']);
   $stmt->execute();
   $rowdv = $stmt->fetch();
-
 } else {
   header("Location: index.php");
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -33,7 +30,6 @@ if (isset($_GET['id'])) {
     <script src="../js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="../css/fileicon.css"/>
     <style>
-
 body {
     background-color: #f7f9fb;
     background-size: cover;
@@ -43,7 +39,6 @@ body {
     padding-top:15px !important; 
     padding-bottom:0 !important;
     height: 40px;
-    
 }
 .navbar {min-height:45px !important;background-color: #000}
 #bootstrapSelectForm .selectContainer .form-control-feedback {
@@ -76,13 +71,11 @@ body {
 .autocomplete-suggestions strong { font-weight: bold; color: #000; }
 .autocomplete-group { padding: 2px 5px; }
 .autocomplete-group strong { font-weight: bold; font-size: 16px; color: #000; display: block; border-bottom: 1px solid #000; }
-
 .spinner {
   margin: 20px auto 0;
   width: 90px;
   text-align: center;
 }
-
 .spinner > div {
   width: 20px;
   height: 50px;
@@ -92,30 +85,25 @@ body {
   -webkit-animation: sk-bouncedelay 1.6s infinite ease-in-out both;
   animation: sk-bouncedelay 1.6s infinite ease-in-out both;
 }
-
 .spinner .bounce1 {
     background: red;
   -webkit-animation-delay: -1.2s;
   animation-delay: -1.2s;
 }
-
 .spinner .bounce2 {
     background: yellow;
   -webkit-animation-delay: -0.8s;
   animation-delay: -0.8s;
 }
-
 .spinner .bounce3 {
     background: blue;
   -webkit-animation-delay: -0.4s;
   animation-delay: -0.4s;
 }
-
 @-webkit-keyframes sk-bouncedelay {
   0%, 80%, 100% { -webkit-transform: scale(0) }
   40% { -webkit-transform: scale(1.0) }
 }
-
 @keyframes sk-bouncedelay {
   0%, 80%, 100% { 
     -webkit-transform: scale(0.0);
@@ -139,14 +127,12 @@ body {
 .vcenter {
   min-height: 90%;  
   min-height: 90vh; 
-
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex; 
-  
-    -webkit-box-align : center;
+      -webkit-box-align : center;
   -webkit-align-items : center;
        -moz-box-align : center;
        -ms-flex-align : center;
@@ -275,18 +261,18 @@ h3 {
             <h3 style="text-align:left;margin-top:0;font-size:20px"><img src="../imgs/money.png" alt="fund" width="40" height="40">&nbsp;Fund Allotment Details</h3>
         </div>
         <div class="col-sm-6 pull-right">
-            <?php if ($_SESSION['permlvl']>0||$_SESSION['id']==$rowdv['id']) { ?> 
-            
+            <?php
+            if ($_SESSION['permlvl']>0||$_SESSION['id']==$rowdv['id']) { 
+            ?> 
             <span class="link-hover editbtn pull-right" id="editfile"><span class="glyphicon glyphicon-pencil"></span> Edit &nbsp; </span>
             <span class="link-hover pull-right" id="back" style="color:#00ADDe"><span class="glyphicon glyphicon-backward"></span> Back &nbsp;</span>
-
-            <?php } else {?>
-
+            <?php 
+            } else {
+            ?>
             <span class="link-hover pull-right" id="back" style="color:#00ADDe"><span class="glyphicon glyphicon-backward"></span> Back &nbsp;</span>
-
-            <?php }?>
-
-
+            <?php 
+            }
+            ?>
         </div>
       </div>
      <div class="row">
@@ -303,8 +289,7 @@ h3 {
                 <th >Date of allotments</th>
                 <th style="width:15%">Purpose</th>
                 <th >Uploaded By</th>
-            
-                </thead>
+              </thead>
               <!--comments-->
               <tr>
                 <td><?php echo $rowdv['region'];?></td>
@@ -318,16 +303,13 @@ h3 {
                 <td><?php echo $rowdv['d8'];?></td>
                  <td><?php echo $rowdv['purpose'];?></td>
                 <td><a href="../hr/user.php?id=<?php echo $rowdv['id']; ?>" style="color:#00ADDe"><?php echo $rowdv['fn']; ?></a><span style='color:#999;font-size:13px'><?php echo " On ".date("m/d/Y", strtotime($rowdv['dateadded'])); ?></span></td>
-
               </tr>
               <!--comments-->     
               </table>
-
         </div>
     </div>
   </div>
 </div>
-
 <div class="row" style="margin-right:0;margin-top:1em;margin-bottom:3em">
   <div class="col-md-offset-1 col-md-10 padfix padfix2" style="">
     <div style="border:solid 1px #c5d6de;background:#fff;text-align:left;padding:1em;padding-top:0;margin-left:1em;">
@@ -338,35 +320,28 @@ h3 {
                 <th style="width:33%">Amount</th>
                 <th style="width:18%">Date of NTA</th>
                 <th >Date Added</th>
-
                 <th></th>
               </thead>
-        
-
-                         <!--comments-->
+              <!--comments-->
             <?php
               $stmtnta = $db->prepare("SELECT f.ntaid,f.nta,f.nta_amount,f.nta_date,h.firstname,h.id,f.id,f.nta_dateadded FROM fin_nta f LEFT JOIN hr_db h ON f.hrdbid=h.id WHERE
                 f.ntaid = :id");
               $stmtnta->bindParam(':id', $_GET['id']);
               $stmtnta->execute();
                 while ($rowN = $stmtnta->fetch(PDO::FETCH_NUM, PDO::FETCH_ORI_NEXT)) {
-     
-                  if ($_SESSION['permlvl']>0 || $_SESSION['id']==$rowN[5]) {
+                if ($_SESSION['permlvl']>0 || $_SESSION['id']==$rowN[5]) {
                     echo "<tr><td>".$rowN[1]." </td><td>&#8369;".number_format($rowN[2],2)."</td><td>".$rowN[3]."</td><td><span style='color:#999;font-size:13px'>by: ".$rowN[4]." on ".date("m/d", strtotime($rowN[7]))."</span></td><td style='text-align:center'><span class='glyphicon glyphicon-edit' id='editcomment' onclick='editnta(".$rowN[6].");'></span> &nbsp;<span class='glyphicon glyphicon-remove' id='deletecomment' onclick='delnta(".$rowN[6].");'></span></td></tr>";
                       }
-                      else
+                    else
                       {
                      echo "<tr><td>".$rowN[1]." </td><td>&#8369;".number_format($rowN[2],2)."</td><td>".$rowN[3]."</td><td><span style='color:#999;font-size:13px'>by: ".$rowN[4]." on ".date("m/d", strtotime($rowN[7]))."</span></td><td style='text-align:center' hidden><span class='glyphicon glyphicon-edit' id='editcomment' onclick='editnta(".$rowN[6].");'></span> &nbsp;<span class='glyphicon glyphicon-remove' id='deletecomment' onclick='delnta(".$rowN[6].");'></span></td></tr>";
-
                       }
               }
               if ($stmtnta->rowCount() <= 0) {
-                
               }
             ?>
               <!--comments-->     
               </table>
-
         </div>
         <div class="row" style="padding-left:0em">
           <div class="col-sm-4">
@@ -393,22 +368,17 @@ h3 {
     </div>
   </div>
 </div>
-
       <!-- Modal -->
       <div class="modal fade" id="myModal" role="dialog" style="margin-top:3em">
         <div class="modal-dialog modal-sm">
-
           <div class="modal-content" style="padding:1em;padding-top:0.5em">
                   <h3 style="color:#00ADDe;margin-bottom:6px">Shareable Link</h3>
-                  
-                    <div class="form-group" style="margin-bottom:1em;margin-top:1em">
+                      <div class="form-group" style="margin-bottom:1em;margin-top:1em">
                       <input id="doclink" class="form-control" value="http://slp.ph/vrcabinet/docview.php?id=<?php echo $_GET['id']; ?>">
                     </div><!-- /input-group -->
-
                   <button type="button" class="btn btn-primary pull-right" style="border:0;margin-top:0;padding:5px 10px 5px 10px" id="okaybtn" data-dismiss="modal">Close</button>
                   <div class="clearfix"></div>
           </div>
-          
         </div>
       </div>
       <!-- Modal -->
@@ -432,7 +402,6 @@ function delnta(row){
                         location.href = "allotments_view.php?id=<?php echo $_GET['id']; ?>";
                       } else {
                         alert(data);
-                          
                       }
                    }
                 });
@@ -464,22 +433,11 @@ $("#editfile").click(function(event) {
                     location.href="allotments_edit.php"
                   }
                 }
-
-          });
+         });
 });
-
-
-
-
-
 $("#back").click(function(event) {
-  
-
-location.href = "allotments.php"; 
-
-        
+  location.href = "allotments.php"; 
 });
-
 $("#postcomment").click(function(event) {
   $("#postcomment").html("...");
   document.getElementById("postcomment").disabled = true;
@@ -495,8 +453,7 @@ $("#postcomment").click(function(event) {
                    url: "func.php",
                    type: "POST",
                    data: formData,
-                   success: function(data)
-                   {
+                   success: function(data) {
                       if (data == "commented") {
                         //$("#commentable").append("<tr><td>"+$('input[name=commentbox]').val()+" <span style='color:#999;font-size:13px'>- <?php echo $_SESSION['firstname']; ?> (now)</span></td></tr>");
                         location.reload();
@@ -509,7 +466,6 @@ $("#postcomment").click(function(event) {
                 });
                 //endAjax
 }); //endpost
-
 </script>
 <script type="text/javascript" src="http://momentjs.com/downloads/moment.min.js"></script>
 <script src="../js/pikaday.min.js"></script>
@@ -518,9 +474,6 @@ $("#postcomment").click(function(event) {
       field: $('#dte')[0], 
       format: 'M/D/YYYY'
     });
-
-    
-
 </script>
 </body>
 </html>
