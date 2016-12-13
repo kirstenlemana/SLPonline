@@ -1,16 +1,13 @@
 <?php
 require "../zxcd9.php";
 //start post
-if(!empty($_POST)) 
-{ 
+if(!empty($_POST)) { 
 //filter input
 $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
         $id = test_input($_POST['id']);
         $option = test_input($_POST['option']);
         $twgname = test_input($_POST['twgname']);
         $twgremarks = test_input($_POST['twgremarks']);
-
         $stmt = $db->prepare("INSERT INTO hr_twgrequest (twgoption, twgname, remarks, added, addedby) VALUES (:twgoption, :twgname, :remarks, :added, :addedby)");
         $stmt->bindParam(':twgoption', $option);
         $stmt->bindParam(':twgname', $twgname);
@@ -26,5 +23,4 @@ $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         */
         echo "good";
 }//end post
-     
 ?>
