@@ -1,6 +1,5 @@
 <?php
-require "../zxcd9.php";
-
+  require "../zxcd9.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,11 +17,9 @@ require "../zxcd9.php";
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
-    <script type="text/javascript" src="../js/bootstrapValidator.js"></script>
-    
+    <script type="text/javascript" src="../js/bootstrapValidator.js"></script> 
     <script src="../js/tag-it.js" type="text/javascript" charset="utf-8"></script>
     <style>
-
 body {
     background-color: #f7f9fb;
     background-size: cover;
@@ -81,7 +78,6 @@ $(document).ready(function() {
       prefloc = 0;
       $('#tooltip1').popover();
 });
-
 </script>
 <?php include "../nav.php"; ?>
 <div class="container-fluid" id="successcontent" style="display:none">
@@ -101,7 +97,6 @@ $(document).ready(function() {
 $sql = "SELECT id, orgname FROM PRTemployers";
 $partnerIDArray = [];
 $partnerArray = [];
-
 foreach ($db->query($sql) as $results)
 {
   $partnerIDArray[] = intval($results["id"]);
@@ -117,7 +112,6 @@ $(function () {
     var partnerArray = <?php echo json_encode($partnerArray);?>;
     var arr = [];
     var element = {};
-    
     for (var i = 0; i < partnerArray.length; i++) {
         var idname=partnerIDArray[i];
         var name=partnerArray[i];
@@ -332,28 +326,27 @@ function intervent() {
 <?php } ?>
                             <div class="form-group">
                             <div class="col-sm-12">
-                              <select class="form-control" id="prov" name="prov" onChange='getCity(this.value)' required>           
-                                <option value="" selected>Select Province</option>
-              <?php
-                  $query = "SELECT * FROM lib_regions WHERE regname = :region"; 
-                  $query_params = array(':region' => $_SESSION['filter']);
-                  try 
-                  { $stmt = $db->prepare($query); $result = $stmt->execute($query_params); } 
-                  catch(PDOException $ex) 
-                  { die("Failed to run query: " . $ex->getMessage()); } 
-                  $row = $stmt->fetch();
-                  $regcode = $row['regid'];
+                              <select class="form-control" id="prov" name="prov" onChange='getCity(this.value)' required>           <option value="" selected>Select Province</option>
+                              <?php
+                                  $query = "SELECT * FROM lib_regions WHERE regname = :region"; 
+                                  $query_params = array(':region' => $_SESSION['filter']);
+                                  try 
+                                  { $stmt = $db->prepare($query); $result = $stmt->execute($query_params); } 
+                                  catch(PDOException $ex) 
+                                  { die("Failed to run query: " . $ex->getMessage()); } 
+                                  $row = $stmt->fetch();
+                                  $regcode = $row['regid'];
 
-                  $query = "SELECT * FROM lib_provinces WHERE regid = :region"; 
-                  $query_params = array(':region' => $regcode);
-                  try 
-                  { $stmt = $db->prepare($query); $result = $stmt->execute($query_params); } 
-                  catch(PDOException $ex) 
-                  { die("Failed to run query: " . $ex->getMessage()); } 
-                  while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                     echo "<option value='".$row["provid"]."'>".$row['provname']."</option>";
-                  }
-              ?>
+                                  $query = "SELECT * FROM lib_provinces WHERE regid = :region"; 
+                                  $query_params = array(':region' => $regcode);
+                                  try 
+                                  { $stmt = $db->prepare($query); $result = $stmt->execute($query_params); } 
+                                  catch(PDOException $ex) 
+                                  { die("Failed to run query: " . $ex->getMessage()); } 
+                                  while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                                     echo "<option value='".$row["provid"]."'>".$row['provname']."</option>";
+                                  }
+                              ?>
                               </select>
                           </div>
                         </div>
@@ -387,7 +380,7 @@ function intervent() {
                     </div>
                   </div>
                   <div class="clearfix"></div>
-            </form>
+                  </form>
                   <div class="form-group">
                     <div class="col-md-6">
                       <div class="col-sm-12" style="color:red;text-align:left;padding-left:0">
@@ -401,50 +394,43 @@ function intervent() {
                       <button class="btn btn-success col-md-12" id="formsubmit">SUBMIT</button>
                     </div>
                   </div>
-
         </div>
     </div>
-  
 </div><!--end container-->
 <script>
-function getProv(val) {
-
-  var formData = { 'region' : $('#region option:selected').val() };
-  $.ajax({
-  type: "POST",
-  url: "getProv.php",
-  data: formData,
-  success: function(data) {
-            $("#prov").html(data);
-        }
-
+  function getProv(val) {
+    var formData = { 'region' : $('#region option:selected').val() };
+    $.ajax({
+    type: "POST",
+    url: "getProv.php",
+    data: formData,
+    success: function(data) {
+              $("#prov").html(data);
+      }
   });
 }
-function getCity(val) {
-
-  var formData = { 'provi' : $('#prov option:selected').val() };
-  $.ajax({
-  type: "POST",
-  url: "getCity.php",
-  data: formData,
-  success: function(data) {
-            $("#city").prop('disabled', false);
-            $("#city").html(data);
-        }
-
+  function getCity(val) {
+    var formData = { 'provi' : $('#prov option:selected').val() };
+    $.ajax({
+    type: "POST",
+    url: "getCity.php",
+    data: formData,
+    success: function(data) {
+              $("#city").prop('disabled', false);
+              $("#city").html(data);
+      }
   });
 }
-function getBrgy(val) {
-  var formData = { 'city' : $('#city option:selected').val() };
-  $.ajax({
-  type: "POST",
-  url: "getBrgy.php",
-  data: formData,
-  success: function(data) {
-            $("#brgy").prop('disabled', false);
-            $("#brgy").html(data);
-        }
-
+  function getBrgy(val) {
+    var formData = { 'city' : $('#city option:selected').val() };
+    $.ajax({
+    type: "POST",
+    url: "getBrgy.php",
+    data: formData,
+    success: function(data) {
+              $("#brgy").prop('disabled', false);
+              $("#brgy").html(data);
+     }
   });
 }
     $('#subsector').tagit({
