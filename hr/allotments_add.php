@@ -1,8 +1,3 @@
-<?php
-
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -17,7 +12,6 @@
     <script src="../js/bootstrap.min.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <style>
-
 body {
     background-color: #f7f9fb;
     background-size: cover;
@@ -27,7 +21,6 @@ body {
     padding-top:15px !important; 
     padding-bottom:0 !important;
     height: 40px;
-    
 }
 .navbar {min-height:45px !important;background-color: #000}
 #bootstrapSelectForm .selectContainer .form-control-feedback {
@@ -41,14 +34,12 @@ body {
 .vcenter {
   min-height: 90%;  
   min-height: 90vh; 
-
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex; 
-  
-    -webkit-box-align : center;
+  -webkit-box-align : center;
   -webkit-align-items : center;
        -moz-box-align : center;
        -ms-flex-align : center;
@@ -188,8 +179,7 @@ tr {
       <div class="row">
         <div class="col-md-12">
           <div style="border:solid 1px #c5d6de;background:#fff;text-align:left;padding:0em;padding-left:1em;margin-bottom:2em;width:100%">
-          
-              <div class="row" style="height:100%">
+            <div class="row" style="height:100%">
                 <div class="col-md-6" style="background-color:#007ee5;padding:3em;color:#fff;height:480px">
                   SLP Finance System<h3>How to add Fund Allotments</h3>
                   <ul>
@@ -214,7 +204,6 @@ tr {
                             <option value="DR">Direct Release</option>
                         </select>
                   </div>
-                  
                   <div class="form-group">
                     <div class="row">
                       <div class="col-md-6">
@@ -271,12 +260,9 @@ tr {
                     </div>
                   </div>
                   <button class="btn-info btn pull-right">Add Fund</button>
-
-
                 </div>
               </div>
-
-          </div>
+           </div>
         </div>
       </div>
   </div>
@@ -285,8 +271,7 @@ tr {
 function displaySubType() {
     var selected = $("#subtype option:selected").val();
     console.log(selected);
-
-    if (selected == "Grant") {
+if (selected == "Grant") {
         $("#saaholder").fadeIn();
         $("#uacsholder").hide();
         $("#blankholder").hide();
@@ -297,8 +282,7 @@ function displaySubType() {
     }
 }
 $(document).ready(function () {
-
-      $('[data-toggle="tooltip"]').tooltip(); 
+        $('[data-toggle="tooltip"]').tooltip(); 
                 encoded = 500;
                 budget = 320;
                 accounting = 40;
@@ -336,7 +320,6 @@ $(document).ready(function () {
                         fontSize: '12px',
                     }
             },
-
             tooltip: {
                 formatter: function() {
                     var point = this.point,
@@ -409,7 +392,6 @@ $(document).ready(function () {
                 }]
             }]
         });
-                  
     });
 </script>
 </body>
