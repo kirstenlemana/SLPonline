@@ -2,12 +2,11 @@
 require "../zxcd9.php";
 $query = "SELECT m.orgname, m.address, m.ptype, m.psic, m.region as regionz, m.contacttitle, m.engagement_means, m.engagement_cost, m.createdby, m.province, m.municipality, m.contactperson, m.contactemail, m.contactnumber, m.npmo, m.established, m.website, t.firstname, t.region FROM PRTemployers m LEFT JOIN hr_db t ON m.createdby=t.id WHERE m.id = :id"; 
         $query_params = array(':id' => $_GET['id']);
-        try 
-        { $stmt = $db->prepare($query); $result = $stmt->execute($query_params); } 
-        catch(PDOException $ex) 
-        { die("Failed to run query: " . $ex->getMessage()); } 
+            try 
+            { $stmt = $db->prepare($query); $result = $stmt->execute($query_params); } 
+            catch(PDOException $ex) 
+            { die("Failed to run query: " . $ex->getMessage()); } 
         $row = $stmt->fetch();
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,7 +23,6 @@ $query = "SELECT m.orgname, m.address, m.ptype, m.psic, m.region as regionz, m.c
     <script src="../js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../js/bootstrapValidator.js"></script>
     <style>
-
 body {
     background-color: #f7f9fb;
     background-size: cover;
@@ -40,42 +38,41 @@ body {
     right: -15px;
 }
 .slidedown {
-  -webkit-transform: scaleY(0);
-       -o-transform: scaleY(0);
-      -ms-transform: scaleY(0);
-          transform: scaleY(0);
+     -webkit-transform: scaleY(0);
+     -o-transform: scaleY(0);
+     -ms-transform: scaleY(0);
+      transform: scaleY(0);
   
-  -webkit-transform-origin: top;
-       -o-transform-origin: top;
-      -ms-transform-origin: top;
-          transform-origin: top;
+     -webkit-transform-origin: top;
+     -o-transform-origin: top;
+     -ms-transform-origin: top;
+     transform-origin: top;
   
-  -webkit-transition: -webkit-transform 0.2s ease;
-            -o-transition: -o-transform 0.2s ease;
-          -ms-transition: -ms-transform 0.2s ease;
-                  transition: transform 0.2s ease;
+     -webkit-transition: -webkit-transform 0.2s ease;
+     -o-transition: -o-transform 0.2s ease;
+     -ms-transition: -ms-transform 0.2s ease;
+     transition: transform 0.2s ease;
 }
-
 .slidedown.active {
-  -webkit-transform: scaleY(1);
-       -o-transform: scaleY(1);
-      -ms-transform: scaleY(1);
-          transform: scaleY(1);
+     -webkit-transform: scaleY(1);
+     -o-transform: scaleY(1);
+     -ms-transform: scaleY(1);
+     transform: scaleY(1);
 }
 .successcontent {
-  display:none;
+     display:none;
 }
 .mainlink {
-  font-size: 1.8em;
-  margin-top: 1px;
+     font-size: 1.8em;
+     margin-top: 1px;
 }
 .form-group div {
-  margin-bottom: 0.5em;
+     margin-bottom: 0.5em;
 }
 .disabled {
-  background:rgba(1,1,1,0.2);
-  border:0px solid;
-  cursor:progress;
+     background:rgba(1,1,1,0.2);
+     border:0px solid;
+     cursor:progress;
 }
 </style>
 </style>
@@ -84,7 +81,6 @@ body {
 <?php include '../nav.php'; ?>
 <div class="container-fluid">
     <div class="row" style="padding-top:2em;display:none" id="successcontent">
-      
     </div>
     <div style="padding-top:2em;" id="maincontent">
       <div class="row">
@@ -249,40 +245,37 @@ body {
 function getProv(val) {
 
   var formData = { 'region' : $('#region option:selected').val() };
-  $.ajax({
-  type: "POST",
-  url: "getProv.php",
-  data: formData,
-  success: function(data) {
-            $("#prov").prop('disabled', false);
-            $("#prov").html(data);
-        }
-
+      $.ajax({
+        type: "POST",
+        url: "getProv.php",
+        data: formData,
+        success: function(data) {
+                  $("#prov").prop('disabled', false);
+                  $("#prov").html(data);
+     }
   });
 }
 function getCity(val) {
-
   var formData = { 'provi' : $('#prov option:selected').val() };
-  $.ajax({
-  type: "POST",
-  url: "getCity.php",
-  data: formData,
-  success: function(data) {
-            $("#city").prop('disabled', false);
-            $("#city").html(data);
-        }
-
+      $.ajax({
+        type: "POST",
+        url: "getCity.php",
+        data: formData,
+        success: function(data) {
+                  $("#city").prop('disabled', false);
+                  $("#city").html(data);
+     }
   });
 }
 function getBrgy(val) {
   var formData = { 'city' : $('#city option:selected').val() };
-  $.ajax({
-  type: "POST",
-  url: "getBrgy.php",
-  data: formData,
-  success: function(data) {
-            $("#brgy").prop('disabled', false);
-            $("#brgy").html(data);
+      $.ajax({
+        type: "POST",
+        url: "getBrgy.php",
+        data: formData,
+        success: function(data) {
+                  $("#brgy").prop('disabled', false);
+                  $("#brgy").html(data);
         }
 
   });
