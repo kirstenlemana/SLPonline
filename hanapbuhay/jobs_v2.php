@@ -1,6 +1,6 @@
 <?php
-require "../zxcd9.php";
-byteMe($_SESSION['id'],'hb_jobs',0.10);
+  require "../zxcd9.php";
+  byteMe($_SESSION['id'],'hb_jobs',0.10);
 $query = " 
             SELECT 
                 firstname, 
@@ -54,7 +54,6 @@ $query = "
     <script type="text/javascript" src="../js/bootstrapValidator.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <style>
-
 body {
     background-color: #f7f9fb;
     background-size: cover;
@@ -70,55 +69,58 @@ body {
     right: -15px;
 }
 .slidedown {
-  -webkit-transform: scaleY(0);
-       -o-transform: scaleY(0);
-      -ms-transform: scaleY(0);
-          transform: scaleY(0);
+    -webkit-transform: scaleY(0);
+    -o-transform: scaleY(0);
+    -ms-transform: scaleY(0);
+    transform: scaleY(0);
   
-  -webkit-transform-origin: top;
-       -o-transform-origin: top;
-      -ms-transform-origin: top;
-          transform-origin: top;
+    -webkit-transform-origin: top;
+    -o-transform-origin: top;
+    -ms-transform-origin: top;
+    transform-origin: top;
   
-  -webkit-transition: -webkit-transform 0.2s ease;
-            -o-transition: -o-transform 0.2s ease;
-          -ms-transition: -ms-transform 0.2s ease;
-                  transition: transform 0.2s ease;
+    -webkit-transition: -webkit-transform 0.2s ease;
+    -o-transition: -o-transform 0.2s ease;
+    -ms-transition: -ms-transform 0.2s ease;
+    transition: transform 0.2s ease;
 }
 
 .slidedown.active {
-  -webkit-transform: scaleY(1);
-       -o-transform: scaleY(1);
-      -ms-transform: scaleY(1);
-          transform: scaleY(1);
+    -webkit-transform: scaleY(1);
+    -o-transform: scaleY(1);
+    -ms-transform: scaleY(1);
+    transform: scaleY(1);
 }
 .successcontent {
-  display:none;
+    display:none;
 }
 .cleanselect {
-  -webkit-appearance:none;-moz-appearance:none;-ms-appearance:none;appearance:none;background:#fff url(../imgs/arrows.png) no-repeat right 9px;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    -ms-appearance:none;
+    appearance:none;background:#fff url(../imgs/arrows.png) no-repeat right 9px;
 }
 .mainlink {
-  font-size: 1.8em;
-  margin-top: 1px;
+    font-size: 1.8em;
+    margin-top: 1px;
 }
 .form-group div {
-  margin-bottom: 0.5em;
+    margin-bottom: 0.5em;
 }
 .disabled {
-  background:rgba(1,1,1,0.2);
-  border:0px solid;
-  cursor:progress;
-}
+    background:rgba(1,1,1,0.2);
+    border:0px solid;
+    cursor:progress;
+  }
 tbody tr {
-  cursor: pointer;
+    cursor: pointer;
 }
 .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
-  background-color: #2c3e50;
-  color: #fff;
+    background-color: #2c3e50;
+    color: #fff;
 }
 .dataTables_filter {
-   display:none;
+     display:none;
 }
 #slideout {
       z-index: 998;
@@ -171,17 +173,17 @@ tbody tr {
       right: 0;
     }
     .form-control {
-        display: block;
-        width: 100%;
-        height: 45px;
-        padding: 0px 0px 0px 10px;
-        font-size: 15px;
-        line-height: 1.42857143;
-        color: #2c3e50;
-        background-color: #ffffff;
-        background-image: none;
-        border: 1px solid #dce4ec;
-        border-radius: 4px;
+      display: block;
+      width: 100%;
+      height: 45px;
+      padding: 0px 0px 0px 10px;
+      font-size: 15px;
+      line-height: 1.42857143;
+      color: #2c3e50;
+      background-color: #ffffff;
+      background-image: none;
+      border: 1px solid #dce4ec;
+      border-radius: 4px;
     }
     .btn2 {
       color: #fff;
