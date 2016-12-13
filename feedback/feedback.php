@@ -32,11 +32,7 @@ $query = "
         catch(PDOException $ex) 
         { die("Failed to run query: " . $ex->getMessage()); } 
         $row = $stmt->fetch();
-
 ?>
-
- 
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -56,7 +52,6 @@ $query = "
     <script type="text/javascript" src="../js/bootstrapValidator.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <style>
-
 body {
     background-color: #f7f9fb;
     background-size: cover;
@@ -76,18 +71,15 @@ body {
        -o-transform: scaleY(0);
       -ms-transform: scaleY(0);
           transform: scaleY(0);
-  
   -webkit-transform-origin: top;
        -o-transform-origin: top;
       -ms-transform-origin: top;
           transform-origin: top;
-  
   -webkit-transition: -webkit-transform 0.2s ease;
             -o-transition: -o-transform 0.2s ease;
           -ms-transition: -ms-transform 0.2s ease;
                   transition: transform 0.2s ease;
 }
-
 .slidedown.active {
   -webkit-transform: scaleY(1);
        -o-transform: scaleY(1);
@@ -115,12 +107,10 @@ body {
 tbody tr {
   cursor: pointer;
 }
-
 .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
   background-color: #2c3e50;
   color: #fff;
 }
-
 #slideout {
       z-index: 998;
       position: fixed;
@@ -138,7 +128,7 @@ tbody tr {
       -moz-border-radius: 5px 0px 0px 5px;
       border-radius: 5px 0px 0px 5px;
     }
-    #slideout_inner {
+#slideout_inner {
       z-index: 999;
       position: fixed;
       top: 70%;
@@ -156,22 +146,22 @@ tbody tr {
       -moz-border-radius: 0px 0 0px 5px;
       border-radius: 0px 0 0px 5px;
     }
-    #slideout_inner textarea {
+#slideout_inner textarea {
       z-index: 999;
       margin-right: 5px;
       width: 210px;
       height: 100px;
       margin-bottom: 6px;
     }
-    #slideout:hover {
+#slideout:hover {
       z-index: 999;
       right: 250px;
     }
-    #slideout:hover #slideout_inner {
+#slideout:hover #slideout_inner {
       z-index: 999;
       right: 0;
     }
-    .form-control {
+.form-control {
         display: block;
         width: 100%;
         height: 45px;
@@ -184,7 +174,7 @@ tbody tr {
         border: 1px solid #dce4ec;
         border-radius: 4px;
     }
-    .btn2 {
+.btn2 {
       color: #fff;
       background-color: #2c3e50;
       display: inline-block;
@@ -206,7 +196,7 @@ tbody tr {
       -moz-user-select: none;
       -ms-user-select: none;
     }
-    #search-text-input{
+#search-text-input{
     border-top:thin solid  #e5e5e5;
     border-right:thin solid #e5e5e5;
     border-bottom:0;
@@ -219,7 +209,6 @@ tbody tr {
     padding:.4em 0 .4em .6em; 
     width:500px; 
 }
-  
 #button-holder{
     background-color:#f1f1f1;
     border-top:thin solid #e5e5e5;
@@ -230,7 +219,6 @@ tbody tr {
     text-align:center;
     width:50px;
 }
-  
 #button-holder img{
     margin:4px;
     width:30px; 
@@ -241,15 +229,12 @@ tbody tr {
 </head>
 <body>
 <?php include '../nav.php'; ?>
-
-
 <script type="text/javascript" language="javascript" class="init">
 var oTable = "";
 $(document).ready(function() {
-
 function toTitleCase(str)
 {
-    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
 }
 function parselimit(strz)
 {
@@ -277,53 +262,38 @@ function parseStatus(str) {
     "aProcessing": true,
     "aServerSide": true,
     "orderCellsTop": true,
-
     "ajax": "dt_feedbackportal.php",
-  
     "dom": '<"top">rtp<"bottom"f>',
     "fnRowCallback":
       function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
         $(nRow).attr('id', aData[0]);
         $(nRow).attr('subfeed', aData[1]);
-        
-        return nRow;
+       return nRow;
       },
     "aoColumnDefs": [
       { 
                "aTargets":[0],
-               "fnCreatedCell": function(nTd, sData, oData, iRow, iCol)
-                {
+               "fnCreatedCell": function(nTd, sData, oData, iRow, iCol) {
                     $(nTd).css('width', 10);
-
-                }
-
+               }
             },
-           
-       { 
+          { 
                "aTargets":[1],
-               "fnCreatedCell": function(nTd, sData, oData, iRow, iCol)
-                {
+               "fnCreatedCell": function(nTd, sData, oData, iRow, iCol) {
                     $(nTd).css('width', 50);
-
-                 
-                },
+            },
                 "mData": null,
                 "mRender": function( data, type, full) {
                     return '<td>'+'<img src="../imgs/GROUP.png" width="50" height="50">'+'</td>';
-
-
-                }
+               }
             },
-
             { 
                "aTargets":[2],
-               "fnCreatedCell": function(nTd, sData, oData, iRow, iCol)
-                {
+               "fnCreatedCell": function(nTd, sData, oData, iRow, iCol) {
                     $(nTd).css('width', 1300);
                     $(nTd).css( 'text-transform','capitalize')
                    // $(nTd).css('font-weight','bold');
-                 
-                },
+             },
                 "mData": null,
                 "mRender": function( data, type, full) {
                     return '<td>'+'<img src="../imgs/pin.png" width="20" height="20">'+'<b>'+data[1]+'</b>'+'<br>'+'<span style="font-size:13px">'+'posted by: '+data[2]+' '+data[3]+' '+data[4]+'</span>'+'</td>';
@@ -331,40 +301,24 @@ function parseStatus(str) {
             },
      { 
                "aTargets":[6],
-               "fnCreatedCell": function(nTd, sData, oData, iRow, iCol)
-                {
+               "fnCreatedCell": function(nTd, sData, oData, iRow, iCol) {
                     $(nTd).css('width', 180);
-
-                 
-                },
+            },
                 "mData": null,
                 "mRender": function( data, type, full) {
                     return '<td>'+' <span style="font-size:13px">'+data[5]+'&nbsp;&nbsp;'+'Comments '+'</span>'+'</td>';
-
-
                 }
             },
-                  
-    { 
+     { 
                "aTargets":[7],
-               "fnCreatedCell": function(nTd, sData, oData, iRow, iCol)
-                {
+               "fnCreatedCell": function(nTd, sData, oData, iRow, iCol)  {
                     $(nTd).css('width', 250);
-
-                 
-                },
+            },
                 "mData": null,
                 "mRender": function( data, type, full) {
                     return '<td>'+' <span style="font-size:13px">'+data[6]+'&nbsp;&nbsp;'+'<br>'+'by '+data[7]+'</span>'+'</td>';
-
-
                 }
             },
-
-
-
-
-           
             { "bVisible": false, "aTargets":[0,3,4,5] }
                     ]
   });
@@ -381,10 +335,8 @@ function parseStatus(str) {
                               location.href="feedback_portaldetails.php?id="+redirection;
                             }
                           }
-
                     });
   });
-
 $(document).ready(function() {
   tableshown=false;
 $("#search-text-input").keyup(function() {
@@ -394,18 +346,14 @@ $("#search-text-input").keyup(function() {
    oTable.fnFilter(this.value);
 }); 
 });
-
 });
 </script>
 <div class="container-fluid">
     <div class="row">
       <div style="background-color:#fff;height:90%;padding:2em;padding-bottom:4em">
-      
-        <div id="tableHolder" class="col-md-12" style="border:0px solid #000;margin-bottom:2em">
-        
-              <h3 align="center"><img src="../imgs/slplogo_med.png" width="100" height="100">&nbsp;&nbsp;Sustainable Livelihood Program ( SLP ) Forum </h3>
+       <div id="tableHolder" class="col-md-12" style="border:0px solid #000;margin-bottom:2em">
+         <h3 align="center"><img src="../imgs/slplogo_med.png" width="100" height="100">&nbsp;&nbsp;Sustainable Livelihood Program ( SLP ) Forum </h3>
               <br/>
-         
 <script>
 function filterProvince() {
       var regionvalue = document.getElementById("provincefilter").value;
@@ -415,28 +363,24 @@ function filterProvince() {
         oTable.fnFilter("^"+regionvalue+"$", 4, true);
       }
 }
-            </script>
+</script>
  <div class="row">
-         
-          <div class="col-md-11" id="searchblock" style="padding:2em;">
+         <div class="col-md-11" id="searchblock" style="padding:2em;">
                 <div style="margin-top:2em">
                   <div class="form-group">
                       <input id="search-text-input" class="form-control" placeholder="Search keywords.." style="height:38px;text-align:center;padding-left:0"/><center>
-
-                     <div id="button-holder" >
+                  <div id="button-holder" >
                       <img src="../imgs/mg.png"  id="mg">
                     </div>
                   </div>
                 </div>
-          </div>
-          <div class="col-md-1">
+        </div>
+        <div class="col-md-1">
                 <br/><br/><br/><br/>
                  <a href="../feedback_portal.php" class="btn btn-info btn-sm" id="create" role="button">Create new thread</a> 
           </div>
-                
-      </div>
-
-                  <table cellpadding="0" cellspacing="0" border="0" class="table table-bordered table-hover hover" id="viewdata">
+       </div>
+  <table cellpadding="0" cellspacing="0" border="0" class="table table-bordered table-hover hover" id="viewdata">
                     <thead>
                       <tr>
                       <th>ID</th>
@@ -447,35 +391,17 @@ function filterProvince() {
                       <th></th>
                       <th>NO. OF COMMENTS</th>     
                       <th>LATEST REPLY</th>
-                     
-                      </tr>
+                     </tr>
                     </thead>
-                  </table>
-
-
-
+                 </table>
           </div>
-
-
-
-                           
-                 <div class="row">
-
-                  <div class="col-md-12" >
+        <div class="row">
+         <div class="col-md-12" >
                   <p align="right">      <a href="../feedback_portal.php" class="btn btn-info btn-sm" id="create" role="button">Create new thread</a> </p>
-               
-                  </div>
-                 
-              </div>  
-
-        </div>
-
-     
- 
-
-    </div><!--endrow-->
+              </div>
+            </div>  
+          </div>
+       </div><!--endrow-->
    <!--container-->
-
-
 </body>
 </html>
