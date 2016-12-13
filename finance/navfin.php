@@ -29,10 +29,8 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      
     </div>
    <!-- Collect the nav links, forms, and other content for toggling -->
-
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <!--<li class="dropdown">
@@ -63,7 +61,6 @@
             <li><a href="http://slp.ph/hanapbuhay/jobs.php">MD</a></li>
           </ul>
         </li>-->
-          
         <li class="dropdown">
           <a href="dashboard.php">
           <img src="../images/SLP LOGO.png" width="65" height="25" alt="SLPIT">&nbsp;Finance v3</a>
@@ -96,20 +93,17 @@
                   <li><a href="#">SLPIS</a></li>
                 </ul>
             </li>
-
             <li><a href="external.php">RPMO Directory</i></a></li>
             <li><a href="external.php">System Dev't</i></a></li>
             <li><a href="external.php">Help & Support</i></a></li>
           </ul>
         </li>-->
-
       </ul>
       <ul class="nav navbar-nav" style="float:right;">
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color:rgba(255,255,255,0.5);"><span class="badge nonotif" style="<?php if ($notifs > 0) { echo 'background: #e74c3c;color: #fff;'; } ?>"><?php echo $notifs; ?> &nbsp;<span class="glyphicon glyphicon-bell <?php if ($notifs >0) { echo 'spin'; } ?>"></span></span></a>
           <ul class="dropdown-menu" style="width:160px">
 <?php
-
 $i = 0;
   foreach($notiArray as $notif) {
       echo '<li style="font-size:10px;width:160px;white-space:none;border-bottom:1px solid #ccc" onclick="triggerClicked('.$notif[0].','.'\''.$notif[5].'\')"><a href="#" style="width:160px;padding-left:10px;white-space:none;"><b style="color:#00AADe">'.$notif[2].'</b> '.$notif[3].' <b>'.$notif[4].'</b></a></li>';
@@ -119,13 +113,10 @@ $i = 0;
       break;
     }
   }
-
-
 if ($notifs == 0) {
     echo '<li id="notifbox"><a href="#">No new notifications</a></li>';
     echo '<li id="notifbox"><a href="http://slp.ph/hr/notifications.php" style="color:#00AADe">View all previous</a></li>';
 }
-
 ?>            
           </ul>
         </li>
