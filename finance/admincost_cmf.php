@@ -1,8 +1,5 @@
 <?php
-
-
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -17,7 +14,6 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <style>
-
 body {
     background-color: #f7f9fb;
     background-size: cover;
@@ -27,7 +23,6 @@ body {
     padding-top:15px !important; 
     padding-bottom:0 !important;
     height: 40px;
-    
 }
 .navbar {min-height:45px !important;background-color: #000}
 #bootstrapSelectForm .selectContainer .form-control-feedback {
@@ -41,14 +36,12 @@ body {
 .vcenter {
   min-height: 90%;  
   min-height: 90vh; 
-
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex; 
-  
-    -webkit-box-align : center;
+      -webkit-box-align : center;
   -webkit-align-items : center;
        -moz-box-align : center;
        -ms-flex-align : center;
@@ -191,21 +184,19 @@ tr {
               <div class="row">
                 <div class="col-md-8">
                   <h2 style="font-size:40px;margin-bottom:0em;margin-top:0em">Admin Costs - CMF</h2>
-                  Viewing data for: <b>Region VI</b><br>
+                    Viewing data for: <b>Region VI</b><br>
                     <div style="margin-top:0.6em">
                       <a href="admincost_add.php"><button class="btn btn-info btn-sm">Add CMF</button></a>
                       <button class="btn btn-success btn-sm" onclick="showsearch()"><span class="glyphicon glyphicon-search"></span>&nbsp; Search</button>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div style="border:solid 0px #c5d6de;background:#fff;text-align:left;padding:0.2em;margin-bottom:0;height:160px" id="cont2">
-                      Pie Chart 2: Summary
-                    </div>
+          <div class="col-md-4">
+              <div style="border:solid 0px #c5d6de;background:#fff;text-align:left;padding:0.2em;margin-bottom:0;height:160px" id="cont2">
+                 Pie Chart 2: Summary
+                  </div>
                 </div>
               </div>
-
-                    
-          <table class="table table-bordered" style="margin-top:2em;line-height:0.9;vertical-align:middle;border-top:2;padding-bottom:0;margin-bottom:2em;width:100%">
+     <table class="table table-bordered" style="margin-top:2em;line-height:0.9;vertical-align:middle;border-top:2;padding-bottom:0;margin-bottom:2em;width:100%">
           <thead style="background:#f6f8fa">
             <tr>
                 <th rowspan="2" style="vertical-align:middle">UACS</th>
@@ -250,13 +241,9 @@ tr {
             </tr>
           </thead>
         </table>
-
-        
-
-
-                    </div>
-          </div>
-        </div>
+      </div>          
+    </div>
+   </div>
   </div>
 </div>
 <script>
@@ -299,7 +286,6 @@ $(document).ready(function () {
                         fontSize: '12px',
                     }
             },
-
             tooltip: {
                 formatter: function() {
                     var point = this.point,
@@ -372,8 +358,7 @@ $(document).ready(function () {
                 }]
             }]
         });
-                  
-    });
+     });
 </script>
 </body>
 </html>
