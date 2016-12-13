@@ -15,8 +15,7 @@ function sendFeedback(page,feedback,sender) {
                    url: "../sendfeedback.php",
                    type: "POST",
                    data: formData,
-                   success: function(data)
-                   {
+                   success: function(data){
                       if (data == "good") {
                         $("#loadicon").hide();
                         document.getElementById("formz").innerHTML = "<div style='padding:10px;color:#fff'><h2>Feedback Sent!</h2>Thank you!</div>"
