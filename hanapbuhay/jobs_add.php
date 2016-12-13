@@ -1,6 +1,5 @@
 <?php
-require "../zxcd9.php";
-
+  require "../zxcd9.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,10 +18,8 @@ require "../zxcd9.php";
     <script src="../js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript" src="../js/bootstrapValidator.js"></script>
-    
     <script src="../js/tag-it.js" type="text/javascript" charset="utf-8"></script>
     <style>
-
 body {
     background-color: #f7f9fb;
     background-size: cover;
@@ -41,7 +38,10 @@ body {
   display:none;
 }
 . {
-  -webkit-appearance:none;-moz-appearance:none;-ms-appearance:none;appearance:none;background:#fff url(../../../imgs/arrows.png) no-repeat right 9px;
+  -webkit-appearance:none;
+  -moz-appearance:none;
+  -ms-appearance:none;
+  appearance:none;background:#fff url(../../../imgs/arrows.png) no-repeat right 9px;
 }
 .mainlink {
   font-size: 1.8em;
@@ -81,7 +81,6 @@ $(document).ready(function() {
       prefloc = 0;
       $('#tooltip1').popover();
 });
-
 </script>
 <?php include "../nav.php"; ?>
 <div class="container-fluid" id="successcontent" style="display:none">
@@ -93,15 +92,14 @@ $(document).ready(function() {
       </div>
 </div>
 <div class="container-fluid" id="maincontent">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2" style="margin-bottom:3em"><center>
-        <form id="postjobForm" action="" method="post">
-          <h2><b>Job</b> Details</h2><br>
+     <div class="row">
+          <div class="col-md-8 col-md-offset-2" style="margin-bottom:3em"><center>
+          <form id="postjobForm" action="" method="post">
+            <h2><b>Job</b> Details</h2><br>
 <?PhP
 $sql = "SELECT id, orgname FROM PRTemployers";
 $partnerIDArray = [];
 $partnerArray = [];
-
 foreach ($db->query($sql) as $results)
 {
   $partnerIDArray[] = intval($results["id"]);
@@ -117,7 +115,6 @@ $(function () {
     var partnerArray = <?php echo json_encode($partnerArray);?>;
     var arr = [];
     var element = {};
-    
     for (var i = 0; i < partnerArray.length; i++) {
         var idname=partnerIDArray[i];
         var name=partnerArray[i];
@@ -243,13 +240,13 @@ function intervent() {
                   </div>
                   <div class="form-group">
                     <div class="col-sm-12">
-                                <select class="form-control " name="employstatus" id="employstatus" required>
-                                  <option value="" selected>Status of Employment</option>
-                                  <option>Regular</option>
-                                  <option>Contractual</option>
-                                  <option>MOA</option>
-                                  <option>Job Order</option>
-                                </select>
+                              <select class="form-control " name="employstatus" id="employstatus" required>
+                                <option value="" selected>Status of Employment</option>
+                                <option>Regular</option>
+                                <option>Contractual</option>
+                                <option>MOA</option>
+                                <option>Job Order</option>
+                              </select>
                     </div>
                   </div>
                   <div class="form-group">
@@ -284,18 +281,18 @@ function intervent() {
                                 <option>25-35</option>
                                 <option>35-45</option>
                                 <option>45+</option>
-                              </select>
+                      </select>
                     </div>
                     <div class="col-sm-6">
                       <select class="form-control " name="prefheight" id="prefheight" >
                                 <option value="0" selected>Preferred Height</option>
                                 <option value="0">None</option>
-                                      <option value="1">Below 5'ft</option>
-                                      <option value="2">5'0 to 5'3 ft</option>
-                                      <option value="3">5'4 to 5'7 ft</option>
-                                      <option value="4">5'8 to 5'10 ft</option>
-                                      <option value="5">Above 5'10 ft</option>
-                              </select>
+                                <option value="1">Below 5'ft</option>
+                                <option value="2">5'0 to 5'3 ft</option>
+                                <option value="3">5'4 to 5'7 ft</option>
+                                <option value="4">5'8 to 5'10 ft</option>
+                                <option value="5">Above 5'10 ft</option>
+                        </select>
                     </div>
                   </div>
                   <div class="form-group">
@@ -336,25 +333,25 @@ function intervent() {
                               <select class="form-control" id="prov" name="prov" onChange='getCity(this.value)' required>           
                                 <option value="" selected>Select Province</option>
                                   <?php
-                  $query = "SELECT * FROM lib_regions WHERE regname = :region"; 
-                  $query_params = array(':region' => $_SESSION['filter']);
-                  try 
-                  { $stmt = $db->prepare($query); $result = $stmt->execute($query_params); } 
-                  catch(PDOException $ex) 
-                  { die("Failed to run query: " . $ex->getMessage()); } 
-                  $row = $stmt->fetch();
-                  $regcode = $row['regid'];
+                                    $query = "SELECT * FROM lib_regions WHERE regname = :region"; 
+                                    $query_params = array(':region' => $_SESSION['filter']);
+                                    try 
+                                    { $stmt = $db->prepare($query); $result = $stmt->execute($query_params); } 
+                                    catch(PDOException $ex) 
+                                    { die("Failed to run query: " . $ex->getMessage()); } 
+                                    $row = $stmt->fetch();
+                                    $regcode = $row['regid'];
 
-                  $query = "SELECT * FROM lib_provinces WHERE regid = :region"; 
-                  $query_params = array(':region' => $regcode);
-                  try 
-                  { $stmt = $db->prepare($query); $result = $stmt->execute($query_params); } 
-                  catch(PDOException $ex) 
-                  { die("Failed to run query: " . $ex->getMessage()); } 
-                  while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                     echo "<option value='".$row["provid"]."'>".$row['provname']."</option>";
-                  }
-              ?>
+                                    $query = "SELECT * FROM lib_provinces WHERE regid = :region"; 
+                                    $query_params = array(':region' => $regcode);
+                                    try 
+                                    { $stmt = $db->prepare($query); $result = $stmt->execute($query_params); } 
+                                    catch(PDOException $ex) 
+                                    { die("Failed to run query: " . $ex->getMessage()); } 
+                                    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                                       echo "<option value='".$row["provid"]."'>".$row['provname']."</option>";
+                                    }
+                                ?>
                               </select>
                           </div>
                         </div>
@@ -365,48 +362,44 @@ function intervent() {
                               </select>
                             </div>
                         </div>
-                            
                             <div id="newinput" style="display:block" class="form-group"></div>
                             <div id="newinput2" style="display:block" class="form-group"></div>
-                  
-                  <div class="form-group">
-                    <div class="col-sm-12">
-                      <input name="contactperson" class="form-control" id="contactperson" placeholder="Alternate Contact Person">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <div class="col-sm-6">
-                      <input name="contacttitle" class="form-control" id="contacttitle" placeholder="Alternate Contact Title">
-                    </div>
-                    <div class="col-sm-6">
-                      <input name="contactemail" class="form-control" id="contactemail" placeholder="Alternate Contact E-mail">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <div class="col-sm-12">
-                      <input name="contactnumber" class="form-control" id="contactnumber" placeholder="Alternate Contact Number (Mobile)">
-                    </div>
-                  </div>
-            </form>
-                  <div class="form-group">
-                    <div class="col-md-6">
-                      <div id="statusdisp" class="col-sm-12" style="color:red;text-align:center"></div>
-                    </div>
-                    <div class="col-md-2">
-                      <span id="loadicon" class="glyphicon glyphicon-refresh spin" style="font-size:30px;"></span>
-                    </div>
-                    <div class="col-md-4">
-                      <button class="btn btn-success col-md-12" id="formsubmit">SUBMIT</button>
-                    </div>
-                  </div>
-
+                            <div class="form-group">
+                              <div class="col-sm-12">
+                                <input name="contactperson" class="form-control" id="contactperson" placeholder="Alternate Contact Person">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <div class="col-sm-6">
+                                <input name="contacttitle" class="form-control" id="contacttitle" placeholder="Alternate Contact Title">
+                              </div>
+                              <div class="col-sm-6">
+                                <input name="contactemail" class="form-control" id="contactemail" placeholder="Alternate Contact E-mail">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <div class="col-sm-12">
+                                <input name="contactnumber" class="form-control" id="contactnumber" placeholder="Alternate Contact Number (Mobile)">
+                              </div>
+                            </div>
+                      </form>
+                            <div class="form-group">
+                              <div class="col-md-6">
+                                <div id="statusdisp" class="col-sm-12" style="color:red;text-align:center"></div>
+                              </div>
+                              <div class="col-md-2">
+                                <span id="loadicon" class="glyphicon glyphicon-refresh spin" style="font-size:30px;"></span>
+                              </div>
+                              <div class="col-md-4">
+                                <button class="btn btn-success col-md-12" id="formsubmit">SUBMIT</button>
+                              </div>
+                            </div>
         </div>
     </div>
   
 </div><!--end container-->
 <script>
 function getProv(val) {
-
   var formData = { 'region' : $('#region option:selected').val() };
   $.ajax({
   type: "POST",
@@ -414,8 +407,7 @@ function getProv(val) {
   data: formData,
   success: function(data) {
             $("#prov").html(data);
-        }
-
+      }
   });
 }
 function getCity(val) {
@@ -428,8 +420,7 @@ function getCity(val) {
   success: function(data) {
             $("#city").prop('disabled', false);
             $("#city").html(data);
-        }
-
+      }
   });
 }
 function getBrgy(val) {
@@ -441,8 +432,7 @@ function getBrgy(val) {
   success: function(data) {
             $("#brgy").prop('disabled', false);
             $("#brgy").html(data);
-        }
-
+      }
   });
 }
     $('#subsector').tagit({
@@ -532,8 +522,7 @@ function sectorChange() {
           case 'Wholesale and Retail Trading':
             vals = data.u.split(",");
             break;
-        }
-        
+        }  
         if (key != "") {
             document.getElementById("filter2").disabled = false;
             $secondChoice.empty();
@@ -546,7 +535,6 @@ function sectorChange() {
             $secondChoice.append("<option value=''>Select Sub-Sector(s)</option>");
             document.getElementById("filter2").disabled = true;
         }
-        
       });
 }
 function changeValue2(){
@@ -632,9 +620,6 @@ function removeOptions(selectbox) {
         selectbox.remove(i);
     }
 }
-
-
-
 </script>
 <script type="text/javascript" src="../js/postjobForm.js"></script>
 <script type="text/javascript" src="../js/jquery.autocomplete.min.js"></script>
