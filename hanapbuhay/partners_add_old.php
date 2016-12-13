@@ -1,5 +1,5 @@
 <?php
-require "../zxcd9.php";
+  require "../zxcd9.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,7 +16,6 @@ require "../zxcd9.php";
     <script src="../js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../js/bootstrapValidator.js"></script>
     <style>
-
 body {
     background-color: #f7f9fb;
     background-size: cover;
@@ -32,60 +31,58 @@ body {
     right: -15px;
 }
 .slidedown {
-  -webkit-transform: scaleY(0);
-       -o-transform: scaleY(0);
-      -ms-transform: scaleY(0);
-          transform: scaleY(0);
+   -webkit-transform: scaleY(0);
+   -o-transform: scaleY(0);
+   -ms-transform: scaleY(0);
+   transform: scaleY(0);
   
-  -webkit-transform-origin: top;
-       -o-transform-origin: top;
-      -ms-transform-origin: top;
-          transform-origin: top;
-  
-  -webkit-transition: -webkit-transform 0.2s ease;
-            -o-transition: -o-transform 0.2s ease;
-          -ms-transition: -ms-transform 0.2s ease;
-                  transition: transform 0.2s ease;
+    -webkit-transform-origin: top;
+    -o-transform-origin: top;
+    -ms-transform-origin: top;
+    transform-origin: top;
+    
+    -webkit-transition: -webkit-transform 0.2s ease;
+    -o-transition: -o-transform 0.2s ease;
+    -ms-transition: -ms-transform 0.2s ease;
+    transition: transform 0.2s ease;
 }
-
 .slidedown.active {
-  -webkit-transform: scaleY(1);
-       -o-transform: scaleY(1);
-      -ms-transform: scaleY(1);
-          transform: scaleY(1);
+    -webkit-transform: scaleY(1);
+    -o-transform: scaleY(1);
+    -ms-transform: scaleY(1);
+    transform: scaleY(1);
 }
 .successcontent {
-  display:none;
+    display:none;
 }
 .mainlink {
-  font-size: 1.8em;
-  margin-top: 1px;
+    font-size: 1.8em;
+    margin-top: 1px;
 }
 .form-group div {
-  margin-bottom: 0.5em;
+    margin-bottom: 0.5em;
 }
 .disabled {
-  background:rgba(1,1,1,0.2);
-  border:0px solid;
-  cursor:progress;
+    background:rgba(1,1,1,0.2);
+    border:0px solid;
+    cursor:progress;
 }
 </style>
 </style>
 </head>
 <body>
 <?php include '../nav.php'; ?>
-<div class="container-fluid">
-    <div class="row" style="padding-top:2em;display:none" id="successcontent">
-      
-    </div>
-    <div style="padding-top:2em;" id="maincontent">
-      <div class="row">
-        <div class="col-md-offset-1 col-md-10" ><center>
-            <div class="col-md-12">
-              <span class="mainlink cl-effect-1"><b>Partner</b> Registration</span><br>
-            </div>
-        </div>
+  <div class="container-fluid">
+      <div class="row" style="padding-top:2em;display:none" id="successcontent"> 
       </div>
+    <div style="padding-top:2em;" id="maincontent">
+        <div class="row">
+          <div class="col-md-offset-1 col-md-10" ><center>
+             <div class="col-md-12">
+               <span class="mainlink cl-effect-1"><b>Partner</b> Registration</span><br>
+             </div>
+           </div>
+        </div>
       <div class="col-md-offset-3 col-md-6" id="main">
         <form id="partnerForm" method="post" action="" autocomplete="off">
                             <div class="form-group">
@@ -140,15 +137,15 @@ body {
                               </div>
                             </div>
                             <div class="form-group">
-                                        <div class="col-sm-5">
-                                          <input name="yearsofop" type="number" class="form-control" id="yearsofop" placeholder="Year Established">
-                                        </div>
-                                        <div class="col-sm-7">
-                                          <div class="input-group">
+                                <div class="col-sm-5">
+                                    <input name="yearsofop" type="number" class="form-control" id="yearsofop" placeholder="Year Established">
+                                </div>
+                                   <div class="col-sm-7">
+                                      <div class="input-group">
                                             <span class="input-group-addon" id="sizing-addon2">http://</span>
                                             <input type="text" class="form-control" id="website" name="website" placeholder="Website Address" aria-describedby="sizing-addon2">
-                                          </div>
-                                        </div>
+                                      </div>
+                                    </div>
                             </div>
                             <div class="form-group">
                               <div class="col-sm-12">
@@ -198,8 +195,8 @@ body {
                               </select>
                             </div>
                         </div>
-                            <div class="form-group">
-                            <div class="col-sm-12">
+                        <div class="form-group">
+                          <div class="col-sm-12">
                               <select class="form-control" id="prov" name="prov" onChange='getCity(this.value)' disabled required>           
                                 <option value="" selected>Select Province</option>
                               </select>
@@ -263,7 +260,6 @@ body {
 </div>
 <script>
 function getProv(val) {
-
   var formData = { 'region' : $('#region option:selected').val() };
   $.ajax({
   type: "POST",
@@ -277,7 +273,6 @@ function getProv(val) {
   });
 }
 function getCity(val) {
-
   var formData = { 'provi' : $('#prov option:selected').val() };
   $.ajax({
   type: "POST",
