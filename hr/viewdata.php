@@ -3,13 +3,11 @@ require "../zxcd9.php";
 byteMe($_SESSION['id'],'hr_view',0.10);
   $query = "SELECT region FROM hr_db WHERE emailaddress = :emailaddress";
   $query_params = array(':emailaddress' => $_SESSION['emailaddress']);
-        try 
-        { 
+        try { 
             $stmt = $db->prepare($query); 
             $result = $stmt->execute($query_params);
         } 
-        catch(PDOException $ex) 
-        { 
+        catch(PDOException $ex)  { 
             echo "failed";
             die;
         }
@@ -18,7 +16,6 @@ byteMe($_SESSION['id'],'hr_view',0.10);
         if ($filter == "NPMO") {
           $filter = "NPMO";
         }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,7 +34,6 @@ byteMe($_SESSION['id'],'hr_view',0.10);
     <script src="../js/bootstrap.min.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <style>
-
 body {
     background-color: #f7f9fb;
     background-size: cover;
@@ -57,18 +53,15 @@ body {
        -o-transform: scaleY(0);
       -ms-transform: scaleY(0);
           transform: scaleY(0);
-  
-  -webkit-transform-origin: top;
+    -webkit-transform-origin: top;
        -o-transform-origin: top;
       -ms-transform-origin: top;
           transform-origin: top;
-  
-  -webkit-transition: -webkit-transform 0.2s ease;
+    -webkit-transition: -webkit-transform 0.2s ease;
             -o-transition: -o-transform 0.2s ease;
           -ms-transition: -ms-transform 0.2s ease;
                   transition: transform 0.2s ease;
 }
-
 .slidedown.active {
   -webkit-transform: scaleY(1);
        -o-transform: scaleY(1);
@@ -99,7 +92,6 @@ tbody tr {
   -o-animation: spin 1000ms infinite linear;
   animation: spin 1000ms infinite linear;
 }
-
 @-moz-keyframes spin {
   from {
     -moz-transform: rotate(0deg);
@@ -108,7 +100,6 @@ tbody tr {
     -moz-transform: rotate(360deg);
   }
 }
-
 @-webkit-keyframes spin {
   from {
     -webkit-transform: rotate(0deg);
@@ -117,7 +108,6 @@ tbody tr {
     -webkit-transform: rotate(360deg);
   }
 }
-
 @keyframes spin {
   from {
     transform: rotate(0deg);
@@ -198,7 +188,6 @@ function reset_filt() {
           <div class="form-group">
               <button class="btn btn-primary" id="sendfeedback" style="padding:4px;margin-left:1em">Submit</button>
           </div>
-      
       </div>
     </div>
   </div>
@@ -239,8 +228,7 @@ $(document).ready(function() {
     "aoColumnDefs": [
             { 
                "aTargets":[1],
-               "fnCreatedCell": function(nTd, sData, oData, iRow, iCol)
-                {
+               "fnCreatedCell": function(nTd, sData, oData, iRow, iCol) {
                     $(nTd).css('text-align', 'left');
                     $(nTd).css('width', '18%');
                 },
@@ -251,8 +239,7 @@ $(document).ready(function() {
             },
             { 
                "aTargets":[2],
-               "fnCreatedCell": function(nTd, sData, oData, iRow, iCol)
-                {
+               "fnCreatedCell": function(nTd, sData, oData, iRow, iCol) {
                     $(nTd).css('text-align', 'left');
                     $(nTd).css('width', '15%');
                 },
@@ -263,22 +250,19 @@ $(document).ready(function() {
             },
             { 
                "aTargets":[3],
-               "fnCreatedCell": function(nTd, sData, oData, iRow, iCol)
-                {
+               "fnCreatedCell": function(nTd, sData, oData, iRow, iCol) {
                     $(nTd).css('width', '20%');
                 }
             },
             { 
                "aTargets":[6],
-               "fnCreatedCell": function(nTd, sData, oData, iRow, iCol)
-                {
+               "fnCreatedCell": function(nTd, sData, oData, iRow, iCol) {
                     $(nTd).css('text-align', 'center');
                 }
             },
             { 
                "aTargets":[10],
-               "fnCreatedCell": function(nTd, sData, oData, iRow, iCol)
-                {
+               "fnCreatedCell": function(nTd, sData, oData, iRow, iCol) {
                     $(nTd).css('text-align', 'center');
                 },
                 "mData": null,
@@ -288,8 +272,7 @@ $(document).ready(function() {
             },
             { 
                "aTargets":[8],
-               "fnCreatedCell": function(nTd, sData, oData, iRow, iCol)
-                {
+               "fnCreatedCell": function(nTd, sData, oData, iRow, iCol) {
                     $(nTd).css('text-align', 'center');
                 },
                 "mData": null,
@@ -299,8 +282,7 @@ $(document).ready(function() {
             },
             { 
                "aTargets":[9],
-               "fnCreatedCell": function(nTd, sData, oData, iRow, iCol)
-                {
+               "fnCreatedCell": function(nTd, sData, oData, iRow, iCol) {
                     $(nTd).css('text-align', 'left');
                     $(nTd).css('font-size', '11px');
                 },
@@ -311,8 +293,7 @@ $(document).ready(function() {
                     } else {
                       return '<td>-</td>';
                     }
-                    
-                }
+                    }
             },
             { "bVisible": false, "aTargets":[<?php if ($_SESSION['filter']=='NPMO') { echo "0,2,7,8,11"; } else { echo "0,2,6,9,10,11"; } ?>] }
                     ]
@@ -323,13 +304,11 @@ $(document).ready(function() {
           window.location.href = "user.php?id="+redirection;
         });
 });
-
 function filterRegion() {
     var regionvalue = document.getElementById("regionfilter").value;
     //oTable.fnFilter(regionvalue,6);
     oTable.fnFilter("^"+regionvalue+"$", 6, true, false, true);
 }
-
 </script>
 <div class="container-fluid">
   <div class="row">
@@ -381,8 +360,7 @@ function filterRegion() {
         </thead>
         </table>
       </div>
-        
-      </div>        
+    </div>        
   </div>
 </div>
 <br>
@@ -398,7 +376,6 @@ $row = $stmt->fetch();
 ?>
 <script>
 $(function () {
-
     $(document).ready(function () {
       var colors = Highcharts.getOptions().colors,
         counttotal = '<?php echo $row['total']; ?>',
@@ -482,7 +459,6 @@ $(function () {
 });
 <?php
 $regionz = array("NPMO", "NCR", "CAR", "REGION I", "REGION II", "REGION III", "REGION IV-A", "REGION IV-B", "REGION V", "REGION VI", "REGION VII", "REGION VIII", "REGION IX", "REGION X", "REGION XI", "REGION XII", "CARAGA", "ARMM", "NIR");
-
 $regtot = [];
 foreach ($regionz as $regvalue) {
       $stmt = $db->prepare("SELECT COUNT(region) as regioncount FROM hr_db WHERE region = '".$regvalue."'");           
@@ -490,7 +466,6 @@ foreach ($regionz as $regvalue) {
       $row = $stmt->fetch();
       $regtot[] = intval($row['regioncount']);
 }
-
 $regconf = [];
 foreach ($regionz as $regvalue) {
       $stmt = $db->prepare("SELECT COUNT(region) as regioncount FROM hr_db WHERE region = '".$regvalue."' AND confirmed = '1'");           
@@ -498,7 +473,6 @@ foreach ($regionz as $regvalue) {
       $row = $stmt->fetch();
       $regconf[] = intval($row['regioncount']);
 }
-
 ?>
 $(function () {
     $('#container2').highcharts({
@@ -598,15 +572,13 @@ $('[data-toggle="popover"]').popover({
     'placement': 'left',
     'html': 'true'
   });
-
-  $("#loadicon").hide();
-  $("#sendfeedback").click(function(event) {
+$("#loadicon").hide();
+$("#sendfeedback").click(function(event) {
     event.preventDefault();
     event.stopImmediatePropagation();
-    
-    $("#loadicon").show();
-    $("#feedback").hide();
-    $("#sendfeedback").html('Processing..');
+$("#loadicon").show();
+$("#feedback").hide();
+$("#sendfeedback").html('Processing..');
     document.getElementById("sendfeedback").classList.add("disabled");
     document.getElementById("sendfeedback").disabled = true;
     var formData = {
@@ -618,8 +590,7 @@ $('[data-toggle="popover"]').popover({
                    url: "../sendfeedback.php",
                    type: "POST",
                    data: formData,
-                   success: function(data)
-                   {
+                   success: function(data) {
                       if (data == "good") {
                         $("#loadicon").hide();
                         document.getElementById("formz").innerHTML = "<div style='padding:10px;color:#fff'><h2>Feedback Sent!</h2>Thank you!</div>"
