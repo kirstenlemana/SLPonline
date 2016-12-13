@@ -29,17 +29,14 @@ $query = "
                 compnotes
             FROM hr_db 
             WHERE 
-                id = :id
-        "; 
+                id = :id"; 
         $query_params = array( 
-            ':id' => $_SESSION['id'] 
-        );
+            ':id' => $_SESSION['id']);
         try 
-        { $stmt = $db->prepare($query); $result = $stmt->execute($query_params); } 
+          { $stmt = $db->prepare($query); $result = $stmt->execute($query_params); } 
         catch(PDOException $ex) 
-        { die("Failed to run query: " . $ex->getMessage()); } 
+          { die("Failed to run query: " . $ex->getMessage()); } 
         $row = $stmt->fetch();
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -76,47 +73,47 @@ body {
     height: 45px;
 }
 .navbar {min-height:45px !important;background-color: #000}
-#bootstrapSelectForm .selectContainer .form-control-feedback {
+    #bootstrapSelectForm .selectContainer .form-control-feedback {
     right: -15px;
 }
 .slidedown {
-  -webkit-transform: scaleY(0);
+       -webkit-transform: scaleY(0);
        -o-transform: scaleY(0);
-      -ms-transform: scaleY(0);
-          transform: scaleY(0);
+       -ms-transform: scaleY(0);
+       transform: scaleY(0);
   
-  -webkit-transform-origin: top;
+       -webkit-transform-origin: top;
        -o-transform-origin: top;
-      -ms-transform-origin: top;
-          transform-origin: top;
+       -ms-transform-origin: top;
+       transform-origin: top;
   
-  -webkit-transition: -webkit-transform 0.2s ease;
-            -o-transition: -o-transform 0.2s ease;
-          -ms-transition: -ms-transform 0.2s ease;
-                  transition: transform 0.2s ease;
+       -webkit-transition: -webkit-transform 0.2s ease;
+       -o-transition: -o-transform 0.2s ease;
+       -ms-transition: -ms-transform 0.2s ease;
+       transition: transform 0.2s ease;
 }
 
 .slidedown.active {
-  -webkit-transform: scaleY(1);
+       -webkit-transform: scaleY(1);
        -o-transform: scaleY(1);
-      -ms-transform: scaleY(1);
-          transform: scaleY(1);
+       -ms-transform: scaleY(1);
+       transform: scaleY(1);
 }
 .successcontent {
-  display:none;
+       display:none;
 }
 .mainlink {
-  font-size: 1.8em;
-  margin-top: 1px;
+      font-size: 1.8em;
+      margin-top: 1px;
 }
 .form-group div {
-  margin-bottom: 0.5em;
+      margin-bottom: 0.5em;
 }
 .spin {
-  -webkit-animation: spin 1000ms infinite linear;
-  -moz-animation: spin 1000ms infinite linear;
-  -o-animation: spin 1000ms infinite linear;
-  animation: spin 1000ms infinite linear;
+      -webkit-animation: spin 1000ms infinite linear;
+      -moz-animation: spin 1000ms infinite linear;
+      -o-animation: spin 1000ms infinite linear;
+      animation: spin 1000ms infinite linear;
 }
 
 @-moz-keyframes spin {
@@ -184,8 +181,8 @@ tbody tr {
       -webkit-border-radius: 5px 0px 0px 5px;
       -moz-border-radius: 5px 0px 0px 5px;
       border-radius: 5px 0px 0px 5px;
-    }
-    #slideout_inner {
+}
+#slideout_inner {
       z-index: 999;
       position: fixed;
       top: 70%;
@@ -202,35 +199,35 @@ tbody tr {
       -webkit-border-radius: 0px 0 0px 5px;
       -moz-border-radius: 0px 0 0px 5px;
       border-radius: 0px 0 0px 5px;
-    }
+}
     #slideout_inner textarea {
       z-index: 999;
       margin-right: 5px;
       width: 210px;
       height: 100px;
       margin-bottom: 6px;
-    }
+}
     #slideout:hover {
       z-index: 999;
       right: 250px;
-    }
+}
     #slideout:hover #slideout_inner {
       z-index: 999;
       right: 0;
-    }
+}
     .form-control {
-        display: block;
-        width: 100%;
-        height: 45px;
-        padding: 0px 0px 0px 10px;
-        font-size: 15px;
-        line-height: 1.42857143;
-        color: #2c3e50;
-        background-color: #ffffff;
-        background-image: none;
-        border: 1px solid #dce4ec;
-        border-radius: 4px;
-    }
+      display: block;
+      width: 100%;
+      height: 45px;
+      padding: 0px 0px 0px 10px;
+      font-size: 15px;
+      line-height: 1.42857143;
+      color: #2c3e50;
+      background-color: #ffffff;
+      background-image: none;
+      border: 1px solid #dce4ec;
+      border-radius: 4px;
+}
     .btn2 {
       color: #fff;
       background-color: #2c3e50;
@@ -252,7 +249,7 @@ tbody tr {
       -webkit-user-select: none;
       -moz-user-select: none;
       -ms-user-select: none;
-    }
+}
 
 </style>
 </style>
@@ -329,12 +326,12 @@ function parseStatus(str) {
                "aTargets":[1],
                "fnCreatedCell": function(nTd, sData, oData, iRow, iCol)
                 {
-                    $(nTd).css('text-align', 'center');
-                    $(nTd).css('width', '60');
+                  $(nTd).css('text-align', 'center');
+                  $(nTd).css('width', '60');
                 },
             },
 
-            { "bVisible": false, "aTargets":[2] }
+             { "bVisible": false, "aTargets":[2] }
             ]
 } );
   oTable = $('#viewdata').dataTable();
@@ -347,18 +344,14 @@ function parseStatus(str) {
           data: formData,
           success: function(data) {
                   if (data == "visitpage") {
-                    location.href="participants.php"
+                  location.href="participants.php"
                   }
                 }
-
-          });
-
-      });
+        });
+    });
 });
-
 </script>
-<div class="container-fluid">
-  
+  <div class="container-fluid">
     <div class="row">
         <div id="maincontent" class="col-md-5" style="border:0px solid #000;height:90%;margin-right:0">
           <div style="height:100%;background-color:#fff;margin-top:0;padding:2em;padding-top:0.8em">
@@ -380,7 +373,7 @@ function parseStatus(str) {
                   catch(PDOException $ex) 
                   { die("Failed to run query: " . $ex->getMessage()); } 
                   while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                     echo "<option value='".$row["regid"]."'>".$row['regname']."</option>";
+                    echo "<option value='".$row["regid"]."'>".$row['regname']."</option>";
                   }
               ?>
                               </select>
@@ -416,7 +409,7 @@ function parseStatus(str) {
                   }
               ?>
                               </select>
-                          </div>
+                            </div>
                         </div>
                         <div class="form-group">
                             <div class="col-sm-12">
@@ -435,53 +428,46 @@ function parseStatus(str) {
                           </form>
                           <div class="row">
                               <button id="btnsupply2" class="btn btn-info" style="width:100px;margin-top:1em;padding:6px">Next <span class="glyphicon glyphicon-chevron-right"></span></button>
-                          </div>
-                          
+                          </div>   
             </div>
             <div id="supply_part2" style="display:none;">
               <div class="row">
-              <form id="supplyForm2" method="post" action="" autocomplete="off">
-                            
-<script>
-function getProv(val) {
-
-  var formData = { 'region' : $('#region option:selected').val() };
-  $.ajax({
-  type: "POST",
-  url: "getProv.php",
-  data: formData,
-  success: function(data) {
-            $("#prov").html(data);
-        }
-
+                <form id="supplyForm2" method="post" action="" autocomplete="off">
+            <script>
+              function getProv(val) {
+                 var formData = { 'region' : $('#region option:selected').val() };
+                 $.ajax({
+                 type: "POST",
+                 url: "getProv.php",
+                 data: formData,
+                 success: function(data) {
+                    $("#prov").html(data);
+     }
   });
 }
-function getCity(val) {
-
-  var formData = { 'provi' : $('#prov option:selected').val() };
-  $.ajax({
-  type: "POST",
-  url: "getCity.php",
-  data: formData,
-  success: function(data) {
-            $("#city").prop('disabled', false);
-            $("#city").html(data);
-        }
-
-  });
+             function getCity(val) {
+                var formData = { 'provi' : $('#prov option:selected').val() };
+                $.ajax({
+                type: "POST",
+                url: "getCity.php",
+                data: formData,
+                success: function(data) {
+                    $("#city").prop('disabled', false);
+                    $("#city").html(data);
+       }
+    });
 }
-function getBrgy(val) {
-  var formData = { 'city' : $('#city option:selected').val() };
-  $.ajax({
-  type: "POST",
-  url: "getBrgy.php",
-  data: formData,
-  success: function(data) {
-            $("#brgy").prop('disabled', false);
-            $("#brgy").html(data);
+              function getBrgy(val) {
+                var formData = { 'city' : $('#city option:selected').val() };
+                $.ajax({
+                type: "POST",
+                url: "getBrgy.php",
+                data: formData,
+                success: function(data) {
+                          $("#brgy").prop('disabled', false);
+                          $("#brgy").html(data);
         }
-
-  });
+     });
 }
 
 pantawid = 0;
@@ -586,7 +572,7 @@ function sectorChange() {
             break;
         }
         
-        if (key != "") {
+          if (key != "") {
             document.getElementById("filter2").disabled = false;
             $secondChoice.empty();
             $secondChoice.append("<option>Select Sub-Sector(s)</option>");
@@ -601,14 +587,13 @@ function sectorChange() {
         
       });
 }
-function changeValue2(){
-
+    function changeValue2(){
           $('#idg').show();
           var option=document.getElementById('filter2').value;
           $("#subsector").tagit("createTag", option);
           $('#filter2').get(0).selectedIndex = 0;
 }
-</script>
+    </script>
                             <div class="form-group">
                               <div class="col-sm-12">
                                 <select id="sector" onchange="sectorChange()" class="form-control cleanselect">
@@ -651,15 +636,15 @@ function changeValue2(){
                             </div>
                             <div class="form-group">
                               <div class="col-sm-12">
-                                <input name="firstname" class="form-control" id="firstname" placeholder="First Name">
+                                  <input name="firstname" class="form-control" id="firstname" placeholder="First Name">
                               </div>
                             </div>
                             <div class="form-group">
                               <div class="col-sm-6">
-                                <input name="middlename" class="form-control" id="middlename" placeholder="Middle Name">
+                                 <input name="middlename" class="form-control" id="middlename" placeholder="Middle Name">
                               </div>
                               <div class="col-sm-6">
-                                <input name="lastname" class="form-control" id="lastname" placeholder="Last Name">
+                                 <input name="lastname" class="form-control" id="lastname" placeholder="Last Name">
                               </div>
                             </div>
                             <div class="form-group">
@@ -669,7 +654,7 @@ function changeValue2(){
                                       <option>Male</option>
                                       <option>Female</option>
                                     </select>
-                              </div>
+                            </div>
                               <div class="col-sm-6">
                                 <input name="birthdate" class="form-control" id="address" placeholder="Birthday (mm/dd/yyyy)" >
                               </div>
@@ -683,10 +668,10 @@ function changeValue2(){
                                       <option value="3">5'4 to 5'7 ft</option>
                                       <option value="4">5'8 to 5'10 ft</option>
                                       <option value="5">Above 5'10 ft</option>
-                                    </select>
+                                </select>
                               </div>
-                              <div class="col-sm-6" style="margin-bottom:0em">
-                                <input name="contactnumber" class="form-control" id="contactnumber" placeholder="Contact Number" style="margin-bottom:0.8em">
+                            <div class="col-sm-6" style="margin-bottom:0em">
+                              <input name="contactnumber" class="form-control" id="contactnumber" placeholder="Contact Number" style="margin-bottom:0.8em">
                               </div>
                             </div>
                             <div class="form-group">
@@ -742,21 +727,16 @@ function changeValue2(){
                               <br>
                               <div id="statusdisp" class="col-sm-12" style="color:red;text-align:center"></div>
                             </div>
-                            </div>
                   </form>
                   </div>
                 </div>
 
             <button id="btnsupply1" class="btn btn-info" style="margin-top:1em;padding:6px">Add Participant</button>
-            
             <div class="row">
               <div id="container" style="width:100%; margin: 0 auto"></div>
             </div>
-
-          </div>
-        </div>
-        <div id="tableHolder" class="col-md-7" style="border:0px solid #000;margin-left:0">
-          <div style="background-color:#fff;height:100%;padding:2em;margin-left:0">
+            <div id="tableHolder" class="col-md-7" style="border:0px solid #000;margin-left:0">
+            <div style="background-color:#fff;height:100%;padding:2em;margin-left:0">
                   <div class="col-md-4" style="margin-left:0;padding-left:0;padding-bottom:1em">
                     <input id="searchbox" type="text" class="form-control" placeholder="Search Sectors.." style="height:31px"/>
                   </div>
@@ -769,7 +749,6 @@ function changeValue2(){
                       </tr>
                     </thead>
                   </table>
-                  
                   <div class="col-md-6 pull-right" style="color:#5cb85c;font-size:12px;text-align:right">
                     <span id="reloadstamp"></span>
                   </div>
@@ -781,8 +760,7 @@ function changeValue2(){
 </div><!--container-->
 <script>
 $(document).ready(function() {
-
-key = '<?php echo $row["region"]; ?>';
+    key = '<?php echo $row["region"]; ?>';
 $("#searchbox").keyup(function() {
    oTable.fnFilter(this.value);
 });    
@@ -814,7 +792,6 @@ $("#formsubmit").click(function() {
 $("#sendfeedback").click(function(event) {
     event.preventDefault();
     event.stopImmediatePropagation();
-    
     $("#loadicon").show();
     $("#feedback").hide();
     $("#sendfeedback").html('Processing..');
@@ -833,8 +810,8 @@ $("#sendfeedback").click(function(event) {
                    {
                       if (data == "good") {
                         $("#loadicon").hide();
-                        document.getElementById("formz").innerHTML = "<div style='padding:10px;color:#fff'><h2>Feedback Sent!</h2>Thank you!</div>"
-                      } else {
+                        document.getElementById("formz").innerHTML = "<div style='padding:10px;color:#fff'><h2>Feedback Sent!</h2>Thank you!<div>"
+                   } else {
                         alert(data);
                         $("#loadicon").hide();
                         $("#feedback").show();
@@ -852,26 +829,25 @@ $("#sendfeedback").click(function(event) {
 </script>
 <script>
 <?php
-$stmt = $db->prepare("SELECT COUNT(id) as total FROM PRTsupply");
-$stmt->execute();
-$row = $stmt->fetch();
-$total = $row["total"];
-$stmt = $db->prepare("SELECT COUNT(id) as total FROM PRTsupply WHERE encodedby = '".$_SESSION['id']."'");
-$stmt->execute();
-$row = $stmt->fetch();
-$totalencoded = $row["total"];
-$stmt = $db->prepare("SELECT COUNT(id) as total FROM PRTsupply WHERE encodedby = '".$_SESSION['id']."' AND employed != '0000-00-00'");
-$stmt->execute();
-$row = $stmt->fetch();
-$totalemployed = $row["total"];
+  $stmt = $db->prepare("SELECT COUNT(id) as total FROM PRTsupply");
+  $stmt->execute();
+  $row = $stmt->fetch();
+  $total = $row["total"];
+  $stmt = $db->prepare("SELECT COUNT(id) as total FROM PRTsupply WHERE encodedby = '".$_SESSION['id']."'");
+  $stmt->execute();
+  $row = $stmt->fetch();
+  $totalencoded = $row["total"];
+  $stmt = $db->prepare("SELECT COUNT(id) as total FROM PRTsupply WHERE encodedby = '".$_SESSION['id']."' AND employed != '0000-00-00'");
+  $stmt->execute();
+  $row = $stmt->fetch();
+  $totalemployed = $row["total"];
 ?>
-$(function () {
-
-    $(document).ready(function () {
-var colors = Highcharts.getOptions().colors;
-var total = <?php echo $total;?>;
-if (total == '') {
-  total = '0';
+  $(function () {
+  $(document).ready(function () {
+    var colors = Highcharts.getOptions().colors;
+    var total = <?php echo $total;?>;
+  if (total == '') {
+    total = '0';
 }
 var totalencoded = <?php echo $totalencoded;?>;
 var totalemployed = <?php echo $totalemployed;?>;
@@ -897,17 +873,17 @@ var totalemployed = <?php echo $totalemployed;?>;
                 text: 'Total',
                 verticalAlign: 'middle',
                 y: 8,
-                style: {
-                        fontFamily: 'Lato', 
-                        fontSize: '21px',
+            style: {
+                fontFamily: 'Lato', 
+                fontSize: '21px',
                     }
             },
             xAxis: {
                 categories: ['Program Participants'],
                 labels: {
                   enabled: false,
-                    style: {
-                        fontSize:'8px'
+                 style: {
+                   fontSize:'8px'
                     }
                 },
             },
