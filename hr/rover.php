@@ -14,7 +14,6 @@ require "../zxcd9.php";
     <script src="../js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../js/bootstrapValidator.js"></script>
     <style>
-
 body {
     background-color: #f7f9fb;
     background-size: cover;
@@ -50,7 +49,6 @@ body {
     -moz-transform: rotate(360deg);
   }
 }
-
 @-webkit-keyframes spin {
   from {
     -webkit-transform: rotate(0deg);
@@ -59,7 +57,6 @@ body {
     -webkit-transform: rotate(360deg);
   }
 }
-
 @keyframes spin {
   from {
     transform: rotate(0deg);
@@ -68,7 +65,6 @@ body {
     transform: rotate(360deg);
   }
 }
-
 .disabled {
   background:rgba(1,1,1,0.2);
   border:0px solid;
@@ -78,8 +74,7 @@ body {
 </head>
 <body>
   <script type="text/javascript" language="javascript" class="init">
-  function toTitleCase(str)
-{
+  function toTitleCase(str){
     return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
 }
 </script>
@@ -164,18 +159,13 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
 }
 ?>
 </div>
-
 <div class="row col-md-12" style="position:absolute;bottom:1em"><center>
   This page is under development
 </div>
-
 </div><!--endcontainer-->
-       
 <script>
 $(document).ready(function() {
-
 $("#loadicon").hide();
-  
 $("#hrsubmit").click(function(event) {
   event.preventDefault();
   event.stopImmediatePropagation();
@@ -183,13 +173,11 @@ $("#hrsubmit").click(function(event) {
   $('#editForm').bootstrapValidator('validate');
   return false;
 }); //endHRSUBMIT
-
 $('#btnAddnew').click(function() {
       $(".successcontent").hide();
       $("#maincontent").show();
       $('#editForm').data('bootstrapValidator').resetForm(true);
 });//endreset
-
 });//end DOC READY
 </script>
 </body>
