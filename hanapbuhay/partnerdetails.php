@@ -1,20 +1,17 @@
 <?php
-require "../zxcd9.php";
-
-if(!empty($_GET['id'])) {
-  $_GET   = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
-  $_SESSION["partnerid"] = $_GET['id'];
+  require "../zxcd9.php";
+  if(!empty($_GET['id'])) {
+    $_GET   = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
+    $_SESSION["partnerid"] = $_GET['id'];
 }
-
-        $query = "SELECT m.orgname, m.address, m.psic, m.region, m.createdby, m.contactperson, m.contactemail, m.contactnumber, m.npmo, t.firstname, t.region FROM PRTemployers m LEFT JOIN hr_db t ON m.createdby=t.id WHERE m.id = :id"; 
-        $query_params = array(':id' => $_SESSION['partnerid']);
+     $query = "SELECT m.orgname, m.address, m.psic, m.region, m.createdby, m.contactperson, m.contactemail, m.contactnumber, m.npmo, t.firstname, t.region FROM PRTemployers m LEFT JOIN hr_db t ON m.createdby=t.id WHERE m.id = :id"; 
+     $query_params = array(':id' => $_SESSION['partnerid']);
         try 
         { $stmt = $db->prepare($query); $result = $stmt->execute($query_params); } 
         catch(PDOException $ex) 
         { die("Failed to run query: " . $ex->getMessage()); } 
         $row = $stmt->fetch();
         $partnername = $row['orgname'];
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,7 +32,6 @@ if(!empty($_GET['id'])) {
     <script type="text/javascript" src="../js/bootstrapValidator.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <style>
-
 body {
     background-color: #f7f9fb;
     background-size: cover;
@@ -51,46 +47,49 @@ body {
     right: -15px;
 }
 .slidedown {
-  -webkit-transform: scaleY(0);
-       -o-transform: scaleY(0);
-      -ms-transform: scaleY(0);
-          transform: scaleY(0);
+    -webkit-transform: scaleY(0);
+    -o-transform: scaleY(0);
+    -ms-transform: scaleY(0);
+    transform: scaleY(0);
   
-  -webkit-transform-origin: top;
-       -o-transform-origin: top;
-      -ms-transform-origin: top;
-          transform-origin: top;
+    -webkit-transform-origin: top;
+    -o-transform-origin: top;
+    -ms-transform-origin: top;
+    transform-origin: top;
   
-  -webkit-transition: -webkit-transform 0.2s ease;
-            -o-transition: -o-transform 0.2s ease;
-          -ms-transition: -ms-transform 0.2s ease;
-                  transition: transform 0.2s ease;
+    -webkit-transition: -webkit-transform 0.2s ease;
+    -o-transition: -o-transform 0.2s ease;
+    -ms-transition: -ms-transform 0.2s ease;
+    transition: transform 0.2s ease;
 }
 
 .slidedown.active {
-  -webkit-transform: scaleY(1);
-       -o-transform: scaleY(1);
-      -ms-transform: scaleY(1);
-          transform: scaleY(1);
+    -webkit-transform: scaleY(1);
+    -o-transform: scaleY(1);
+    -ms-transform: scaleY(1);
+    transform: scaleY(1);
 }
 .successcontent {
-  display:none;
+    display:none;
 }
 .cleanselect {
-  -webkit-appearance:none;-moz-appearance:none;-ms-appearance:none;appearance:none;background:#fff url(../imgs/arrows.png) no-repeat right 9px;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    -ms-appearance:none;
+    appearance:none;background:#fff url(../imgs/arrows.png) no-repeat right 9px;
 }
 .mainlink {
-  font-size: 1.8em;
-  margin-top: 1px;
+    font-size: 1.8em;
+    margin-top: 1px;
 }
 .form-group div {
-  margin-bottom: 0.5em;
+    margin-bottom: 0.5em;
 }
 .spin {
-  -webkit-animation: spin 1000ms infinite linear;
-  -moz-animation: spin 1000ms infinite linear;
-  -o-animation: spin 1000ms infinite linear;
-  animation: spin 1000ms infinite linear;
+    -webkit-animation: spin 1000ms infinite linear;
+    -moz-animation: spin 1000ms infinite linear;
+    -o-animation: spin 1000ms infinite linear;
+    animation: spin 1000ms infinite linear;
 }
 
 @-moz-keyframes spin {
@@ -120,16 +119,16 @@ body {
   }
 }
 .disabled {
-  background:rgba(1,1,1,0.2);
-  border:0px solid;
-  cursor:progress;
+    background:rgba(1,1,1,0.2);
+    border:0px solid;
+    cursor:progress;
 }
 tbody tr {
-  cursor: pointer;
+    cursor: pointer;
 }
 .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
-  background-color: #2c3e50;
-  color: #fff;
+    background-color: #2c3e50;
+    color: #fff;
 }
 </style>
 </style>
@@ -139,41 +138,41 @@ tbody tr {
   include "../nav.php";
 ?>
 <script type="text/javascript" language="javascript" class="init">
-var oTable = "";
-$(document).ready(function() {
-function toTitleCase(str)
+    var oTable = "";
+    $(document).ready(function() {
+    function toTitleCase(str)
 {
     return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
 }
 function parseStatus(str) {
-  if (str == "0") {
-    status = "<span class='label label-primary'>Proposed</span>";
-  } else if (str == "1") {
-    status = "<span class='label label-warning'>Reviewed</span>";
-  } else if (str == "2") {
-    status = "<span class='label label-info'>Engaged</span>";
-  } else if (str == "3") {
-    status = "<span class='label label-info'>Approved</span>";
-  } else if (str == "4") {
-    status = "<span class='label label-success'>Completed</span>";
-  } else if (str == "5") {
-    status = "<span class='label label-danger'>Rejected</span>";
+    if (str == "0") {
+      status = "<span class='label label-primary'>Proposed</span>";
+    } else if (str == "1") {
+      status = "<span class='label label-warning'>Reviewed</span>";
+    } else if (str == "2") {
+      status = "<span class='label label-info'>Engaged</span>";
+    } else if (str == "3") {
+      status = "<span class='label label-info'>Approved</span>";
+    } else if (str == "4") {
+      status = "<span class='label label-success'>Completed</span>";
+    } else if (str == "5") {
+      status = "<span class='label label-danger'>Rejected</span>";
+    }
+    return status;
   }
-  return status;
-}
     $.fn.DataTable.ext.pager.numbers_length = 5;
-  oTable = $('#viewdata').dataTable({
-    "aProcessing": true,
-    "aServerSide": true,
-    "orderCellsTop": true,
-    "ajax": "dt_partnerdetails.php",
-    "dom": '<"top">rt<"bottom"lp><"clear">',
-    "fnRowCallback":
+      oTable = $('#viewdata').dataTable({
+        "aProcessing": true,
+        "aServerSide": true,
+        "orderCellsTop": true,
+        "ajax": "dt_partnerdetails.php",
+        "dom": '<"top">rt<"bottom"lp><"clear">',
+        "fnRowCallback":
       function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
         $(nRow).attr('id', aData[0]);
         return nRow;
-      },
-    "aoColumnDefs": [
+         },
+           "aoColumnDefs": [
             { 
                "aTargets":[3],
                "fnCreatedCell": function(nTd, sData, oData, iRow, iCol)
@@ -568,8 +567,7 @@ $(function () {
                 data: [{
                     name: 'Participants',
                     y: parseInt(counttotal-countconfirmed),
-                    color: '#2c3e50'
-                    
+                    color: '#2c3e50'                 
                 }, {
                     name: 'Employed',
                     y: parseInt(countconfirmed),
@@ -579,8 +577,6 @@ $(function () {
         });
     });
 });
-
-
 });
 </script>
 </body>
