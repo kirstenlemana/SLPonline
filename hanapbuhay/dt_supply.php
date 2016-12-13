@@ -5,9 +5,7 @@
  * Copyright: 2010 - Allan Jardine
  * License:   GPL v2 or BSD (3-point)
  */
-  
 class TableData {
- 
   private $_db;
   public function __construct() {
     require("../l33tz9.php");
@@ -18,7 +16,6 @@ class TableData {
     if ( isset( $_GET['iDisplayStart'] ) && $_GET['iDisplayLength'] != '-1' ) {
       $sLimit = "LIMIT ".intval( $_GET['iDisplayStart'] ).", ".intval( $_GET['iDisplayLength'] );
     }
-    
     // Ordering
     $sOrder = "";
     if ( isset( $_GET['iSortCol_0'] ) ) {
@@ -28,14 +25,12 @@ class TableData {
           $sortDir = (strcasecmp($_GET['sSortDir_'.$i], 'ASC') == 0) ? 'ASC' : 'DESC';
           $sOrder .= "`".$columns[ intval( $_GET['iSortCol_'.$i] ) ]."` ". $sortDir .", ";
         }
-      }
-      
+      } 
       $sOrder = substr_replace( $sOrder, "", -2 );
       if ( $sOrder == "ORDER BY" ) {
         $sOrder = "";
       }
     }
-    
     /* 
      * Filtering
      * NOTE this does not match the built-in DataTables filtering which does it
@@ -50,100 +45,89 @@ class TableData {
           $sWhere .= "`".$columns[$i]."` LIKE :search OR ";
         }
       }
-      $sWhere = substr_replace( $sWhere, "", -3 );
-      $sWhere .= ')';
-    }
-    
+          $sWhere = substr_replace( $sWhere, "", -3 );
+          $sWhere .= ')';
+      }
     // Individual column filtering
-    for ( $i=0 ; $i<count($columns) ; $i++ ) {
-      if ( isset($_GET['bSearchable_'.$i]) && $_GET['bSearchable_'.$i] == "true" && $_GET['sSearch_'.$i] != '' ) {
-        if ( $sWhere == "" ) {
-          $sWhere = "WHERE ";
-        }
-        else {
-          $sWhere .= " AND ";
-        }
-        $sWhere .= "`".$columns[$i]."` LIKE :search".$i." ";
-      }
-    }
-    
+      for ( $i=0 ; $i<count($columns) ; $i++ ) {
+        if ( isset($_GET['bSearchable_'.$i]) && $_GET['bSearchable_'.$i] == "true" && $_GET['sSearch_'.$i] != '' ) {
+          if ( $sWhere == "" ) {
+            $sWhere = "WHERE ";
+       } else {
+            $sWhere .= " AND ";
+       }
+          $sWhere .= "`".$columns[$i]."` LIKE :search".$i." ";
+       }
+     }
     // SQL queries get data to display
-    if ($_SESSION['filter']=="NPMO") {
-      $sQuery = "SELECT SQL_CALC_FOUND_ROWS DISTINCT t.sector, count(t.supplyrefid) as avail, GROUP_CONCAT(DISTINCT m.province SEPARATOR ', ') provinces, m.region FROM PRTsupplytags t LEFT JOIN PRTsupply m ON t.supplyrefid=m.id GROUP BY t.sector";
-    } else {
-      $sQuery = "SELECT SQL_CALC_FOUND_ROWS DISTINCT t.sector, count(t.supplyrefid) as avail, GROUP_CONCAT(DISTINCT m.province SEPARATOR ', ') provinces, m.region FROM PRTsupplytags t LEFT JOIN PRTsupply m ON t.supplyrefid=m.id WHERE region='".$_SESSION['filter']."' GROUP BY t.sector".$sWhere." ".$sOrder." ".$sLimit;
-    }
-    
-    $statement = $this->_db->prepare($sQuery);
-    
-    // Bind parameters
-    if ( isset($_GET['sSearch']) && $_GET['sSearch'] != "" ) {
-      $statement->bindValue(':search', '%'.$_GET['sSearch'].'%', PDO::PARAM_STR);
-    }
-    for ( $i=0 ; $i<count($columns) ; $i++ ) {
-      if ( isset($_GET['bSearchable_'.$i]) && $_GET['bSearchable_'.$i] == "true" && $_GET['sSearch_'.$i] != '' ) {
-        $statement->bindValue(':search'.$i, '%'.$_GET['sSearch_'.$i].'%', PDO::PARAM_STR);
-      }
-    }
-    $statement->execute();
-    $rResult = $statement->fetchAll();
-    
-    $iFilteredTotal = current($this->_db->query('SELECT FOUND_ROWS()')->fetch());
-    
-    // Get total number of rows in table
-    $sQuery = "SELECT COUNT(`".$index_column."`) FROM `".$table."`";
-    $iTotal = current($this->_db->query($sQuery)->fetch());
-    
-    // Output
-    $output = array(
-      "sEcho" => intval($_GET['sEcho']),
-      "iTotalRecords" => $iTotal,
-      "iTotalDisplayRecords" => $iFilteredTotal,
-      "aaData" => array()
-    );
-    
-    // Return array of values
-    foreach($rResult as $aRow) {
-      $row = array();     
-      for ( $i = 0; $i < count($columns); $i++ ) {
-        if ( $columns[$i] == "version" ) {
-          // Special output formatting for 'version' column
-          $row[] = ($aRow[ $columns[$i] ]=="0") ? '-' : $aRow[ $columns[$i] ];
+        if ($_SESSION['filter']=="NPMO") {
+          $sQuery = "SELECT SQL_CALC_FOUND_ROWS DISTINCT t.sector, count(t.supplyrefid) as avail, GROUP_CONCAT(DISTINCT m.province SEPARATOR ', ') provinces, m.region FROM PRTsupplytags t LEFT JOIN PRTsupply m ON t.supplyrefid=m.id GROUP BY t.sector";
+        } else {
+          $sQuery = "SELECT SQL_CALC_FOUND_ROWS DISTINCT t.sector, count(t.supplyrefid) as avail, GROUP_CONCAT(DISTINCT m.province SEPARATOR ', ') provinces, m.region FROM PRTsupplytags t LEFT JOIN PRTsupply m ON t.supplyrefid=m.id WHERE region='".$_SESSION['filter']."' GROUP BY t.sector".$sWhere." ".$sOrder." ".$sLimit;
+        }  
+          $statement = $this->_db->prepare($sQuery);
+        // Bind parameters
+        if ( isset($_GET['sSearch']) && $_GET['sSearch'] != "" ) {
+          $statement->bindValue(':search', '%'.$_GET['sSearch'].'%', PDO::PARAM_STR);
         }
-        else if ( $columns[$i] != ' ' ) {
-          $row[] = $aRow[ $columns[$i] ];
-        }
-      }
-      $output['aaData'][] = $row;
-    }
-    
-    echo json_encode( $output );
-  }
-}
-header('Pragma: no-cache');
-header('Cache-Control: no-store, no-cache, must-revalidate');
-// Create instance of TableData class
-
-$table_data = new TableData();
-// Get the data
-$table_data->get('PRTsupplytags', 'id', array('sector', 'avail', 'provinces', 'region'));
-/*
- * Alternatively, you may want to use the same class for several differnt tables for different pages.
- * By adding something similar to the following to your .htaccess file you can control this a little more...
- *
- * RewriteRule ^pagename/data/?$ data.php?_page=PAGENAME [L,NC,QSA]
- *
- 
-switch ($_SERVER['REQUEST_METHOD']) {
-    case 'GET':
-        if (isset($_REQUEST['_page'])) {
-          if($_REQUEST['_page'] === 'PAGENAME') {
-              $table_data->get('table_name', 'index_column', array('column1', 'column2', 'columnN'));
+        for ( $i=0 ; $i<count($columns) ; $i++ ) {
+          if ( isset($_GET['bSearchable_'.$i]) && $_GET['bSearchable_'.$i] == "true" && $_GET['sSearch_'.$i] != '' ) {
+            $statement->bindValue(':search'.$i, '%'.$_GET['sSearch_'.$i].'%', PDO::PARAM_STR);
           }
         }
-        break;
-    default:
-        header('HTTP/1.1 400 Bad Request');
-}
+        $statement->execute();
+        $rResult = $statement->fetchAll();
+        $iFilteredTotal = current($this->_db->query('SELECT FOUND_ROWS()')->fetch());
+        // Get total number of rows in table
+        $sQuery = "SELECT COUNT(`".$index_column."`) FROM `".$table."`";
+        $iTotal = current($this->_db->query($sQuery)->fetch());
+        // Output
+        $output = array(
+          "sEcho" => intval($_GET['sEcho']),
+          "iTotalRecords" => $iTotal,
+          "iTotalDisplayRecords" => $iFilteredTotal,
+          "aaData" => array()
+        );    
+        // Return array of values
+        foreach($rResult as $aRow) {
+          $row = array();     
+          for ( $i = 0; $i < count($columns); $i++ ) {
+            if ( $columns[$i] == "version" ) {
+              // Special output formatting for 'version' column
+              $row[] = ($aRow[ $columns[$i] ]=="0") ? '-' : $aRow[ $columns[$i] ];
+            }
+            else if ( $columns[$i] != ' ' ) {
+              $row[] = $aRow[ $columns[$i] ];
+            }
+          }
+          $output['aaData'][] = $row;
+        }
+        echo json_encode( $output );
+      }
+    }
+    header('Pragma: no-cache');
+    header('Cache-Control: no-store, no-cache, must-revalidate');
+    // Create instance of TableData class
+    $table_data = new TableData();
+    // Get the data
+    $table_data->get('PRTsupplytags', 'id', array('sector', 'avail', 'provinces', 'region'));
+    /*
+     * Alternatively, you may want to use the same class for several differnt tables for different pages.
+     * By adding something similar to the following to your .htaccess file you can control this a little more...
+     *
+     * RewriteRule ^pagename/data/?$ data.php?_page=PAGENAME [L,NC,QSA]
+     *
+     
+    switch ($_SERVER['REQUEST_METHOD']) {
+        case 'GET':
+            if (isset($_REQUEST['_page'])) {
+              if($_REQUEST['_page'] === 'PAGENAME') {
+                  $table_data->get('table_name', 'index_column', array('column1', 'column2', 'columnN'));
+              }
+            }
+            break;
+        default:
+            header('HTTP/1.1 400 Bad Request');
+    }
 */
 ?>
