@@ -5,9 +5,7 @@
  * Copyright: 2010 - Allan Jardine
  * License:   GPL v2 or BSD (3-point)
  */
-  
 class TableData {
- 
  	private $_db;
 	public function __construct() {
 		require("../l33tz9.php");
@@ -18,7 +16,6 @@ class TableData {
 		if ( isset( $_GET['iDisplayStart'] ) && $_GET['iDisplayLength'] != '-1' ) {
 			$sLimit = "LIMIT ".intval( $_GET['iDisplayStart'] ).", ".intval( $_GET['iDisplayLength'] );
 		}
-		
 		// Ordering
 		$sOrder = "";
 		if ( isset( $_GET['iSortCol_0'] ) ) {
@@ -29,14 +26,12 @@ class TableData {
 					$sOrder .= "`".$columns[ intval( $_GET['iSortCol_'.$i] ) ]."` ". $sortDir .", ";
 				}
 			}
-			
 			$sOrder = substr_replace( $sOrder, "", -2 );
 			if ( $sOrder == "ORDER BY" ) {
 				$sOrder = "";
 			}
 		}
-		
-		/* 
+	   	/* 
 		 * Filtering
 		 * NOTE this does not match the built-in DataTables filtering which does it
 		 * word by word on any field. It's possible to do here, but concerned about efficiency
@@ -53,7 +48,6 @@ class TableData {
 			$sWhere = substr_replace( $sWhere, "", -3 );
 			$sWhere .= ')';
 		}
-		
 		// Individual column filtering
 		for ( $i=0 ; $i<count($columns) ; $i++ ) {
 			if ( isset($_GET['bSearchable_'.$i]) && $_GET['bSearchable_'.$i] == "true" && $_GET['sSearch_'.$i] != '' ) {
@@ -66,16 +60,13 @@ class TableData {
 				$sWhere .= "`".$columns[$i]."` LIKE :search".$i." ";
 			}
 		}
-		
 		// SQL queries get data to display
 		if ($_SESSION['filter']=="NPMO") {
 			$sQuery = "SELECT SQL_CALC_FOUND_ROWS * FROM hr_db ".$sWhere." ".$sOrder." ".$sLimit;
 		} else {
 			$sQuery = "SELECT SQL_CALC_FOUND_ROWS * FROM hr_db WHERE region='".$_SESSION['filter']."' ".$sOrder." ".$sLimit;
 		}
-		
 		$statement = $this->_db->prepare($sQuery);
-		
 		// Bind parameters
 		if ( isset($_GET['sSearch']) && $_GET['sSearch'] != "" ) {
 			$statement->bindValue(':search', '%'.$_GET['sSearch'].'%', PDO::PARAM_STR);
@@ -87,13 +78,10 @@ class TableData {
 		}
 		$statement->execute();
 		$rResult = $statement->fetchAll();
-		
 		$iFilteredTotal = current($this->_db->query('SELECT FOUND_ROWS()')->fetch());
-		
 		// Get total number of rows in table
 		$sQuery = "SELECT COUNT(`".$index_column."`) FROM `".$table."`";
 		$iTotal = current($this->_db->query($sQuery)->fetch());
-		
 		// Output
 		$output = array(
 			"sEcho" => intval($_GET['sEcho']),
@@ -101,7 +89,6 @@ class TableData {
 			"iTotalDisplayRecords" => $iFilteredTotal,
 			"aaData" => array()
 		);
-		
 		// Return array of values
 		foreach($rResult as $aRow) {
 			$row = array();			
@@ -116,14 +103,12 @@ class TableData {
 			}
 			$output['aaData'][] = $row;
 		}
-		
 		echo json_encode( $output );
 	}
 }
 header('Pragma: no-cache');
 header('Cache-Control: no-store, no-cache, must-revalidate');
 // Create instance of TableData class
-
 $table_data = new TableData();
 // Get the data
 $table_data->get('hr_db', 'id', array('id','firstname', 'lastname', 'emailaddress', 'contactnumber', 'designation', 'region', 'province', 'confirmed'));
@@ -133,8 +118,7 @@ $table_data->get('hr_db', 'id', array('id','firstname', 'lastname', 'emailaddres
  *
  * RewriteRule ^pagename/data/?$ data.php?_page=PAGENAME [L,NC,QSA]
  *
- 
-switch ($_SERVER['REQUEST_METHOD']) {
+ switch ($_SERVER['REQUEST_METHOD']) {
     case 'GET':
         if (isset($_REQUEST['_page'])) {
         	if($_REQUEST['_page'] === 'PAGENAME') {
