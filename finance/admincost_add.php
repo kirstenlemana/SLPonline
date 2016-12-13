@@ -1,8 +1,6 @@
 <?php
-
 require "../zxcd9.php";
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -17,7 +15,6 @@ require "../zxcd9.php";
     <script src="../js/bootstrap.min.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <style>
-
 body {
     background-color: #f7f9fb;
     background-size: cover;
@@ -27,7 +24,6 @@ body {
     padding-top:15px !important; 
     padding-bottom:0 !important;
     height: 40px;
-    
 }
 .navbar {min-height:45px !important;background-color: #000}
 #bootstrapSelectForm .selectContainer .form-control-feedback {
@@ -41,14 +37,12 @@ body {
 .vcenter {
   min-height: 90%;  
   min-height: 90vh; 
-
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex; 
-  
-    -webkit-box-align : center;
+      -webkit-box-align : center;
   -webkit-align-items : center;
        -moz-box-align : center;
        -ms-flex-align : center;
@@ -183,12 +177,11 @@ tr {
 <div class="row" style="margin:0;padding:0">
   <div class="col-md-2">
     <?php require "nav_side.php"; ?>
-  </div>
+</div>
   <div class="col-md-10">
       <div class="row">
         <div class="col-md-12">
           <div style="border:solid 1px #c5d6de;background:#fff;text-align:left;padding:0em;padding-left:1em;margin-bottom:2em;width:100%">
-          
               <div class="row" style="height:100%">
                 <div class="col-md-6" style="background-color:#007ee5;padding:3em;color:#fff;height:480px">
                   SLP Finance System<h3>How to add Admin Cost CMF</h3>
@@ -224,8 +217,7 @@ tr {
                           <!-- upto this --> 
                         </select>
                   </div>
-                  
-                  <div class="form-group">
+                   <div class="form-group">
                     <div class="row">
                       <div class="col-md-6">
                         <input class="form-control" placeholder="Amount (PhP)" id="amount" name="amount"></input>
@@ -236,36 +228,29 @@ tr {
                     </div>
                   </div>
                   <button class="btn-info btn pull-right" id="addfund">Add Fund</button>
-
-
-                </div>
+               </div>
               </div>
-
           </div>
         </div>
       </div>
   </div>
 </div>
-
 <!-- Modal -->
       <div class="modal fade" id="myModal" role="dialog" style="margin-top:3em">
         <div class="modal-dialog modal-sm">
-
           <div class="modal-content" style="padding:1em;padding-top:0.5em;">
                   <h3 style="color:#5cb85c;margin-bottom:6px">Success!</h3>
                   <span style="font-size:13px" id="sucsubtext">Profile picture uploaded.</span><br><br>
                   <button type="button" class="btn btn-primary pull-right" style="background:#5cb85c;border:0;margin-top:0;padding:5px 10px 5px 10px" id="okaybtn" data-dismiss="modal">Okay</button>
-                  <div class="clearfix"></div>
+            <div class="clearfix"></div>
           </div>
-          
-        </div>
+         </div>
       </div>
       <!-- Modal -->
 <script>
 function displaySubType() {
     var selected = $("#subtype option:selected").val();
     console.log(selected);
-
     if (selected == "Grant") {
         $("#saaholder").fadeIn();
         $("#uacsholder").hide();
@@ -277,7 +262,6 @@ function displaySubType() {
     }
 }
 $(document).ready(function () {
-
       $('[data-toggle="tooltip"]').tooltip(); 
                 encoded = 500;
                 budget = 320;
@@ -316,7 +300,6 @@ $(document).ready(function () {
                         fontSize: '12px',
                     }
             },
-
             tooltip: {
                 formatter: function() {
                     var point = this.point,
@@ -389,19 +372,13 @@ $(document).ready(function () {
                 }]
             }]
         });
-                  
-    });
-
-
-
-
+     });
 $("#addfund").click(function(event) {
   
   event.preventDefault();
   event.stopImmediatePropagation();
   $("#addfund").html("Processing..");
   document.getElementById("addfund").disabled = true;
-
   var formData = {
        'action'           :'addf', 
        'uacs'             :$('#uacs option:selected').val(),
@@ -409,32 +386,24 @@ $("#addfund").click(function(event) {
        'amount'           :$('input[name=amount]').val(), 
        'dateacc'          :$('input[name=dateacc]').val()
      };
-
   $.ajax({
        url: "func.php",
        type: "POST",
        data: formData,
-       success: function(data)
-       {
+       success: function(data) {
                 if (data=="success") {
                     document.getElementById("addfund").disabled = true;
-                    
-                       $("#sucsubtext").html("Admin Cost CMF saved!");
+                      $("#sucsubtext").html("Admin Cost CMF saved!");
                       $('#myModal').modal();
                       $('#myModal').on('hidden.bs.modal', function () {location.href = "../finance/admincost_add.php"; });
                     } else {
-                 
-                   //alert(data);
-                    
+                    //alert(data);
                       $("#sucsubtext").html("Admin Cost CMF saved!");
                       $('#myModal').modal();
                       $('#myModal').on('hidden.bs.modal', function () {location.href = "../finance/admincost_add.php"; });
                     }
-
        }
     });//endajax
-
-
 });
 
 
