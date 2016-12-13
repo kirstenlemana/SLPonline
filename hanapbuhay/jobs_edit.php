@@ -1,10 +1,8 @@
 <?php
-require "../zxcd9.php";
-
-  if(!empty($_GET['id'])) {
-    $_GET   = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
-
-$query = " 
+  require "../zxcd9.php";
+    if(!empty($_GET['id'])) {
+     $_GET   = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
+  $query = " 
             SELECT 
                 k.id, 
                 k.orgname, 
@@ -49,7 +47,6 @@ $query = "
         { die("Failed to run query: " . $ex->getMessage()); } 
         $row = $stmt->fetch();
   }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -67,11 +64,9 @@ $query = "
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
-    <script type="text/javascript" src="../js/bootstrapValidator.js"></script>
-    
+    <script type="text/javascript" src="../js/bootstrapValidator.js"></script>    
     <script src="../js/tag-it.js" type="text/javascript" charset="utf-8"></script>
     <style>
-
 body {
     background-color: #f7f9fb;
     background-size: cover;
@@ -87,23 +82,26 @@ body {
     right: -15px;
 }
 .successcontent {
-  display:none;
+    display:none;
 }
 .cleanselect {
-  -webkit-appearance:none;-moz-appearance:none;-ms-appearance:none;appearance:none;background:#fff url(../../../imgs/arrows.png) no-repeat right 9px;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    -ms-appearance:none;
+    appearance:none;background:#fff url(../../../imgs/arrows.png) no-repeat right 9px;
 }
 .mainlink {
-  font-size: 1.8em;
-  margin-top: 1px;
+    font-size: 1.8em;
+    margin-top: 1px;
 }
 .form-group div {
-  margin-bottom: 0.5em;
+    margin-bottom: 0.5em;
 }
 .spin {
-  -webkit-animation: spin 1000ms infinite linear;
-  -moz-animation: spin 1000ms infinite linear;
-  -o-animation: spin 1000ms infinite linear;
-  animation: spin 1000ms infinite linear;
+    -webkit-animation: spin 1000ms infinite linear;
+    -moz-animation: spin 1000ms infinite linear;
+    -o-animation: spin 1000ms infinite linear;
+    animation: spin 1000ms infinite linear;
 }
 
 @-moz-keyframes spin {
@@ -133,19 +131,19 @@ body {
   }
 }
 .disabled {
-  background:rgba(1,1,1,0.2);
-  border:0px solid;
-  cursor:progress;
+    background:rgba(1,1,1,0.2);
+    border:0px solid;
+    cursor:progress;
 }
 tbody tr {
-  cursor: pointer;
+    cursor: pointer;
 }
 .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
-  background-color: #2c3e50;
-  color: #fff;
+    background-color: #2c3e50;
+    color: #fff;
 }
 .input-group {
-  margin-bottom:0.5em;margin-right:1em;margin-left:1em;
+    margin-bottom:0.5em;margin-right:1em;margin-left:1em;
 }
 .autocomplete-suggestions { cursor:pointer;border: 1px solid #999; background: #FFF; cursor: default; overflow: auto; -webkit-box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64); -moz-box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64); box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64); }
 .autocomplete-suggestion { cursor:pointer;padding: 2px 5px; white-space: nowrap; overflow: hidden; }
@@ -196,7 +194,6 @@ tbody tr {
     border-color: #666 transparent;
     border-width: 0 10px 10px;
 }
-
 </style>
 </style>
 </head>
@@ -207,7 +204,6 @@ $(document).ready(function() {
       $('#tooltip1').popover();
       $('#jobname').tooltip();
 });
-
 </script>
 <?php include "../nav.php"; ?>
 <div class="container-fluid" id="successcontent" style="display:none">
@@ -227,7 +223,6 @@ $(document).ready(function() {
 $sql = "SELECT id, orgname FROM PRTemployers";
 $partnerIDArray = [];
 $partnerArray = [];
-
 foreach ($db->query($sql) as $results)
 {
   $partnerIDArray[] = intval($results["id"]);
@@ -245,7 +240,6 @@ $(function () {
     var partnerArray = <?php echo json_encode($partnerArray);?>;
     var arr = [];
     var element = {};
-    
     for (var i = 0; i < partnerArray.length; i++) {
         var idname=partnerIDArray[i];
         var name=partnerArray[i];
@@ -460,51 +454,48 @@ $(function () {
                             
                             <div id="newinput" style="display:block" class="form-group"></div>
                             <div id="newinput2" style="display:block" class="form-group"></div>
-                  
-                  <div class="form-group">
-                    <div class="col-sm-12">
-                      <input name="contactperson" class="form-control" id="contactperson" placeholder="Alternate Contact Person" value="<?php echo $row['contactperson']; ?>" title="Alternate Contact Person">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <div class="col-sm-6">
-                      <input name="contacttitle" class="form-control" id="contacttitle" placeholder="Alternate Contact Title" value="<?php echo $row['contacttitle']; ?>" title="Alternate Contact Title">
-                    </div>
-                    <div class="col-sm-6">
-                      <input name="contactemail" class="form-control" id="contactemail" placeholder="Alternate Contact E-mail" value="<?php echo $row['contactemail']; ?>" title="Alternate Contact E-mail">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <div class="col-sm-12">
-                      <input name="contactnumber" class="form-control" id="contactnumber" placeholder="Alternate Contact Number (Mobile)" value="<?php echo $row['contactnumber']; ?>" title="Alternate Contact Number (Mobile)">
-                    </div>
-                  </div>
-            </form>
-                  <div class="form-group">
-                    <div class="col-md-5">
-                      <div id="statusdisp" class="col-sm-12" style="color:red;text-align:center"></div>
-                    </div>
-                    <div class="col-md-2">
-                      <span id="loadicon" class="glyphicon glyphicon-refresh spin" style="font-size:30px;"></span>
-                    </div>
-                    <div class="col-md-5">
-                        <button class="btn btn-warning pull-right" id="" onclick="history.back();">Go Back</button> &nbsp; 
-                        <button class="btn btn-success pull-right" id="formsubmit" style="margin-right:5px">Save Changes</button> &nbsp; 
-                    </div>
-                  </div>
+                            <div class="form-group">
+                              <div class="col-sm-12">
+                                <input name="contactperson" class="form-control" id="contactperson" placeholder="Alternate Contact Person" value="<?php echo $row['contactperson']; ?>" title="Alternate Contact Person">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <div class="col-sm-6">
+                                <input name="contacttitle" class="form-control" id="contacttitle" placeholder="Alternate Contact Title" value="<?php echo $row['contacttitle']; ?>" title="Alternate Contact Title">
+                              </div>
+                              <div class="col-sm-6">
+                                <input name="contactemail" class="form-control" id="contactemail" placeholder="Alternate Contact E-mail" value="<?php echo $row['contactemail']; ?>" title="Alternate Contact E-mail">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <div class="col-sm-12">
+                                <input name="contactnumber" class="form-control" id="contactnumber" placeholder="Alternate Contact Number (Mobile)" value="<?php echo $row['contactnumber']; ?>" title="Alternate Contact Number (Mobile)">
+                              </div>
+                            </div>
+                      </form>
+                            <div class="form-group">
+                              <div class="col-md-5">
+                                <div id="statusdisp" class="col-sm-12" style="color:red;text-align:center"></div>
+                              </div>
+                              <div class="col-md-2">
+                                <span id="loadicon" class="glyphicon glyphicon-refresh spin" style="font-size:30px;"></span>
+                              </div>
+                              <div class="col-md-5">
+                                  <button class="btn btn-warning pull-right" id="" onclick="history.back();">Go Back</button> &nbsp; 
+                                  <button class="btn btn-success pull-right" id="formsubmit" style="margin-right:5px">Save Changes</button> &nbsp; 
+                              </div>
+                            </div>
 
-        </div>
-    </div>
-  
-</div><!--end container-->
-
+                  </div>
+              </div>
+            
+          </div><!--end container-->
 <?php
               $jobtagrow = $row['tag'];
               $jobtags = explode(',', $jobtagrow);
 ?>
 <script>
 var tagsArray = <?php echo json_encode($jobtags);?>;
-
 $('#jobname').tooltip({'trigger':'focus', 'title': 'Hello!'});
 $('#numopenings').tooltip({'trigger':'focus', 'title': 'Hello!'});
 $('#startdate').tooltip({'trigger':'focus', 'title': 'Hello!'});
@@ -516,7 +507,6 @@ $('#contactperson').tooltip({'trigger':'focus', 'title': 'Hello!'});
 $('#contacttitle').tooltip({'trigger':'focus', 'title': 'Hello!'});
 $('#contactemail').tooltip({'trigger':'focus', 'title': 'Hello!'});
 $('#contactnumber').tooltip({'trigger':'focus', 'title': 'Hello!'});
-
 var desc = "<?php echo preg_replace( "/\r|\n/", " ", $row['description'] ); ?>"
 var req = "<?php echo preg_replace( "/\r|\n/", " ", $row['requirements'] ); ?>"
 document.getElementById("description").value = desc;
@@ -528,8 +518,6 @@ document.getElementById("requirements").value = req;
             $("#subsector").tagit("removeTagByLabel", tagname);
         }
     });
-    
-
     for (i=0;i<tagsArray.length;i++) {
               $("#subsector").tagit("createTag", tagsArray[i]);
             }
@@ -541,7 +529,6 @@ function sectorChange() {
         var key = $dropdown.val();
         var vals = [];
         var $secondChoice = $("#filter2");
-
         switch(key) {
           case 'Sub-Sector(s)':
             $secondChoice.empty();
@@ -611,7 +598,6 @@ function sectorChange() {
             vals = data.u.split(",");
             break;
         }
-        
         if (key != "") {
             document.getElementById("filter2").disabled = false;
             $secondChoice.empty();
@@ -624,10 +610,8 @@ function sectorChange() {
             $secondChoice.append("<option value=''>Select Sub-Sector(s)</option>");
             document.getElementById("filter2").disabled = true;
         }
-        
-      });
+     });
 }
-
 function changeValue2(){
   $('#idg').show();
           var option=document.getElementById('filter2').value;
@@ -714,7 +698,6 @@ function removeOptions(selectbox)
 }
 
 $("#region").change(function() {
-
       var $dropdown = $(this);
       $.getJSON("../json/regiondata.json", function(data) {
       
@@ -798,8 +781,7 @@ $("#region").change(function() {
             document.getElementById("province").disabled = true;
             document.getElementById("municipality").disabled = true;
         }
-        
-      });
+    });
 });
 
 $.getJSON("../json/regiondata.json", function(data) {
@@ -865,8 +847,7 @@ $.getJSON("../json/regiondata.json", function(data) {
           case 'NIR':
             vals = data.NIR.split(",");
             break;
-        }
-        
+        }    
         if (key != "") {
             $secondChoice.empty();
             $secondChoice.append("<option selected><?php echo $row['province']; ?></option>");
@@ -879,32 +860,21 @@ $.getJSON("../json/regiondata.json", function(data) {
             document.getElementById("province").disabled = true;
             document.getElementById("municipality").disabled = true;
         }
-        
       });//endjson
-    
-    
     $.getJSON("../json/munidata.json", function(data) {
-
         var key2 = $("#province").val();
         var vals = [];
         var $thirdchoice = $("#municipality");
         document.getElementById("municipality").disabled = false;
-
             if (key2) {       
                 for (key in data) {
                     vals = data[key2].split(",");
                 }
             }
-        
-        
         $.each(vals, function(index, value) {
           $thirdchoice.append("<option>" + value + "</option>");
         });
-
     });//endjson
-
-
-
     $("#province").change(function() {
       $("#muniholder").slideDown("fast");
       var $dropdown = $(this);
@@ -913,23 +883,18 @@ $.getJSON("../json/regiondata.json", function(data) {
         var vals = [];
         var $thirdchoice = $("#municipality");
         document.getElementById("municipality").disabled = false;
-
             if (key2) {       
                 for (key in data) {
                     vals = data[key2].split(",");
                 }
             }
-        
         $thirdchoice.empty();
         $thirdchoice.append("<option selected><?php echo $row['municipality']; ?></option>");
         $.each(vals, function(index, value) {
           $thirdchoice.append("<option>" + value + "</option>");
         });
-
           });//endjson
       });//endprovince
-
-
 </script>
 <script type="text/javascript" src="../js/postjobForm_edit.js"></script>
 <script type="text/javascript" src="../js/jquery.autocomplete.min.js"></script>
