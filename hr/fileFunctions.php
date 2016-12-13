@@ -1,26 +1,20 @@
 <?php
 require "../zxcd9.php";
-
 //start post
 if(!empty($_POST)) 
 { 
 //filter input
 $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
-
         $id = test_input($_POST['docid']);
-
         if ($_POST['action'] == 'approve') {
-
-            if ($_SESSION['id']==9) {
+        if ($_SESSION['id']==9) {
                 $query = " 
                     UPDATE DOCDB 
                     SET approved = 1 
                     WHERE 
                         id = :id
                 ";
-
-            } else if ($_SESSION['id']==662) {
+        } else if ($_SESSION['id']==662) {
                 $query = " 
                     UPDATE DOCDB 
                     SET approved = 2 
@@ -28,11 +22,9 @@ $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
                         id = :id
                 ";
             }
-
                 $query_params = array( 
                     ':id' => $id 
                 ); 
-                 
                 try { 
                     $stmt = $db->prepare($query); 
                     $result = $stmt->execute($query_params); 
@@ -43,33 +35,26 @@ $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
                 catch(PDOException $ex) { 
                     die("Failed to run query: " . $ex->getMessage()); 
                 }
-
         }
-
         if ($_POST['action'] == 'delete') {
                 $query = "DELETE FROM DOCDB WHERE id = :id";
                 $query_params = array( 
                     ':id' => $id 
                 ); 
-                 
-                try { 
+        try { 
                     $stmt = $db->prepare($query); 
                     $result = $stmt->execute($query_params); 
                 } 
                 catch(PDOException $ex) { 
                     die("Failed to run query: " . $ex->getMessage()); 
                 }
-            
-
         }
-
         if ($_POST['action'] == 'delete_comment') {
                 $query = "DELETE FROM hr_RVcomments WHERE id = :id";
                 $query_params = array( 
                     ':id' => $id 
                 ); 
-                 
-                try { 
+         try { 
                     $stmt = $db->prepare($query); 
                     $result = $stmt->execute($query_params); 
                     if ($stmt == true) {
@@ -79,10 +64,7 @@ $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
                 catch(PDOException $ex) { 
                     die("Failed to run query: " . $ex->getMessage()); 
                 } 
-
-        }
-
-
+            }
         if($_POST['action']=="editwp") {
              date_default_timezone_set('Asia/Brunei');
             $stmt=$db->prepare("UPDATE hr_wallposts SET wall_msg=:ewp,wallposted=:wallposted,wallposter=:wallposter WHERE wallpostid=:wpid");
@@ -99,9 +81,5 @@ $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
                       $stmt->execute();
                       echo "deleted";
         }
-
-
-
 }//end post
-     
 ?>
