@@ -5,9 +5,7 @@
  * Copyright: 2010 - Allan Jardine
  * License:   GPL v2 or BSD (3-point)
  */
-  
 class TableData {
- 
  	private $_db;
 	public function __construct() {
 		require("../l33tz9.php");
@@ -18,7 +16,6 @@ class TableData {
 		if ( isset( $_GET['iDisplayStart'] ) && $_GET['iDisplayLength'] != '-1' ) {
 			$sLimit = "LIMIT ".intval( $_GET['iDisplayStart'] ).", ".intval( $_GET['iDisplayLength'] );
 		}
-		
 		// Ordering
 		$sOrder = "";
 		if ( isset( $_GET['iSortCol_0'] ) ) {
@@ -28,14 +25,12 @@ class TableData {
 					$sortDir = (strcasecmp($_GET['sSortDir_'.$i], 'ASC') == 0) ? 'ASC' : 'DESC';
 					$sOrder .= "`".$columns[ intval( $_GET['iSortCol_'.$i] ) ]."` ". $sortDir .", ";
 				}
-			}
-			
+			}	
 			$sOrder = substr_replace( $sOrder, "", -2 );
 			if ( $sOrder == "ORDER BY" ) {
 				$sOrder = "";
 			}
 		}
-		
 		/* 
 		 * Filtering
 		 * NOTE this does not match the built-in DataTables filtering which does it
@@ -53,7 +48,6 @@ class TableData {
 			$sWhere = substr_replace( $sWhere, "", -3 );
 			$sWhere .= ')';
 		}
-		
 		// Individual column filtering
 		for ( $i=0 ; $i<count($columns) ; $i++ ) {
 			if ( isset($_GET['bSearchable_'.$i]) && $_GET['bSearchable_'.$i] == "true" && $_GET['sSearch_'.$i] != '' ) {
@@ -66,7 +60,6 @@ class TableData {
 				$sWhere .= "`".$columns[$i]."` LIKE :search".$i." ";
 			}
 		}
-		
 		// SQL queries get data to display
 		//if ($_SESSION['filter'] == "NPMO") {
 			$sQuery = "SELECT m.id, m.orgname, m.psic as sector, m.region, SUM(z.numopenings) as jobs, npmo FROM PRTemployers m LEFT JOIN PRTdemand z ON z.partner=m.id GROUP BY m.orgname ORDER BY jobs DESC";
@@ -74,7 +67,6 @@ class TableData {
 			//$sQuery = "SELECT m.id, m.orgname, m.psic as sector, m.region, SUM(z.numopenings) as jobs, npmo FROM PRTemployers m LEFT JOIN PRTdemand z ON z.partner=m.id WHERE m.region='".$_SESSION['filter']."' AND m.npmo='0' GROUP BY m.orgname";
 		//}
 		$statement = $this->_db->prepare($sQuery);
-		
 		// Bind parameters
 		if ( isset($_GET['sSearch']) && $_GET['sSearch'] != "" ) {
 			$statement->bindValue(':search', '%'.$_GET['sSearch'].'%', PDO::PARAM_STR);
@@ -84,16 +76,12 @@ class TableData {
 				$statement->bindValue(':search'.$i, '%'.$_GET['sSearch_'.$i].'%', PDO::PARAM_STR);
 			}
 		}
-
 		$statement->execute();
 		$rResult = $statement->fetchAll();
-		
 		$iFilteredTotal = current($this->_db->query('SELECT FOUND_ROWS()')->fetch());
-		
 		// Get total number of rows in table
 		$sQuery = "SELECT COUNT(`".$index_column."`) FROM `".$table."`";
 		$iTotal = current($this->_db->query($sQuery)->fetch());
-		
 		// Output
 		$output = array(
 			"sEcho" => intval($_GET['sEcho']),
@@ -101,7 +89,6 @@ class TableData {
 			"iTotalDisplayRecords" => $iFilteredTotal,
 			"aaData" => array()
 		);
-		
 		// Return array of values
 		foreach($rResult as $aRow) {
 			$row = array();			
@@ -116,14 +103,12 @@ class TableData {
 			}
 			$output['aaData'][] = $row;
 		}
-		
 		echo json_encode( $output );
 	}
 }
 header('Pragma: no-cache');
 header('Cache-Control: no-store, no-cache, must-revalidate');
 // Create instance of TableData class
-
 $table_data = new TableData();
 // Get the data
 $table_data->get('PRTdemand', 'id', array('id','orgname', 'sector', 'jobs', 'region', 'npmo', 'npmo'));
