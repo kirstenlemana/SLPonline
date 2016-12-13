@@ -1,5 +1,5 @@
 <?php
-require "../zxcd9.php";
+  require "../zxcd9.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,7 +16,6 @@ require "../zxcd9.php";
     <script src="../js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../js/bootstrapValidator.js"></script>
     <style>
-
 body {
     background-color: #f7f9fb;
     background-size: cover;
@@ -32,42 +31,41 @@ body {
     right: -15px;
 }
 .slidedown {
-  -webkit-transform: scaleY(0);
-       -o-transform: scaleY(0);
-      -ms-transform: scaleY(0);
-          transform: scaleY(0);
+    -webkit-transform: scaleY(0);
+    -o-transform: scaleY(0);
+    -ms-transform: scaleY(0);
+    transform: scaleY(0);
   
-  -webkit-transform-origin: top;
-       -o-transform-origin: top;
-      -ms-transform-origin: top;
-          transform-origin: top;
+    -webkit-transform-origin: top;
+    -o-transform-origin: top;
+    -ms-transform-origin: top;
+    transform-origin: top;
   
-  -webkit-transition: -webkit-transform 0.2s ease;
-            -o-transition: -o-transform 0.2s ease;
-          -ms-transition: -ms-transform 0.2s ease;
-                  transition: transform 0.2s ease;
+    -webkit-transition: -webkit-transform 0.2s ease;
+    -o-transition: -o-transform 0.2s ease;
+    -ms-transition: -ms-transform 0.2s ease;
+    transition: transform 0.2s ease;
 }
-
 .slidedown.active {
-  -webkit-transform: scaleY(1);
-       -o-transform: scaleY(1);
-      -ms-transform: scaleY(1);
-          transform: scaleY(1);
+    -webkit-transform: scaleY(1);
+    -o-transform: scaleY(1);
+    -ms-transform: scaleY(1);
+    transform: scaleY(1);
 }
 .successcontent {
-  display:none;
+    display:none;
 }
 .mainlink {
-  font-size: 1.8em;
-  margin-top: 1px;
+    font-size: 1.8em;
+    margin-top: 1px;
 }
 .form-group div {
-  margin-bottom: 0.5em;
+    margin-bottom: 0.5em;
 }
 .disabled {
-  background:rgba(1,1,1,0.2);
-  border:0px solid;
-  cursor:progress;
+    background:rgba(1,1,1,0.2);
+    border:0px solid;
+    cursor:progress;
 }
 </style>
 </style>
@@ -76,7 +74,6 @@ body {
 <?php include '../nav.php'; ?>
 <div class="container-fluid">
     <div class="row" style="padding-top:2em;display:none" id="successcontent">
-      
     </div>
     <div style="padding-top:2em;" id="maincontent">
       <div class="row">
@@ -88,25 +85,25 @@ body {
       </div>
       <div class="col-md-offset-2 col-md-8" id="main">
         <form id="partnerForm" method="post" action="" autocomplete="off">
-                            <div class="form-group">
-                              <div class="col-sm-12">
-                                <input name="orgname" class="form-control" id="orgname" placeholder="Organization / Company Name">
-                              </div>
-                            </div>
-                            <div class="form-group">
-                                        <div class="col-sm-12">
-                                          <select class="form-control cleanselect" name="ptype" id="ptype" required>
-                                            <option value="" selected>Partner Type</option>
-                                            <option>LGU</option>
-                                            <option>NGO</option>
-                                            <option>Private</option>
-                                            <option>CSO</option>
-                                            <option>NGA</option>
-                                            <option>MFI</option>
-                                          </select>
-                                        </div>
-                            </div>
-                            <div class="form-group">
+            <div class="form-group">
+                  <div class="col-sm-12">
+                        <input name="orgname" class="form-control" id="orgname" placeholder="Organization / Company Name">
+                  </div>
+            </div>
+                  <div class="form-group">
+                         <div class="col-sm-12">
+                              <select class="form-control cleanselect" name="ptype" id="ptype" required>
+                                    <option value="" selected>Partner Type</option>
+                                    <option>LGU</option>
+                                    <option>NGO</option>
+                                    <option>Private</option>
+                                    <option>CSO</option>
+                                    <option>NGA</option>
+                                    <option>MFI</option>
+                              </select>
+                          </div>
+                   </div>
+                   <div class="form-group">
                                   <div class="col-sm-12">
                                         <select class="form-control cleanselect" name="psic" id="psic" required>
                                           <option value="" selected>Primary Sector</option>
@@ -264,7 +261,6 @@ body {
 </div>
 <script>
 function getProv(val) {
-
   var formData = { 'region' : $('#region option:selected').val() };
   $.ajax({
   type: "POST",
@@ -278,7 +274,6 @@ function getProv(val) {
   });
 }
 function getCity(val) {
-
   var formData = { 'provi' : $('#prov option:selected').val() };
   $.ajax({
   type: "POST",
