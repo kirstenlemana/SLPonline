@@ -1,16 +1,14 @@
 <?php
 require "../zxcd9.php";
-
 function upload_dir(){
   $dir = $_SERVER['PHP_SELF'];
   for($i=0;$i<strlen($dir);$i++){
-    if(substr($dir,$i,1)=="/") $slashpos=$i;
+  if(substr($dir,$i,1)=="/") $slashpos=$i;
   }
   $dir = substr($dir,0,$slashpos);
   $dir = $_SERVER['DOCUMENT_ROOT']."/docs/";
   return($dir);
 }
-
   $_GET   = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
   $_SESSION['uid'] = $_GET['id'];
   $involved = [];
@@ -25,7 +23,6 @@ function upload_dir(){
             ':rovid' => $_GET['id'], 
             ':hrdbid' => $_SESSION['id']
         ); 
-         
         try 
         { $stmt = $db->prepare($query); $result = $stmt->execute($query_params); } 
         catch(PDOException $ex) 
@@ -35,8 +32,7 @@ function upload_dir(){
         if( $stmt->rowCount() > 0) {
           $istagged = true;
         }
-
-  $query = " 
+    $query = " 
             SELECT 
                 m.id, 
                 m.startdate, 
@@ -61,41 +57,32 @@ function upload_dir(){
         $query_params = array( 
             ':id' => $_GET['id'] 
         ); 
-         
-        try 
+       try 
         { $stmt = $db->prepare($query); $result = $stmt->execute($query_params); } 
         catch(PDOException $ex) 
         { die("Failed to run query: " . $ex->getMessage()); } 
         $row = $stmt->fetch();
-
         $owner = $row['addedby'];
         $involved[] = $owner;
-
         $parts = explode('-', $row['startdate']);
         $stdate  = "$parts[1]/$parts[2]/$parts[0]";
         $sdate  = "$parts[1]/$parts[2]";
-
         $parts = explode('-', $row['enddate']);
         $endate  = "$parts[1]/$parts[2]/$parts[0]";
         $edate  = "$parts[1]/$parts[2]";
-
-        if ($_SESSION['id'] == $row['refid']) {
+       if ($_SESSION['id'] == $row['refid']) {
           $isdisabled = "";
         } else {
           $isdisabled = "disabled";
         }
-
-
 if( isset($_POST['submit']) ){
     $file_name = $_FILES['uploadbtn']['name'];
     if($file_name=="") {
       die("No file selected");
     } else {
-      
       $maxsize=50480000;
       $upl=1;
       $ext=date("mdY");
-      
       $FILE_EXTS = array('pdf','jpg','jpeg','xls','xlsx','doc','docx');
       $file_name = $_FILES['uploadbtn']['name'];
       $file_ext = pathinfo($file_name, PATHINFO_EXTENSION);
@@ -107,11 +94,9 @@ if( isset($_POST['submit']) ){
             $upl=0;
             die("Filesize exceeded");
         }
-        
         if($upl==1){
           $uploaddir = upload_dir();
           $uploadfile = $uploaddir.$ext.'_'.$_FILES['uploadbtn']['name'];
-
           if(move_uploaded_file($_FILES['uploadbtn']['tmp_name'], $uploadfile)){
               ?>
               <script>alert("Success!")</script>
@@ -119,7 +104,6 @@ if( isset($_POST['submit']) ){
           $title = test_input($_POST['dsubject']);
           try {
             // prepare sql and bind parameters
-
             $stmt = $db->prepare("INSERT INTO DOCDB (doctype,title,filename,filesize,remarks,added,hrdbid,roverid) 
             VALUES (:doctype,:title,:filename,:filesize,:remarks,:added,:hrdbid,:roverid)");
             $stmt->bindParam(':doctype', $type);
@@ -130,8 +114,7 @@ if( isset($_POST['submit']) ){
             $stmt->bindParam(':added', $added);
             $stmt->bindParam(':hrdbid', $hrdbid);
             $stmt->bindParam(':roverid', $roverid);
-            
-            // insert a row
+                        // insert a row
             $type = $_POST['fileclass'];
             $filename = $ext.'_'.$_FILES['uploadbtn']['name'];
             $filetype = $file_ext;
@@ -140,31 +123,23 @@ if( isset($_POST['submit']) ){
             $hrdbid = $_SESSION['id'];
             $roverid = $_GET['id'];
             $stmt->execute();
-      
             }
-            catch(PDOException $e)
-            {
+          catch(PDOException $e) {
             echo "Error: " . $e->getMessage();
             }
-
-
-
             $refid = $db->lastInsertId();
-
-            foreach($_SESSION['involved'] as $recip) {
+          foreach($_SESSION['involved'] as $recip) {
                       if ($recip != $_SESSION['id']) {
                           addNotification($recip, $_SESSION['firstname'], "uploaded a file to", "ROVER", "http://slp.ph/hr/viewrover.php?id=".$_GET['id']);
                       }
                   }
             $_POST['submit'] == null;
             $_FILES['uploadbtn'] == null;
-
           }
         }//end if upload=1
       }//endifelse
     }
   }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -186,12 +161,8 @@ if( isset($_POST['submit']) ){
     <script src="../js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="../js/tag-it.js" type="text/javascript" charset="utf-8"></script>
-
 <script type="text/javascript" src="http://momentjs.com/downloads/moment.min.js"></script>
-    
-    
     <style>
-
 body {
     background-color: #f7f9fb;
     background-size: cover;
@@ -214,18 +185,15 @@ body {
        -o-transform: scaleY(0);
       -ms-transform: scaleY(0);
           transform: scaleY(0);
-  
-  -webkit-transform-origin: top;
+   -webkit-transform-origin: top;
        -o-transform-origin: top;
       -ms-transform-origin: top;
           transform-origin: top;
-  
-  -webkit-transition: -webkit-transform 0.2s ease;
+   -webkit-transition: -webkit-transform 0.2s ease;
             -o-transition: -o-transform 0.2s ease;
           -ms-transition: -ms-transform 0.2s ease;
                   transition: transform 0.2s ease;
 }
-
 .slidedown.active {
   -webkit-transform: scaleY(1);
        -o-transform: scaleY(1);
@@ -266,7 +234,6 @@ table a:not(.btn), .table a:not(.btn) {
   -o-animation: spin 1000ms infinite linear;
   animation: spin 1000ms infinite linear;
 }
-
 @-moz-keyframes spin {
   from {
     -moz-transform: rotate(0deg);
@@ -275,7 +242,6 @@ table a:not(.btn), .table a:not(.btn) {
     -moz-transform: rotate(360deg);
   }
 }
-
 @-webkit-keyframes spin {
   from {
     -webkit-transform: rotate(0deg);
@@ -284,7 +250,6 @@ table a:not(.btn), .table a:not(.btn) {
     -webkit-transform: rotate(360deg);
   }
 }
-
 @keyframes spin {
   from {
     transform: rotate(0deg);
@@ -386,14 +351,12 @@ table a:not(.btn), .table a:not(.btn) {
           <div class="form-group">
               <button class="btn btn-primary" id="sendfeedback" style="padding:4px;margin-left:1em">Submit</button>
           </div>
-      
-      </div>
+       </div>
     </div>
   </div>
 <?php
 include "../nav.php";
-if( $stmt->rowCount() <= 0)
-{
+if( $stmt->rowCount() <= 0) {
     die("<div class='col-md-12'><center><h2>Oops!</h2>This user / record does not exist.<br><br><a href='index.php'><button class='btn btn-primary'>Go Back</button></a></center></div>");
 }
 ?>
@@ -407,7 +370,7 @@ if( $stmt->rowCount() <= 0)
             <br>
             <script>
             function toTitleCase(str) {
-                    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+                return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
                 }
             </script>
             <span style="color:#999;">
@@ -478,7 +441,7 @@ if( $stmt->rowCount() <= 0)
                 function parseImg(str) {
                   if (str=="AM") {
 
-                  }
+                }
                 }
                 function approveFile(str) {
                   var formData = {
@@ -512,8 +475,7 @@ if( $stmt->rowCount() <= 0)
                                    url: "fileFunctions.php",
                                    type: "POST",
                                    data: formData,
-                                   success: function(data)
-                                   {
+                                   success: function(data) {
                                       if (data == "good") {
                                         alert("Successfully deleted!");
                                         window.location.reload();
@@ -524,8 +486,7 @@ if( $stmt->rowCount() <= 0)
                                    }
                                 });//endAjax
                     }
-                    
-                }
+                    }
                 function deleteComment(str) {
                     var formData = {
                               'action'                : 'delete_comment',
@@ -538,8 +499,7 @@ if( $stmt->rowCount() <= 0)
                                    url: "fileFunctions.php",
                                    type: "POST",
                                    data: formData,
-                                   success: function(data)
-                                   {
+                                   success: function(data) {
                                       if (data == "good") {
                                         alert("Successfully deleted!");
                                         window.location.reload();
@@ -550,8 +510,7 @@ if( $stmt->rowCount() <= 0)
                                    }
                                 });//endAjax
                     }
-                    
-                }
+                    }
                 hasaccess = '<?php if($_SESSION["id"]==9 || $_SESSION["id"]==683 || $_SESSION["id"]==333 || $_SESSION["id"]==334) { echo "yes"; } ?>';
                 var oTable = $('#viewdata').dataTable({
                   "aProcessing": true,
@@ -680,7 +639,6 @@ if( $stmt->rowCount() <= 0)
           <?php
             }
           ?>
-
         </div>
         <div class="row" style="padding:1em">
           <?php
@@ -696,20 +654,18 @@ if( $stmt->rowCount() <= 0)
               ?>
               <a href="http://slp.ph/hr/user.php?id=<?php echo $_SESSION['id']; ?>"><button class="btn btn-warning" style="padding:5px;margin-top:1em">Go Back</button></a></div>
         </div>
-
       </div>
     </div>
   </div>
-
   <div class="row">
     <div class="col-md-6" id="editpanel" style="display:none;">
       <div style="background:#fff;margin-bottom:1em;padding:1.2em;" class="col-md-12">
         <form class="form-horizontal" id="editForm" method="post" action="adduser.php" autocomplete="off">
-                          <div class="form-group" style="margin-left:1em;margin-right:1em">
-    <div class="input-group">
+            <div class="form-group" style="margin-left:1em;margin-right:1em">
+   <div class="input-group">
       <input type="text" class="form-control" aria-label="..." placeholder="Start Date" id="startdate" name="startdate" >
-      <div class="input-group-btn">
-        <button id="ampm1" type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border: 2px solid #dce4ec;">AM / PM <span class="caret"></span></button>
+    <div class="input-group-btn">
+      <button id="ampm1" type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border: 2px solid #dce4ec;">AM / PM <span class="caret"></span></button>
         <ul class="dropdown-menu dropdown-menu-right" id="selectampm1">
           <li><a href="javascript:return false;">AM</a></li>
           <li><a href="javascript:return false;">PM</a></li>
@@ -717,7 +673,6 @@ if( $stmt->rowCount() <= 0)
       </div><!-- /btn-group -->
     </div><!-- /input-group -->
 </div>
-
 <div class="form-group" style="margin-left:1em;margin-right:1em">
     <div class="input-group">
       <input type="text" class="form-control" aria-label="..." placeholder="End Date" id="enddate" name="enddate" >
@@ -730,10 +685,9 @@ if( $stmt->rowCount() <= 0)
       </div><!-- /btn-group -->
     </div><!-- /input-group -->
 </div>
-                          <div class="form-group" style="margin-right:1em;margin-left:1em;margin-bottom:0">
-                            
-                              <select class="form-control cleanselect" name="event" id="event" required>
-                                <option selected><?php echo $row["event"]; ?></option>
+      <div class="form-group" style="margin-right:1em;margin-left:1em;margin-bottom:0">
+            <select class="form-control cleanselect" name="event" id="event" required>
+            <option selected><?php echo $row["event"]; ?></option>
                  <!-- get this --> 
                       <?php
                       try {
@@ -746,14 +700,12 @@ if( $stmt->rowCount() <= 0)
                         {
                       ?>
                         <option value=" <?php echo $hreventname['hreventname']; ?>"> <?php echo $hreventname['hreventname']; ?> </option>
-                    
                       <?php
                         }
                               } catch(PDOException $e) {
                             echo "Error: " . $e->getMessage();
                             }//en
-                   
-                        ?>
+                      ?>
                       </select>
                     <!-- upto this -->                    
                           </div>
@@ -764,19 +716,17 @@ if( $stmt->rowCount() <= 0)
                               <textarea name="remarks" maxlength="255" class="form-control" id="remarks" placeholder="Remarks" style="resize:none;padding-top:8px;padding-bottom:4px;" rows="3"><?php echo $row['remarks'];?></textarea>
                           </div>
                           <div class="form-group" style="margin-left:1em;margin-right:1em">
-                                    <input type="text" name="autocompleteajax" id="autocompleteajax" class="form-control" placeholder="Tag other people.."/>
-                                    <input type="hidden" id="autocomplete-ajax-x" disabled="disabled"/>
-                            </div>
-                            <span id="tagpart" style="padding-left:5px;display:none;margin-left:1em;margin-right:1em">Tagged:</span>
-                            <div class="form-group" style="margin-bottom:0.2em;margin-left:1em;margin-right:1em" id="idg">
-                                  <input name="subsector" id="subsector" value="" type="">
-                            </div>
+                              <input type="text" name="autocompleteajax" id="autocompleteajax" class="form-control" placeholder="Tag other people.."/>
+                              <input type="hidden" id="autocomplete-ajax-x" disabled="disabled"/>
+                          </div>
+                              <span id="tagpart" style="padding-left:5px;display:none;margin-left:1em;margin-right:1em">Tagged:</span>
+                          <div class="form-group" style="margin-bottom:0.2em;margin-left:1em;margin-right:1em" id="idg">
+                              <input name="subsector" id="subsector" value="" type="">
+                          </div>
   </form>
-                <button id="addrover" class="btn btn-success pull-right" style="margin-right:1em">Save Changes</button>
-
+        <button id="addrover" class="btn btn-success pull-right" style="margin-right:1em">Save Changes</button>
       </div>
     </div>
-
     <div class="col-md-6" id="uploadpanel" style="display:none;">
       <div style="background:#fff;margin-bottom:1em;padding:1.2em;" class="col-md-12">
         <h2 style="font-weight:bold">Attach Files</h2>
@@ -802,8 +752,7 @@ if( $stmt->rowCount() <= 0)
                               //$prof->bindParam(':hrdbida', $_SESSION['pageid']);
                               $sql->execute();
                          //     $p=$prof->fetch(PDO::FETCH_ASSOC);
-                        while($hrdocname=$sql->fetch(PDO::FETCH_ASSOC))
-                        {
+                      while($hrdocname=$sql->fetch(PDO::FETCH_ASSOC)) {
                       ?>
                         <option value=" <?php echo $hrdocname['hrdocname']; ?>"> <?php echo $hrdocname['hrdocname']; ?> </option>
                       <?php }
@@ -815,7 +764,7 @@ if( $stmt->rowCount() <= 0)
                               } catch(PDOException $e) {
                             echo "Error: " . $e->getMessage();
                             }//en
-                    ?>
+                        ?>
                       </select>
                    <!--   upto this      -->     
                     </div>
@@ -825,40 +774,33 @@ if( $stmt->rowCount() <= 0)
                   <div class="form-group" style="margin-top:1em;margin-left:1em;margin-right:1em;" id="docdate">
                       <input class="form-control" placeholder="Date Written / Created" style="" id="ddate" name="ddate" required/><center>
                   </div>
-                    <div class="form-group" style="margin-right:1em;margin-left:1em;margin-bottom:0">
-                        <input type="text" class="form-control" placeholder="Remarks" id="fileremarks" name="fileremarks">
-                    </div>
-                    <button id="submit" name="submit" class="btn btn-info pull-right" type="submit" style="margin-right:1em">Upload File</button>
+                  <div class="form-group" style="margin-right:1em;margin-left:1em;margin-bottom:0">
+                      <input type="text" class="form-control" placeholder="Remarks" id="fileremarks" name="fileremarks">
+                  </div>
+                      <button id="submit" name="submit" class="btn btn-info pull-right" type="submit" style="margin-right:1em">Upload File</button>
             </form>
-                    
       </div>
     </div>
   </div>
-
-
-  <br>
+<br>
       <!-- Modal -->
       <div class="modal fade" id="myModal" role="dialog" style="margin-top:3em">
         <div class="modal-dialog modal-sm">
-
           <div class="modal-content" style="padding:1em;padding-top:0.5em;">
                   <h3 style="color:#5cb85c;margin-bottom:6px">Success!</h3>
                   <span style="font-size:13px" id="sucsubtext">Boom</span><br><br>
                   <button type="button" class="btn btn-primary pull-right" style="background:#5cb85c;border:0;margin-top:0;padding:5px 10px 5px 10px" id="okaybtn" data-dismiss="modal">Okay</button>
                   <div class="clearfix"></div>
           </div>
-          
         </div>
       </div>
-      <!-- Modal -->
+<!-- Modal -->
 </div><!--endcontainerfluid-->
 <?PhP
 $sql = "SELECT id, CONCAT(lastname, ', ', firstname) as name FROM hr_db";
 $partnerIDArray = [];
 $partnerArray = [];
-
-foreach ($db->query($sql) as $results)
-{
+foreach ($db->query($sql) as $results) {
   $partnerIDArray[] = intval($results["id"]);
   $partnerArray[] = $results["name"];
 }
@@ -908,7 +850,6 @@ $(function () {
     });
     $('#idg').hide();
 $(document).ready(function() {
-
 document.getElementById("uploadbtn").onchange = function () {
     document.getElementById("uploadfilename").value = this.value;
 };
@@ -917,7 +858,6 @@ var found3 = [];
         if($.inArray(this.value, found3) != -1) $(this).remove();
         found3.push(this.value);
     });
-
   time1 = "";
   time2 = "";
   $('#selectampm1 li').on('click', function(){
@@ -934,12 +874,9 @@ document.getElementById("ampm1").innerHTML = '<?php echo $row["starttime"]; ?>  
 time1 = document.getElementById("ampm1").value = '<?php echo $row["starttime"]; ?>';
 document.getElementById("ampm2").innerHTML = '<?php echo $row["endtime"]; ?>  <span class="caret"/>';
 time2 = document.getElementById("ampm2").value = '<?php echo $row["endtime"]; ?>';
-
-
 $("#addrover").click(function(event) {
     event.preventDefault();
     event.stopImmediatePropagation();
-    
     errors = 0;
     errorlist = "";
     if ($('input[name=startdate]').val() == "") {
@@ -979,8 +916,7 @@ $("#addrover").click(function(event) {
                        url: "editrover.php",
                        type: "POST",
                        data: formData,
-                       success: function(data)
-                       {
+                       success: function(data) {
                           if (data == "good") {
                             $("#sucsubtext").html("Record edited")
                             $('#myModal').modal();
@@ -995,10 +931,7 @@ $("#addrover").click(function(event) {
       } else {
         alert(errorlist);
       }
-
-
     });
-
 });//end doc ready
 </script>
 <script>
@@ -1009,33 +942,26 @@ $(document).ready(function() {
                 var d = t[1]+"/"+t[2];
                 return zz;
               }
-
-  $("#loadicon").hide();
-  
-  $("#hrsubmit").click(function(event) {
+$("#loadicon").hide();
+$("#hrsubmit").click(function(event) {
   event.preventDefault();
   event.stopImmediatePropagation();
-  $("#statusdisp").html('');
-  $('#editForm').bootstrapValidator('validate');
+$("#statusdisp").html('');
+$('#editForm').bootstrapValidator('validate');
   return false;
 }); //endHRSUBMIT
-
-
 $("#attachbtn").click(function(event) {
   event.preventDefault();
   event.stopImmediatePropagation();
   $("#uploadpanel").show();
   location.href = "#uploadpanel";
 }); //endattach
-
 $("#commentsbtn").click(function(event) {
   event.preventDefault();
   event.stopImmediatePropagation();
   $("#commentsbox").show();
   $("#commentsbtn").hide();
 }); //endattach
-
-
 $("#editbtn").click(function(event) {
   event.preventDefault();
   event.stopImmediatePropagation();
@@ -1051,8 +977,7 @@ $("#postcomment").click(function(event) {
                        url: "addcomment.php",
                        type: "POST",
                        data: formData,
-                       success: function(data)
-                       {
+                       success: function(data) {
                           if (data == "good") {
                             $("#sucsubtext").html("Comment added")
                             $('#myModal').modal();
@@ -1065,14 +990,11 @@ $("#postcomment").click(function(event) {
                        }
                     });//endAjax
 }); //endedit
-
-  
 $("#goback").click(function(event) {
   event.preventDefault();
   event.stopImmediatePropagation();
   history.back();
 }); //endHRSUBMIT
-
 $("#deleterecord").click(function(event) {
     var r = confirm("You are about to delete a record. This will be recorded. Are you sure?");
     if (r == true) {
@@ -1083,8 +1005,7 @@ $("#deleterecord").click(function(event) {
                    url: "delrecord_rover.php",
                    type: "POST",
                    data: formData,
-                   success: function(data)
-                   {
+                   success: function(data) {
                       if (data == "good") {
                             $("#sucsubtext").html("Deleted successfully")
                             $('#myModal').modal();
@@ -1102,7 +1023,6 @@ $("#deleterecord").click(function(event) {
 $("#sendfeedback").click(function(event) {
     event.preventDefault();
     event.stopImmediatePropagation();
-    
     $("#loadicon").show();
     $("#feedback").hide();
     $("#sendfeedback").html('Processing..');
@@ -1117,8 +1037,7 @@ $("#sendfeedback").click(function(event) {
                    url: "../sendfeedback.php",
                    type: "POST",
                    data: formData,
-                   success: function(data)
-                   {
+                   success: function(data) {
                       if (data == "good") {
                         $("#loadicon").hide();
                         document.getElementById("formz").innerHTML = "<div style='padding:10px;color:#fff'><h2>Feedback Sent!</h2>Thank you!</div>"
@@ -1145,8 +1064,7 @@ $("#untagrecord").click(function(event) {
                    url: "untag_rover.php",
                    type: "POST",
                    data: formData,
-                   success: function(data)
-                   {
+                   success: function(data) {
                       if (data == "good") {
                             $("#sucsubtext").html("Untagged")
                             $('#myModal').modal();
@@ -1161,7 +1079,6 @@ $("#untagrecord").click(function(event) {
                 });//endAjax
     }
 });
-
 }); //enddocready
 </script>
 <script type="text/javascript" src="../js/jquery.autocomplete.min.js"></script>
