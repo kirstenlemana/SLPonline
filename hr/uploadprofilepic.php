@@ -8,8 +8,6 @@ if(!empty($_POST))
 { 
     if($_POST['action'] == "uploadpics") 
     {
-
-            date_default_timezone_set('Asia/Brunei');
             $ext=date("mdY");
             $maxsize=10000000;
             $FILE_EXTS = array('jpg','jpeg','png', 'bmp', 'JPG', 'JPEG', 'PNG', 'BMP');         
@@ -17,7 +15,6 @@ if(!empty($_POST))
             $file_name = preg_replace("/ /", "-", $file_name);
             $file_ext = pathinfo($file_name, PATHINFO_EXTENSION);
             $file_size = $_FILES['file']['size'];
-
             if($file_name=="") {
               die("No file selected");
             }
@@ -30,8 +27,6 @@ if(!empty($_POST))
             $uploaddir = upload_dir();
             $uploadname = $ext.'_'.$_SESSION['pageid'].'.'.$file_ext;
             $uploadfile = $uploaddir.$uploadname;
-
-
             if(move_uploaded_file($_FILES['file']['tmp_name'], $uploaddir."/".$uploadname )) {
             try { 
                       byteMe($_SESSION['id'],'profilepic',15);
@@ -41,19 +36,16 @@ if(!empty($_POST))
                       $stmt->bindParam(':file1', $file_name );
                       $date2 = date("Y-m-d h:i:sa");
                       $stmt->bindParam(':dt', $date2);
-                     
                       $stmt->execute(); 
             } 
             catch(PDOException $e)  {
                       echo "Error: " . $e->getMessage();
             }
-               byteMe($_SESSION['id'],'uploadpic',3);
-
-                    if ($_POST['switch']>0) 
+            if ($_POST['switch']>0) 
                     {
                           $refid = $db->lastInsertId();
                           sendEmail($refid,$uploadname,$doctype);
-                          byteMe($_SESSION['id'],'uploadpic',3);
+                          byteMe($_SESSION['id'],'upload',3);
                           echo "Success";
                     } 
                     else 
@@ -61,12 +53,8 @@ if(!empty($_POST))
                       echo "Success";
                     }
         }             
-
-    }
-
+        }
     if($_POST['action'] == "reuploadpics") {
-
-            date_default_timezone_set('Asia/Brunei');
             $ext=date("mdY");
             $maxsize=5000000;
             $FILE_EXTS = array('jpg','jpeg','png', 'bmp', 'tiff');      
@@ -74,7 +62,6 @@ if(!empty($_POST))
             $file_name = preg_replace("/ /", "-", $file_name);
             $file_ext = pathinfo($file_name, PATHINFO_EXTENSION);
             $file_size = $_FILES['file']['size'];
-
             if($file_name=="") {
               die("No file selected");
             }
@@ -84,28 +71,22 @@ if(!empty($_POST))
             if($_FILES['file']['size']>$maxsize) {
                 die("Filesize exceeded");
             }
-
-
             $uploaddir = upload_dir();
             $uploadname = $ext.'_'.$file_name;
             $uploadname2 = $ext.'_'.$_SESSION['pageid'].'.'.$file_ext;
             $uploadfile = $uploaddir.$uploadname2;
-            
-
-              try {
+            try {
                     byteMe($_SESSION['id'],'profilepic',3);
                     $edit = $db->prepare("SELECT name FROM hr_profilepics WHERE hrdbid=:hrdbidz");
                     $edit->bindParam(':hrdbidz',$_SESSION['pageid']);
                     $edit->execute();
                     $edit_row = $edit->fetch(PDO::FETCH_ASSOC);
                     unlink($uploaddir.$edit_row['name']);
-
-              } catch(PDOException $e){
+            } catch(PDOException $e){
                     echo "Error: " . $e->getMessage();
               } 
             if(move_uploaded_file($_FILES['file']['tmp_name'], $uploaddir."/".$uploadname2 )) {
                try {
-                      
                       $stmt = $db->prepare("UPDATE hr_profilepics SET name=:file, filename=:filez1, dtetme=:dt WHERE hrdbid=:pageid");
                       $stmt->bindParam(':pageid',$_SESSION['pageid']);
                       $stmt->bindParam(':file', $uploadname2);
@@ -117,9 +98,7 @@ if(!empty($_POST))
                     echo "Error: " . $e->getMessage();
                 }
             }
-            byteMe($_SESSION['id'],'reuploadpic',1);
          echo "Success";
-      
-    }
+      }
 }
 ?>
