@@ -8,11 +8,7 @@ if (isset($_POST['editid1'])) {
         $stmt->bindParam(':id', $_SESSION['editid1']);
         $stmt->execute();
         $rowa = $stmt->fetch();
-
-
-
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -28,7 +24,6 @@ if (isset($_POST['editid1'])) {
     <script src="../js/bootstrap.min.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <style>
-
 body {
     background-color: #f7f9fb;
     background-size: cover;
@@ -38,7 +33,6 @@ body {
     padding-top:15px !important; 
     padding-bottom:0 !important;
     height: 40px;
-    
 }
 .navbar {min-height:45px !important;background-color: #000}
 #bootstrapSelectForm .selectContainer .form-control-feedback {
@@ -52,14 +46,12 @@ body {
 .vcenter {
   min-height: 90%;  
   min-height: 90vh; 
-
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex; 
-  
-    -webkit-box-align : center;
+      -webkit-box-align : center;
   -webkit-align-items : center;
        -moz-box-align : center;
        -ms-flex-align : center;
@@ -125,7 +117,7 @@ button {
   .slpdrop {
     font-weight:900;
     font-size:22px;
-  }
+ }
   .padfix {
     padding-right: 0;
     margin-right: 0;
@@ -205,7 +197,6 @@ tr {
       <div class="row">
         <div class="col-md-12">
           <div style="border:solid 1px #c5d6de;background:#fff;text-align:left;padding:0em;padding-left:1em;margin-bottom:2em;width:100%">
-          
               <div class="row row-eq-height" >
                  <div class="col-md-6" style="background-color:#007ee5;padding:2em;color:#fff;">
                   SLP Finance System
@@ -230,9 +221,7 @@ tr {
                          <!--get this region -->
                              <option><?php echo $rowa['region'];?></option> 
                              <option value="">Select Region</option>
-                              
-                            
-                              <?php
+                          <?php
                               $query = "SELECT * FROM lib_regions order by regname"; 
                               try 
                               { $stmt = $db->prepare($query); $result = $stmt->execute(); } 
@@ -241,7 +230,7 @@ tr {
                               while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                                  echo "<option value='".$row['regname']."'>".$row['regname']."</option>";
                               }
-                              ?>
+                          ?>
                           <!-- upto this -->    
                         </select>
                   </div>
@@ -295,10 +284,8 @@ tr {
                       </div>
                     </div>
                   </div>
-
                        <div class="row">
-                     
-                      <div class="col-md-6" id="saaholder">
+                        <div class="col-md-6" id="saaholder">
                         <input class="form-control" style="padding-right:0;" id="saa" name="saa" placeholder="Sub-Aro Number" value="<?php echo $rowa['saa'];?>">
                       </div>
                       <div class="col-md-6" id="uacsholder">
@@ -340,8 +327,7 @@ tr {
                       </div>
                     </div>
                   </div>
-                  
-                    <div class="form-group">
+                 <div class="form-group">
                      <div class="row">
                        <div class="col-md-12" style="">
                            <textarea rows="3" class="form-control" placeholder="Purpose" style="padding-top:0.6em;resize:none" id="purpose" name="purpose" required><?php echo $rowa['purpose'];?></textarea><center>
@@ -357,24 +343,18 @@ tr {
       </div>
   </div>
 </div>
-
 <!-- Modal -->
       <div class="modal fade" id="myModal" role="dialog" style="margin-top:3em">
         <div class="modal-dialog modal-sm">
-
           <div class="modal-content" style="padding:1em;padding-top:0.5em;">
                   <h3 style="color:#5cb85c;margin-bottom:6px">Success!</h3>
                   <span style="font-size:13px" id="sucsubtext">Fund Allotments updated!</span><br><br>
                   <button type="button" class="btn btn-primary pull-right" style="background:#5cb85c;border:0;margin-top:0;padding:5px 10px 5px 10px" id="okaybtn" data-dismiss="modal">Okay</button>
                   <div class="clearfix"></div>
           </div>
-          
         </div>
       </div>
       <!-- Modal -->
-
-
-
 <script>
 function SubGA() {
  var subga=$("#subtype").val();
@@ -385,7 +365,6 @@ function SubGA() {
     document.getElementById("uacs1").disabled = false;
  }
 }
-
 function fs() {
 var fs = $("#fundsource").val();
 
@@ -402,11 +381,8 @@ var fs = $("#fundsource").val();
  $("#saa").val('');
   document.getElementById("saa").focus();
   }
-
 }
-
 $("#updateallot").click(function(event) {
-
   event.preventDefault();
   event.stopImmediatePropagation();
   $("#updateallot").html("Processing..");
@@ -424,14 +400,12 @@ $("#updateallot").click(function(event) {
        'amt'              :$('input[name=amt]').val(), 
        'd8'               :$('input[name=d8]').val(),
        'purpose'          :$('textarea[name=purpose]').val()
-
      };
   $.ajax({
        url: "func.php",
        type: "POST",
        data: formData,
-       success: function(data)
-       {
+       success: function(data){
                 if (data=="success") {
                       document.getElementById("updateallot").disabled = true;
                       $("#sucsubtext").html("Fund Allotments updated!");
@@ -440,27 +414,13 @@ $("#updateallot").click(function(event) {
                 } else {
                       alert(data);
                 }
-
        }
     });//endajax
-
-
 });
-
-
 $("#back").click(function(event) {
-
 location.href = "allotments_view.php?id=<?php echo $_SESSION['pageid']; ?>"; 
-
-
 });
-
-
-
-
-
 $(document).ready(function () {
-
       $('[data-toggle="tooltip"]').tooltip(); 
                 encoded = 500;
                 budget = 320;
@@ -499,7 +459,6 @@ $(document).ready(function () {
                         fontSize: '12px',
                     }
             },
-
             tooltip: {
                 formatter: function() {
                     var point = this.point,
@@ -571,8 +530,7 @@ $(document).ready(function () {
                     color: colors[5]
                 }]
             }]
-        });
-                  
+        });                  
     });
 </script>
 <script type="text/javascript" src="http://momentjs.com/downloads/moment.min.js"></script>
