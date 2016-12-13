@@ -8,9 +8,7 @@ if (isset($_POST['editid'])) {
         $stmt->bindParam(':id', $_SESSION['editid']);
         $stmt->execute();
         $rowEN = $stmt->fetch();
-
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -30,7 +28,6 @@ if (isset($_POST['editid'])) {
     <script src="../js/tag-it.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript" src="../js/jquery.autocomplete.min.js"></script>
     <style>
-
 body {
     background-color: #f7f9fb;
     background-size: cover;
@@ -50,18 +47,15 @@ body {
        -o-transform: scaleY(0);
       -ms-transform: scaleY(0);
           transform: scaleY(0);
-  
-  -webkit-transform-origin: top;
+    -webkit-transform-origin: top;
        -o-transform-origin: top;
       -ms-transform-origin: top;
           transform-origin: top;
-  
   -webkit-transition: -webkit-transform 0.2s ease;
             -o-transition: -o-transform 0.2s ease;
           -ms-transition: -ms-transform 0.2s ease;
                   transition: transform 0.2s ease;
 }
-
 .slidedown.active {
   -webkit-transform: scaleY(1);
        -o-transform: scaleY(1);
@@ -95,13 +89,11 @@ body {
 .autocomplete-suggestions strong { font-weight: bold; color: #000; }
 .autocomplete-group { padding: 2px 5px; }
 .autocomplete-group strong { font-weight: bold; font-size: 16px; color: #000; display: block; border-bottom: 1px solid #000; }
-
 .spinner {
   margin: 20px auto 0;
   width: 90px;
   text-align: center;
 }
-
 .spinner > div {
   width: 20px;
   height: 50px;
@@ -111,30 +103,25 @@ body {
   -webkit-animation: sk-bouncedelay 1.6s infinite ease-in-out both;
   animation: sk-bouncedelay 1.6s infinite ease-in-out both;
 }
-
 .spinner .bounce1 {
     background: red;
   -webkit-animation-delay: -1.2s;
   animation-delay: -1.2s;
 }
-
 .spinner .bounce2 {
     background: yellow;
   -webkit-animation-delay: -0.8s;
   animation-delay: -0.8s;
 }
-
 .spinner .bounce3 {
     background: blue;
   -webkit-animation-delay: -0.4s;
   animation-delay: -0.4s;
 }
-
 @-webkit-keyframes sk-bouncedelay {
   0%, 80%, 100% { -webkit-transform: scale(0) }
   40% { -webkit-transform: scale(1.0) }
 }
-
 @keyframes sk-bouncedelay {
   0%, 80%, 100% { 
     -webkit-transform: scale(0.0);
@@ -158,14 +145,12 @@ body {
 .vcenter {
   min-height: 90%;  
   min-height: 90vh; 
-
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex; 
-  
-    -webkit-box-align : center;
+     -webkit-box-align : center;
   -webkit-align-items : center;
        -moz-box-align : center;
        -ms-flex-align : center;
@@ -190,9 +175,7 @@ table {
       <div class="bounce2"></div>
       <div class="bounce3"></div>
     </div>
-
 </div>
-
   <div id="slideout">
     <img src="http://slp.ph/imgs/feedback.png" alt="Feedback" />
     <div id="slideout_inner">
@@ -208,101 +191,65 @@ table {
           <div class="form-group">
               <button class="btn btn-primary" id="sendfeedback" style="padding:4px;margin-left:1em">Submit</button>
           </div>
-      
-      </div>
+       </div>
     </div>
   </div>
-
-<?php include "../nav.php"; ?>
-
-
-
-
+<?php
+  include "../nav.php"; 
+?>
 <div class="container-fluid">
-
-
   <div class="col-md-12" style="">
-
       <div style="background:#fff;margin-bottom:1em;padding:1.2em;" class="col-md-12">
-
-
-
-
-
-
-
-
-
       <div class="row">
           <div class="col-md-12" id="searchblock">
                 <div class="col-md-offset-2 col-md-8" style="margin-top:0">
                   <h2 style="font-weight:bold;margin-bottom:0">Update NTA Details</h2>
-
                 <form id="myForm" method="POST" enctype="multipart/form-data">
                   <div class="row">
-
                    <div class="col-md-4">
                     <div class="form-group" style="margin-top:1em;">
                         <input class="form-control" placeholder="Type NTA here ..." style="" id="enta" name="enta" value="<?php echo $rowEN['nta']; ?>" required/><center>
                     </div>
                     </div>
-
                      <div class="col-md-4">
                     <div class="form-group" style="margin-top:1em;">
                         <input class="form-control" placeholder="Type Amount here ..." style="" id="eamt" name="eamt" value="<?php echo $rowEN['nta_amount']; ?>" required/><center>
                     </div>
                     </div>
-
                      <div class="col-md-4">
-                    <div class="form-group" style="margin-top:1em;">
+                     <div class="form-group" style="margin-top:1em;">
                         <input class="form-control" placeholder="Type Date here ..." style="" id="edate" name="edate" value="<?php 
                         $dd = explode('-', $rowEN['nta_date']);
                         $ed  = "$dd[1]-$dd[2]-$dd[0]";
                        echo $ed;?>" required/><center>
                     </div>
                     </div>
-
                   </div> 
                 <div class="col-md-12" style="padding-right:0">
-
-              
-                  <button class="btn btn-success pull-right" id="editBtn" style="padding:6px 10px 6px 10px;margin-top:0.8em"><span class="glyphicon glyphicon-cloud-upload"></span> Update</button>
+                    <button class="btn btn-success pull-right" id="editBtn" style="padding:6px 10px 6px 10px;margin-top:0.8em"><span class="glyphicon glyphicon-cloud-upload"></span> Update</button>
               </div>
           </div>
       </div>
     </div>
-
-
-
-
-
-
-
-
-
     </div>
 </div>
 </div>
 <!-- Modal -->
       <div class="modal fade" id="myModal" role="dialog" style="margin-top:3em">
         <div class="modal-dialog modal-sm">
-
           <div class="modal-content" style="padding:1em;">
                   <h3 style="color:#5cb85c;">Success!</h3>
                   NTA details have been edited!
                   <button type="button" class="btn btn-primary pull-right" style="background:#5cb85c;border:0;margin-top:0;padding:5px 10px 5px 10px" id="okaybtn" data-dismiss="modal">Okay</button>
                   <div class="clearfix"></div>
           </div>
-          
         </div>
       </div>
       <!-- Modal -->
 <script>
-
 $(document).ready(function() {
 $("#title").prop('required',true);
 switchClass = 0;
-
 $("#editBtn").click(function(event) {
     $("#editBtn").html("Processing..");
     document.getElementById("editBtn").disabled = true;
@@ -312,8 +259,7 @@ $("#editBtn").click(function(event) {
       'enta'  : $('input[name=enta]').val(),
       'eamt'  : $('input[name=eamt]').val(),
       'edate'  : $('input[name=edate]').val()
-  
-    };
+      };
      $.ajax({
                    url: "func.php",
                    type: "POST",
@@ -332,14 +278,9 @@ $("#editBtn").click(function(event) {
                 }
       });
 });
-
-
-
-
 $("#sendfeedback").click(function(event) {
     event.preventDefault();
     event.stopImmediatePropagation();
-    
     $("#loadicon").show();
     $("#feedback").hide();
     $("#sendfeedback").html('Processing..');
@@ -354,8 +295,7 @@ $("#sendfeedback").click(function(event) {
                    url: "sendfeedback.php",
                    type: "POST",
                    data: formData,
-                   success: function(data)
-                   {
+                   success: function(data) {
                       if (data == "good") {
                         $("#loadicon").hide();
                         document.getElementById("formz").innerHTML = "<div style='padding:10px;color:#fff'><h2>Feedback Sent!</h2>Thank you!</div>"
@@ -371,7 +311,6 @@ $("#sendfeedback").click(function(event) {
                    }
                 });//endAjax
   }); //endfeedback
-
 });
 </script>
 <script type="text/javascript" src="http://momentjs.com/downloads/moment.min.js"></script>
