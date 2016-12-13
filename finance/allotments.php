@@ -9,9 +9,7 @@ require "../zxcd9.php";
  // while ($rowfa = $stmt->fetch(PDO::FETCH_ASSOC)) {
   //      echo $rowfa['hrdbid'].'<br>';
    // }
-  
 $regionz = array("NCR", "CAR", "REGION I", "REGION II", "REGION III", "REGION IV-A", "REGION IV-B", "REGION V", "REGION VI", "REGION VII", "REGION VIII", "REGION IX", "REGION X", "REGION XI", "REGION XII", "CARAGA", "ARMM", "NIR");
-
 //SELECT COUNT(region)as region,re FROM `fin_allotments` WHERE type="CMF" and region="NCR"
 $cmf = [];
 foreach ($regionz as $regvalue) {
@@ -27,10 +25,6 @@ foreach ($regionz as $regvalue) {
       $row = $stmt->fetch();
       $dr[] = intval($row['regioncount']);
 }
-
-
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,7 +41,6 @@ foreach ($regionz as $regvalue) {
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script type="text/javascript" language="javascript" src="../js/jquery.dataTables.js"></script>
     <style>
-
 body {
     background-color: #f7f9fb;
     background-size: cover;
@@ -57,7 +50,6 @@ body {
     padding-top:15px !important; 
     padding-bottom:0 !important;
     height: 40px;
-    
 }
 .navbar {min-height:45px !important;background-color: #000}
 #bootstrapSelectForm .selectContainer .form-control-feedback {
@@ -71,13 +63,11 @@ body {
 .vcenter {
   min-height: 90%;  
   min-height: 90vh; 
-
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex; 
-  
     -webkit-box-align : center;
   -webkit-align-items : center;
        -moz-box-align : center;
@@ -174,7 +164,6 @@ thead th {
 line-height:22px;
 text-align:left;
 }
-
 h3 {
   font-weight: 400
 }
@@ -212,7 +201,9 @@ tr {
 </style>
 </head>
 <body>
-<?php require "navfin.php"; ?>
+<?php 
+ require "navfin.php"; 
+ ?>
 <script>
 $(function () {
   var colors = Highcharts.getOptions().colors;
@@ -302,8 +293,7 @@ $(function () {
         //    color: colors[8],
          //   data: [43,12,44,22,10,08,25,67,32,10,29,56,19,10,40,20]
         //}]
-
-        series: [{
+       series: [{
             name: 'CMF',
             color:  colors[3],
             data: [<?php echo $cmf[0].",".$cmf[1].",".$cmf[2].",".$cmf[3].",".$cmf[4].",".$cmf[5].",".$cmf[6].",".$cmf[7].",".$cmf[8].",".$cmf[9].",".$cmf[10].",".$cmf[11].",".$cmf[12].",".$cmf[13].",".$cmf[14].",".$cmf[15].",".$cmf[16].",".$cmf[17]; ?>]
@@ -312,10 +302,6 @@ $(function () {
             color: colors[8],
             data: [<?php echo $dr[0].",".$dr[1].",".$dr[2].",".$dr[3].",".$dr[4].",".$dr[5].",".$dr[6].",".$dr[7].",".$dr[8].",".$dr[9].",".$dr[10].",".$dr[11].",".$dr[12].",".$dr[13].",".$dr[14].",".$dr[15].",".$dr[16].",".$dr[17]; ?>]
         }]
-
-
-
-
     });
 });
 function delcom(xx) {
@@ -335,7 +321,6 @@ function delcom(xx) {
                   $('#myModal').on('hidden.bs.modal', function () {location.href = "../finance/allotments_add.php"; });
                   location.reload();
               }
-
         });
       }
 }
@@ -357,12 +342,10 @@ function allotview(ee) {
 var oTable = "";
 $(document).ready(function() {
 
-function toTitleCase(str)
-{
+function toTitleCase(str) {
     return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
 }
-function parselimit(strz)
-{
+function parselimit(strz) {
     var m = new String(strz);
     if (m.length > 32) {
       m = m.substring(0,32);
@@ -370,11 +353,9 @@ function parselimit(strz)
     }
     return m;
 }
-
 function com(x) {
                    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                }
-
 function parseStatus(str) {
   if (str == "0") {
     status = "<span class='label label-primary'>Open</span>";
@@ -387,11 +368,8 @@ function parseStatus(str) {
   }
   return status;
 }
-
-
   $.fn.DataTable.ext.pager.numbers_length = 5;
   oTable = $('#viewdata').dataTable({ 
-    
     "aProcessing": true,
     "aServerSide": true,
     "orderCellsTop": true,
@@ -402,8 +380,7 @@ function parseStatus(str) {
       function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
         $(nRow).attr('id', aData[0]);
       //  $(nRow).attr('subfeed', aData[1]);
-        
-        return nRow;
+     return nRow;
       },
     "aoColumnDefs": [
            { 
@@ -429,12 +406,8 @@ function parseStatus(str) {
                }
               }
             },
-        
-            { "bVisible": false, "aTargets":[0] }
-                    ]
+        { "bVisible": false, "aTargets":[0] }                    ]
   });
-
-
 $(document).ready(function() {
   tableshown=false;
 $("#searchme").keyup(function() {
@@ -445,21 +418,20 @@ $("#searchme").keyup(function() {
 }); 
 });
 });
-
 </script>
 <div class="row" style="margin:0;padding:0">
   <div class="col-md-2">
-    <?php require "nav_side.php"; ?>
+    <?php 
+      require "nav_side.php"; 
+    ?>
   </div>
   <div class="col-md-10">
       <div class="row">
         <div class="col-md-12">
-            
-<div style="border:solid 1px #c5d6de;background:#fff;text-align:left;padding:2em;margin-bottom:2em">
+     <div style="border:solid 1px #c5d6de;background:#fff;text-align:left;padding:2em;margin-bottom:2em">
     <div class="row">
       <div class="col-md-4">        
-        
-        <h2 style="font-size:36px;margin-bottom:0em;margin-top:0em">Fund Allotments</h2>
+       <h2 style="font-size:36px;margin-bottom:0em;margin-top:0em">Fund Allotments</h2>
         Encoded by SLP-NPMO
         <br><br>
         <a href="allotments_add.php"><button class="btn btn-info btn-sm">Add Fund Allotment</button></a>
@@ -467,8 +439,7 @@ $("#searchme").keyup(function() {
         <br>
       </div>
       <div class="col-md-8" id="cont1" style="">
-        
-      </div>
+     </div>
     </div>
         <div class="row" style="margin-top:1em;margin-bottom:1em;display:none;" id="searchfields">
           <div class="row" style="padding:2em;padding-bottom:1em">
@@ -496,9 +467,6 @@ $("#searchme").keyup(function() {
               </select>
           </div>
         </div>
-
-
-
         <table class="table table-bordered table-hover" style="margin-top:2em;line-height:0.9;vertical-align:middle;border-top:2;padding-bottom:0;margin-bottom:0" id="viewdata">
           <thead style="background:#f6f8fa">
             <th></th>
@@ -511,8 +479,6 @@ $("#searchme").keyup(function() {
             <th>Amount</th>
             <th>Date</th>
             <th></th>
-       
-
           </thead>
         <!--    <tr>
               <td>Region IV-B</td>
@@ -525,7 +491,6 @@ $("#searchme").keyup(function() {
               <td>06/17/2016</td>
               <td><span class="glyphicon glyphicon-edit"></span> <span class="glyphicon glyphicon-remove"></span></td> 
             </tr> 
-
             <tr>
               <td>Region IV-B</td>
               <td>CMF</td>
@@ -598,7 +563,6 @@ $("#searchme").keyup(function() {
                   <button type="button" class="btn btn-primary pull-right" style="background:#5cb85c;border:0;margin-top:0;padding:5px 10px 5px 10px" id="okaybtn" data-dismiss="modal">Okay</button>
                   <div class="clearfix"></div>
           </div>
-          
         </div>
       </div>
 <!-- Modal -->
@@ -627,10 +591,8 @@ function getProv() {
             $("#province").prop('disabled', false);
             $("#province").html(data);
         }
-
   });
 }
 </script>
-
 </body>
 </html>
